@@ -1,5 +1,7 @@
+#include<string.h>
 #include "ctp.h"
 #include "include/ThostFtdcMdApi.h"
+#include "mdspi.h"
 
 const char *mdapi_get_api_version() { return CThostFtdcMdApi::GetApiVersion(); }
 
@@ -14,9 +16,13 @@ void mdapi_free(MdApi a) {
   mdApi->Release();
 }
 
-void mdapi_register_spi(MdApi a, int ptr) {
-
+SpiPtr mdapi_register_spi(MdApi a, uint64_t ptr) {
+  CThostFtdcMdApi* mdApi = (CThostFtdcMdApi*) a;
+  MdSpi* spi = new MdSpi(ptr);
+  mdApi->RegisterSpi(spi);
+  return (SpiPtr)spi;
 }
+
 void mdapi_init(MdApi a) {
   CThostFtdcMdApi* mdApi = (CThostFtdcMdApi*) a;
   mdApi->Init();

@@ -1,12 +1,13 @@
 #ifndef MDSAPI_H
 #define MDSAPI_H
+#include <stdint.h>
 #include "include/ThostFtdcMdApi.h"
 
 
 class MdSpi : public CThostFtdcMdSpi
 {
  public:
-  MdSpi(int ptr);
+  MdSpi(uint64_t ptr);
   virtual ~MdSpi();
 
   virtual void OnFrontConnected();
@@ -56,7 +57,7 @@ class MdSpi : public CThostFtdcMdSpi
   virtual void OnRtnForQuoteRsp(CThostFtdcForQuoteRspField *pForQuoteRsp);
 
 private:
-  int ptr = 0;
+  uint64_t ptr = 0;
 };
 
 

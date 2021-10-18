@@ -7,7 +7,8 @@ import (
 )
 
 type MdApi struct {
-	p C.MdApi
+	spi *SpiWrapper
+	p   C.MdApi
 }
 
 func NewMdApi(flowPath string, bIsUsingUdp, bIsMulticast bool) *MdApi {
@@ -30,8 +31,9 @@ func GetMdApiVersion() string {
 }
 
 func (m *MdApi) RegisterSpi(spi MdSpi) {
-	ptr := uintptr(unsafe.Pointer(&spi))
-	C.mdapi_register_spi(m.p, C.int(ptr))
+	m.spi = &SpiWrapper{MdSpi: spi}
+	ptr := uintptr(unsafe.Pointer(m.spi))
+	m.spi.ptr = C.mdapi_register_spi(m.p, C.uint64_t(ptr))
 }
 
 func (m *MdApi) Init() {
@@ -92,9 +94,9 @@ func (m *MdApi) UnSubForQuoteRsp(instrumentIDs []string) int {
 }
 
 func (m *MdApi) ReqUserLogin(reqUserLoginField *CThostFtdcReqUserLoginField, reqID int) int {
-	var pReqUserLoginField *C.CThostFtdcReqUserLoginField
-	var nReqID C.int
-	ret := C.mdapi_req_user_login(m.p, pReqUserLoginField, nReqID)
+	nReqID := C.int(reqID)
+
+	ret := C.mdapi_req_user_login(m.p, reqUserLoginField.CValue(), nReqID)
 	return int(ret)
 }
 

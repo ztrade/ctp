@@ -1,24 +1,24 @@
 #include "mdspi.h"
 
 extern "C" {
-  void goMdOnFrontConnected(int ptr);
-  void goMdOnFrontDisconnected(int ptr, int nReason);
-  void goMdOnHeartBeatWarning(int ptr, int nTimeLapse);
-  void goMdOnRspUserLogin(int ptr, CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
-  void goMdOnRspUserLogout(int ptr, CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+  void goMdOnFrontConnected(uint64_t ptr);
+  void goMdOnFrontDisconnected(uint64_t ptr, int nReason);
+  void goMdOnHeartBeatWarning(uint64_t ptr, int nTimeLapse);
+  void goMdOnRspUserLogin(uint64_t ptr, CThostFtdcRspUserLoginField *pRspUserLogin, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+  void goMdOnRspUserLogout(uint64_t ptr, CThostFtdcUserLogoutField *pUserLogout, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
 
-  void goMdOnRspQryMulticastInstrument(int ptr, CThostFtdcMulticastInstrumentField *pMulticastInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
-  void goMdOnRspError(int ptr, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
-  void goMdOnRspSubMarketData(int ptr, CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
-  void goMdOnRspUnSubMarketData(int ptr,CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
-  void goMdOnRspSubForQuoteRsp(int ptr,CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
-  void goMdOnRspUnSubForQuoteRsp(int ptr,CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
-  void goMdOnRtnDepthMarketData(int ptr,CThostFtdcDepthMarketDataField *pDepthMarketData);
-  void goMdOnRtnForQuoteRsp(int ptr, CThostFtdcForQuoteRspField *pForQuoteRsp);
+  void goMdOnRspQryMulticastInstrument(uint64_t ptr, CThostFtdcMulticastInstrumentField *pMulticastInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+  void goMdOnRspError(uint64_t ptr, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+  void goMdOnRspSubMarketData(uint64_t ptr, CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+  void goMdOnRspUnSubMarketData(uint64_t ptr,CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+  void goMdOnRspSubForQuoteRsp(uint64_t ptr,CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+  void goMdOnRspUnSubForQuoteRsp(uint64_t ptr,CThostFtdcSpecificInstrumentField *pSpecificInstrument, CThostFtdcRspInfoField *pRspInfo, int nRequestID, bool bIsLast);
+  void goMdOnRtnDepthMarketData(uint64_t ptr,CThostFtdcDepthMarketDataField *pDepthMarketData);
+  void goMdOnRtnForQuoteRsp(uint64_t ptr, CThostFtdcForQuoteRspField *pForQuoteRsp);
 };
 
 
-MdSpi::MdSpi(int ptr):ptr(ptr) {
+MdSpi::MdSpi(uint64_t ptr):ptr(ptr) {
 }
 
 MdSpi::~MdSpi() {}

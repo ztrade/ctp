@@ -1,11 +1,13 @@
 #ifndef CTP_H
 #define CTP_H
+#include <stdint.h>
 #include "include/ThostFtdcUserApiStruct.h"
 #ifdef  __cplusplus
 extern "C"{
 #endif
 
 typedef void *MdApi;
+typedef void *SpiPtr;
 typedef struct CThostFtdcRspUserLoginField CThostFtdcRspUserLoginField;
 typedef struct CThostFtdcRspInfoField CThostFtdcRspInfoField;
 typedef struct CThostFtdcUserLogoutField CThostFtdcUserLogoutField;
@@ -28,7 +30,7 @@ MdApi mdapi_create(const char *pszFlowPath, int bIsUsingUdp,
                       int bIsMulticast);
 void mdapi_free(MdApi a);
 
-void mdapi_register_spi(MdApi a,int ptr);
+SpiPtr mdapi_register_spi(MdApi a,uint64_t ptr);
 void mdapi_init(MdApi a);
 
 int mdapi_join(MdApi a);
@@ -45,6 +47,7 @@ nRequestID);
 int mdapi_req_user_logout(MdApi a, CThostFtdcUserLogoutField *pReqUserLoginField,
 int nRequestID);
 int mdapi_req_qry_multicast_instrument(MdApi a, CThostFtdcQryMulticastInstrumentField *pQryMulticastInstrument, int nRequestID);
+
 
 #ifdef  __cplusplus
 };
