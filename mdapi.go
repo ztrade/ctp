@@ -67,7 +67,11 @@ func (m *MdApi) RegisterFensUserInfo(pFensUserInfo *CThostFtdcFensUserInfoField)
 
 func (m *MdApi) SubscribeMarketData(instrumentIDs []string) int {
 	var ppInstrumentID **C.char
+
 	var nCount C.int
+	value := go2cStrArray(instrumentIDs)
+	ppInstrumentID = &value[0]
+	nCount = C.int(len(value))
 	ret := C.mdapi_subscribe_market_data(m.p, ppInstrumentID, nCount)
 	return int(ret)
 }
@@ -75,6 +79,9 @@ func (m *MdApi) SubscribeMarketData(instrumentIDs []string) int {
 func (m *MdApi) UnSubscribeMarketData(instrumentIDs []string) int {
 	var ppInstrumentID **C.char
 	var nCount C.int
+	value := go2cStrArray(instrumentIDs)
+	ppInstrumentID = &value[0]
+	nCount = C.int(len(value))
 	ret := C.mdapi_unsubscribe_market_data(m.p, ppInstrumentID, nCount)
 	return int(ret)
 }
@@ -82,6 +89,9 @@ func (m *MdApi) UnSubscribeMarketData(instrumentIDs []string) int {
 func (m *MdApi) SubForQuoteRsp(instrumentIDs []string) int {
 	var ppInstrumentID **C.char
 	var nCount C.int
+	value := go2cStrArray(instrumentIDs)
+	ppInstrumentID = &value[0]
+	nCount = C.int(len(value))
 	ret := C.mdapi_subscribe_for_quote_rsp(m.p, ppInstrumentID, nCount)
 	return int(ret)
 }
@@ -89,27 +99,27 @@ func (m *MdApi) SubForQuoteRsp(instrumentIDs []string) int {
 func (m *MdApi) UnSubForQuoteRsp(instrumentIDs []string) int {
 	var ppInstrumentID **C.char
 	var nCount C.int
+	value := go2cStrArray(instrumentIDs)
+	ppInstrumentID = &value[0]
+	nCount = C.int(len(value))
 	ret := C.mdapi_unsubscribe_for_quote_rsp(m.p, ppInstrumentID, nCount)
 	return int(ret)
 }
 
 func (m *MdApi) ReqUserLogin(reqUserLoginField *CThostFtdcReqUserLoginField, reqID int) int {
 	nReqID := C.int(reqID)
-
 	ret := C.mdapi_req_user_login(m.p, reqUserLoginField.CValue(), nReqID)
 	return int(ret)
 }
 
 func (m *MdApi) ReqUserLogout(reqUserLogoutField *CThostFtdcUserLogoutField, reqID int) int {
-	var pReqUserLogoutField *C.CThostFtdcUserLogoutField
-	var nReqID C.int
-	ret := C.mdapi_req_user_logout(m.p, pReqUserLogoutField, nReqID)
+	nReqID := C.int(reqID)
+	ret := C.mdapi_req_user_logout(m.p, reqUserLogoutField.CValue(), nReqID)
 	return int(ret)
 }
 
 func (m *MdApi) ReqQryMulticastInstrument(qryMulticastInstrument *CThostFtdcQryMulticastInstrumentField, reqID int) int {
-	var pQryMulticastInstrument *C.CThostFtdcQryMulticastInstrumentField
-	var nReqID C.int
-	ret := C.mdapi_req_qry_multicast_instrument(m.p, pQryMulticastInstrument, nReqID)
+	nReqID := C.int(reqID)
+	ret := C.mdapi_req_qry_multicast_instrument(m.p, qryMulticastInstrument.CValue(), nReqID)
 	return int(ret)
 }

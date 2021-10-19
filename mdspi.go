@@ -55,67 +55,67 @@ func goMdOnHeartBeatWarning(ptr uint64, nTimeLapse int) {
 
 //export goMdOnRspUserLogin
 func goMdOnRspUserLogin(ptr uint64, pRspUserLogin *C.CThostFtdcRspUserLoginField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
-	var rspUserLogin *CThostFtdcRspUserLoginField
-	var rspInfo *CThostFtdcRspInfoField
+	rspUserLogin := NewCThostFtdcRspUserLoginField(*pRspUserLogin)
+	rspInfo := NewCThostFtdcRspInfoField(pRspInfo)
 	getMdSpi(ptr).OnRspUserLogin(rspUserLogin, rspInfo, nRequestID, bIsLast)
 }
 
 //export goMdOnRspUserLogout
 func goMdOnRspUserLogout(ptr uint64, pUserLogout *C.CThostFtdcUserLogoutField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
-	var rspUserLogout *CThostFtdcUserLogoutField
-	var rspInfo *CThostFtdcRspInfoField
+	rspUserLogout := NewCThostFtdcUserLogoutField(pUserLogout)
+	rspInfo := NewCThostFtdcRspInfoField(pRspInfo)
 	getMdSpi(ptr).OnRspUserLogout(rspUserLogout, rspInfo, nRequestID, bIsLast)
 }
 
 //export goMdOnRspQryMulticastInstrument
 func goMdOnRspQryMulticastInstrument(ptr uint64, pMulticastInstrument *C.CThostFtdcMulticastInstrumentField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
-	var multicastInstrument *CThostFtdcMulticastInstrumentField
-	var rspInfo *CThostFtdcRspInfoField
+	multicastInstrument := NewCThostFtdcMulticastInstrumentField(pMulticastInstrument)
+	rspInfo := NewCThostFtdcRspInfoField(pRspInfo)
 	getMdSpi(ptr).OnRspQryMulticastInstrument(multicastInstrument, rspInfo, nRequestID, bIsLast)
 }
 
 //export goMdOnRspError
 func goMdOnRspError(ptr uint64, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
-	var rspInfo *CThostFtdcRspInfoField
+	rspInfo := NewCThostFtdcRspInfoField(pRspInfo)
 	getMdSpi(ptr).OnRspError(rspInfo, nRequestID, bIsLast)
 }
 
 //export goMdOnRspSubMarketData
 func goMdOnRspSubMarketData(ptr uint64, pSpecificInstrument *C.CThostFtdcSpecificInstrumentField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
-	var specificInstrument *CThostFtdcSpecificInstrumentField
-	var rspInfo *CThostFtdcRspInfoField
+	specificInstrument := NewCThostFtdcSpecificInstrumentField(pSpecificInstrument)
+	rspInfo := NewCThostFtdcRspInfoField(pRspInfo)
 	getMdSpi(ptr).OnRspSubMarketData(specificInstrument, rspInfo, nRequestID, bIsLast)
 }
 
 //export goMdOnRspUnSubMarketData
 func goMdOnRspUnSubMarketData(ptr uint64, pSpecificInstrument *C.CThostFtdcSpecificInstrumentField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
-	var specificInstrument *CThostFtdcSpecificInstrumentField
-	var rspInfo *CThostFtdcRspInfoField
+	specificInstrument := NewCThostFtdcSpecificInstrumentField(pSpecificInstrument)
+	rspInfo := NewCThostFtdcRspInfoField(pRspInfo)
 	getMdSpi(ptr).OnRspUnSubMarketData(specificInstrument, rspInfo, nRequestID, bIsLast)
 }
 
 //export goMdOnRspSubForQuoteRsp
 func goMdOnRspSubForQuoteRsp(ptr uint64, pSpecificInstrument *C.CThostFtdcSpecificInstrumentField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
-	var specificInstrument *CThostFtdcSpecificInstrumentField
-	var rspInfo *CThostFtdcRspInfoField
+	specificInstrument := NewCThostFtdcSpecificInstrumentField(pSpecificInstrument)
+	rspInfo := NewCThostFtdcRspInfoField(pRspInfo)
 	getMdSpi(ptr).OnRspSubForQuoteRsp(specificInstrument, rspInfo, nRequestID, bIsLast)
 }
 
 //export goMdOnRspUnSubForQuoteRsp
 func goMdOnRspUnSubForQuoteRsp(ptr uint64, pSpecificInstrument *C.CThostFtdcSpecificInstrumentField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
-	var specificInstrument *CThostFtdcSpecificInstrumentField
-	var rspInfo *CThostFtdcRspInfoField
+	specificInstrument := NewCThostFtdcSpecificInstrumentField(pSpecificInstrument)
+	rspInfo := NewCThostFtdcRspInfoField(pRspInfo)
 	getMdSpi(ptr).OnRspUnSubForQuoteRsp(specificInstrument, rspInfo, nRequestID, bIsLast)
 }
 
 //export goMdOnRtnDepthMarketData
 func goMdOnRtnDepthMarketData(ptr uint64, pDepthMarketData *C.CThostFtdcDepthMarketDataField) {
-	var depthMarketData *CThostFtdcDepthMarketDataField
+	depthMarketData := NewCThostFtdcDepthMarketDataField(pDepthMarketData)
 	getMdSpi(ptr).OnRtnDepthMarketData(depthMarketData)
 }
 
 //export goMdOnRtnForQuoteRsp
 func goMdOnRtnForQuoteRsp(ptr uint64, pForQuoteRsp *C.CThostFtdcForQuoteRspField) {
-	var forQuoteRsp *CThostFtdcForQuoteRspField
+	forQuoteRsp := NewCThostFtdcForQuoteRspField(pForQuoteRsp)
 	getMdSpi(ptr).OnRtnForQuoteRsp(forQuoteRsp)
 }
