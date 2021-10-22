@@ -21,8 +21,8 @@ package ctp
 import "C"
 import "errors"
 
-func c2goStr(p *C.char) string {
-	return C.GoString(p)
+func c2goStr(p *C.char, n int) string {
+	return C.GoStringN(p, C.int(n))
 }
 
 func go2cStr(str string, p *C.char, l int) (err error) {
@@ -120,19 +120,19 @@ type CThostFtdcRspUserLoginField struct {
 
 func NewCThostFtdcRspUserLoginField(p C.CThostFtdcRspUserLoginField) *CThostFtdcRspUserLoginField {
 	ret := &CThostFtdcRspUserLoginField{}
-	ret.TradingDay = c2goStr(&p.TradingDay[0])
-	ret.LoginTime = c2goStr(&p.LoginTime[0])
-	ret.BrokerID = c2goStr(&p.BrokerID[0])
-	ret.UserID = c2goStr(&p.UserID[0])
-	ret.SystemName = c2goStr(&p.SystemName[0])
+	ret.TradingDay = c2goStr(&p.TradingDay[0], C.sizeof_TThostFtdcDateType)
+	ret.LoginTime = c2goStr(&p.LoginTime[0], C.sizeof_TThostFtdcTimeType)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], C.sizeof_TThostFtdcBrokerIDType)
+	ret.UserID = c2goStr(&p.UserID[0], C.sizeof_TThostFtdcUserIDType)
+	ret.SystemName = c2goStr(&p.SystemName[0], C.sizeof_TThostFtdcSystemNameType)
 	ret.FrontID = int(p.FrontID)
 	ret.SessionID = int(p.SessionID)
-	ret.MaxOrderRef = c2goStr(&p.MaxOrderRef[0])
-	ret.SHFETime = c2goStr(&p.SHFETime[0])
-	ret.DCETime = c2goStr(&p.DCETime[0])
-	ret.CZCETime = c2goStr(&p.CZCETime[0])
-	ret.FFEXTime = c2goStr(&p.FFEXTime[0])
-	ret.INETime = c2goStr(&p.INETime[0])
+	ret.MaxOrderRef = c2goStr(&p.MaxOrderRef[0], C.sizeof_TThostFtdcOrderRefType)
+	ret.SHFETime = c2goStr(&p.SHFETime[0], C.sizeof_TThostFtdcTimeType)
+	ret.DCETime = c2goStr(&p.DCETime[0], C.sizeof_TThostFtdcTimeType)
+	ret.CZCETime = c2goStr(&p.CZCETime[0], C.sizeof_TThostFtdcTimeType)
+	ret.FFEXTime = c2goStr(&p.FFEXTime[0], C.sizeof_TThostFtdcTimeType)
+	ret.INETime = c2goStr(&p.INETime[0], C.sizeof_TThostFtdcTimeType)
 	return ret
 }
 
@@ -145,7 +145,7 @@ type CThostFtdcRspInfoField struct {
 func NewCThostFtdcRspInfoField(p *C.CThostFtdcRspInfoField) *CThostFtdcRspInfoField {
 	ret := &CThostFtdcRspInfoField{
 		ErrorID:  int(p.ErrorID),
-		ErrorMsg: c2goStr(&p.ErrorMsg[0]),
+		ErrorMsg: c2goStr(&p.ErrorMsg[0], C.sizeof_TThostFtdcErrorMsgType),
 	}
 	return ret
 }
@@ -159,8 +159,8 @@ type CThostFtdcUserLogoutField struct {
 
 func NewCThostFtdcUserLogoutField(p *C.CThostFtdcUserLogoutField) *CThostFtdcUserLogoutField {
 	ret := &CThostFtdcUserLogoutField{
-		BrokerID: c2goStr(&p.BrokerID[0]),
-		UserID:   c2goStr(&p.UserID[0]),
+		BrokerID: c2goStr(&p.BrokerID[0], C.sizeof_TThostFtdcBrokerIDType),
+		UserID:   c2goStr(&p.UserID[0], C.sizeof_TThostFtdcUserIDType),
 	}
 	return ret
 }
@@ -192,12 +192,12 @@ type CThostFtdcMulticastInstrumentField struct {
 func NewCThostFtdcMulticastInstrumentField(p *C.CThostFtdcMulticastInstrumentField) *CThostFtdcMulticastInstrumentField {
 	ret := &CThostFtdcMulticastInstrumentField{
 		TopicID:        int(p.TopicID),
-		Reserve1:       c2goStr(&p.reserve1[0]),
+		Reserve1:       c2goStr(&p.reserve1[0], C.sizeof_TThostFtdcOldInstrumentIDType),
 		InstrumentNo:   int(p.InstrumentNo),
 		CodePrice:      float64(p.CodePrice),
 		VolumeMultiple: int(p.VolumeMultiple),
 		PriceTick:      float64(p.PriceTick),
-		InstrumentID:   c2goStr(&p.InstrumentID[0]),
+		InstrumentID:   c2goStr(&p.InstrumentID[0], C.sizeof_TThostFtdcInstrumentIDsType),
 	}
 	return ret
 }
@@ -211,8 +211,8 @@ type CThostFtdcSpecificInstrumentField struct {
 
 func NewCThostFtdcSpecificInstrumentField(p *C.CThostFtdcSpecificInstrumentField) *CThostFtdcSpecificInstrumentField {
 	ret := &CThostFtdcSpecificInstrumentField{
-		Reserve1:     c2goStr(&p.reserve1[0]),
-		InstrumentID: c2goStr(&p.InstrumentID[0]),
+		Reserve1:     c2goStr(&p.reserve1[0], C.sizeof_TThostFtdcOldInstrumentIDType),
+		InstrumentID: c2goStr(&p.InstrumentID[0], C.sizeof_TThostFtdcInstrumentIDType),
 	}
 	return ret
 }
@@ -316,14 +316,17 @@ type CThostFtdcDepthMarketDataField struct {
 }
 
 func NewCThostFtdcDepthMarketDataField(p *C.CThostFtdcDepthMarketDataField) *CThostFtdcDepthMarketDataField {
+	if p == nil {
+		return nil
+	}
 	ret := &CThostFtdcDepthMarketDataField{
-		TradingDay: c2goStr(&p.TradingDay[0]),
+		TradingDay: c2goStr(&p.TradingDay[0], C.sizeof_TThostFtdcDateType),
 
-		Reserve1: c2goStr(&p.reserve1[0]),
+		Reserve1: c2goStr(&p.reserve1[0], C.sizeof_TThostFtdcOldInstrumentIDType),
 		///交易所代码
-		ExchangeID: c2goStr(&p.ExchangeID[0]),
+		ExchangeID: c2goStr(&p.ExchangeID[0], C.sizeof_TThostFtdcExchangeIDType),
 		///保留的无效字段
-		Reserve2: c2goStr(&p.reserve2[0]),
+		Reserve2: c2goStr(&p.reserve2[0], C.sizeof_TThostFtdcOldExchangeInstIDType),
 		///最新价
 		LastPrice: float64(p.LastPrice),
 		///上次结算价
@@ -348,7 +351,7 @@ func NewCThostFtdcDepthMarketDataField(p *C.CThostFtdcDepthMarketDataField) *CTh
 		LowerLimitPrice:   float64(p.LowerLimitPrice),
 		PreDelta:          float64(p.PreDelta),
 		CurrDelta:         float64(p.CurrDelta),
-		UpdateTime:        c2goStr(&p.UpdateTime[0]),
+		UpdateTime:        c2goStr(&p.UpdateTime[0], C.sizeof_TThostFtdcTimeType),
 		UpdateMillisec:    int(p.UpdateMillisec),
 		BidPrice1:         float64(p.BidPrice1),
 		BidVolume1:        int(p.BidVolume1),
@@ -371,9 +374,9 @@ func NewCThostFtdcDepthMarketDataField(p *C.CThostFtdcDepthMarketDataField) *CTh
 		AskPrice5:         float64(p.AskPrice5),
 		AskVolume5:        int(p.AskVolume5),
 		AveragePrice:      float64(p.AveragePrice),
-		ActionDay:         c2goStr(&p.ActionDay[0]),
-		InstrumentID:      c2goStr(&p.InstrumentID[0]),
-		ExchangeInstID:    c2goStr(&p.ExchangeInstID[0]),
+		ActionDay:         c2goStr(&p.ActionDay[0], C.sizeof_TThostFtdcDateType),
+		InstrumentID:      c2goStr(&p.InstrumentID[0], C.sizeof_TThostFtdcInstrumentIDType),
+		ExchangeInstID:    c2goStr(&p.ExchangeInstID[0], C.sizeof_TThostFtdcExchangeInstIDType),
 		BandingUpperPrice: float64(p.BandingUpperPrice),
 		BandingLowerPrice: float64(p.BandingLowerPrice),
 	}
@@ -424,13 +427,13 @@ type CThostFtdcForQuoteRspField struct {
 
 func NewCThostFtdcForQuoteRspField(p *C.CThostFtdcForQuoteRspField) *CThostFtdcForQuoteRspField {
 	ret := &CThostFtdcForQuoteRspField{
-		TradingDay:    c2goStr(&p.TradingDay[0]),
-		Reserve1:      c2goStr(&p.reserve1[0]),
-		ForQuoteSysID: c2goStr(&p.ForQuoteSysID[0]),
-		ForQuoteTime:  c2goStr(&p.ForQuoteTime[0]),
-		ActionDay:     c2goStr(&p.ActionDay[0]),
-		ExchangeID:    c2goStr(&p.ExchangeID[0]),
-		InstrumentID:  c2goStr(&p.InstrumentID[0]),
+		TradingDay:    c2goStr(&p.TradingDay[0], C.sizeof_TThostFtdcDateType),
+		Reserve1:      c2goStr(&p.reserve1[0], C.sizeof_TThostFtdcOldInstrumentIDType),
+		ForQuoteSysID: c2goStr(&p.ForQuoteSysID[0], C.sizeof_TThostFtdcOrderSysIDType),
+		ForQuoteTime:  c2goStr(&p.ForQuoteTime[0], C.sizeof_TThostFtdcTimeType),
+		ActionDay:     c2goStr(&p.ActionDay[0], C.sizeof_TThostFtdcDateType),
+		ExchangeID:    c2goStr(&p.ExchangeID[0], C.sizeof_TThostFtdcExchangeIDType),
+		InstrumentID:  c2goStr(&p.InstrumentID[0], C.sizeof_TThostFtdcInstrumentIDType),
 	}
 	return ret
 }

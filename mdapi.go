@@ -3,16 +3,25 @@ package ctp
 // #include "ctp.h"
 import "C"
 import (
-	"unsafe"
+	"sync"
+	"sync/atomic"
 )
 
+var (
+	ptrMap   sync.Map
+	ptrIndex uint64
+)
+
+// var gMdApi *MdApi
+
 type MdApi struct {
-	spi *SpiWrapper
-	p   C.MdApi
+	p     C.MdApi
+	index uint64
 }
 
 func NewMdApi(flowPath string, bIsUsingUdp, bIsMulticast bool) *MdApi {
 	md := new(MdApi)
+
 	cPath := C.CString(flowPath)
 	var cIsUsingUdp, cIsMulticast C.int
 	if bIsMulticast {
@@ -22,6 +31,7 @@ func NewMdApi(flowPath string, bIsUsingUdp, bIsMulticast bool) *MdApi {
 		cIsMulticast = 1
 	}
 	md.p = C.mdapi_create(cPath, cIsUsingUdp, cIsMulticast)
+	// gMdApi = md
 	return md
 }
 
@@ -31,9 +41,13 @@ func GetMdApiVersion() string {
 }
 
 func (m *MdApi) RegisterSpi(spi MdSpi) {
-	m.spi = &SpiWrapper{MdSpi: spi}
-	ptr := uintptr(unsafe.Pointer(m.spi))
-	m.spi.ptr = C.mdapi_register_spi(m.p, C.uint64_t(ptr))
+	if m.index > 0 {
+		ptrMap.Delete(m.index)
+	}
+	n := atomic.AddUint64(&ptrIndex, 1)
+	m.index = n
+	ptrMap.Store(n, spi)
+	C.mdapi_register_spi(m.p, C.uint64_t(n))
 }
 
 func (m *MdApi) Init() {

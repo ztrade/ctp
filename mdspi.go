@@ -7,7 +7,7 @@ package ctp
 */
 import "C"
 import (
-	"unsafe"
+	"fmt"
 )
 
 type MdSpi interface {
@@ -26,16 +26,13 @@ type MdSpi interface {
 	OnRtnForQuoteRsp(pForQuoteRsp *CThostFtdcForQuoteRspField)
 }
 
-type SpiWrapper struct {
-	Name string
-	MdSpi
-	ptr C.SpiPtr
-}
-
 func getMdSpi(ptr uint64) MdSpi {
-	var v *SpiWrapper
-	v = (*SpiWrapper)(unsafe.Pointer(uintptr(ptr)))
-	return v.MdSpi
+	value, _ := ptrMap.Load(ptr)
+	if value == nil {
+		return nil
+	}
+	v := value.(MdSpi)
+	return v
 }
 
 //export goMdOnFrontConnected
@@ -111,7 +108,19 @@ func goMdOnRspUnSubForQuoteRsp(ptr uint64, pSpecificInstrument *C.CThostFtdcSpec
 //export goMdOnRtnDepthMarketData
 func goMdOnRtnDepthMarketData(ptr uint64, pDepthMarketData *C.CThostFtdcDepthMarketDataField) {
 	depthMarketData := NewCThostFtdcDepthMarketDataField(pDepthMarketData)
-	getMdSpi(ptr).OnRtnDepthMarketData(depthMarketData)
+	if depthMarketData == nil {
+		fmt.Println("recv:", nil)
+		return
+	}
+	fmt.Println("recv:", pDepthMarketData)
+	fmt.Println("recv2:", depthMarketData)
+	p := getMdSpi(ptr)
+	if p == nil {
+		// realP := uintptr(unsafe.Pointer(gMdApi.spi))
+		// fmt.Println("real p:", realP, ptr, p)
+	}
+	fmt.Println("ptr:", ptr, p)
+	p.OnRtnDepthMarketData(depthMarketData)
 }
 
 //export goMdOnRtnForQuoteRsp
