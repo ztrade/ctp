@@ -6,9 +6,6 @@ package ctp
  #cgo linux amd64 LDFLAGS: -fPIC -L${SRCDIR}/libs/linux64/ -l:thostmduserapi_se.so -l:thosttraderapi_se.so -lstdc++
 */
 import "C"
-import (
-	"fmt"
-)
 
 type MdSpi interface {
 	OnFrontConnected()
@@ -52,7 +49,7 @@ func goMdOnHeartBeatWarning(ptr uint64, nTimeLapse int) {
 
 //export goMdOnRspUserLogin
 func goMdOnRspUserLogin(ptr uint64, pRspUserLogin *C.CThostFtdcRspUserLoginField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
-	rspUserLogin := NewCThostFtdcRspUserLoginField(*pRspUserLogin)
+	rspUserLogin := NewCThostFtdcRspUserLoginField(pRspUserLogin)
 	rspInfo := NewCThostFtdcRspInfoField(pRspInfo)
 	getMdSpi(ptr).OnRspUserLogin(rspUserLogin, rspInfo, nRequestID, bIsLast)
 }
@@ -109,17 +106,13 @@ func goMdOnRspUnSubForQuoteRsp(ptr uint64, pSpecificInstrument *C.CThostFtdcSpec
 func goMdOnRtnDepthMarketData(ptr uint64, pDepthMarketData *C.CThostFtdcDepthMarketDataField) {
 	depthMarketData := NewCThostFtdcDepthMarketDataField(pDepthMarketData)
 	if depthMarketData == nil {
-		fmt.Println("recv:", nil)
 		return
 	}
-	fmt.Println("recv:", pDepthMarketData)
-	fmt.Println("recv2:", depthMarketData)
 	p := getMdSpi(ptr)
 	if p == nil {
 		// realP := uintptr(unsafe.Pointer(gMdApi.spi))
 		// fmt.Println("real p:", realP, ptr, p)
 	}
-	fmt.Println("ptr:", ptr, p)
 	p.OnRtnDepthMarketData(depthMarketData)
 }
 
