@@ -252,8 +252,8 @@ CThostFtdcUserSessionField* newCThostFtdcUserSessionField(){
     CThostFtdcUserSessionField *ptr = (CThostFtdcUserSessionField*)malloc(sizeof(CThostFtdcUserSessionField));
     return ptr;
 }
-CThostFtdcQryMaxOrderVolumeField* newCThostFtdcQryMaxOrderVolumeField(){
-    CThostFtdcQryMaxOrderVolumeField *ptr = (CThostFtdcQryMaxOrderVolumeField*)malloc(sizeof(CThostFtdcQryMaxOrderVolumeField));
+CThostFtdcQueryMaxOrderVolumeField* newCThostFtdcQueryMaxOrderVolumeField(){
+    CThostFtdcQueryMaxOrderVolumeField *ptr = (CThostFtdcQueryMaxOrderVolumeField*)malloc(sizeof(CThostFtdcQueryMaxOrderVolumeField));
     return ptr;
 }
 CThostFtdcSettlementInfoConfirmField* newCThostFtdcSettlementInfoConfirmField(){
@@ -808,10 +808,6 @@ CThostFtdcMarketDataUpdateTimeField* newCThostFtdcMarketDataUpdateTimeField(){
     CThostFtdcMarketDataUpdateTimeField *ptr = (CThostFtdcMarketDataUpdateTimeField*)malloc(sizeof(CThostFtdcMarketDataUpdateTimeField));
     return ptr;
 }
-CThostFtdcMarketDataBandingPriceField* newCThostFtdcMarketDataBandingPriceField(){
-    CThostFtdcMarketDataBandingPriceField *ptr = (CThostFtdcMarketDataBandingPriceField*)malloc(sizeof(CThostFtdcMarketDataBandingPriceField));
-    return ptr;
-}
 CThostFtdcMarketDataExchangeField* newCThostFtdcMarketDataExchangeField(){
     CThostFtdcMarketDataExchangeField *ptr = (CThostFtdcMarketDataExchangeField*)malloc(sizeof(CThostFtdcMarketDataExchangeField));
     return ptr;
@@ -1028,8 +1024,8 @@ CThostFtdcExchangeSequenceField* newCThostFtdcExchangeSequenceField(){
     CThostFtdcExchangeSequenceField *ptr = (CThostFtdcExchangeSequenceField*)malloc(sizeof(CThostFtdcExchangeSequenceField));
     return ptr;
 }
-CThostFtdcQryMaxOrderVolumeWithPriceField* newCThostFtdcQryMaxOrderVolumeWithPriceField(){
-    CThostFtdcQryMaxOrderVolumeWithPriceField *ptr = (CThostFtdcQryMaxOrderVolumeWithPriceField*)malloc(sizeof(CThostFtdcQryMaxOrderVolumeWithPriceField));
+CThostFtdcQueryMaxOrderVolumeWithPriceField* newCThostFtdcQueryMaxOrderVolumeWithPriceField(){
+    CThostFtdcQueryMaxOrderVolumeWithPriceField *ptr = (CThostFtdcQueryMaxOrderVolumeWithPriceField*)malloc(sizeof(CThostFtdcQueryMaxOrderVolumeWithPriceField));
     return ptr;
 }
 CThostFtdcQryBrokerTradingParamsField* newCThostFtdcQryBrokerTradingParamsField(){
@@ -1320,6 +1316,10 @@ CThostFtdcQryLoginForbiddenUserField* newCThostFtdcQryLoginForbiddenUserField(){
     CThostFtdcQryLoginForbiddenUserField *ptr = (CThostFtdcQryLoginForbiddenUserField*)malloc(sizeof(CThostFtdcQryLoginForbiddenUserField));
     return ptr;
 }
+CThostFtdcMulticastGroupInfoField* newCThostFtdcMulticastGroupInfoField(){
+    CThostFtdcMulticastGroupInfoField *ptr = (CThostFtdcMulticastGroupInfoField*)malloc(sizeof(CThostFtdcMulticastGroupInfoField));
+    return ptr;
+}
 CThostFtdcTradingAccountReserveField* newCThostFtdcTradingAccountReserveField(){
     CThostFtdcTradingAccountReserveField *ptr = (CThostFtdcTradingAccountReserveField*)malloc(sizeof(CThostFtdcTradingAccountReserveField));
     return ptr;
@@ -1362,6 +1362,10 @@ CThostFtdcQrySecAgentCheckModeField* newCThostFtdcQrySecAgentCheckModeField(){
 }
 CThostFtdcQrySecAgentTradeInfoField* newCThostFtdcQrySecAgentTradeInfoField(){
     CThostFtdcQrySecAgentTradeInfoField *ptr = (CThostFtdcQrySecAgentTradeInfoField*)malloc(sizeof(CThostFtdcQrySecAgentTradeInfoField));
+    return ptr;
+}
+CThostFtdcUserSystemInfoField* newCThostFtdcUserSystemInfoField(){
+    CThostFtdcUserSystemInfoField *ptr = (CThostFtdcUserSystemInfoField*)malloc(sizeof(CThostFtdcUserSystemInfoField));
     return ptr;
 }
 CThostFtdcReqUserAuthMethodField* newCThostFtdcReqUserAuthMethodField(){
@@ -1430,117 +1434,5 @@ CThostFtdcQryAuthForbiddenIPField* newCThostFtdcQryAuthForbiddenIPField(){
 }
 CThostFtdcSyncDelaySwapFrozenField* newCThostFtdcSyncDelaySwapFrozenField(){
     CThostFtdcSyncDelaySwapFrozenField *ptr = (CThostFtdcSyncDelaySwapFrozenField*)malloc(sizeof(CThostFtdcSyncDelaySwapFrozenField));
-    return ptr;
-}
-CThostFtdcUserSystemInfoField* newCThostFtdcUserSystemInfoField(){
-    CThostFtdcUserSystemInfoField *ptr = (CThostFtdcUserSystemInfoField*)malloc(sizeof(CThostFtdcUserSystemInfoField));
-    return ptr;
-}
-CThostFtdcAuthUserIDField* newCThostFtdcAuthUserIDField(){
-    CThostFtdcAuthUserIDField *ptr = (CThostFtdcAuthUserIDField*)malloc(sizeof(CThostFtdcAuthUserIDField));
-    return ptr;
-}
-CThostFtdcAuthIPField* newCThostFtdcAuthIPField(){
-    CThostFtdcAuthIPField *ptr = (CThostFtdcAuthIPField*)malloc(sizeof(CThostFtdcAuthIPField));
-    return ptr;
-}
-CThostFtdcQryClassifiedInstrumentField* newCThostFtdcQryClassifiedInstrumentField(){
-    CThostFtdcQryClassifiedInstrumentField *ptr = (CThostFtdcQryClassifiedInstrumentField*)malloc(sizeof(CThostFtdcQryClassifiedInstrumentField));
-    return ptr;
-}
-CThostFtdcQryCombPromotionParamField* newCThostFtdcQryCombPromotionParamField(){
-    CThostFtdcQryCombPromotionParamField *ptr = (CThostFtdcQryCombPromotionParamField*)malloc(sizeof(CThostFtdcQryCombPromotionParamField));
-    return ptr;
-}
-CThostFtdcCombPromotionParamField* newCThostFtdcCombPromotionParamField(){
-    CThostFtdcCombPromotionParamField *ptr = (CThostFtdcCombPromotionParamField*)malloc(sizeof(CThostFtdcCombPromotionParamField));
-    return ptr;
-}
-CThostFtdcQryRiskSettleInvstPositionField* newCThostFtdcQryRiskSettleInvstPositionField(){
-    CThostFtdcQryRiskSettleInvstPositionField *ptr = (CThostFtdcQryRiskSettleInvstPositionField*)malloc(sizeof(CThostFtdcQryRiskSettleInvstPositionField));
-    return ptr;
-}
-CThostFtdcQryRiskSettleProductStatusField* newCThostFtdcQryRiskSettleProductStatusField(){
-    CThostFtdcQryRiskSettleProductStatusField *ptr = (CThostFtdcQryRiskSettleProductStatusField*)malloc(sizeof(CThostFtdcQryRiskSettleProductStatusField));
-    return ptr;
-}
-CThostFtdcRiskSettleInvstPositionField* newCThostFtdcRiskSettleInvstPositionField(){
-    CThostFtdcRiskSettleInvstPositionField *ptr = (CThostFtdcRiskSettleInvstPositionField*)malloc(sizeof(CThostFtdcRiskSettleInvstPositionField));
-    return ptr;
-}
-CThostFtdcRiskSettleProductStatusField* newCThostFtdcRiskSettleProductStatusField(){
-    CThostFtdcRiskSettleProductStatusField *ptr = (CThostFtdcRiskSettleProductStatusField*)malloc(sizeof(CThostFtdcRiskSettleProductStatusField));
-    return ptr;
-}
-CThostFtdcSyncDeltaInfoField* newCThostFtdcSyncDeltaInfoField(){
-    CThostFtdcSyncDeltaInfoField *ptr = (CThostFtdcSyncDeltaInfoField*)malloc(sizeof(CThostFtdcSyncDeltaInfoField));
-    return ptr;
-}
-CThostFtdcSyncDeltaProductStatusField* newCThostFtdcSyncDeltaProductStatusField(){
-    CThostFtdcSyncDeltaProductStatusField *ptr = (CThostFtdcSyncDeltaProductStatusField*)malloc(sizeof(CThostFtdcSyncDeltaProductStatusField));
-    return ptr;
-}
-CThostFtdcSyncDeltaInvstPosDtlField* newCThostFtdcSyncDeltaInvstPosDtlField(){
-    CThostFtdcSyncDeltaInvstPosDtlField *ptr = (CThostFtdcSyncDeltaInvstPosDtlField*)malloc(sizeof(CThostFtdcSyncDeltaInvstPosDtlField));
-    return ptr;
-}
-CThostFtdcSyncDeltaInvstPosCombDtlField* newCThostFtdcSyncDeltaInvstPosCombDtlField(){
-    CThostFtdcSyncDeltaInvstPosCombDtlField *ptr = (CThostFtdcSyncDeltaInvstPosCombDtlField*)malloc(sizeof(CThostFtdcSyncDeltaInvstPosCombDtlField));
-    return ptr;
-}
-CThostFtdcSyncDeltaTradingAccountField* newCThostFtdcSyncDeltaTradingAccountField(){
-    CThostFtdcSyncDeltaTradingAccountField *ptr = (CThostFtdcSyncDeltaTradingAccountField*)malloc(sizeof(CThostFtdcSyncDeltaTradingAccountField));
-    return ptr;
-}
-CThostFtdcSyncDeltaInitInvstMarginField* newCThostFtdcSyncDeltaInitInvstMarginField(){
-    CThostFtdcSyncDeltaInitInvstMarginField *ptr = (CThostFtdcSyncDeltaInitInvstMarginField*)malloc(sizeof(CThostFtdcSyncDeltaInitInvstMarginField));
-    return ptr;
-}
-CThostFtdcSyncDeltaDceCombInstrumentField* newCThostFtdcSyncDeltaDceCombInstrumentField(){
-    CThostFtdcSyncDeltaDceCombInstrumentField *ptr = (CThostFtdcSyncDeltaDceCombInstrumentField*)malloc(sizeof(CThostFtdcSyncDeltaDceCombInstrumentField));
-    return ptr;
-}
-CThostFtdcSyncDeltaInvstMarginRateField* newCThostFtdcSyncDeltaInvstMarginRateField(){
-    CThostFtdcSyncDeltaInvstMarginRateField *ptr = (CThostFtdcSyncDeltaInvstMarginRateField*)malloc(sizeof(CThostFtdcSyncDeltaInvstMarginRateField));
-    return ptr;
-}
-CThostFtdcSyncDeltaExchMarginRateField* newCThostFtdcSyncDeltaExchMarginRateField(){
-    CThostFtdcSyncDeltaExchMarginRateField *ptr = (CThostFtdcSyncDeltaExchMarginRateField*)malloc(sizeof(CThostFtdcSyncDeltaExchMarginRateField));
-    return ptr;
-}
-CThostFtdcSyncDeltaOptExchMarginField* newCThostFtdcSyncDeltaOptExchMarginField(){
-    CThostFtdcSyncDeltaOptExchMarginField *ptr = (CThostFtdcSyncDeltaOptExchMarginField*)malloc(sizeof(CThostFtdcSyncDeltaOptExchMarginField));
-    return ptr;
-}
-CThostFtdcSyncDeltaOptInvstMarginField* newCThostFtdcSyncDeltaOptInvstMarginField(){
-    CThostFtdcSyncDeltaOptInvstMarginField *ptr = (CThostFtdcSyncDeltaOptInvstMarginField*)malloc(sizeof(CThostFtdcSyncDeltaOptInvstMarginField));
-    return ptr;
-}
-CThostFtdcSyncDeltaInvstMarginRateULField* newCThostFtdcSyncDeltaInvstMarginRateULField(){
-    CThostFtdcSyncDeltaInvstMarginRateULField *ptr = (CThostFtdcSyncDeltaInvstMarginRateULField*)malloc(sizeof(CThostFtdcSyncDeltaInvstMarginRateULField));
-    return ptr;
-}
-CThostFtdcSyncDeltaOptInvstCommRateField* newCThostFtdcSyncDeltaOptInvstCommRateField(){
-    CThostFtdcSyncDeltaOptInvstCommRateField *ptr = (CThostFtdcSyncDeltaOptInvstCommRateField*)malloc(sizeof(CThostFtdcSyncDeltaOptInvstCommRateField));
-    return ptr;
-}
-CThostFtdcSyncDeltaInvstCommRateField* newCThostFtdcSyncDeltaInvstCommRateField(){
-    CThostFtdcSyncDeltaInvstCommRateField *ptr = (CThostFtdcSyncDeltaInvstCommRateField*)malloc(sizeof(CThostFtdcSyncDeltaInvstCommRateField));
-    return ptr;
-}
-CThostFtdcSyncDeltaProductExchRateField* newCThostFtdcSyncDeltaProductExchRateField(){
-    CThostFtdcSyncDeltaProductExchRateField *ptr = (CThostFtdcSyncDeltaProductExchRateField*)malloc(sizeof(CThostFtdcSyncDeltaProductExchRateField));
-    return ptr;
-}
-CThostFtdcSyncDeltaDepthMarketDataField* newCThostFtdcSyncDeltaDepthMarketDataField(){
-    CThostFtdcSyncDeltaDepthMarketDataField *ptr = (CThostFtdcSyncDeltaDepthMarketDataField*)malloc(sizeof(CThostFtdcSyncDeltaDepthMarketDataField));
-    return ptr;
-}
-CThostFtdcSyncDeltaIndexPriceField* newCThostFtdcSyncDeltaIndexPriceField(){
-    CThostFtdcSyncDeltaIndexPriceField *ptr = (CThostFtdcSyncDeltaIndexPriceField*)malloc(sizeof(CThostFtdcSyncDeltaIndexPriceField));
-    return ptr;
-}
-CThostFtdcSyncDeltaEWarrantOffsetField* newCThostFtdcSyncDeltaEWarrantOffsetField(){
-    CThostFtdcSyncDeltaEWarrantOffsetField *ptr = (CThostFtdcSyncDeltaEWarrantOffsetField*)malloc(sizeof(CThostFtdcSyncDeltaEWarrantOffsetField));
     return ptr;
 }
