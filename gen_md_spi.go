@@ -6,6 +6,7 @@ package ctp
 #include "gen_types.h"
 */
 import "C"
+import "fmt"
 
 type CThostFtdcMdSpi interface {
 	OnFrontConnected()
@@ -21,6 +22,49 @@ type CThostFtdcMdSpi interface {
 	OnRspUnSubForQuoteRsp(pSpecificInstrument *CThostFtdcSpecificInstrumentField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRtnDepthMarketData(pDepthMarketData *CThostFtdcDepthMarketDataField)
 	OnRtnForQuoteRsp(pForQuoteRsp *CThostFtdcForQuoteRspField)
+}
+
+type CThostFtdcMdSpiBase struct {
+}
+
+func (b *CThostFtdcMdSpiBase) OnFrontConnected() {
+	fmt.Println("OnFrontConnected")
+}
+func (b *CThostFtdcMdSpiBase) OnFrontDisconnected(nReason int) {
+	fmt.Println("OnFrontDisconnected")
+}
+func (b *CThostFtdcMdSpiBase) OnHeartBeatWarning(nTimeLapse int) {
+	fmt.Println("OnHeartBeatWarning")
+}
+func (b *CThostFtdcMdSpiBase) OnRspUserLogin(pRspUserLogin *CThostFtdcRspUserLoginField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspUserLogin")
+}
+func (b *CThostFtdcMdSpiBase) OnRspUserLogout(pUserLogout *CThostFtdcUserLogoutField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspUserLogout")
+}
+func (b *CThostFtdcMdSpiBase) OnRspQryMulticastInstrument(pMulticastInstrument *CThostFtdcMulticastInstrumentField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryMulticastInstrument")
+}
+func (b *CThostFtdcMdSpiBase) OnRspError(pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspError")
+}
+func (b *CThostFtdcMdSpiBase) OnRspSubMarketData(pSpecificInstrument *CThostFtdcSpecificInstrumentField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspSubMarketData")
+}
+func (b *CThostFtdcMdSpiBase) OnRspUnSubMarketData(pSpecificInstrument *CThostFtdcSpecificInstrumentField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspUnSubMarketData")
+}
+func (b *CThostFtdcMdSpiBase) OnRspSubForQuoteRsp(pSpecificInstrument *CThostFtdcSpecificInstrumentField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspSubForQuoteRsp")
+}
+func (b *CThostFtdcMdSpiBase) OnRspUnSubForQuoteRsp(pSpecificInstrument *CThostFtdcSpecificInstrumentField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspUnSubForQuoteRsp")
+}
+func (b *CThostFtdcMdSpiBase) OnRtnDepthMarketData(pDepthMarketData *CThostFtdcDepthMarketDataField) {
+	fmt.Println("OnRtnDepthMarketData")
+}
+func (b *CThostFtdcMdSpiBase) OnRtnForQuoteRsp(pForQuoteRsp *CThostFtdcForQuoteRspField) {
+	fmt.Println("OnRtnForQuoteRsp")
 }
 
 func getCThostFtdcMdSpi(ptr uint64) CThostFtdcMdSpi {

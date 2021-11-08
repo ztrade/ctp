@@ -3,7 +3,8 @@ package ctp
 
 //#include "gen_td_api.h"
 import "C"
-import "unsafe"
+
+//import "unsafe"
 
 func CThostFtdcTraderSpiCValue(ptr CThostFtdcTraderSpi) C.tdSpi {
 	v := storeGoPtr(ptr)
@@ -58,7 +59,7 @@ func (a *CThostFtdcTraderApi) GetTradingDay() string {
 func (a *CThostFtdcTraderApi) RegisterFront(pszFrontAddress string) {
 	cpszFrontAddress := go2cStrPtr(pszFrontAddress)
 	defer func() {
-		freeCStr(cpszFrontAddress)
+
 	}()
 
 	C.td_register_front(a.p, cpszFrontAddress)
@@ -68,7 +69,7 @@ func (a *CThostFtdcTraderApi) RegisterFront(pszFrontAddress string) {
 func (a *CThostFtdcTraderApi) RegisterNameServer(pszNsAddress string) {
 	cpszNsAddress := go2cStrPtr(pszNsAddress)
 	defer func() {
-		freeCStr(cpszNsAddress)
+
 	}()
 
 	C.td_register_name_server(a.p, cpszNsAddress)
@@ -78,7 +79,7 @@ func (a *CThostFtdcTraderApi) RegisterNameServer(pszNsAddress string) {
 func (a *CThostFtdcTraderApi) RegisterFensUserInfo(pFensUserInfo *CThostFtdcFensUserInfoField) {
 	cpFensUserInfo := CThostFtdcFensUserInfoFieldCValue(pFensUserInfo)
 	defer func() {
-		C.free(unsafe.Pointer(cpFensUserInfo))
+
 	}()
 
 	C.td_register_fens_user_info(a.p, cpFensUserInfo)
@@ -88,7 +89,7 @@ func (a *CThostFtdcTraderApi) RegisterFensUserInfo(pFensUserInfo *CThostFtdcFens
 func (a *CThostFtdcTraderApi) RegisterSpi(pSpi CThostFtdcTraderSpi) {
 	cpSpi := CThostFtdcTraderSpiCValue(pSpi)
 	defer func() {
-		C.free(unsafe.Pointer(cpSpi))
+
 	}()
 
 	C.td_register_spi(a.p, cpSpi)
@@ -112,7 +113,7 @@ func (a *CThostFtdcTraderApi) SubscribePublicTopic(nResumeType THOST_TE_RESUME_T
 func (a *CThostFtdcTraderApi) ReqAuthenticate(pReqAuthenticateField *CThostFtdcReqAuthenticateField, nRequestID int) int {
 	cpReqAuthenticateField := CThostFtdcReqAuthenticateFieldCValue(pReqAuthenticateField)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqAuthenticateField))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -124,7 +125,7 @@ func (a *CThostFtdcTraderApi) ReqAuthenticate(pReqAuthenticateField *CThostFtdcR
 func (a *CThostFtdcTraderApi) RegisterUserSystemInfo(pUserSystemInfo *CThostFtdcUserSystemInfoField) int {
 	cpUserSystemInfo := CThostFtdcUserSystemInfoFieldCValue(pUserSystemInfo)
 	defer func() {
-		C.free(unsafe.Pointer(cpUserSystemInfo))
+
 	}()
 
 	ret := C.td_register_user_system_info(a.p, cpUserSystemInfo)
@@ -135,7 +136,7 @@ func (a *CThostFtdcTraderApi) RegisterUserSystemInfo(pUserSystemInfo *CThostFtdc
 func (a *CThostFtdcTraderApi) SubmitUserSystemInfo(pUserSystemInfo *CThostFtdcUserSystemInfoField) int {
 	cpUserSystemInfo := CThostFtdcUserSystemInfoFieldCValue(pUserSystemInfo)
 	defer func() {
-		C.free(unsafe.Pointer(cpUserSystemInfo))
+
 	}()
 
 	ret := C.td_submit_user_system_info(a.p, cpUserSystemInfo)
@@ -146,7 +147,7 @@ func (a *CThostFtdcTraderApi) SubmitUserSystemInfo(pUserSystemInfo *CThostFtdcUs
 func (a *CThostFtdcTraderApi) ReqUserLogin(pReqUserLoginField *CThostFtdcReqUserLoginField, nRequestID int) int {
 	cpReqUserLoginField := CThostFtdcReqUserLoginFieldCValue(pReqUserLoginField)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqUserLoginField))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -158,7 +159,7 @@ func (a *CThostFtdcTraderApi) ReqUserLogin(pReqUserLoginField *CThostFtdcReqUser
 func (a *CThostFtdcTraderApi) ReqUserLogout(pUserLogout *CThostFtdcUserLogoutField, nRequestID int) int {
 	cpUserLogout := CThostFtdcUserLogoutFieldCValue(pUserLogout)
 	defer func() {
-		C.free(unsafe.Pointer(cpUserLogout))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -170,7 +171,7 @@ func (a *CThostFtdcTraderApi) ReqUserLogout(pUserLogout *CThostFtdcUserLogoutFie
 func (a *CThostFtdcTraderApi) ReqUserPasswordUpdate(pUserPasswordUpdate *CThostFtdcUserPasswordUpdateField, nRequestID int) int {
 	cpUserPasswordUpdate := CThostFtdcUserPasswordUpdateFieldCValue(pUserPasswordUpdate)
 	defer func() {
-		C.free(unsafe.Pointer(cpUserPasswordUpdate))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -182,7 +183,7 @@ func (a *CThostFtdcTraderApi) ReqUserPasswordUpdate(pUserPasswordUpdate *CThostF
 func (a *CThostFtdcTraderApi) ReqTradingAccountPasswordUpdate(pTradingAccountPasswordUpdate *CThostFtdcTradingAccountPasswordUpdateField, nRequestID int) int {
 	cpTradingAccountPasswordUpdate := CThostFtdcTradingAccountPasswordUpdateFieldCValue(pTradingAccountPasswordUpdate)
 	defer func() {
-		C.free(unsafe.Pointer(cpTradingAccountPasswordUpdate))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -194,7 +195,7 @@ func (a *CThostFtdcTraderApi) ReqTradingAccountPasswordUpdate(pTradingAccountPas
 func (a *CThostFtdcTraderApi) ReqUserAuthMethod(pReqUserAuthMethod *CThostFtdcReqUserAuthMethodField, nRequestID int) int {
 	cpReqUserAuthMethod := CThostFtdcReqUserAuthMethodFieldCValue(pReqUserAuthMethod)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqUserAuthMethod))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -206,7 +207,7 @@ func (a *CThostFtdcTraderApi) ReqUserAuthMethod(pReqUserAuthMethod *CThostFtdcRe
 func (a *CThostFtdcTraderApi) ReqGenUserCaptcha(pReqGenUserCaptcha *CThostFtdcReqGenUserCaptchaField, nRequestID int) int {
 	cpReqGenUserCaptcha := CThostFtdcReqGenUserCaptchaFieldCValue(pReqGenUserCaptcha)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqGenUserCaptcha))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -218,7 +219,7 @@ func (a *CThostFtdcTraderApi) ReqGenUserCaptcha(pReqGenUserCaptcha *CThostFtdcRe
 func (a *CThostFtdcTraderApi) ReqGenUserText(pReqGenUserText *CThostFtdcReqGenUserTextField, nRequestID int) int {
 	cpReqGenUserText := CThostFtdcReqGenUserTextFieldCValue(pReqGenUserText)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqGenUserText))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -230,7 +231,7 @@ func (a *CThostFtdcTraderApi) ReqGenUserText(pReqGenUserText *CThostFtdcReqGenUs
 func (a *CThostFtdcTraderApi) ReqUserLoginWithCaptcha(pReqUserLoginWithCaptcha *CThostFtdcReqUserLoginWithCaptchaField, nRequestID int) int {
 	cpReqUserLoginWithCaptcha := CThostFtdcReqUserLoginWithCaptchaFieldCValue(pReqUserLoginWithCaptcha)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqUserLoginWithCaptcha))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -242,7 +243,7 @@ func (a *CThostFtdcTraderApi) ReqUserLoginWithCaptcha(pReqUserLoginWithCaptcha *
 func (a *CThostFtdcTraderApi) ReqUserLoginWithText(pReqUserLoginWithText *CThostFtdcReqUserLoginWithTextField, nRequestID int) int {
 	cpReqUserLoginWithText := CThostFtdcReqUserLoginWithTextFieldCValue(pReqUserLoginWithText)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqUserLoginWithText))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -254,7 +255,7 @@ func (a *CThostFtdcTraderApi) ReqUserLoginWithText(pReqUserLoginWithText *CThost
 func (a *CThostFtdcTraderApi) ReqUserLoginWithOTP(pReqUserLoginWithOTP *CThostFtdcReqUserLoginWithOTPField, nRequestID int) int {
 	cpReqUserLoginWithOTP := CThostFtdcReqUserLoginWithOTPFieldCValue(pReqUserLoginWithOTP)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqUserLoginWithOTP))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -266,7 +267,7 @@ func (a *CThostFtdcTraderApi) ReqUserLoginWithOTP(pReqUserLoginWithOTP *CThostFt
 func (a *CThostFtdcTraderApi) ReqOrderInsert(pInputOrder *CThostFtdcInputOrderField, nRequestID int) int {
 	cpInputOrder := CThostFtdcInputOrderFieldCValue(pInputOrder)
 	defer func() {
-		C.free(unsafe.Pointer(cpInputOrder))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -278,7 +279,7 @@ func (a *CThostFtdcTraderApi) ReqOrderInsert(pInputOrder *CThostFtdcInputOrderFi
 func (a *CThostFtdcTraderApi) ReqParkedOrderInsert(pParkedOrder *CThostFtdcParkedOrderField, nRequestID int) int {
 	cpParkedOrder := CThostFtdcParkedOrderFieldCValue(pParkedOrder)
 	defer func() {
-		C.free(unsafe.Pointer(cpParkedOrder))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -290,7 +291,7 @@ func (a *CThostFtdcTraderApi) ReqParkedOrderInsert(pParkedOrder *CThostFtdcParke
 func (a *CThostFtdcTraderApi) ReqParkedOrderAction(pParkedOrderAction *CThostFtdcParkedOrderActionField, nRequestID int) int {
 	cpParkedOrderAction := CThostFtdcParkedOrderActionFieldCValue(pParkedOrderAction)
 	defer func() {
-		C.free(unsafe.Pointer(cpParkedOrderAction))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -302,7 +303,7 @@ func (a *CThostFtdcTraderApi) ReqParkedOrderAction(pParkedOrderAction *CThostFtd
 func (a *CThostFtdcTraderApi) ReqOrderAction(pInputOrderAction *CThostFtdcInputOrderActionField, nRequestID int) int {
 	cpInputOrderAction := CThostFtdcInputOrderActionFieldCValue(pInputOrderAction)
 	defer func() {
-		C.free(unsafe.Pointer(cpInputOrderAction))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -314,7 +315,7 @@ func (a *CThostFtdcTraderApi) ReqOrderAction(pInputOrderAction *CThostFtdcInputO
 func (a *CThostFtdcTraderApi) ReqQueryMaxOrderVolume(pQueryMaxOrderVolume *CThostFtdcQueryMaxOrderVolumeField, nRequestID int) int {
 	cpQueryMaxOrderVolume := CThostFtdcQueryMaxOrderVolumeFieldCValue(pQueryMaxOrderVolume)
 	defer func() {
-		C.free(unsafe.Pointer(cpQueryMaxOrderVolume))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -326,7 +327,7 @@ func (a *CThostFtdcTraderApi) ReqQueryMaxOrderVolume(pQueryMaxOrderVolume *CThos
 func (a *CThostFtdcTraderApi) ReqSettlementInfoConfirm(pSettlementInfoConfirm *CThostFtdcSettlementInfoConfirmField, nRequestID int) int {
 	cpSettlementInfoConfirm := CThostFtdcSettlementInfoConfirmFieldCValue(pSettlementInfoConfirm)
 	defer func() {
-		C.free(unsafe.Pointer(cpSettlementInfoConfirm))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -338,7 +339,7 @@ func (a *CThostFtdcTraderApi) ReqSettlementInfoConfirm(pSettlementInfoConfirm *C
 func (a *CThostFtdcTraderApi) ReqRemoveParkedOrder(pRemoveParkedOrder *CThostFtdcRemoveParkedOrderField, nRequestID int) int {
 	cpRemoveParkedOrder := CThostFtdcRemoveParkedOrderFieldCValue(pRemoveParkedOrder)
 	defer func() {
-		C.free(unsafe.Pointer(cpRemoveParkedOrder))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -350,7 +351,7 @@ func (a *CThostFtdcTraderApi) ReqRemoveParkedOrder(pRemoveParkedOrder *CThostFtd
 func (a *CThostFtdcTraderApi) ReqRemoveParkedOrderAction(pRemoveParkedOrderAction *CThostFtdcRemoveParkedOrderActionField, nRequestID int) int {
 	cpRemoveParkedOrderAction := CThostFtdcRemoveParkedOrderActionFieldCValue(pRemoveParkedOrderAction)
 	defer func() {
-		C.free(unsafe.Pointer(cpRemoveParkedOrderAction))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -362,7 +363,7 @@ func (a *CThostFtdcTraderApi) ReqRemoveParkedOrderAction(pRemoveParkedOrderActio
 func (a *CThostFtdcTraderApi) ReqExecOrderInsert(pInputExecOrder *CThostFtdcInputExecOrderField, nRequestID int) int {
 	cpInputExecOrder := CThostFtdcInputExecOrderFieldCValue(pInputExecOrder)
 	defer func() {
-		C.free(unsafe.Pointer(cpInputExecOrder))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -374,7 +375,7 @@ func (a *CThostFtdcTraderApi) ReqExecOrderInsert(pInputExecOrder *CThostFtdcInpu
 func (a *CThostFtdcTraderApi) ReqExecOrderAction(pInputExecOrderAction *CThostFtdcInputExecOrderActionField, nRequestID int) int {
 	cpInputExecOrderAction := CThostFtdcInputExecOrderActionFieldCValue(pInputExecOrderAction)
 	defer func() {
-		C.free(unsafe.Pointer(cpInputExecOrderAction))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -386,7 +387,7 @@ func (a *CThostFtdcTraderApi) ReqExecOrderAction(pInputExecOrderAction *CThostFt
 func (a *CThostFtdcTraderApi) ReqForQuoteInsert(pInputForQuote *CThostFtdcInputForQuoteField, nRequestID int) int {
 	cpInputForQuote := CThostFtdcInputForQuoteFieldCValue(pInputForQuote)
 	defer func() {
-		C.free(unsafe.Pointer(cpInputForQuote))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -398,7 +399,7 @@ func (a *CThostFtdcTraderApi) ReqForQuoteInsert(pInputForQuote *CThostFtdcInputF
 func (a *CThostFtdcTraderApi) ReqQuoteInsert(pInputQuote *CThostFtdcInputQuoteField, nRequestID int) int {
 	cpInputQuote := CThostFtdcInputQuoteFieldCValue(pInputQuote)
 	defer func() {
-		C.free(unsafe.Pointer(cpInputQuote))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -410,7 +411,7 @@ func (a *CThostFtdcTraderApi) ReqQuoteInsert(pInputQuote *CThostFtdcInputQuoteFi
 func (a *CThostFtdcTraderApi) ReqQuoteAction(pInputQuoteAction *CThostFtdcInputQuoteActionField, nRequestID int) int {
 	cpInputQuoteAction := CThostFtdcInputQuoteActionFieldCValue(pInputQuoteAction)
 	defer func() {
-		C.free(unsafe.Pointer(cpInputQuoteAction))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -422,7 +423,7 @@ func (a *CThostFtdcTraderApi) ReqQuoteAction(pInputQuoteAction *CThostFtdcInputQ
 func (a *CThostFtdcTraderApi) ReqBatchOrderAction(pInputBatchOrderAction *CThostFtdcInputBatchOrderActionField, nRequestID int) int {
 	cpInputBatchOrderAction := CThostFtdcInputBatchOrderActionFieldCValue(pInputBatchOrderAction)
 	defer func() {
-		C.free(unsafe.Pointer(cpInputBatchOrderAction))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -434,7 +435,7 @@ func (a *CThostFtdcTraderApi) ReqBatchOrderAction(pInputBatchOrderAction *CThost
 func (a *CThostFtdcTraderApi) ReqOptionSelfCloseInsert(pInputOptionSelfClose *CThostFtdcInputOptionSelfCloseField, nRequestID int) int {
 	cpInputOptionSelfClose := CThostFtdcInputOptionSelfCloseFieldCValue(pInputOptionSelfClose)
 	defer func() {
-		C.free(unsafe.Pointer(cpInputOptionSelfClose))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -446,7 +447,7 @@ func (a *CThostFtdcTraderApi) ReqOptionSelfCloseInsert(pInputOptionSelfClose *CT
 func (a *CThostFtdcTraderApi) ReqOptionSelfCloseAction(pInputOptionSelfCloseAction *CThostFtdcInputOptionSelfCloseActionField, nRequestID int) int {
 	cpInputOptionSelfCloseAction := CThostFtdcInputOptionSelfCloseActionFieldCValue(pInputOptionSelfCloseAction)
 	defer func() {
-		C.free(unsafe.Pointer(cpInputOptionSelfCloseAction))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -458,7 +459,7 @@ func (a *CThostFtdcTraderApi) ReqOptionSelfCloseAction(pInputOptionSelfCloseActi
 func (a *CThostFtdcTraderApi) ReqCombActionInsert(pInputCombAction *CThostFtdcInputCombActionField, nRequestID int) int {
 	cpInputCombAction := CThostFtdcInputCombActionFieldCValue(pInputCombAction)
 	defer func() {
-		C.free(unsafe.Pointer(cpInputCombAction))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -470,7 +471,7 @@ func (a *CThostFtdcTraderApi) ReqCombActionInsert(pInputCombAction *CThostFtdcIn
 func (a *CThostFtdcTraderApi) ReqQryOrder(pQryOrder *CThostFtdcQryOrderField, nRequestID int) int {
 	cpQryOrder := CThostFtdcQryOrderFieldCValue(pQryOrder)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryOrder))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -482,7 +483,7 @@ func (a *CThostFtdcTraderApi) ReqQryOrder(pQryOrder *CThostFtdcQryOrderField, nR
 func (a *CThostFtdcTraderApi) ReqQryTrade(pQryTrade *CThostFtdcQryTradeField, nRequestID int) int {
 	cpQryTrade := CThostFtdcQryTradeFieldCValue(pQryTrade)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryTrade))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -494,7 +495,7 @@ func (a *CThostFtdcTraderApi) ReqQryTrade(pQryTrade *CThostFtdcQryTradeField, nR
 func (a *CThostFtdcTraderApi) ReqQryInvestorPosition(pQryInvestorPosition *CThostFtdcQryInvestorPositionField, nRequestID int) int {
 	cpQryInvestorPosition := CThostFtdcQryInvestorPositionFieldCValue(pQryInvestorPosition)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryInvestorPosition))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -506,7 +507,7 @@ func (a *CThostFtdcTraderApi) ReqQryInvestorPosition(pQryInvestorPosition *CThos
 func (a *CThostFtdcTraderApi) ReqQryTradingAccount(pQryTradingAccount *CThostFtdcQryTradingAccountField, nRequestID int) int {
 	cpQryTradingAccount := CThostFtdcQryTradingAccountFieldCValue(pQryTradingAccount)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryTradingAccount))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -518,7 +519,7 @@ func (a *CThostFtdcTraderApi) ReqQryTradingAccount(pQryTradingAccount *CThostFtd
 func (a *CThostFtdcTraderApi) ReqQryInvestor(pQryInvestor *CThostFtdcQryInvestorField, nRequestID int) int {
 	cpQryInvestor := CThostFtdcQryInvestorFieldCValue(pQryInvestor)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryInvestor))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -530,7 +531,7 @@ func (a *CThostFtdcTraderApi) ReqQryInvestor(pQryInvestor *CThostFtdcQryInvestor
 func (a *CThostFtdcTraderApi) ReqQryTradingCode(pQryTradingCode *CThostFtdcQryTradingCodeField, nRequestID int) int {
 	cpQryTradingCode := CThostFtdcQryTradingCodeFieldCValue(pQryTradingCode)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryTradingCode))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -542,7 +543,7 @@ func (a *CThostFtdcTraderApi) ReqQryTradingCode(pQryTradingCode *CThostFtdcQryTr
 func (a *CThostFtdcTraderApi) ReqQryInstrumentMarginRate(pQryInstrumentMarginRate *CThostFtdcQryInstrumentMarginRateField, nRequestID int) int {
 	cpQryInstrumentMarginRate := CThostFtdcQryInstrumentMarginRateFieldCValue(pQryInstrumentMarginRate)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryInstrumentMarginRate))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -554,7 +555,7 @@ func (a *CThostFtdcTraderApi) ReqQryInstrumentMarginRate(pQryInstrumentMarginRat
 func (a *CThostFtdcTraderApi) ReqQryInstrumentCommissionRate(pQryInstrumentCommissionRate *CThostFtdcQryInstrumentCommissionRateField, nRequestID int) int {
 	cpQryInstrumentCommissionRate := CThostFtdcQryInstrumentCommissionRateFieldCValue(pQryInstrumentCommissionRate)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryInstrumentCommissionRate))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -566,7 +567,7 @@ func (a *CThostFtdcTraderApi) ReqQryInstrumentCommissionRate(pQryInstrumentCommi
 func (a *CThostFtdcTraderApi) ReqQryExchange(pQryExchange *CThostFtdcQryExchangeField, nRequestID int) int {
 	cpQryExchange := CThostFtdcQryExchangeFieldCValue(pQryExchange)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryExchange))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -578,7 +579,7 @@ func (a *CThostFtdcTraderApi) ReqQryExchange(pQryExchange *CThostFtdcQryExchange
 func (a *CThostFtdcTraderApi) ReqQryProduct(pQryProduct *CThostFtdcQryProductField, nRequestID int) int {
 	cpQryProduct := CThostFtdcQryProductFieldCValue(pQryProduct)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryProduct))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -590,7 +591,7 @@ func (a *CThostFtdcTraderApi) ReqQryProduct(pQryProduct *CThostFtdcQryProductFie
 func (a *CThostFtdcTraderApi) ReqQryInstrument(pQryInstrument *CThostFtdcQryInstrumentField, nRequestID int) int {
 	cpQryInstrument := CThostFtdcQryInstrumentFieldCValue(pQryInstrument)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryInstrument))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -602,7 +603,7 @@ func (a *CThostFtdcTraderApi) ReqQryInstrument(pQryInstrument *CThostFtdcQryInst
 func (a *CThostFtdcTraderApi) ReqQryDepthMarketData(pQryDepthMarketData *CThostFtdcQryDepthMarketDataField, nRequestID int) int {
 	cpQryDepthMarketData := CThostFtdcQryDepthMarketDataFieldCValue(pQryDepthMarketData)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryDepthMarketData))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -614,7 +615,7 @@ func (a *CThostFtdcTraderApi) ReqQryDepthMarketData(pQryDepthMarketData *CThostF
 func (a *CThostFtdcTraderApi) ReqQrySettlementInfo(pQrySettlementInfo *CThostFtdcQrySettlementInfoField, nRequestID int) int {
 	cpQrySettlementInfo := CThostFtdcQrySettlementInfoFieldCValue(pQrySettlementInfo)
 	defer func() {
-		C.free(unsafe.Pointer(cpQrySettlementInfo))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -626,7 +627,7 @@ func (a *CThostFtdcTraderApi) ReqQrySettlementInfo(pQrySettlementInfo *CThostFtd
 func (a *CThostFtdcTraderApi) ReqQryTransferBank(pQryTransferBank *CThostFtdcQryTransferBankField, nRequestID int) int {
 	cpQryTransferBank := CThostFtdcQryTransferBankFieldCValue(pQryTransferBank)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryTransferBank))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -638,7 +639,7 @@ func (a *CThostFtdcTraderApi) ReqQryTransferBank(pQryTransferBank *CThostFtdcQry
 func (a *CThostFtdcTraderApi) ReqQryInvestorPositionDetail(pQryInvestorPositionDetail *CThostFtdcQryInvestorPositionDetailField, nRequestID int) int {
 	cpQryInvestorPositionDetail := CThostFtdcQryInvestorPositionDetailFieldCValue(pQryInvestorPositionDetail)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryInvestorPositionDetail))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -650,7 +651,7 @@ func (a *CThostFtdcTraderApi) ReqQryInvestorPositionDetail(pQryInvestorPositionD
 func (a *CThostFtdcTraderApi) ReqQryNotice(pQryNotice *CThostFtdcQryNoticeField, nRequestID int) int {
 	cpQryNotice := CThostFtdcQryNoticeFieldCValue(pQryNotice)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryNotice))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -662,7 +663,7 @@ func (a *CThostFtdcTraderApi) ReqQryNotice(pQryNotice *CThostFtdcQryNoticeField,
 func (a *CThostFtdcTraderApi) ReqQrySettlementInfoConfirm(pQrySettlementInfoConfirm *CThostFtdcQrySettlementInfoConfirmField, nRequestID int) int {
 	cpQrySettlementInfoConfirm := CThostFtdcQrySettlementInfoConfirmFieldCValue(pQrySettlementInfoConfirm)
 	defer func() {
-		C.free(unsafe.Pointer(cpQrySettlementInfoConfirm))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -674,7 +675,7 @@ func (a *CThostFtdcTraderApi) ReqQrySettlementInfoConfirm(pQrySettlementInfoConf
 func (a *CThostFtdcTraderApi) ReqQryInvestorPositionCombineDetail(pQryInvestorPositionCombineDetail *CThostFtdcQryInvestorPositionCombineDetailField, nRequestID int) int {
 	cpQryInvestorPositionCombineDetail := CThostFtdcQryInvestorPositionCombineDetailFieldCValue(pQryInvestorPositionCombineDetail)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryInvestorPositionCombineDetail))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -686,7 +687,7 @@ func (a *CThostFtdcTraderApi) ReqQryInvestorPositionCombineDetail(pQryInvestorPo
 func (a *CThostFtdcTraderApi) ReqQryCFMMCTradingAccountKey(pQryCFMMCTradingAccountKey *CThostFtdcQryCFMMCTradingAccountKeyField, nRequestID int) int {
 	cpQryCFMMCTradingAccountKey := CThostFtdcQryCFMMCTradingAccountKeyFieldCValue(pQryCFMMCTradingAccountKey)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryCFMMCTradingAccountKey))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -698,7 +699,7 @@ func (a *CThostFtdcTraderApi) ReqQryCFMMCTradingAccountKey(pQryCFMMCTradingAccou
 func (a *CThostFtdcTraderApi) ReqQryEWarrantOffset(pQryEWarrantOffset *CThostFtdcQryEWarrantOffsetField, nRequestID int) int {
 	cpQryEWarrantOffset := CThostFtdcQryEWarrantOffsetFieldCValue(pQryEWarrantOffset)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryEWarrantOffset))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -710,7 +711,7 @@ func (a *CThostFtdcTraderApi) ReqQryEWarrantOffset(pQryEWarrantOffset *CThostFtd
 func (a *CThostFtdcTraderApi) ReqQryInvestorProductGroupMargin(pQryInvestorProductGroupMargin *CThostFtdcQryInvestorProductGroupMarginField, nRequestID int) int {
 	cpQryInvestorProductGroupMargin := CThostFtdcQryInvestorProductGroupMarginFieldCValue(pQryInvestorProductGroupMargin)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryInvestorProductGroupMargin))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -722,7 +723,7 @@ func (a *CThostFtdcTraderApi) ReqQryInvestorProductGroupMargin(pQryInvestorProdu
 func (a *CThostFtdcTraderApi) ReqQryExchangeMarginRate(pQryExchangeMarginRate *CThostFtdcQryExchangeMarginRateField, nRequestID int) int {
 	cpQryExchangeMarginRate := CThostFtdcQryExchangeMarginRateFieldCValue(pQryExchangeMarginRate)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryExchangeMarginRate))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -734,7 +735,7 @@ func (a *CThostFtdcTraderApi) ReqQryExchangeMarginRate(pQryExchangeMarginRate *C
 func (a *CThostFtdcTraderApi) ReqQryExchangeMarginRateAdjust(pQryExchangeMarginRateAdjust *CThostFtdcQryExchangeMarginRateAdjustField, nRequestID int) int {
 	cpQryExchangeMarginRateAdjust := CThostFtdcQryExchangeMarginRateAdjustFieldCValue(pQryExchangeMarginRateAdjust)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryExchangeMarginRateAdjust))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -746,7 +747,7 @@ func (a *CThostFtdcTraderApi) ReqQryExchangeMarginRateAdjust(pQryExchangeMarginR
 func (a *CThostFtdcTraderApi) ReqQryExchangeRate(pQryExchangeRate *CThostFtdcQryExchangeRateField, nRequestID int) int {
 	cpQryExchangeRate := CThostFtdcQryExchangeRateFieldCValue(pQryExchangeRate)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryExchangeRate))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -758,7 +759,7 @@ func (a *CThostFtdcTraderApi) ReqQryExchangeRate(pQryExchangeRate *CThostFtdcQry
 func (a *CThostFtdcTraderApi) ReqQrySecAgentACIDMap(pQrySecAgentACIDMap *CThostFtdcQrySecAgentACIDMapField, nRequestID int) int {
 	cpQrySecAgentACIDMap := CThostFtdcQrySecAgentACIDMapFieldCValue(pQrySecAgentACIDMap)
 	defer func() {
-		C.free(unsafe.Pointer(cpQrySecAgentACIDMap))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -770,7 +771,7 @@ func (a *CThostFtdcTraderApi) ReqQrySecAgentACIDMap(pQrySecAgentACIDMap *CThostF
 func (a *CThostFtdcTraderApi) ReqQryProductExchRate(pQryProductExchRate *CThostFtdcQryProductExchRateField, nRequestID int) int {
 	cpQryProductExchRate := CThostFtdcQryProductExchRateFieldCValue(pQryProductExchRate)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryProductExchRate))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -782,7 +783,7 @@ func (a *CThostFtdcTraderApi) ReqQryProductExchRate(pQryProductExchRate *CThostF
 func (a *CThostFtdcTraderApi) ReqQryProductGroup(pQryProductGroup *CThostFtdcQryProductGroupField, nRequestID int) int {
 	cpQryProductGroup := CThostFtdcQryProductGroupFieldCValue(pQryProductGroup)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryProductGroup))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -794,7 +795,7 @@ func (a *CThostFtdcTraderApi) ReqQryProductGroup(pQryProductGroup *CThostFtdcQry
 func (a *CThostFtdcTraderApi) ReqQryMMInstrumentCommissionRate(pQryMMInstrumentCommissionRate *CThostFtdcQryMMInstrumentCommissionRateField, nRequestID int) int {
 	cpQryMMInstrumentCommissionRate := CThostFtdcQryMMInstrumentCommissionRateFieldCValue(pQryMMInstrumentCommissionRate)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryMMInstrumentCommissionRate))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -806,7 +807,7 @@ func (a *CThostFtdcTraderApi) ReqQryMMInstrumentCommissionRate(pQryMMInstrumentC
 func (a *CThostFtdcTraderApi) ReqQryMMOptionInstrCommRate(pQryMMOptionInstrCommRate *CThostFtdcQryMMOptionInstrCommRateField, nRequestID int) int {
 	cpQryMMOptionInstrCommRate := CThostFtdcQryMMOptionInstrCommRateFieldCValue(pQryMMOptionInstrCommRate)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryMMOptionInstrCommRate))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -818,7 +819,7 @@ func (a *CThostFtdcTraderApi) ReqQryMMOptionInstrCommRate(pQryMMOptionInstrCommR
 func (a *CThostFtdcTraderApi) ReqQryInstrumentOrderCommRate(pQryInstrumentOrderCommRate *CThostFtdcQryInstrumentOrderCommRateField, nRequestID int) int {
 	cpQryInstrumentOrderCommRate := CThostFtdcQryInstrumentOrderCommRateFieldCValue(pQryInstrumentOrderCommRate)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryInstrumentOrderCommRate))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -830,7 +831,7 @@ func (a *CThostFtdcTraderApi) ReqQryInstrumentOrderCommRate(pQryInstrumentOrderC
 func (a *CThostFtdcTraderApi) ReqQrySecAgentTradingAccount(pQryTradingAccount *CThostFtdcQryTradingAccountField, nRequestID int) int {
 	cpQryTradingAccount := CThostFtdcQryTradingAccountFieldCValue(pQryTradingAccount)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryTradingAccount))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -842,7 +843,7 @@ func (a *CThostFtdcTraderApi) ReqQrySecAgentTradingAccount(pQryTradingAccount *C
 func (a *CThostFtdcTraderApi) ReqQrySecAgentCheckMode(pQrySecAgentCheckMode *CThostFtdcQrySecAgentCheckModeField, nRequestID int) int {
 	cpQrySecAgentCheckMode := CThostFtdcQrySecAgentCheckModeFieldCValue(pQrySecAgentCheckMode)
 	defer func() {
-		C.free(unsafe.Pointer(cpQrySecAgentCheckMode))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -854,7 +855,7 @@ func (a *CThostFtdcTraderApi) ReqQrySecAgentCheckMode(pQrySecAgentCheckMode *CTh
 func (a *CThostFtdcTraderApi) ReqQrySecAgentTradeInfo(pQrySecAgentTradeInfo *CThostFtdcQrySecAgentTradeInfoField, nRequestID int) int {
 	cpQrySecAgentTradeInfo := CThostFtdcQrySecAgentTradeInfoFieldCValue(pQrySecAgentTradeInfo)
 	defer func() {
-		C.free(unsafe.Pointer(cpQrySecAgentTradeInfo))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -866,7 +867,7 @@ func (a *CThostFtdcTraderApi) ReqQrySecAgentTradeInfo(pQrySecAgentTradeInfo *CTh
 func (a *CThostFtdcTraderApi) ReqQryOptionInstrTradeCost(pQryOptionInstrTradeCost *CThostFtdcQryOptionInstrTradeCostField, nRequestID int) int {
 	cpQryOptionInstrTradeCost := CThostFtdcQryOptionInstrTradeCostFieldCValue(pQryOptionInstrTradeCost)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryOptionInstrTradeCost))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -878,7 +879,7 @@ func (a *CThostFtdcTraderApi) ReqQryOptionInstrTradeCost(pQryOptionInstrTradeCos
 func (a *CThostFtdcTraderApi) ReqQryOptionInstrCommRate(pQryOptionInstrCommRate *CThostFtdcQryOptionInstrCommRateField, nRequestID int) int {
 	cpQryOptionInstrCommRate := CThostFtdcQryOptionInstrCommRateFieldCValue(pQryOptionInstrCommRate)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryOptionInstrCommRate))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -890,7 +891,7 @@ func (a *CThostFtdcTraderApi) ReqQryOptionInstrCommRate(pQryOptionInstrCommRate 
 func (a *CThostFtdcTraderApi) ReqQryExecOrder(pQryExecOrder *CThostFtdcQryExecOrderField, nRequestID int) int {
 	cpQryExecOrder := CThostFtdcQryExecOrderFieldCValue(pQryExecOrder)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryExecOrder))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -902,7 +903,7 @@ func (a *CThostFtdcTraderApi) ReqQryExecOrder(pQryExecOrder *CThostFtdcQryExecOr
 func (a *CThostFtdcTraderApi) ReqQryForQuote(pQryForQuote *CThostFtdcQryForQuoteField, nRequestID int) int {
 	cpQryForQuote := CThostFtdcQryForQuoteFieldCValue(pQryForQuote)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryForQuote))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -914,7 +915,7 @@ func (a *CThostFtdcTraderApi) ReqQryForQuote(pQryForQuote *CThostFtdcQryForQuote
 func (a *CThostFtdcTraderApi) ReqQryQuote(pQryQuote *CThostFtdcQryQuoteField, nRequestID int) int {
 	cpQryQuote := CThostFtdcQryQuoteFieldCValue(pQryQuote)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryQuote))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -926,7 +927,7 @@ func (a *CThostFtdcTraderApi) ReqQryQuote(pQryQuote *CThostFtdcQryQuoteField, nR
 func (a *CThostFtdcTraderApi) ReqQryOptionSelfClose(pQryOptionSelfClose *CThostFtdcQryOptionSelfCloseField, nRequestID int) int {
 	cpQryOptionSelfClose := CThostFtdcQryOptionSelfCloseFieldCValue(pQryOptionSelfClose)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryOptionSelfClose))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -938,7 +939,7 @@ func (a *CThostFtdcTraderApi) ReqQryOptionSelfClose(pQryOptionSelfClose *CThostF
 func (a *CThostFtdcTraderApi) ReqQryInvestUnit(pQryInvestUnit *CThostFtdcQryInvestUnitField, nRequestID int) int {
 	cpQryInvestUnit := CThostFtdcQryInvestUnitFieldCValue(pQryInvestUnit)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryInvestUnit))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -950,7 +951,7 @@ func (a *CThostFtdcTraderApi) ReqQryInvestUnit(pQryInvestUnit *CThostFtdcQryInve
 func (a *CThostFtdcTraderApi) ReqQryCombInstrumentGuard(pQryCombInstrumentGuard *CThostFtdcQryCombInstrumentGuardField, nRequestID int) int {
 	cpQryCombInstrumentGuard := CThostFtdcQryCombInstrumentGuardFieldCValue(pQryCombInstrumentGuard)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryCombInstrumentGuard))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -962,7 +963,7 @@ func (a *CThostFtdcTraderApi) ReqQryCombInstrumentGuard(pQryCombInstrumentGuard 
 func (a *CThostFtdcTraderApi) ReqQryCombAction(pQryCombAction *CThostFtdcQryCombActionField, nRequestID int) int {
 	cpQryCombAction := CThostFtdcQryCombActionFieldCValue(pQryCombAction)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryCombAction))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -974,7 +975,7 @@ func (a *CThostFtdcTraderApi) ReqQryCombAction(pQryCombAction *CThostFtdcQryComb
 func (a *CThostFtdcTraderApi) ReqQryTransferSerial(pQryTransferSerial *CThostFtdcQryTransferSerialField, nRequestID int) int {
 	cpQryTransferSerial := CThostFtdcQryTransferSerialFieldCValue(pQryTransferSerial)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryTransferSerial))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -986,7 +987,7 @@ func (a *CThostFtdcTraderApi) ReqQryTransferSerial(pQryTransferSerial *CThostFtd
 func (a *CThostFtdcTraderApi) ReqQryAccountregister(pQryAccountregister *CThostFtdcQryAccountregisterField, nRequestID int) int {
 	cpQryAccountregister := CThostFtdcQryAccountregisterFieldCValue(pQryAccountregister)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryAccountregister))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -998,7 +999,7 @@ func (a *CThostFtdcTraderApi) ReqQryAccountregister(pQryAccountregister *CThostF
 func (a *CThostFtdcTraderApi) ReqQryContractBank(pQryContractBank *CThostFtdcQryContractBankField, nRequestID int) int {
 	cpQryContractBank := CThostFtdcQryContractBankFieldCValue(pQryContractBank)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryContractBank))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -1010,7 +1011,7 @@ func (a *CThostFtdcTraderApi) ReqQryContractBank(pQryContractBank *CThostFtdcQry
 func (a *CThostFtdcTraderApi) ReqQryParkedOrder(pQryParkedOrder *CThostFtdcQryParkedOrderField, nRequestID int) int {
 	cpQryParkedOrder := CThostFtdcQryParkedOrderFieldCValue(pQryParkedOrder)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryParkedOrder))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -1022,7 +1023,7 @@ func (a *CThostFtdcTraderApi) ReqQryParkedOrder(pQryParkedOrder *CThostFtdcQryPa
 func (a *CThostFtdcTraderApi) ReqQryParkedOrderAction(pQryParkedOrderAction *CThostFtdcQryParkedOrderActionField, nRequestID int) int {
 	cpQryParkedOrderAction := CThostFtdcQryParkedOrderActionFieldCValue(pQryParkedOrderAction)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryParkedOrderAction))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -1034,7 +1035,7 @@ func (a *CThostFtdcTraderApi) ReqQryParkedOrderAction(pQryParkedOrderAction *CTh
 func (a *CThostFtdcTraderApi) ReqQryTradingNotice(pQryTradingNotice *CThostFtdcQryTradingNoticeField, nRequestID int) int {
 	cpQryTradingNotice := CThostFtdcQryTradingNoticeFieldCValue(pQryTradingNotice)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryTradingNotice))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -1046,7 +1047,7 @@ func (a *CThostFtdcTraderApi) ReqQryTradingNotice(pQryTradingNotice *CThostFtdcQ
 func (a *CThostFtdcTraderApi) ReqQryBrokerTradingParams(pQryBrokerTradingParams *CThostFtdcQryBrokerTradingParamsField, nRequestID int) int {
 	cpQryBrokerTradingParams := CThostFtdcQryBrokerTradingParamsFieldCValue(pQryBrokerTradingParams)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryBrokerTradingParams))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -1058,7 +1059,7 @@ func (a *CThostFtdcTraderApi) ReqQryBrokerTradingParams(pQryBrokerTradingParams 
 func (a *CThostFtdcTraderApi) ReqQryBrokerTradingAlgos(pQryBrokerTradingAlgos *CThostFtdcQryBrokerTradingAlgosField, nRequestID int) int {
 	cpQryBrokerTradingAlgos := CThostFtdcQryBrokerTradingAlgosFieldCValue(pQryBrokerTradingAlgos)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryBrokerTradingAlgos))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -1070,7 +1071,7 @@ func (a *CThostFtdcTraderApi) ReqQryBrokerTradingAlgos(pQryBrokerTradingAlgos *C
 func (a *CThostFtdcTraderApi) ReqQueryCFMMCTradingAccountToken(pQueryCFMMCTradingAccountToken *CThostFtdcQueryCFMMCTradingAccountTokenField, nRequestID int) int {
 	cpQueryCFMMCTradingAccountToken := CThostFtdcQueryCFMMCTradingAccountTokenFieldCValue(pQueryCFMMCTradingAccountToken)
 	defer func() {
-		C.free(unsafe.Pointer(cpQueryCFMMCTradingAccountToken))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -1082,7 +1083,7 @@ func (a *CThostFtdcTraderApi) ReqQueryCFMMCTradingAccountToken(pQueryCFMMCTradin
 func (a *CThostFtdcTraderApi) ReqFromBankToFutureByFuture(pReqTransfer *CThostFtdcReqTransferField, nRequestID int) int {
 	cpReqTransfer := CThostFtdcReqTransferFieldCValue(pReqTransfer)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqTransfer))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -1094,7 +1095,7 @@ func (a *CThostFtdcTraderApi) ReqFromBankToFutureByFuture(pReqTransfer *CThostFt
 func (a *CThostFtdcTraderApi) ReqFromFutureToBankByFuture(pReqTransfer *CThostFtdcReqTransferField, nRequestID int) int {
 	cpReqTransfer := CThostFtdcReqTransferFieldCValue(pReqTransfer)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqTransfer))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -1106,7 +1107,7 @@ func (a *CThostFtdcTraderApi) ReqFromFutureToBankByFuture(pReqTransfer *CThostFt
 func (a *CThostFtdcTraderApi) ReqQueryBankAccountMoneyByFuture(pReqQueryAccount *CThostFtdcReqQueryAccountField, nRequestID int) int {
 	cpReqQueryAccount := CThostFtdcReqQueryAccountFieldCValue(pReqQueryAccount)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqQueryAccount))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 

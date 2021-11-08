@@ -3,7 +3,8 @@ package ctp
 
 //#include "gen_md_api.h"
 import "C"
-import "unsafe"
+
+//import "unsafe"
 
 func CThostFtdcMdSpiCValue(ptr CThostFtdcMdSpi) C.mdSpi {
 	v := storeGoPtr(ptr)
@@ -60,7 +61,7 @@ func (a *CThostFtdcMdApi) GetTradingDay() string {
 func (a *CThostFtdcMdApi) RegisterFront(pszFrontAddress string) {
 	cpszFrontAddress := go2cStrPtr(pszFrontAddress)
 	defer func() {
-		freeCStr(cpszFrontAddress)
+
 	}()
 
 	C.md_register_front(a.p, cpszFrontAddress)
@@ -70,7 +71,7 @@ func (a *CThostFtdcMdApi) RegisterFront(pszFrontAddress string) {
 func (a *CThostFtdcMdApi) RegisterNameServer(pszNsAddress string) {
 	cpszNsAddress := go2cStrPtr(pszNsAddress)
 	defer func() {
-		freeCStr(cpszNsAddress)
+
 	}()
 
 	C.md_register_name_server(a.p, cpszNsAddress)
@@ -80,7 +81,7 @@ func (a *CThostFtdcMdApi) RegisterNameServer(pszNsAddress string) {
 func (a *CThostFtdcMdApi) RegisterFensUserInfo(pFensUserInfo *CThostFtdcFensUserInfoField) {
 	cpFensUserInfo := CThostFtdcFensUserInfoFieldCValue(pFensUserInfo)
 	defer func() {
-		C.free(unsafe.Pointer(cpFensUserInfo))
+
 	}()
 
 	C.md_register_fens_user_info(a.p, cpFensUserInfo)
@@ -90,7 +91,7 @@ func (a *CThostFtdcMdApi) RegisterFensUserInfo(pFensUserInfo *CThostFtdcFensUser
 func (a *CThostFtdcMdApi) RegisterSpi(pSpi CThostFtdcMdSpi) {
 	cpSpi := CThostFtdcMdSpiCValue(pSpi)
 	defer func() {
-		C.free(unsafe.Pointer(cpSpi))
+
 	}()
 
 	C.md_register_spi(a.p, cpSpi)
@@ -144,7 +145,7 @@ func (a *CThostFtdcMdApi) UnSubscribeForQuoteRsp(strs []string) int {
 func (a *CThostFtdcMdApi) ReqUserLogin(pReqUserLoginField *CThostFtdcReqUserLoginField, nRequestID int) int {
 	cpReqUserLoginField := CThostFtdcReqUserLoginFieldCValue(pReqUserLoginField)
 	defer func() {
-		C.free(unsafe.Pointer(cpReqUserLoginField))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -156,7 +157,7 @@ func (a *CThostFtdcMdApi) ReqUserLogin(pReqUserLoginField *CThostFtdcReqUserLogi
 func (a *CThostFtdcMdApi) ReqUserLogout(pUserLogout *CThostFtdcUserLogoutField, nRequestID int) int {
 	cpUserLogout := CThostFtdcUserLogoutFieldCValue(pUserLogout)
 	defer func() {
-		C.free(unsafe.Pointer(cpUserLogout))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 
@@ -168,7 +169,7 @@ func (a *CThostFtdcMdApi) ReqUserLogout(pUserLogout *CThostFtdcUserLogoutField, 
 func (a *CThostFtdcMdApi) ReqQryMulticastInstrument(pQryMulticastInstrument *CThostFtdcQryMulticastInstrumentField, nRequestID int) int {
 	cpQryMulticastInstrument := CThostFtdcQryMulticastInstrumentFieldCValue(pQryMulticastInstrument)
 	defer func() {
-		C.free(unsafe.Pointer(cpQryMulticastInstrument))
+
 	}()
 	cnRequestID := C.int(nRequestID)
 

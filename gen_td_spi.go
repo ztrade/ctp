@@ -6,6 +6,7 @@ package ctp
 #include "gen_types.h"
 */
 import "C"
+import "fmt"
 
 type CThostFtdcTraderSpi interface {
 	OnFrontConnected()
@@ -133,6 +134,385 @@ type CThostFtdcTraderSpi interface {
 	OnRtnOpenAccountByBank(pOpenAccount *CThostFtdcOpenAccountField)
 	OnRtnCancelAccountByBank(pCancelAccount *CThostFtdcCancelAccountField)
 	OnRtnChangeAccountByBank(pChangeAccount *CThostFtdcChangeAccountField)
+}
+
+type CThostFtdcTraderSpiBase struct {
+}
+
+func (b *CThostFtdcTraderSpiBase) OnFrontConnected() {
+	fmt.Println("OnFrontConnected")
+}
+func (b *CThostFtdcTraderSpiBase) OnFrontDisconnected(nReason int) {
+	fmt.Println("OnFrontDisconnected")
+}
+func (b *CThostFtdcTraderSpiBase) OnHeartBeatWarning(nTimeLapse int) {
+	fmt.Println("OnHeartBeatWarning")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspAuthenticate(pRspAuthenticateField *CThostFtdcRspAuthenticateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspAuthenticate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspUserLogin(pRspUserLogin *CThostFtdcRspUserLoginField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspUserLogin")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspUserLogout(pUserLogout *CThostFtdcUserLogoutField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspUserLogout")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspUserPasswordUpdate(pUserPasswordUpdate *CThostFtdcUserPasswordUpdateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspUserPasswordUpdate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspTradingAccountPasswordUpdate(pTradingAccountPasswordUpdate *CThostFtdcTradingAccountPasswordUpdateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspTradingAccountPasswordUpdate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspUserAuthMethod(pRspUserAuthMethod *CThostFtdcRspUserAuthMethodField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspUserAuthMethod")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspGenUserCaptcha(pRspGenUserCaptcha *CThostFtdcRspGenUserCaptchaField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspGenUserCaptcha")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspGenUserText(pRspGenUserText *CThostFtdcRspGenUserTextField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspGenUserText")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspOrderInsert(pInputOrder *CThostFtdcInputOrderField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspOrderInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspParkedOrderInsert(pParkedOrder *CThostFtdcParkedOrderField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspParkedOrderInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspParkedOrderAction(pParkedOrderAction *CThostFtdcParkedOrderActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspParkedOrderAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspOrderAction(pInputOrderAction *CThostFtdcInputOrderActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspOrderAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQueryMaxOrderVolume(pQueryMaxOrderVolume *CThostFtdcQueryMaxOrderVolumeField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQueryMaxOrderVolume")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspSettlementInfoConfirm(pSettlementInfoConfirm *CThostFtdcSettlementInfoConfirmField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspSettlementInfoConfirm")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspRemoveParkedOrder(pRemoveParkedOrder *CThostFtdcRemoveParkedOrderField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspRemoveParkedOrder")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspRemoveParkedOrderAction(pRemoveParkedOrderAction *CThostFtdcRemoveParkedOrderActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspRemoveParkedOrderAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspExecOrderInsert(pInputExecOrder *CThostFtdcInputExecOrderField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspExecOrderInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspExecOrderAction(pInputExecOrderAction *CThostFtdcInputExecOrderActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspExecOrderAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspForQuoteInsert(pInputForQuote *CThostFtdcInputForQuoteField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspForQuoteInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQuoteInsert(pInputQuote *CThostFtdcInputQuoteField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQuoteInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQuoteAction(pInputQuoteAction *CThostFtdcInputQuoteActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQuoteAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspBatchOrderAction(pInputBatchOrderAction *CThostFtdcInputBatchOrderActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspBatchOrderAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspOptionSelfCloseInsert(pInputOptionSelfClose *CThostFtdcInputOptionSelfCloseField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspOptionSelfCloseInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspOptionSelfCloseAction(pInputOptionSelfCloseAction *CThostFtdcInputOptionSelfCloseActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspOptionSelfCloseAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspCombActionInsert(pInputCombAction *CThostFtdcInputCombActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspCombActionInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryOrder(pOrder *CThostFtdcOrderField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryOrder")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryTrade(pTrade *CThostFtdcTradeField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryTrade")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorPosition(pInvestorPosition *CThostFtdcInvestorPositionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorPosition")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryTradingAccount(pTradingAccount *CThostFtdcTradingAccountField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryTradingAccount")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestor(pInvestor *CThostFtdcInvestorField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestor")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryTradingCode(pTradingCode *CThostFtdcTradingCodeField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryTradingCode")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInstrumentMarginRate(pInstrumentMarginRate *CThostFtdcInstrumentMarginRateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInstrumentMarginRate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInstrumentCommissionRate(pInstrumentCommissionRate *CThostFtdcInstrumentCommissionRateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInstrumentCommissionRate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryExchange(pExchange *CThostFtdcExchangeField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryExchange")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryProduct(pProduct *CThostFtdcProductField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryProduct")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInstrument(pInstrument *CThostFtdcInstrumentField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInstrument")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryDepthMarketData(pDepthMarketData *CThostFtdcDepthMarketDataField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryDepthMarketData")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySettlementInfo(pSettlementInfo *CThostFtdcSettlementInfoField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySettlementInfo")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryTransferBank(pTransferBank *CThostFtdcTransferBankField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryTransferBank")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorPositionDetail(pInvestorPositionDetail *CThostFtdcInvestorPositionDetailField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorPositionDetail")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryNotice(pNotice *CThostFtdcNoticeField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryNotice")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySettlementInfoConfirm(pSettlementInfoConfirm *CThostFtdcSettlementInfoConfirmField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySettlementInfoConfirm")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorPositionCombineDetail(pInvestorPositionCombineDetail *CThostFtdcInvestorPositionCombineDetailField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorPositionCombineDetail")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryCFMMCTradingAccountKey(pCFMMCTradingAccountKey *CThostFtdcCFMMCTradingAccountKeyField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryCFMMCTradingAccountKey")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryEWarrantOffset(pEWarrantOffset *CThostFtdcEWarrantOffsetField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryEWarrantOffset")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorProductGroupMargin(pInvestorProductGroupMargin *CThostFtdcInvestorProductGroupMarginField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorProductGroupMargin")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryExchangeMarginRate(pExchangeMarginRate *CThostFtdcExchangeMarginRateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryExchangeMarginRate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryExchangeMarginRateAdjust(pExchangeMarginRateAdjust *CThostFtdcExchangeMarginRateAdjustField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryExchangeMarginRateAdjust")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryExchangeRate(pExchangeRate *CThostFtdcExchangeRateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryExchangeRate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySecAgentACIDMap(pSecAgentACIDMap *CThostFtdcSecAgentACIDMapField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySecAgentACIDMap")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryProductExchRate(pProductExchRate *CThostFtdcProductExchRateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryProductExchRate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryProductGroup(pProductGroup *CThostFtdcProductGroupField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryProductGroup")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryMMInstrumentCommissionRate(pMMInstrumentCommissionRate *CThostFtdcMMInstrumentCommissionRateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryMMInstrumentCommissionRate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryMMOptionInstrCommRate(pMMOptionInstrCommRate *CThostFtdcMMOptionInstrCommRateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryMMOptionInstrCommRate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInstrumentOrderCommRate(pInstrumentOrderCommRate *CThostFtdcInstrumentOrderCommRateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInstrumentOrderCommRate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySecAgentTradingAccount(pTradingAccount *CThostFtdcTradingAccountField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySecAgentTradingAccount")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySecAgentCheckMode(pSecAgentCheckMode *CThostFtdcSecAgentCheckModeField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySecAgentCheckMode")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySecAgentTradeInfo(pSecAgentTradeInfo *CThostFtdcSecAgentTradeInfoField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySecAgentTradeInfo")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryOptionInstrTradeCost(pOptionInstrTradeCost *CThostFtdcOptionInstrTradeCostField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryOptionInstrTradeCost")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryOptionInstrCommRate(pOptionInstrCommRate *CThostFtdcOptionInstrCommRateField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryOptionInstrCommRate")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryExecOrder(pExecOrder *CThostFtdcExecOrderField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryExecOrder")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryForQuote(pForQuote *CThostFtdcForQuoteField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryForQuote")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryQuote(pQuote *CThostFtdcQuoteField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryQuote")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryOptionSelfClose(pOptionSelfClose *CThostFtdcOptionSelfCloseField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryOptionSelfClose")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestUnit(pInvestUnit *CThostFtdcInvestUnitField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestUnit")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryCombInstrumentGuard(pCombInstrumentGuard *CThostFtdcCombInstrumentGuardField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryCombInstrumentGuard")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryCombAction(pCombAction *CThostFtdcCombActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryCombAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryTransferSerial(pTransferSerial *CThostFtdcTransferSerialField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryTransferSerial")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryAccountregister(pAccountregister *CThostFtdcAccountregisterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryAccountregister")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspError(pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspError")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnOrder(pOrder *CThostFtdcOrderField) {
+	fmt.Println("OnRtnOrder")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnTrade(pTrade *CThostFtdcTradeField) {
+	fmt.Println("OnRtnTrade")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnOrderInsert(pInputOrder *CThostFtdcInputOrderField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnOrderInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnOrderAction(pOrderAction *CThostFtdcOrderActionField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnOrderAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnInstrumentStatus(pInstrumentStatus *CThostFtdcInstrumentStatusField) {
+	fmt.Println("OnRtnInstrumentStatus")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnBulletin(pBulletin *CThostFtdcBulletinField) {
+	fmt.Println("OnRtnBulletin")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnTradingNotice(pTradingNoticeInfo *CThostFtdcTradingNoticeInfoField) {
+	fmt.Println("OnRtnTradingNotice")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnErrorConditionalOrder(pErrorConditionalOrder *CThostFtdcErrorConditionalOrderField) {
+	fmt.Println("OnRtnErrorConditionalOrder")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnExecOrder(pExecOrder *CThostFtdcExecOrderField) {
+	fmt.Println("OnRtnExecOrder")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnExecOrderInsert(pInputExecOrder *CThostFtdcInputExecOrderField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnExecOrderInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnExecOrderAction(pExecOrderAction *CThostFtdcExecOrderActionField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnExecOrderAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnForQuoteInsert(pInputForQuote *CThostFtdcInputForQuoteField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnForQuoteInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnQuote(pQuote *CThostFtdcQuoteField) {
+	fmt.Println("OnRtnQuote")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnQuoteInsert(pInputQuote *CThostFtdcInputQuoteField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnQuoteInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnQuoteAction(pQuoteAction *CThostFtdcQuoteActionField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnQuoteAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnForQuoteRsp(pForQuoteRsp *CThostFtdcForQuoteRspField) {
+	fmt.Println("OnRtnForQuoteRsp")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnCFMMCTradingAccountToken(pCFMMCTradingAccountToken *CThostFtdcCFMMCTradingAccountTokenField) {
+	fmt.Println("OnRtnCFMMCTradingAccountToken")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnBatchOrderAction(pBatchOrderAction *CThostFtdcBatchOrderActionField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnBatchOrderAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnOptionSelfClose(pOptionSelfClose *CThostFtdcOptionSelfCloseField) {
+	fmt.Println("OnRtnOptionSelfClose")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnOptionSelfCloseInsert(pInputOptionSelfClose *CThostFtdcInputOptionSelfCloseField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnOptionSelfCloseInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnOptionSelfCloseAction(pOptionSelfCloseAction *CThostFtdcOptionSelfCloseActionField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnOptionSelfCloseAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnCombAction(pCombAction *CThostFtdcCombActionField) {
+	fmt.Println("OnRtnCombAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnCombActionInsert(pInputCombAction *CThostFtdcInputCombActionField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnCombActionInsert")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryContractBank(pContractBank *CThostFtdcContractBankField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryContractBank")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryParkedOrder(pParkedOrder *CThostFtdcParkedOrderField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryParkedOrder")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryParkedOrderAction(pParkedOrderAction *CThostFtdcParkedOrderActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryParkedOrderAction")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryTradingNotice(pTradingNotice *CThostFtdcTradingNoticeField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryTradingNotice")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryBrokerTradingParams(pBrokerTradingParams *CThostFtdcBrokerTradingParamsField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryBrokerTradingParams")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryBrokerTradingAlgos(pBrokerTradingAlgos *CThostFtdcBrokerTradingAlgosField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryBrokerTradingAlgos")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQueryCFMMCTradingAccountToken(pQueryCFMMCTradingAccountToken *CThostFtdcQueryCFMMCTradingAccountTokenField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQueryCFMMCTradingAccountToken")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnFromBankToFutureByBank(pRspTransfer *CThostFtdcRspTransferField) {
+	fmt.Println("OnRtnFromBankToFutureByBank")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnFromFutureToBankByBank(pRspTransfer *CThostFtdcRspTransferField) {
+	fmt.Println("OnRtnFromFutureToBankByBank")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnRepealFromBankToFutureByBank(pRspRepeal *CThostFtdcRspRepealField) {
+	fmt.Println("OnRtnRepealFromBankToFutureByBank")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnRepealFromFutureToBankByBank(pRspRepeal *CThostFtdcRspRepealField) {
+	fmt.Println("OnRtnRepealFromFutureToBankByBank")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnFromBankToFutureByFuture(pRspTransfer *CThostFtdcRspTransferField) {
+	fmt.Println("OnRtnFromBankToFutureByFuture")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnFromFutureToBankByFuture(pRspTransfer *CThostFtdcRspTransferField) {
+	fmt.Println("OnRtnFromFutureToBankByFuture")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnRepealFromBankToFutureByFutureManual(pRspRepeal *CThostFtdcRspRepealField) {
+	fmt.Println("OnRtnRepealFromBankToFutureByFutureManual")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnRepealFromFutureToBankByFutureManual(pRspRepeal *CThostFtdcRspRepealField) {
+	fmt.Println("OnRtnRepealFromFutureToBankByFutureManual")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnQueryBankBalanceByFuture(pNotifyQueryAccount *CThostFtdcNotifyQueryAccountField) {
+	fmt.Println("OnRtnQueryBankBalanceByFuture")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnBankToFutureByFuture(pReqTransfer *CThostFtdcReqTransferField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnBankToFutureByFuture")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnFutureToBankByFuture(pReqTransfer *CThostFtdcReqTransferField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnFutureToBankByFuture")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnRepealBankToFutureByFutureManual(pReqRepeal *CThostFtdcReqRepealField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnRepealBankToFutureByFutureManual")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnRepealFutureToBankByFutureManual(pReqRepeal *CThostFtdcReqRepealField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnRepealFutureToBankByFutureManual")
+}
+func (b *CThostFtdcTraderSpiBase) OnErrRtnQueryBankBalanceByFuture(pReqQueryAccount *CThostFtdcReqQueryAccountField, pRspInfo *CThostFtdcRspInfoField) {
+	fmt.Println("OnErrRtnQueryBankBalanceByFuture")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnRepealFromBankToFutureByFuture(pRspRepeal *CThostFtdcRspRepealField) {
+	fmt.Println("OnRtnRepealFromBankToFutureByFuture")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnRepealFromFutureToBankByFuture(pRspRepeal *CThostFtdcRspRepealField) {
+	fmt.Println("OnRtnRepealFromFutureToBankByFuture")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspFromBankToFutureByFuture(pReqTransfer *CThostFtdcReqTransferField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspFromBankToFutureByFuture")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspFromFutureToBankByFuture(pReqTransfer *CThostFtdcReqTransferField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspFromFutureToBankByFuture")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQueryBankAccountMoneyByFuture(pReqQueryAccount *CThostFtdcReqQueryAccountField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQueryBankAccountMoneyByFuture")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnOpenAccountByBank(pOpenAccount *CThostFtdcOpenAccountField) {
+	fmt.Println("OnRtnOpenAccountByBank")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnCancelAccountByBank(pCancelAccount *CThostFtdcCancelAccountField) {
+	fmt.Println("OnRtnCancelAccountByBank")
+}
+func (b *CThostFtdcTraderSpiBase) OnRtnChangeAccountByBank(pChangeAccount *CThostFtdcChangeAccountField) {
+	fmt.Println("OnRtnChangeAccountByBank")
 }
 
 func getCThostFtdcTraderSpi(ptr uint64) CThostFtdcTraderSpi {
