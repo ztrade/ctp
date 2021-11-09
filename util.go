@@ -18,6 +18,18 @@ package ctp
     p[n] = 0;
     return 0;
  }
+ #include <stdio.h>
+void dump_buf(char *buf, int bytes)
+{
+    int    i;
+    for(i=0; i<bytes; i++)
+    {
+        printf("0x%02x ", buf[i]);
+        if( 0 == (i+1)%16 )
+            printf("\n");
+    }
+    printf("\n");
+}
 
  int cstrEnd(char* p, int n){
    char* temp = NULL;
@@ -49,16 +61,32 @@ package ctp
 */
 import "C"
 import (
+	"bytes"
 	"errors"
+	"fmt"
+	"io/ioutil"
 	"sync"
 	"sync/atomic"
 	"unsafe"
+
+	"golang.org/x/text/encoding/simplifiedchinese"
+	"golang.org/x/text/transform"
 )
 
 var (
 	ptrMap   sync.Map
 	ptrIndex uint64
 )
+
+func GbkToUtf8(str string) (ret string, err error) {
+	reader := transform.NewReader(bytes.NewReader([]byte(str)), simplifiedchinese.GBK.NewDecoder())
+	decode, err := ioutil.ReadAll(reader)
+	if err != nil {
+		return
+	}
+	ret = string(decode)
+	return
+}
 
 func getGoPtr(i uint64) interface{} {
 	v, ok := ptrMap.Load(i)
@@ -76,7 +104,13 @@ func storeGoPtr(value interface{}) uint64 {
 
 func c2goStr(p *C.char, n int) string {
 	index := C.cstrEnd(p, C.int(n))
-	return C.GoStringN(p, C.int(index))
+	str := C.GoStringN(p, C.int(index))
+	ret, err := GbkToUtf8(str)
+	if err != nil {
+		fmt.Println("gbktoUtf8 error:", err.Error())
+		return str
+	}
+	return ret
 }
 
 func go2cStr(str string, p *C.char, l int) (err error) {
