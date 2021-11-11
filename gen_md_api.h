@@ -11,6 +11,7 @@ typedef void* mdApi;
 typedef void* mdSpi;
 
 mdSpi md_new_spi(uint64_t value);
+void md_spi_free(mdSpi p);
 
 
 mdApi md_create_ftdc_md_api(char * pszFlowPath,int8_t bIsUsingUdp,int8_t bIsMulticast);

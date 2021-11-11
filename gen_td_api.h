@@ -11,6 +11,7 @@ typedef void* tdApi;
 typedef void* tdSpi;
 
 tdSpi td_new_spi(uint64_t value);
+void td_spi_free(tdSpi p);
 
 
 tdApi td_create_ftdc_trader_api(char * pszFlowPath);

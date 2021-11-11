@@ -8,6 +8,11 @@ tdSpi td_new_spi(uint64_t value){
   return tdSpi(p);
 }
 
+void td_spi_free(tdSpi p){
+  CThostFtdcTraderSpiImpl *ptr = (CThostFtdcTraderSpiImpl *)p;
+  delete ptr;
+}
+
 
 
 tdApi td_create_ftdc_trader_api(char * pszFlowPath){

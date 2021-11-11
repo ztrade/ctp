@@ -12,7 +12,8 @@ func CThostFtdcMdSpiCValue(ptr CThostFtdcMdSpi) C.mdSpi {
 }
 
 type CThostFtdcMdApi struct {
-	p C.mdApi
+	p   C.mdApi
+	spi C.mdSpi
 }
 
 func MdCreateFtdcMdApi(pszFlowPath string, bIsUsingUdp bool, bIsMulticast bool) *CThostFtdcMdApi {
@@ -32,13 +33,15 @@ func MdGetApiVersion() string {
 }
 
 func (a *CThostFtdcMdApi) Release() {
-
 	C.md_release(a.p)
 
+	if a.spi != nil {
+		C.md_spi_free(a.spi)
+		a.spi = nil
+	}
 }
 
 func (a *CThostFtdcMdApi) Init() {
-
 	C.md_init(a.p)
 
 }
@@ -62,7 +65,6 @@ func (a *CThostFtdcMdApi) RegisterFront(pszFrontAddress string) {
 	defer func() {
 		freeCStr(cpszFrontAddress)
 	}()
-
 	C.md_register_front(a.p, cpszFrontAddress)
 
 }
@@ -72,7 +74,6 @@ func (a *CThostFtdcMdApi) RegisterNameServer(pszNsAddress string) {
 	defer func() {
 		freeCStr(cpszNsAddress)
 	}()
-
 	C.md_register_name_server(a.p, cpszNsAddress)
 
 }
@@ -82,16 +83,18 @@ func (a *CThostFtdcMdApi) RegisterFensUserInfo(pFensUserInfo *CThostFtdcFensUser
 	defer func() {
 		C.free(unsafe.Pointer(cpFensUserInfo))
 	}()
-
 	C.md_register_fens_user_info(a.p, cpFensUserInfo)
 
 }
 
 func (a *CThostFtdcMdApi) RegisterSpi(pSpi CThostFtdcMdSpi) {
 	cpSpi := CThostFtdcMdSpiCValue(pSpi)
-
 	C.md_register_spi(a.p, cpSpi)
 
+	if a.spi != nil {
+		C.md_spi_free(a.spi)
+	}
+	a.spi = cpSpi
 }
 
 func (a *CThostFtdcMdApi) SubscribeMarketData(strs []string) int {

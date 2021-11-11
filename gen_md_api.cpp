@@ -8,6 +8,11 @@ mdSpi md_new_spi(uint64_t value){
   return mdSpi(p);
 }
 
+void md_spi_free(mdSpi p){
+  CThostFtdcMdSpiImpl *ptr = (CThostFtdcMdSpiImpl *)p;
+  delete ptr;
+}
+
 
 
 mdApi md_create_ftdc_md_api(char * pszFlowPath,int8_t bIsUsingUdp,int8_t bIsMulticast){

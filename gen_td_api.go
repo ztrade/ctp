@@ -12,7 +12,8 @@ func CThostFtdcTraderSpiCValue(ptr CThostFtdcTraderSpi) C.tdSpi {
 }
 
 type CThostFtdcTraderApi struct {
-	p C.tdApi
+	p   C.tdApi
+	spi C.tdSpi
 }
 
 func TdCreateFtdcTraderApi(pszFlowPath string) *CThostFtdcTraderApi {
@@ -30,13 +31,15 @@ func TdGetApiVersion() string {
 }
 
 func (a *CThostFtdcTraderApi) Release() {
-
 	C.td_release(a.p)
 
+	if a.spi != nil {
+		C.td_spi_free(a.spi)
+		a.spi = nil
+	}
 }
 
 func (a *CThostFtdcTraderApi) Init() {
-
 	C.td_init(a.p)
 
 }
@@ -60,7 +63,6 @@ func (a *CThostFtdcTraderApi) RegisterFront(pszFrontAddress string) {
 	defer func() {
 		freeCStr(cpszFrontAddress)
 	}()
-
 	C.td_register_front(a.p, cpszFrontAddress)
 
 }
@@ -70,7 +72,6 @@ func (a *CThostFtdcTraderApi) RegisterNameServer(pszNsAddress string) {
 	defer func() {
 		freeCStr(cpszNsAddress)
 	}()
-
 	C.td_register_name_server(a.p, cpszNsAddress)
 
 }
@@ -80,28 +81,28 @@ func (a *CThostFtdcTraderApi) RegisterFensUserInfo(pFensUserInfo *CThostFtdcFens
 	defer func() {
 		C.free(unsafe.Pointer(cpFensUserInfo))
 	}()
-
 	C.td_register_fens_user_info(a.p, cpFensUserInfo)
 
 }
 
 func (a *CThostFtdcTraderApi) RegisterSpi(pSpi CThostFtdcTraderSpi) {
 	cpSpi := CThostFtdcTraderSpiCValue(pSpi)
-
 	C.td_register_spi(a.p, cpSpi)
 
+	if a.spi != nil {
+		C.td_spi_free(a.spi)
+	}
+	a.spi = cpSpi
 }
 
 func (a *CThostFtdcTraderApi) SubscribePrivateTopic(nResumeType THOST_TE_RESUME_TYPE) {
 	cnResumeType := C.THOST_TE_RESUME_TYPE(nResumeType)
-
 	C.td_subscribe_private_topic(a.p, cnResumeType)
 
 }
 
 func (a *CThostFtdcTraderApi) SubscribePublicTopic(nResumeType THOST_TE_RESUME_TYPE) {
 	cnResumeType := C.THOST_TE_RESUME_TYPE(nResumeType)
-
 	C.td_subscribe_public_topic(a.p, cnResumeType)
 
 }
