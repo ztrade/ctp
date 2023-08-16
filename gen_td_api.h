@@ -44,7 +44,7 @@ int td_req_order_insert(tdApi a, CThostFtdcInputOrderField * pInputOrder, int nR
 int td_req_parked_order_insert(tdApi a, CThostFtdcParkedOrderField * pParkedOrder, int nRequestID);
 int td_req_parked_order_action(tdApi a, CThostFtdcParkedOrderActionField * pParkedOrderAction, int nRequestID);
 int td_req_order_action(tdApi a, CThostFtdcInputOrderActionField * pInputOrderAction, int nRequestID);
-int td_req_query_max_order_volume(tdApi a, CThostFtdcQueryMaxOrderVolumeField * pQueryMaxOrderVolume, int nRequestID);
+int td_req_qry_max_order_volume(tdApi a, CThostFtdcQryMaxOrderVolumeField * pQryMaxOrderVolume, int nRequestID);
 int td_req_settlement_info_confirm(tdApi a, CThostFtdcSettlementInfoConfirmField * pSettlementInfoConfirm, int nRequestID);
 int td_req_remove_parked_order(tdApi a, CThostFtdcRemoveParkedOrderField * pRemoveParkedOrder, int nRequestID);
 int td_req_remove_parked_order_action(tdApi a, CThostFtdcRemoveParkedOrderActionField * pRemoveParkedOrderAction, int nRequestID);
@@ -69,6 +69,7 @@ int td_req_qry_exchange(tdApi a, CThostFtdcQryExchangeField * pQryExchange, int 
 int td_req_qry_product(tdApi a, CThostFtdcQryProductField * pQryProduct, int nRequestID);
 int td_req_qry_instrument(tdApi a, CThostFtdcQryInstrumentField * pQryInstrument, int nRequestID);
 int td_req_qry_depth_market_data(tdApi a, CThostFtdcQryDepthMarketDataField * pQryDepthMarketData, int nRequestID);
+int td_req_qry_trader_offer(tdApi a, CThostFtdcQryTraderOfferField * pQryTraderOffer, int nRequestID);
 int td_req_qry_settlement_info(tdApi a, CThostFtdcQrySettlementInfoField * pQrySettlementInfo, int nRequestID);
 int td_req_qry_transfer_bank(tdApi a, CThostFtdcQryTransferBankField * pQryTransferBank, int nRequestID);
 int td_req_qry_investor_position_detail(tdApi a, CThostFtdcQryInvestorPositionDetailField * pQryInvestorPositionDetail, int nRequestID);
@@ -111,6 +112,18 @@ int td_req_query_c_f_m_m_c_trading_account_token(tdApi a, CThostFtdcQueryCFMMCTr
 int td_req_from_bank_to_future_by_future(tdApi a, CThostFtdcReqTransferField * pReqTransfer, int nRequestID);
 int td_req_from_future_to_bank_by_future(tdApi a, CThostFtdcReqTransferField * pReqTransfer, int nRequestID);
 int td_req_query_bank_account_money_by_future(tdApi a, CThostFtdcReqQueryAccountField * pReqQueryAccount, int nRequestID);
+int td_req_qry_classified_instrument(tdApi a, CThostFtdcQryClassifiedInstrumentField * pQryClassifiedInstrument, int nRequestID);
+int td_req_qry_comb_promotion_param(tdApi a, CThostFtdcQryCombPromotionParamField * pQryCombPromotionParam, int nRequestID);
+int td_req_qry_risk_settle_invst_position(tdApi a, CThostFtdcQryRiskSettleInvstPositionField * pQryRiskSettleInvstPosition, int nRequestID);
+int td_req_qry_risk_settle_product_status(tdApi a, CThostFtdcQryRiskSettleProductStatusField * pQryRiskSettleProductStatus, int nRequestID);
+int td_req_qry_s_p_b_m_future_parameter(tdApi a, CThostFtdcQrySPBMFutureParameterField * pQrySPBMFutureParameter, int nRequestID);
+int td_req_qry_s_p_b_m_option_parameter(tdApi a, CThostFtdcQrySPBMOptionParameterField * pQrySPBMOptionParameter, int nRequestID);
+int td_req_qry_s_p_b_m_intra_parameter(tdApi a, CThostFtdcQrySPBMIntraParameterField * pQrySPBMIntraParameter, int nRequestID);
+int td_req_qry_s_p_b_m_inter_parameter(tdApi a, CThostFtdcQrySPBMInterParameterField * pQrySPBMInterParameter, int nRequestID);
+int td_req_qry_s_p_b_m_portf_definition(tdApi a, CThostFtdcQrySPBMPortfDefinitionField * pQrySPBMPortfDefinition, int nRequestID);
+int td_req_qry_s_p_b_m_investor_portf_def(tdApi a, CThostFtdcQrySPBMInvestorPortfDefField * pQrySPBMInvestorPortfDef, int nRequestID);
+int td_req_qry_investor_portf_margin_ratio(tdApi a, CThostFtdcQryInvestorPortfMarginRatioField * pQryInvestorPortfMarginRatio, int nRequestID);
+int td_req_qry_investor_prod_s_p_b_m_detail(tdApi a, CThostFtdcQryInvestorProdSPBMDetailField * pQryInvestorProdSPBMDetail, int nRequestID);
 
 #ifdef  __cplusplus
 };

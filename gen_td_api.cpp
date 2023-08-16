@@ -133,9 +133,9 @@ int td_req_order_action(tdApi a, CThostFtdcInputOrderActionField * pInputOrderAc
   CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
   return p->ReqOrderAction(pInputOrderAction,nRequestID);
 }
-int td_req_query_max_order_volume(tdApi a, CThostFtdcQueryMaxOrderVolumeField * pQueryMaxOrderVolume, int nRequestID){
+int td_req_qry_max_order_volume(tdApi a, CThostFtdcQryMaxOrderVolumeField * pQryMaxOrderVolume, int nRequestID){
   CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
-  return p->ReqQueryMaxOrderVolume(pQueryMaxOrderVolume,nRequestID);
+  return p->ReqQryMaxOrderVolume(pQryMaxOrderVolume,nRequestID);
 }
 int td_req_settlement_info_confirm(tdApi a, CThostFtdcSettlementInfoConfirmField * pSettlementInfoConfirm, int nRequestID){
   CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
@@ -232,6 +232,10 @@ int td_req_qry_instrument(tdApi a, CThostFtdcQryInstrumentField * pQryInstrument
 int td_req_qry_depth_market_data(tdApi a, CThostFtdcQryDepthMarketDataField * pQryDepthMarketData, int nRequestID){
   CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
   return p->ReqQryDepthMarketData(pQryDepthMarketData,nRequestID);
+}
+int td_req_qry_trader_offer(tdApi a, CThostFtdcQryTraderOfferField * pQryTraderOffer, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQryTraderOffer(pQryTraderOffer,nRequestID);
 }
 int td_req_qry_settlement_info(tdApi a, CThostFtdcQrySettlementInfoField * pQrySettlementInfo, int nRequestID){
   CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
@@ -400,4 +404,52 @@ int td_req_from_future_to_bank_by_future(tdApi a, CThostFtdcReqTransferField * p
 int td_req_query_bank_account_money_by_future(tdApi a, CThostFtdcReqQueryAccountField * pReqQueryAccount, int nRequestID){
   CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
   return p->ReqQueryBankAccountMoneyByFuture(pReqQueryAccount,nRequestID);
+}
+int td_req_qry_classified_instrument(tdApi a, CThostFtdcQryClassifiedInstrumentField * pQryClassifiedInstrument, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQryClassifiedInstrument(pQryClassifiedInstrument,nRequestID);
+}
+int td_req_qry_comb_promotion_param(tdApi a, CThostFtdcQryCombPromotionParamField * pQryCombPromotionParam, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQryCombPromotionParam(pQryCombPromotionParam,nRequestID);
+}
+int td_req_qry_risk_settle_invst_position(tdApi a, CThostFtdcQryRiskSettleInvstPositionField * pQryRiskSettleInvstPosition, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQryRiskSettleInvstPosition(pQryRiskSettleInvstPosition,nRequestID);
+}
+int td_req_qry_risk_settle_product_status(tdApi a, CThostFtdcQryRiskSettleProductStatusField * pQryRiskSettleProductStatus, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQryRiskSettleProductStatus(pQryRiskSettleProductStatus,nRequestID);
+}
+int td_req_qry_s_p_b_m_future_parameter(tdApi a, CThostFtdcQrySPBMFutureParameterField * pQrySPBMFutureParameter, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQrySPBMFutureParameter(pQrySPBMFutureParameter,nRequestID);
+}
+int td_req_qry_s_p_b_m_option_parameter(tdApi a, CThostFtdcQrySPBMOptionParameterField * pQrySPBMOptionParameter, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQrySPBMOptionParameter(pQrySPBMOptionParameter,nRequestID);
+}
+int td_req_qry_s_p_b_m_intra_parameter(tdApi a, CThostFtdcQrySPBMIntraParameterField * pQrySPBMIntraParameter, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQrySPBMIntraParameter(pQrySPBMIntraParameter,nRequestID);
+}
+int td_req_qry_s_p_b_m_inter_parameter(tdApi a, CThostFtdcQrySPBMInterParameterField * pQrySPBMInterParameter, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQrySPBMInterParameter(pQrySPBMInterParameter,nRequestID);
+}
+int td_req_qry_s_p_b_m_portf_definition(tdApi a, CThostFtdcQrySPBMPortfDefinitionField * pQrySPBMPortfDefinition, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQrySPBMPortfDefinition(pQrySPBMPortfDefinition,nRequestID);
+}
+int td_req_qry_s_p_b_m_investor_portf_def(tdApi a, CThostFtdcQrySPBMInvestorPortfDefField * pQrySPBMInvestorPortfDef, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQrySPBMInvestorPortfDef(pQrySPBMInvestorPortfDef,nRequestID);
+}
+int td_req_qry_investor_portf_margin_ratio(tdApi a, CThostFtdcQryInvestorPortfMarginRatioField * pQryInvestorPortfMarginRatio, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQryInvestorPortfMarginRatio(pQryInvestorPortfMarginRatio,nRequestID);
+}
+int td_req_qry_investor_prod_s_p_b_m_detail(tdApi a, CThostFtdcQryInvestorProdSPBMDetailField * pQryInvestorProdSPBMDetail, int nRequestID){
+  CThostFtdcTraderApi* p = (CThostFtdcTraderApi*)a;
+  return p->ReqQryInvestorProdSPBMDetail(pQryInvestorProdSPBMDetail,nRequestID);
 }

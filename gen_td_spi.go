@@ -24,7 +24,7 @@ type CThostFtdcTraderSpi interface {
 	OnRspParkedOrderInsert(pParkedOrder *CThostFtdcParkedOrderField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspParkedOrderAction(pParkedOrderAction *CThostFtdcParkedOrderActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspOrderAction(pInputOrderAction *CThostFtdcInputOrderActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
-	OnRspQueryMaxOrderVolume(pQueryMaxOrderVolume *CThostFtdcQueryMaxOrderVolumeField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryMaxOrderVolume(pQryMaxOrderVolume *CThostFtdcQryMaxOrderVolumeField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspSettlementInfoConfirm(pSettlementInfoConfirm *CThostFtdcSettlementInfoConfirmField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspRemoveParkedOrder(pRemoveParkedOrder *CThostFtdcRemoveParkedOrderField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspRemoveParkedOrderAction(pRemoveParkedOrderAction *CThostFtdcRemoveParkedOrderActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
@@ -49,6 +49,7 @@ type CThostFtdcTraderSpi interface {
 	OnRspQryProduct(pProduct *CThostFtdcProductField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspQryInstrument(pInstrument *CThostFtdcInstrumentField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspQryDepthMarketData(pDepthMarketData *CThostFtdcDepthMarketDataField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryTraderOffer(pTraderOffer *CThostFtdcTraderOfferField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspQrySettlementInfo(pSettlementInfo *CThostFtdcSettlementInfoField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspQryTransferBank(pTransferBank *CThostFtdcTransferBankField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspQryInvestorPositionDetail(pInvestorPositionDetail *CThostFtdcInvestorPositionDetailField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
@@ -134,6 +135,18 @@ type CThostFtdcTraderSpi interface {
 	OnRtnOpenAccountByBank(pOpenAccount *CThostFtdcOpenAccountField)
 	OnRtnCancelAccountByBank(pCancelAccount *CThostFtdcCancelAccountField)
 	OnRtnChangeAccountByBank(pChangeAccount *CThostFtdcChangeAccountField)
+	OnRspQryClassifiedInstrument(pInstrument *CThostFtdcInstrumentField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryCombPromotionParam(pCombPromotionParam *CThostFtdcCombPromotionParamField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryRiskSettleInvstPosition(pRiskSettleInvstPosition *CThostFtdcRiskSettleInvstPositionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryRiskSettleProductStatus(pRiskSettleProductStatus *CThostFtdcRiskSettleProductStatusField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQrySPBMFutureParameter(pSPBMFutureParameter *CThostFtdcSPBMFutureParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQrySPBMOptionParameter(pSPBMOptionParameter *CThostFtdcSPBMOptionParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQrySPBMIntraParameter(pSPBMIntraParameter *CThostFtdcSPBMIntraParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQrySPBMInterParameter(pSPBMInterParameter *CThostFtdcSPBMInterParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQrySPBMPortfDefinition(pSPBMPortfDefinition *CThostFtdcSPBMPortfDefinitionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQrySPBMInvestorPortfDef(pSPBMInvestorPortfDef *CThostFtdcSPBMInvestorPortfDefField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryInvestorPortfMarginRatio(pInvestorPortfMarginRatio *CThostFtdcInvestorPortfMarginRatioField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryInvestorProdSPBMDetail(pInvestorProdSPBMDetail *CThostFtdcInvestorProdSPBMDetailField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 }
 
 type CThostFtdcTraderSpiBase struct {
@@ -184,8 +197,8 @@ func (b *CThostFtdcTraderSpiBase) OnRspParkedOrderAction(pParkedOrderAction *CTh
 func (b *CThostFtdcTraderSpiBase) OnRspOrderAction(pInputOrderAction *CThostFtdcInputOrderActionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
 	fmt.Println("OnRspOrderAction")
 }
-func (b *CThostFtdcTraderSpiBase) OnRspQueryMaxOrderVolume(pQueryMaxOrderVolume *CThostFtdcQueryMaxOrderVolumeField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
-	fmt.Println("OnRspQueryMaxOrderVolume")
+func (b *CThostFtdcTraderSpiBase) OnRspQryMaxOrderVolume(pQryMaxOrderVolume *CThostFtdcQryMaxOrderVolumeField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryMaxOrderVolume")
 }
 func (b *CThostFtdcTraderSpiBase) OnRspSettlementInfoConfirm(pSettlementInfoConfirm *CThostFtdcSettlementInfoConfirmField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
 	fmt.Println("OnRspSettlementInfoConfirm")
@@ -258,6 +271,9 @@ func (b *CThostFtdcTraderSpiBase) OnRspQryInstrument(pInstrument *CThostFtdcInst
 }
 func (b *CThostFtdcTraderSpiBase) OnRspQryDepthMarketData(pDepthMarketData *CThostFtdcDepthMarketDataField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
 	fmt.Println("OnRspQryDepthMarketData")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryTraderOffer(pTraderOffer *CThostFtdcTraderOfferField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryTraderOffer")
 }
 func (b *CThostFtdcTraderSpiBase) OnRspQrySettlementInfo(pSettlementInfo *CThostFtdcSettlementInfoField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
 	fmt.Println("OnRspQrySettlementInfo")
@@ -514,6 +530,42 @@ func (b *CThostFtdcTraderSpiBase) OnRtnCancelAccountByBank(pCancelAccount *CThos
 func (b *CThostFtdcTraderSpiBase) OnRtnChangeAccountByBank(pChangeAccount *CThostFtdcChangeAccountField) {
 	fmt.Println("OnRtnChangeAccountByBank")
 }
+func (b *CThostFtdcTraderSpiBase) OnRspQryClassifiedInstrument(pInstrument *CThostFtdcInstrumentField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryClassifiedInstrument")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryCombPromotionParam(pCombPromotionParam *CThostFtdcCombPromotionParamField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryCombPromotionParam")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryRiskSettleInvstPosition(pRiskSettleInvstPosition *CThostFtdcRiskSettleInvstPositionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryRiskSettleInvstPosition")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryRiskSettleProductStatus(pRiskSettleProductStatus *CThostFtdcRiskSettleProductStatusField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryRiskSettleProductStatus")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySPBMFutureParameter(pSPBMFutureParameter *CThostFtdcSPBMFutureParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySPBMFutureParameter")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySPBMOptionParameter(pSPBMOptionParameter *CThostFtdcSPBMOptionParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySPBMOptionParameter")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySPBMIntraParameter(pSPBMIntraParameter *CThostFtdcSPBMIntraParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySPBMIntraParameter")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySPBMInterParameter(pSPBMInterParameter *CThostFtdcSPBMInterParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySPBMInterParameter")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySPBMPortfDefinition(pSPBMPortfDefinition *CThostFtdcSPBMPortfDefinitionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySPBMPortfDefinition")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySPBMInvestorPortfDef(pSPBMInvestorPortfDef *CThostFtdcSPBMInvestorPortfDefField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySPBMInvestorPortfDef")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorPortfMarginRatio(pInvestorPortfMarginRatio *CThostFtdcInvestorPortfMarginRatioField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorPortfMarginRatio")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorProdSPBMDetail(pInvestorProdSPBMDetail *CThostFtdcInvestorProdSPBMDetailField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorProdSPBMDetail")
+}
 
 func getCThostFtdcTraderSpi(ptr uint64) CThostFtdcTraderSpi {
 	value := getGoPtr(ptr)
@@ -694,15 +746,15 @@ func tdOnRspOrderAction(ptr uint64, pInputOrderAction *C.CThostFtdcInputOrderAct
 	}
 }
 
-//export tdOnRspQueryMaxOrderVolume
-func tdOnRspQueryMaxOrderVolume(ptr uint64, pQueryMaxOrderVolume *C.CThostFtdcQueryMaxOrderVolumeField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+//export tdOnRspQryMaxOrderVolume
+func tdOnRspQryMaxOrderVolume(ptr uint64, pQryMaxOrderVolume *C.CThostFtdcQryMaxOrderVolumeField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
 	p := getCThostFtdcTraderSpi(ptr)
 	if p != nil {
-		gopQueryMaxOrderVolume := NewCThostFtdcQueryMaxOrderVolumeField(pQueryMaxOrderVolume)
+		gopQryMaxOrderVolume := NewCThostFtdcQryMaxOrderVolumeField(pQryMaxOrderVolume)
 		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
 		gonRequestID := int(nRequestID)
 		gobIsLast := c2goBool(bIsLast)
-		p.OnRspQueryMaxOrderVolume(gopQueryMaxOrderVolume, gopRspInfo, gonRequestID, gobIsLast)
+		p.OnRspQryMaxOrderVolume(gopQryMaxOrderVolume, gopRspInfo, gonRequestID, gobIsLast)
 	}
 }
 
@@ -991,6 +1043,18 @@ func tdOnRspQryDepthMarketData(ptr uint64, pDepthMarketData *C.CThostFtdcDepthMa
 		gonRequestID := int(nRequestID)
 		gobIsLast := c2goBool(bIsLast)
 		p.OnRspQryDepthMarketData(gopDepthMarketData, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryTraderOffer
+func tdOnRspQryTraderOffer(ptr uint64, pTraderOffer *C.CThostFtdcTraderOfferField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopTraderOffer := NewCThostFtdcTraderOfferField(pTraderOffer)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryTraderOffer(gopTraderOffer, gopRspInfo, gonRequestID, gobIsLast)
 	}
 }
 
@@ -1900,5 +1964,149 @@ func tdOnRtnChangeAccountByBank(ptr uint64, pChangeAccount *C.CThostFtdcChangeAc
 	if p != nil {
 		gopChangeAccount := NewCThostFtdcChangeAccountField(pChangeAccount)
 		p.OnRtnChangeAccountByBank(gopChangeAccount)
+	}
+}
+
+//export tdOnRspQryClassifiedInstrument
+func tdOnRspQryClassifiedInstrument(ptr uint64, pInstrument *C.CThostFtdcInstrumentField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopInstrument := NewCThostFtdcInstrumentField(pInstrument)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryClassifiedInstrument(gopInstrument, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryCombPromotionParam
+func tdOnRspQryCombPromotionParam(ptr uint64, pCombPromotionParam *C.CThostFtdcCombPromotionParamField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopCombPromotionParam := NewCThostFtdcCombPromotionParamField(pCombPromotionParam)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryCombPromotionParam(gopCombPromotionParam, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryRiskSettleInvstPosition
+func tdOnRspQryRiskSettleInvstPosition(ptr uint64, pRiskSettleInvstPosition *C.CThostFtdcRiskSettleInvstPositionField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopRiskSettleInvstPosition := NewCThostFtdcRiskSettleInvstPositionField(pRiskSettleInvstPosition)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryRiskSettleInvstPosition(gopRiskSettleInvstPosition, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryRiskSettleProductStatus
+func tdOnRspQryRiskSettleProductStatus(ptr uint64, pRiskSettleProductStatus *C.CThostFtdcRiskSettleProductStatusField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopRiskSettleProductStatus := NewCThostFtdcRiskSettleProductStatusField(pRiskSettleProductStatus)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryRiskSettleProductStatus(gopRiskSettleProductStatus, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQrySPBMFutureParameter
+func tdOnRspQrySPBMFutureParameter(ptr uint64, pSPBMFutureParameter *C.CThostFtdcSPBMFutureParameterField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopSPBMFutureParameter := NewCThostFtdcSPBMFutureParameterField(pSPBMFutureParameter)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQrySPBMFutureParameter(gopSPBMFutureParameter, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQrySPBMOptionParameter
+func tdOnRspQrySPBMOptionParameter(ptr uint64, pSPBMOptionParameter *C.CThostFtdcSPBMOptionParameterField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopSPBMOptionParameter := NewCThostFtdcSPBMOptionParameterField(pSPBMOptionParameter)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQrySPBMOptionParameter(gopSPBMOptionParameter, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQrySPBMIntraParameter
+func tdOnRspQrySPBMIntraParameter(ptr uint64, pSPBMIntraParameter *C.CThostFtdcSPBMIntraParameterField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopSPBMIntraParameter := NewCThostFtdcSPBMIntraParameterField(pSPBMIntraParameter)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQrySPBMIntraParameter(gopSPBMIntraParameter, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQrySPBMInterParameter
+func tdOnRspQrySPBMInterParameter(ptr uint64, pSPBMInterParameter *C.CThostFtdcSPBMInterParameterField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopSPBMInterParameter := NewCThostFtdcSPBMInterParameterField(pSPBMInterParameter)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQrySPBMInterParameter(gopSPBMInterParameter, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQrySPBMPortfDefinition
+func tdOnRspQrySPBMPortfDefinition(ptr uint64, pSPBMPortfDefinition *C.CThostFtdcSPBMPortfDefinitionField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopSPBMPortfDefinition := NewCThostFtdcSPBMPortfDefinitionField(pSPBMPortfDefinition)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQrySPBMPortfDefinition(gopSPBMPortfDefinition, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQrySPBMInvestorPortfDef
+func tdOnRspQrySPBMInvestorPortfDef(ptr uint64, pSPBMInvestorPortfDef *C.CThostFtdcSPBMInvestorPortfDefField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopSPBMInvestorPortfDef := NewCThostFtdcSPBMInvestorPortfDefField(pSPBMInvestorPortfDef)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQrySPBMInvestorPortfDef(gopSPBMInvestorPortfDef, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryInvestorPortfMarginRatio
+func tdOnRspQryInvestorPortfMarginRatio(ptr uint64, pInvestorPortfMarginRatio *C.CThostFtdcInvestorPortfMarginRatioField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopInvestorPortfMarginRatio := NewCThostFtdcInvestorPortfMarginRatioField(pInvestorPortfMarginRatio)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryInvestorPortfMarginRatio(gopInvestorPortfMarginRatio, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryInvestorProdSPBMDetail
+func tdOnRspQryInvestorProdSPBMDetail(ptr uint64, pInvestorProdSPBMDetail *C.CThostFtdcInvestorProdSPBMDetailField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopInvestorProdSPBMDetail := NewCThostFtdcInvestorProdSPBMDetailField(pInvestorProdSPBMDetail)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryInvestorProdSPBMDetail(gopInvestorProdSPBMDetail, gopRspInfo, gonRequestID, gobIsLast)
 	}
 }

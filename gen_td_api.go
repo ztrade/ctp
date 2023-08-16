@@ -309,14 +309,14 @@ func (a *CThostFtdcTraderApi) ReqOrderAction(pInputOrderAction *CThostFtdcInputO
 	return int(ret)
 }
 
-func (a *CThostFtdcTraderApi) ReqQueryMaxOrderVolume(pQueryMaxOrderVolume *CThostFtdcQueryMaxOrderVolumeField, nRequestID int) int {
-	cpQueryMaxOrderVolume := CThostFtdcQueryMaxOrderVolumeFieldCValue(pQueryMaxOrderVolume)
+func (a *CThostFtdcTraderApi) ReqQryMaxOrderVolume(pQryMaxOrderVolume *CThostFtdcQryMaxOrderVolumeField, nRequestID int) int {
+	cpQryMaxOrderVolume := CThostFtdcQryMaxOrderVolumeFieldCValue(pQryMaxOrderVolume)
 	defer func() {
-		C.free(unsafe.Pointer(cpQueryMaxOrderVolume))
+		C.free(unsafe.Pointer(cpQryMaxOrderVolume))
 	}()
 	cnRequestID := C.int(nRequestID)
 
-	ret := C.td_req_query_max_order_volume(a.p, cpQueryMaxOrderVolume, cnRequestID)
+	ret := C.td_req_qry_max_order_volume(a.p, cpQryMaxOrderVolume, cnRequestID)
 
 	return int(ret)
 }
@@ -605,6 +605,18 @@ func (a *CThostFtdcTraderApi) ReqQryDepthMarketData(pQryDepthMarketData *CThostF
 	cnRequestID := C.int(nRequestID)
 
 	ret := C.td_req_qry_depth_market_data(a.p, cpQryDepthMarketData, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQryTraderOffer(pQryTraderOffer *CThostFtdcQryTraderOfferField, nRequestID int) int {
+	cpQryTraderOffer := CThostFtdcQryTraderOfferFieldCValue(pQryTraderOffer)
+	defer func() {
+		C.free(unsafe.Pointer(cpQryTraderOffer))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_trader_offer(a.p, cpQryTraderOffer, cnRequestID)
 
 	return int(ret)
 }
@@ -1109,6 +1121,150 @@ func (a *CThostFtdcTraderApi) ReqQueryBankAccountMoneyByFuture(pReqQueryAccount 
 	cnRequestID := C.int(nRequestID)
 
 	ret := C.td_req_query_bank_account_money_by_future(a.p, cpReqQueryAccount, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQryClassifiedInstrument(pQryClassifiedInstrument *CThostFtdcQryClassifiedInstrumentField, nRequestID int) int {
+	cpQryClassifiedInstrument := CThostFtdcQryClassifiedInstrumentFieldCValue(pQryClassifiedInstrument)
+	defer func() {
+		C.free(unsafe.Pointer(cpQryClassifiedInstrument))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_classified_instrument(a.p, cpQryClassifiedInstrument, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQryCombPromotionParam(pQryCombPromotionParam *CThostFtdcQryCombPromotionParamField, nRequestID int) int {
+	cpQryCombPromotionParam := CThostFtdcQryCombPromotionParamFieldCValue(pQryCombPromotionParam)
+	defer func() {
+		C.free(unsafe.Pointer(cpQryCombPromotionParam))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_comb_promotion_param(a.p, cpQryCombPromotionParam, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQryRiskSettleInvstPosition(pQryRiskSettleInvstPosition *CThostFtdcQryRiskSettleInvstPositionField, nRequestID int) int {
+	cpQryRiskSettleInvstPosition := CThostFtdcQryRiskSettleInvstPositionFieldCValue(pQryRiskSettleInvstPosition)
+	defer func() {
+		C.free(unsafe.Pointer(cpQryRiskSettleInvstPosition))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_risk_settle_invst_position(a.p, cpQryRiskSettleInvstPosition, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQryRiskSettleProductStatus(pQryRiskSettleProductStatus *CThostFtdcQryRiskSettleProductStatusField, nRequestID int) int {
+	cpQryRiskSettleProductStatus := CThostFtdcQryRiskSettleProductStatusFieldCValue(pQryRiskSettleProductStatus)
+	defer func() {
+		C.free(unsafe.Pointer(cpQryRiskSettleProductStatus))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_risk_settle_product_status(a.p, cpQryRiskSettleProductStatus, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQrySPBMFutureParameter(pQrySPBMFutureParameter *CThostFtdcQrySPBMFutureParameterField, nRequestID int) int {
+	cpQrySPBMFutureParameter := CThostFtdcQrySPBMFutureParameterFieldCValue(pQrySPBMFutureParameter)
+	defer func() {
+		C.free(unsafe.Pointer(cpQrySPBMFutureParameter))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_s_p_b_m_future_parameter(a.p, cpQrySPBMFutureParameter, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQrySPBMOptionParameter(pQrySPBMOptionParameter *CThostFtdcQrySPBMOptionParameterField, nRequestID int) int {
+	cpQrySPBMOptionParameter := CThostFtdcQrySPBMOptionParameterFieldCValue(pQrySPBMOptionParameter)
+	defer func() {
+		C.free(unsafe.Pointer(cpQrySPBMOptionParameter))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_s_p_b_m_option_parameter(a.p, cpQrySPBMOptionParameter, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQrySPBMIntraParameter(pQrySPBMIntraParameter *CThostFtdcQrySPBMIntraParameterField, nRequestID int) int {
+	cpQrySPBMIntraParameter := CThostFtdcQrySPBMIntraParameterFieldCValue(pQrySPBMIntraParameter)
+	defer func() {
+		C.free(unsafe.Pointer(cpQrySPBMIntraParameter))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_s_p_b_m_intra_parameter(a.p, cpQrySPBMIntraParameter, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQrySPBMInterParameter(pQrySPBMInterParameter *CThostFtdcQrySPBMInterParameterField, nRequestID int) int {
+	cpQrySPBMInterParameter := CThostFtdcQrySPBMInterParameterFieldCValue(pQrySPBMInterParameter)
+	defer func() {
+		C.free(unsafe.Pointer(cpQrySPBMInterParameter))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_s_p_b_m_inter_parameter(a.p, cpQrySPBMInterParameter, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQrySPBMPortfDefinition(pQrySPBMPortfDefinition *CThostFtdcQrySPBMPortfDefinitionField, nRequestID int) int {
+	cpQrySPBMPortfDefinition := CThostFtdcQrySPBMPortfDefinitionFieldCValue(pQrySPBMPortfDefinition)
+	defer func() {
+		C.free(unsafe.Pointer(cpQrySPBMPortfDefinition))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_s_p_b_m_portf_definition(a.p, cpQrySPBMPortfDefinition, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQrySPBMInvestorPortfDef(pQrySPBMInvestorPortfDef *CThostFtdcQrySPBMInvestorPortfDefField, nRequestID int) int {
+	cpQrySPBMInvestorPortfDef := CThostFtdcQrySPBMInvestorPortfDefFieldCValue(pQrySPBMInvestorPortfDef)
+	defer func() {
+		C.free(unsafe.Pointer(cpQrySPBMInvestorPortfDef))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_s_p_b_m_investor_portf_def(a.p, cpQrySPBMInvestorPortfDef, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQryInvestorPortfMarginRatio(pQryInvestorPortfMarginRatio *CThostFtdcQryInvestorPortfMarginRatioField, nRequestID int) int {
+	cpQryInvestorPortfMarginRatio := CThostFtdcQryInvestorPortfMarginRatioFieldCValue(pQryInvestorPortfMarginRatio)
+	defer func() {
+		C.free(unsafe.Pointer(cpQryInvestorPortfMarginRatio))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_investor_portf_margin_ratio(a.p, cpQryInvestorPortfMarginRatio, cnRequestID)
+
+	return int(ret)
+}
+
+func (a *CThostFtdcTraderApi) ReqQryInvestorProdSPBMDetail(pQryInvestorProdSPBMDetail *CThostFtdcQryInvestorProdSPBMDetailField, nRequestID int) int {
+	cpQryInvestorProdSPBMDetail := CThostFtdcQryInvestorProdSPBMDetailFieldCValue(pQryInvestorProdSPBMDetail)
+	defer func() {
+		C.free(unsafe.Pointer(cpQryInvestorProdSPBMDetail))
+	}()
+	cnRequestID := C.int(nRequestID)
+
+	ret := C.td_req_qry_investor_prod_s_p_b_m_detail(a.p, cpQryInvestorProdSPBMDetail, cnRequestID)
 
 	return int(ret)
 }

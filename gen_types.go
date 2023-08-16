@@ -46,9 +46,10 @@ type CThostFtdcReqUserLoginField struct {
 	ProtocolInfo         string
 	MacAddress           string
 	OneTimePassword      string
-	ClientIPAddress      string
+	Reserve1             string
 	LoginRemark          string
 	ClientIPPort         int
+	ClientIPAddress      string
 }
 
 func NewCThostFtdcReqUserLoginField(p *C.CThostFtdcReqUserLoginField) *CThostFtdcReqUserLoginField {
@@ -65,9 +66,10 @@ func NewCThostFtdcReqUserLoginField(p *C.CThostFtdcReqUserLoginField) *CThostFtd
 	ret.ProtocolInfo = c2goStr(&p.ProtocolInfo[0], 11)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.OneTimePassword = c2goStr(&p.OneTimePassword[0], 41)
-	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.LoginRemark = c2goStr(&p.LoginRemark[0], 36)
 	ret.ClientIPPort = int(p.ClientIPPort)
+	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 33)
 	return ret
 }
 
@@ -82,9 +84,10 @@ func CThostFtdcReqUserLoginFieldCValue(s *CThostFtdcReqUserLoginField) *C.CThost
 	go2cStr(s.ProtocolInfo, &ptr.ProtocolInfo[0], 11)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.OneTimePassword, &ptr.OneTimePassword[0], 41)
-	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.LoginRemark, &ptr.LoginRemark[0], 36)
 	ptr.ClientIPPort = C.int(s.ClientIPPort)
+	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 33)
 	return ptr
 }
 
@@ -102,6 +105,8 @@ type CThostFtdcRspUserLoginField struct {
 	CZCETime    string
 	FFEXTime    string
 	INETime     string
+	SysVersion  string
+	GFEXTime    string
 }
 
 func NewCThostFtdcRspUserLoginField(p *C.CThostFtdcRspUserLoginField) *CThostFtdcRspUserLoginField {
@@ -122,6 +127,8 @@ func NewCThostFtdcRspUserLoginField(p *C.CThostFtdcRspUserLoginField) *CThostFtd
 	ret.CZCETime = c2goStr(&p.CZCETime[0], 9)
 	ret.FFEXTime = c2goStr(&p.FFEXTime[0], 9)
 	ret.INETime = c2goStr(&p.INETime[0], 9)
+	ret.SysVersion = c2goStr(&p.SysVersion[0], 41)
+	ret.GFEXTime = c2goStr(&p.GFEXTime[0], 9)
 	return ret
 }
 
@@ -140,6 +147,8 @@ func CThostFtdcRspUserLoginFieldCValue(s *CThostFtdcRspUserLoginField) *C.CThost
 	go2cStr(s.CZCETime, &ptr.CZCETime[0], 9)
 	go2cStr(s.FFEXTime, &ptr.FFEXTime[0], 9)
 	go2cStr(s.INETime, &ptr.INETime[0], 9)
+	go2cStr(s.SysVersion, &ptr.SysVersion[0], 41)
+	go2cStr(s.GFEXTime, &ptr.GFEXTime[0], 9)
 	return ptr
 }
 
@@ -257,6 +266,7 @@ type CThostFtdcAuthenticationInfoField struct {
 	IsResult        int
 	AppID           string
 	AppType         byte
+	Reserve1        string
 	ClientIPAddress string
 }
 
@@ -272,7 +282,8 @@ func NewCThostFtdcAuthenticationInfoField(p *C.CThostFtdcAuthenticationInfoField
 	ret.IsResult = int(p.IsResult)
 	ret.AppID = c2goStr(&p.AppID[0], 33)
 	ret.AppType = byte(p.AppType)
-	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
+	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 33)
 	return ret
 }
 
@@ -285,7 +296,8 @@ func CThostFtdcAuthenticationInfoFieldCValue(s *CThostFtdcAuthenticationInfoFiel
 	ptr.IsResult = C.int(s.IsResult)
 	go2cStr(s.AppID, &ptr.AppID[0], 33)
 	ptr.AppType = C.char(s.AppType)
-	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
+	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 33)
 	return ptr
 }
 
@@ -728,23 +740,27 @@ func CThostFtdcExchangeFieldCValue(s *CThostFtdcExchangeField) *C.CThostFtdcExch
 }
 
 type CThostFtdcProductField struct {
-	ProductID            string
-	ProductName          string
-	ExchangeID           string
-	ProductClass         byte
-	VolumeMultiple       int
-	PriceTick            float64
-	MaxMarketOrderVolume int
-	MinMarketOrderVolume int
-	MaxLimitOrderVolume  int
-	MinLimitOrderVolume  int
-	PositionType         byte
-	PositionDateType     byte
-	CloseDealType        byte
-	TradeCurrencyID      string
-	MortgageFundUseRange byte
-	ExchangeProductID    string
-	UnderlyingMultiple   float64
+	Reserve1              string
+	ProductName           string
+	ExchangeID            string
+	ProductClass          byte
+	VolumeMultiple        int
+	PriceTick             float64
+	MaxMarketOrderVolume  int
+	MinMarketOrderVolume  int
+	MaxLimitOrderVolume   int
+	MinLimitOrderVolume   int
+	PositionType          byte
+	PositionDateType      byte
+	CloseDealType         byte
+	TradeCurrencyID       string
+	MortgageFundUseRange  byte
+	Reserve2              string
+	UnderlyingMultiple    float64
+	ProductID             string
+	ExchangeProductID     string
+	OpenLimitControlLevel byte
+	OrderFreqControlLevel byte
 }
 
 func NewCThostFtdcProductField(p *C.CThostFtdcProductField) *CThostFtdcProductField {
@@ -752,7 +768,7 @@ func NewCThostFtdcProductField(p *C.CThostFtdcProductField) *CThostFtdcProductFi
 		return nil
 	}
 	ret := new(CThostFtdcProductField)
-	ret.ProductID = c2goStr(&p.ProductID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ProductName = c2goStr(&p.ProductName[0], 21)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ProductClass = byte(p.ProductClass)
@@ -767,14 +783,18 @@ func NewCThostFtdcProductField(p *C.CThostFtdcProductField) *CThostFtdcProductFi
 	ret.CloseDealType = byte(p.CloseDealType)
 	ret.TradeCurrencyID = c2goStr(&p.TradeCurrencyID[0], 4)
 	ret.MortgageFundUseRange = byte(p.MortgageFundUseRange)
-	ret.ExchangeProductID = c2goStr(&p.ExchangeProductID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.UnderlyingMultiple = goFloat64(p.UnderlyingMultiple)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
+	ret.ExchangeProductID = c2goStr(&p.ExchangeProductID[0], 81)
+	ret.OpenLimitControlLevel = byte(p.OpenLimitControlLevel)
+	ret.OrderFreqControlLevel = byte(p.OrderFreqControlLevel)
 	return ret
 }
 
 func CThostFtdcProductFieldCValue(s *CThostFtdcProductField) *C.CThostFtdcProductField {
 	ptr := (*C.CThostFtdcProductField)(C.malloc(C.sizeof_CThostFtdcProductField))
-	go2cStr(s.ProductID, &ptr.ProductID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ProductName, &ptr.ProductName[0], 21)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	ptr.ProductClass = C.char(s.ProductClass)
@@ -789,17 +809,21 @@ func CThostFtdcProductFieldCValue(s *CThostFtdcProductField) *C.CThostFtdcProduc
 	ptr.CloseDealType = C.char(s.CloseDealType)
 	go2cStr(s.TradeCurrencyID, &ptr.TradeCurrencyID[0], 4)
 	ptr.MortgageFundUseRange = C.char(s.MortgageFundUseRange)
-	go2cStr(s.ExchangeProductID, &ptr.ExchangeProductID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	ptr.UnderlyingMultiple = C.double(s.UnderlyingMultiple)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
+	go2cStr(s.ExchangeProductID, &ptr.ExchangeProductID[0], 81)
+	ptr.OpenLimitControlLevel = C.char(s.OpenLimitControlLevel)
+	ptr.OrderFreqControlLevel = C.char(s.OrderFreqControlLevel)
 	return ptr
 }
 
 type CThostFtdcInstrumentField struct {
-	InstrumentID           string
+	Reserve1               string
 	ExchangeID             string
 	InstrumentName         string
-	ExchangeInstID         string
-	ProductID              string
+	Reserve2               string
+	Reserve3               string
 	ProductClass           byte
 	DeliveryYear           int
 	DeliveryMonth          int
@@ -821,11 +845,15 @@ type CThostFtdcInstrumentField struct {
 	LongMarginRatio        float64
 	ShortMarginRatio       float64
 	MaxMarginSideAlgorithm byte
-	UnderlyingInstrID      string
+	Reserve4               string
 	StrikePrice            float64
 	OptionsType            byte
 	UnderlyingMultiple     float64
 	CombinationType        byte
+	InstrumentID           string
+	ExchangeInstID         string
+	ProductID              string
+	UnderlyingInstrID      string
 }
 
 func NewCThostFtdcInstrumentField(p *C.CThostFtdcInstrumentField) *CThostFtdcInstrumentField {
@@ -833,11 +861,11 @@ func NewCThostFtdcInstrumentField(p *C.CThostFtdcInstrumentField) *CThostFtdcIns
 		return nil
 	}
 	ret := new(CThostFtdcInstrumentField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InstrumentName = c2goStr(&p.InstrumentName[0], 21)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
-	ret.ProductID = c2goStr(&p.ProductID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
+	ret.Reserve3 = c2goStr(&p.reserve3[0], 31)
 	ret.ProductClass = byte(p.ProductClass)
 	ret.DeliveryYear = int(p.DeliveryYear)
 	ret.DeliveryMonth = int(p.DeliveryMonth)
@@ -859,21 +887,25 @@ func NewCThostFtdcInstrumentField(p *C.CThostFtdcInstrumentField) *CThostFtdcIns
 	ret.LongMarginRatio = goFloat64(p.LongMarginRatio)
 	ret.ShortMarginRatio = goFloat64(p.ShortMarginRatio)
 	ret.MaxMarginSideAlgorithm = byte(p.MaxMarginSideAlgorithm)
-	ret.UnderlyingInstrID = c2goStr(&p.UnderlyingInstrID[0], 31)
+	ret.Reserve4 = c2goStr(&p.reserve4[0], 31)
 	ret.StrikePrice = goFloat64(p.StrikePrice)
 	ret.OptionsType = byte(p.OptionsType)
 	ret.UnderlyingMultiple = goFloat64(p.UnderlyingMultiple)
 	ret.CombinationType = byte(p.CombinationType)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
+	ret.UnderlyingInstrID = c2goStr(&p.UnderlyingInstrID[0], 81)
 	return ret
 }
 
 func CThostFtdcInstrumentFieldCValue(s *CThostFtdcInstrumentField) *C.CThostFtdcInstrumentField {
 	ptr := (*C.CThostFtdcInstrumentField)(C.malloc(C.sizeof_CThostFtdcInstrumentField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InstrumentName, &ptr.InstrumentName[0], 21)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
-	go2cStr(s.ProductID, &ptr.ProductID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
+	go2cStr(s.Reserve3, &ptr.reserve3[0], 31)
 	ptr.ProductClass = C.char(s.ProductClass)
 	ptr.DeliveryYear = C.int(s.DeliveryYear)
 	ptr.DeliveryMonth = C.int(s.DeliveryMonth)
@@ -895,11 +927,15 @@ func CThostFtdcInstrumentFieldCValue(s *CThostFtdcInstrumentField) *C.CThostFtdc
 	ptr.LongMarginRatio = C.double(s.LongMarginRatio)
 	ptr.ShortMarginRatio = C.double(s.ShortMarginRatio)
 	ptr.MaxMarginSideAlgorithm = C.char(s.MaxMarginSideAlgorithm)
-	go2cStr(s.UnderlyingInstrID, &ptr.UnderlyingInstrID[0], 31)
+	go2cStr(s.Reserve4, &ptr.reserve4[0], 31)
 	ptr.StrikePrice = C.double(s.StrikePrice)
 	ptr.OptionsType = C.char(s.OptionsType)
 	ptr.UnderlyingMultiple = C.double(s.UnderlyingMultiple)
 	ptr.CombinationType = C.char(s.CombinationType)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
+	go2cStr(s.UnderlyingInstrID, &ptr.UnderlyingInstrID[0], 81)
 	return ptr
 }
 
@@ -932,12 +968,13 @@ func CThostFtdcBrokerFieldCValue(s *CThostFtdcBrokerField) *C.CThostFtdcBrokerFi
 }
 
 type CThostFtdcTraderField struct {
-	ExchangeID    string
-	TraderID      string
-	ParticipantID string
-	Password      string
-	InstallCount  int
-	BrokerID      string
+	ExchangeID     string
+	TraderID       string
+	ParticipantID  string
+	Password       string
+	InstallCount   int
+	BrokerID       string
+	OrderCancelAlg byte
 }
 
 func NewCThostFtdcTraderField(p *C.CThostFtdcTraderField) *CThostFtdcTraderField {
@@ -951,6 +988,7 @@ func NewCThostFtdcTraderField(p *C.CThostFtdcTraderField) *CThostFtdcTraderField
 	ret.Password = c2goStr(&p.Password[0], 41)
 	ret.InstallCount = int(p.InstallCount)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.OrderCancelAlg = byte(p.OrderCancelAlg)
 	return ret
 }
 
@@ -962,6 +1000,7 @@ func CThostFtdcTraderFieldCValue(s *CThostFtdcTraderField) *C.CThostFtdcTraderFi
 	go2cStr(s.Password, &ptr.Password[0], 41)
 	ptr.InstallCount = C.int(s.InstallCount)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	ptr.OrderCancelAlg = C.char(s.OrderCancelAlg)
 	return ptr
 }
 
@@ -979,6 +1018,8 @@ type CThostFtdcInvestorField struct {
 	Mobile             string
 	CommModelID        string
 	MarginModelID      string
+	IsOrderFreq        byte
+	IsOpenVolLimit     byte
 }
 
 func NewCThostFtdcInvestorField(p *C.CThostFtdcInvestorField) *CThostFtdcInvestorField {
@@ -999,6 +1040,8 @@ func NewCThostFtdcInvestorField(p *C.CThostFtdcInvestorField) *CThostFtdcInvesto
 	ret.Mobile = c2goStr(&p.Mobile[0], 41)
 	ret.CommModelID = c2goStr(&p.CommModelID[0], 13)
 	ret.MarginModelID = c2goStr(&p.MarginModelID[0], 13)
+	ret.IsOrderFreq = byte(p.IsOrderFreq)
+	ret.IsOpenVolLimit = byte(p.IsOpenVolLimit)
 	return ret
 }
 
@@ -1017,6 +1060,8 @@ func CThostFtdcInvestorFieldCValue(s *CThostFtdcInvestorField) *C.CThostFtdcInve
 	go2cStr(s.Mobile, &ptr.Mobile[0], 41)
 	go2cStr(s.CommModelID, &ptr.CommModelID[0], 13)
 	go2cStr(s.MarginModelID, &ptr.MarginModelID[0], 13)
+	ptr.IsOrderFreq = C.char(s.IsOrderFreq)
+	ptr.IsOpenVolLimit = C.char(s.IsOpenVolLimit)
 	return ptr
 }
 
@@ -1330,7 +1375,7 @@ func CThostFtdcTradingAccountFieldCValue(s *CThostFtdcTradingAccountField) *C.CT
 }
 
 type CThostFtdcInvestorPositionField struct {
-	InstrumentID       string
+	Reserve1           string
 	BrokerID           string
 	InvestorID         string
 	PosiDirection      byte
@@ -1379,6 +1424,7 @@ type CThostFtdcInvestorPositionField struct {
 	PositionCostOffset float64
 	TasPosition        int
 	TasPositionCost    float64
+	InstrumentID       string
 }
 
 func NewCThostFtdcInvestorPositionField(p *C.CThostFtdcInvestorPositionField) *CThostFtdcInvestorPositionField {
@@ -1386,7 +1432,7 @@ func NewCThostFtdcInvestorPositionField(p *C.CThostFtdcInvestorPositionField) *C
 		return nil
 	}
 	ret := new(CThostFtdcInvestorPositionField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.PosiDirection = byte(p.PosiDirection)
@@ -1435,12 +1481,13 @@ func NewCThostFtdcInvestorPositionField(p *C.CThostFtdcInvestorPositionField) *C
 	ret.PositionCostOffset = goFloat64(p.PositionCostOffset)
 	ret.TasPosition = int(p.TasPosition)
 	ret.TasPositionCost = goFloat64(p.TasPositionCost)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcInvestorPositionFieldCValue(s *CThostFtdcInvestorPositionField) *C.CThostFtdcInvestorPositionField {
 	ptr := (*C.CThostFtdcInvestorPositionField)(C.malloc(C.sizeof_CThostFtdcInvestorPositionField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	ptr.PosiDirection = C.char(s.PosiDirection)
@@ -1489,11 +1536,12 @@ func CThostFtdcInvestorPositionFieldCValue(s *CThostFtdcInvestorPositionField) *
 	ptr.PositionCostOffset = C.double(s.PositionCostOffset)
 	ptr.TasPosition = C.int(s.TasPosition)
 	ptr.TasPositionCost = C.double(s.TasPositionCost)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcInstrumentMarginRateField struct {
-	InstrumentID             string
+	Reserve1                 string
 	InvestorRange            byte
 	BrokerID                 string
 	InvestorID               string
@@ -1505,6 +1553,7 @@ type CThostFtdcInstrumentMarginRateField struct {
 	IsRelative               int
 	ExchangeID               string
 	InvestUnitID             string
+	InstrumentID             string
 }
 
 func NewCThostFtdcInstrumentMarginRateField(p *C.CThostFtdcInstrumentMarginRateField) *CThostFtdcInstrumentMarginRateField {
@@ -1512,7 +1561,7 @@ func NewCThostFtdcInstrumentMarginRateField(p *C.CThostFtdcInstrumentMarginRateF
 		return nil
 	}
 	ret := new(CThostFtdcInstrumentMarginRateField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
@@ -1524,12 +1573,13 @@ func NewCThostFtdcInstrumentMarginRateField(p *C.CThostFtdcInstrumentMarginRateF
 	ret.IsRelative = int(p.IsRelative)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcInstrumentMarginRateFieldCValue(s *CThostFtdcInstrumentMarginRateField) *C.CThostFtdcInstrumentMarginRateField {
 	ptr := (*C.CThostFtdcInstrumentMarginRateField)(C.malloc(C.sizeof_CThostFtdcInstrumentMarginRateField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
@@ -1541,11 +1591,12 @@ func CThostFtdcInstrumentMarginRateFieldCValue(s *CThostFtdcInstrumentMarginRate
 	ptr.IsRelative = C.int(s.IsRelative)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcInstrumentCommissionRateField struct {
-	InstrumentID            string
+	Reserve1                string
 	InvestorRange           byte
 	BrokerID                string
 	InvestorID              string
@@ -1558,6 +1609,7 @@ type CThostFtdcInstrumentCommissionRateField struct {
 	ExchangeID              string
 	BizType                 byte
 	InvestUnitID            string
+	InstrumentID            string
 }
 
 func NewCThostFtdcInstrumentCommissionRateField(p *C.CThostFtdcInstrumentCommissionRateField) *CThostFtdcInstrumentCommissionRateField {
@@ -1565,7 +1617,7 @@ func NewCThostFtdcInstrumentCommissionRateField(p *C.CThostFtdcInstrumentCommiss
 		return nil
 	}
 	ret := new(CThostFtdcInstrumentCommissionRateField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
@@ -1578,12 +1630,13 @@ func NewCThostFtdcInstrumentCommissionRateField(p *C.CThostFtdcInstrumentCommiss
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.BizType = byte(p.BizType)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcInstrumentCommissionRateFieldCValue(s *CThostFtdcInstrumentCommissionRateField) *C.CThostFtdcInstrumentCommissionRateField {
 	ptr := (*C.CThostFtdcInstrumentCommissionRateField)(C.malloc(C.sizeof_CThostFtdcInstrumentCommissionRateField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
@@ -1596,14 +1649,15 @@ func CThostFtdcInstrumentCommissionRateFieldCValue(s *CThostFtdcInstrumentCommis
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	ptr.BizType = C.char(s.BizType)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcDepthMarketDataField struct {
 	TradingDay         string
-	InstrumentID       string
+	Reserve1           string
 	ExchangeID         string
-	ExchangeInstID     string
+	Reserve2           string
 	LastPrice          float64
 	PreSettlementPrice float64
 	PreClosePrice      float64
@@ -1644,6 +1698,10 @@ type CThostFtdcDepthMarketDataField struct {
 	AskVolume5         int
 	AveragePrice       float64
 	ActionDay          string
+	InstrumentID       string
+	ExchangeInstID     string
+	BandingUpperPrice  float64
+	BandingLowerPrice  float64
 }
 
 func NewCThostFtdcDepthMarketDataField(p *C.CThostFtdcDepthMarketDataField) *CThostFtdcDepthMarketDataField {
@@ -1652,9 +1710,9 @@ func NewCThostFtdcDepthMarketDataField(p *C.CThostFtdcDepthMarketDataField) *CTh
 	}
 	ret := new(CThostFtdcDepthMarketDataField)
 	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.LastPrice = goFloat64(p.LastPrice)
 	ret.PreSettlementPrice = goFloat64(p.PreSettlementPrice)
 	ret.PreClosePrice = goFloat64(p.PreClosePrice)
@@ -1695,15 +1753,19 @@ func NewCThostFtdcDepthMarketDataField(p *C.CThostFtdcDepthMarketDataField) *CTh
 	ret.AskVolume5 = int(p.AskVolume5)
 	ret.AveragePrice = goFloat64(p.AveragePrice)
 	ret.ActionDay = c2goStr(&p.ActionDay[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.BandingUpperPrice = goFloat64(p.BandingUpperPrice)
+	ret.BandingLowerPrice = goFloat64(p.BandingLowerPrice)
 	return ret
 }
 
 func CThostFtdcDepthMarketDataFieldCValue(s *CThostFtdcDepthMarketDataField) *C.CThostFtdcDepthMarketDataField {
 	ptr := (*C.CThostFtdcDepthMarketDataField)(C.malloc(C.sizeof_CThostFtdcDepthMarketDataField))
 	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	ptr.LastPrice = C.double(s.LastPrice)
 	ptr.PreSettlementPrice = C.double(s.PreSettlementPrice)
 	ptr.PreClosePrice = C.double(s.PreClosePrice)
@@ -1744,15 +1806,20 @@ func CThostFtdcDepthMarketDataFieldCValue(s *CThostFtdcDepthMarketDataField) *C.
 	ptr.AskVolume5 = C.int(s.AskVolume5)
 	ptr.AveragePrice = C.double(s.AveragePrice)
 	go2cStr(s.ActionDay, &ptr.ActionDay[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	ptr.BandingUpperPrice = C.double(s.BandingUpperPrice)
+	ptr.BandingLowerPrice = C.double(s.BandingLowerPrice)
 	return ptr
 }
 
 type CThostFtdcInstrumentTradingRightField struct {
-	InstrumentID  string
+	Reserve1      string
 	InvestorRange byte
 	BrokerID      string
 	InvestorID    string
 	TradingRight  byte
+	InstrumentID  string
 }
 
 func NewCThostFtdcInstrumentTradingRightField(p *C.CThostFtdcInstrumentTradingRightField) *CThostFtdcInstrumentTradingRightField {
@@ -1760,21 +1827,23 @@ func NewCThostFtdcInstrumentTradingRightField(p *C.CThostFtdcInstrumentTradingRi
 		return nil
 	}
 	ret := new(CThostFtdcInstrumentTradingRightField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.TradingRight = byte(p.TradingRight)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcInstrumentTradingRightFieldCValue(s *CThostFtdcInstrumentTradingRightField) *C.CThostFtdcInstrumentTradingRightField {
 	ptr := (*C.CThostFtdcInstrumentTradingRightField)(C.malloc(C.sizeof_CThostFtdcInstrumentTradingRightField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	ptr.TradingRight = C.char(s.TradingRight)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -1897,6 +1966,7 @@ type CThostFtdcTraderOfferField struct {
 	BrokerID                 string
 	MaxTradeID               string
 	MaxOrderMessageReference string
+	OrderCancelAlg           byte
 }
 
 func NewCThostFtdcTraderOfferField(p *C.CThostFtdcTraderOfferField) *CThostFtdcTraderOfferField {
@@ -1923,6 +1993,7 @@ func NewCThostFtdcTraderOfferField(p *C.CThostFtdcTraderOfferField) *CThostFtdcT
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.MaxTradeID = c2goStr(&p.MaxTradeID[0], 21)
 	ret.MaxOrderMessageReference = c2goStr(&p.MaxOrderMessageReference[0], 7)
+	ret.OrderCancelAlg = byte(p.OrderCancelAlg)
 	return ret
 }
 
@@ -1947,6 +2018,7 @@ func CThostFtdcTraderOfferFieldCValue(s *CThostFtdcTraderOfferField) *C.CThostFt
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.MaxTradeID, &ptr.MaxTradeID[0], 21)
 	go2cStr(s.MaxOrderMessageReference, &ptr.MaxOrderMessageReference[0], 7)
+	ptr.OrderCancelAlg = C.char(s.OrderCancelAlg)
 	return ptr
 }
 
@@ -1991,7 +2063,7 @@ func CThostFtdcSettlementInfoFieldCValue(s *CThostFtdcSettlementInfoField) *C.CT
 }
 
 type CThostFtdcInstrumentMarginRateAdjustField struct {
-	InstrumentID             string
+	Reserve1                 string
 	InvestorRange            byte
 	BrokerID                 string
 	InvestorID               string
@@ -2001,6 +2073,7 @@ type CThostFtdcInstrumentMarginRateAdjustField struct {
 	ShortMarginRatioByMoney  float64
 	ShortMarginRatioByVolume float64
 	IsRelative               int
+	InstrumentID             string
 }
 
 func NewCThostFtdcInstrumentMarginRateAdjustField(p *C.CThostFtdcInstrumentMarginRateAdjustField) *CThostFtdcInstrumentMarginRateAdjustField {
@@ -2008,7 +2081,7 @@ func NewCThostFtdcInstrumentMarginRateAdjustField(p *C.CThostFtdcInstrumentMargi
 		return nil
 	}
 	ret := new(CThostFtdcInstrumentMarginRateAdjustField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
@@ -2018,12 +2091,13 @@ func NewCThostFtdcInstrumentMarginRateAdjustField(p *C.CThostFtdcInstrumentMargi
 	ret.ShortMarginRatioByMoney = goFloat64(p.ShortMarginRatioByMoney)
 	ret.ShortMarginRatioByVolume = goFloat64(p.ShortMarginRatioByVolume)
 	ret.IsRelative = int(p.IsRelative)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcInstrumentMarginRateAdjustFieldCValue(s *CThostFtdcInstrumentMarginRateAdjustField) *C.CThostFtdcInstrumentMarginRateAdjustField {
 	ptr := (*C.CThostFtdcInstrumentMarginRateAdjustField)(C.malloc(C.sizeof_CThostFtdcInstrumentMarginRateAdjustField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
@@ -2033,18 +2107,20 @@ func CThostFtdcInstrumentMarginRateAdjustFieldCValue(s *CThostFtdcInstrumentMarg
 	ptr.ShortMarginRatioByMoney = C.double(s.ShortMarginRatioByMoney)
 	ptr.ShortMarginRatioByVolume = C.double(s.ShortMarginRatioByVolume)
 	ptr.IsRelative = C.int(s.IsRelative)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcExchangeMarginRateField struct {
 	BrokerID                 string
-	InstrumentID             string
+	Reserve1                 string
 	HedgeFlag                byte
 	LongMarginRatioByMoney   float64
 	LongMarginRatioByVolume  float64
 	ShortMarginRatioByMoney  float64
 	ShortMarginRatioByVolume float64
 	ExchangeID               string
+	InstrumentID             string
 }
 
 func NewCThostFtdcExchangeMarginRateField(p *C.CThostFtdcExchangeMarginRateField) *CThostFtdcExchangeMarginRateField {
@@ -2053,32 +2129,34 @@ func NewCThostFtdcExchangeMarginRateField(p *C.CThostFtdcExchangeMarginRateField
 	}
 	ret := new(CThostFtdcExchangeMarginRateField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.LongMarginRatioByMoney = goFloat64(p.LongMarginRatioByMoney)
 	ret.LongMarginRatioByVolume = goFloat64(p.LongMarginRatioByVolume)
 	ret.ShortMarginRatioByMoney = goFloat64(p.ShortMarginRatioByMoney)
 	ret.ShortMarginRatioByVolume = goFloat64(p.ShortMarginRatioByVolume)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcExchangeMarginRateFieldCValue(s *CThostFtdcExchangeMarginRateField) *C.CThostFtdcExchangeMarginRateField {
 	ptr := (*C.CThostFtdcExchangeMarginRateField)(C.malloc(C.sizeof_CThostFtdcExchangeMarginRateField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	ptr.LongMarginRatioByMoney = C.double(s.LongMarginRatioByMoney)
 	ptr.LongMarginRatioByVolume = C.double(s.LongMarginRatioByVolume)
 	ptr.ShortMarginRatioByMoney = C.double(s.ShortMarginRatioByMoney)
 	ptr.ShortMarginRatioByVolume = C.double(s.ShortMarginRatioByVolume)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcExchangeMarginRateAdjustField struct {
 	BrokerID                     string
-	InstrumentID                 string
+	Reserve1                     string
 	HedgeFlag                    byte
 	LongMarginRatioByMoney       float64
 	LongMarginRatioByVolume      float64
@@ -2092,6 +2170,7 @@ type CThostFtdcExchangeMarginRateAdjustField struct {
 	NoLongMarginRatioByVolume    float64
 	NoShortMarginRatioByMoney    float64
 	NoShortMarginRatioByVolume   float64
+	InstrumentID                 string
 }
 
 func NewCThostFtdcExchangeMarginRateAdjustField(p *C.CThostFtdcExchangeMarginRateAdjustField) *CThostFtdcExchangeMarginRateAdjustField {
@@ -2100,7 +2179,7 @@ func NewCThostFtdcExchangeMarginRateAdjustField(p *C.CThostFtdcExchangeMarginRat
 	}
 	ret := new(CThostFtdcExchangeMarginRateAdjustField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.LongMarginRatioByMoney = goFloat64(p.LongMarginRatioByMoney)
 	ret.LongMarginRatioByVolume = goFloat64(p.LongMarginRatioByVolume)
@@ -2114,13 +2193,14 @@ func NewCThostFtdcExchangeMarginRateAdjustField(p *C.CThostFtdcExchangeMarginRat
 	ret.NoLongMarginRatioByVolume = goFloat64(p.NoLongMarginRatioByVolume)
 	ret.NoShortMarginRatioByMoney = goFloat64(p.NoShortMarginRatioByMoney)
 	ret.NoShortMarginRatioByVolume = goFloat64(p.NoShortMarginRatioByVolume)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcExchangeMarginRateAdjustFieldCValue(s *CThostFtdcExchangeMarginRateAdjustField) *C.CThostFtdcExchangeMarginRateAdjustField {
 	ptr := (*C.CThostFtdcExchangeMarginRateAdjustField)(C.malloc(C.sizeof_CThostFtdcExchangeMarginRateAdjustField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	ptr.LongMarginRatioByMoney = C.double(s.LongMarginRatioByMoney)
 	ptr.LongMarginRatioByVolume = C.double(s.LongMarginRatioByVolume)
@@ -2134,6 +2214,7 @@ func CThostFtdcExchangeMarginRateAdjustFieldCValue(s *CThostFtdcExchangeMarginRa
 	ptr.NoLongMarginRatioByVolume = C.double(s.NoLongMarginRatioByVolume)
 	ptr.NoShortMarginRatioByMoney = C.double(s.NoShortMarginRatioByMoney)
 	ptr.NoShortMarginRatioByVolume = C.double(s.NoShortMarginRatioByVolume)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -2250,7 +2331,7 @@ type CThostFtdcLoginInfoField struct {
 	UserID               string
 	LoginDate            string
 	LoginTime            string
-	IPAddress            string
+	Reserve1             string
 	UserProductInfo      string
 	InterfaceProductInfo string
 	ProtocolInfo         string
@@ -2267,6 +2348,7 @@ type CThostFtdcLoginInfoField struct {
 	IsQryControl         int
 	LoginRemark          string
 	Password             string
+	IPAddress            string
 }
 
 func NewCThostFtdcLoginInfoField(p *C.CThostFtdcLoginInfoField) *CThostFtdcLoginInfoField {
@@ -2280,7 +2362,7 @@ func NewCThostFtdcLoginInfoField(p *C.CThostFtdcLoginInfoField) *CThostFtdcLogin
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.LoginDate = c2goStr(&p.LoginDate[0], 9)
 	ret.LoginTime = c2goStr(&p.LoginTime[0], 9)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.UserProductInfo = c2goStr(&p.UserProductInfo[0], 11)
 	ret.InterfaceProductInfo = c2goStr(&p.InterfaceProductInfo[0], 11)
 	ret.ProtocolInfo = c2goStr(&p.ProtocolInfo[0], 11)
@@ -2297,6 +2379,7 @@ func NewCThostFtdcLoginInfoField(p *C.CThostFtdcLoginInfoField) *CThostFtdcLogin
 	ret.IsQryControl = int(p.IsQryControl)
 	ret.LoginRemark = c2goStr(&p.LoginRemark[0], 36)
 	ret.Password = c2goStr(&p.Password[0], 41)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -2308,7 +2391,7 @@ func CThostFtdcLoginInfoFieldCValue(s *CThostFtdcLoginInfoField) *C.CThostFtdcLo
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.LoginDate, &ptr.LoginDate[0], 9)
 	go2cStr(s.LoginTime, &ptr.LoginTime[0], 9)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.UserProductInfo, &ptr.UserProductInfo[0], 11)
 	go2cStr(s.InterfaceProductInfo, &ptr.InterfaceProductInfo[0], 11)
 	go2cStr(s.ProtocolInfo, &ptr.ProtocolInfo[0], 11)
@@ -2325,6 +2408,7 @@ func CThostFtdcLoginInfoFieldCValue(s *CThostFtdcLoginInfoField) *C.CThostFtdcLo
 	ptr.IsQryControl = C.int(s.IsQryControl)
 	go2cStr(s.LoginRemark, &ptr.LoginRemark[0], 36)
 	go2cStr(s.Password, &ptr.Password[0], 41)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -2412,7 +2496,7 @@ func CThostFtdcUserPasswordUpdateFieldCValue(s *CThostFtdcUserPasswordUpdateFiel
 type CThostFtdcInputOrderField struct {
 	BrokerID            string
 	InvestorID          string
-	InstrumentID        string
+	Reserve1            string
 	OrderRef            string
 	UserID              string
 	OrderPriceType      byte
@@ -2438,8 +2522,10 @@ type CThostFtdcInputOrderField struct {
 	AccountID           string
 	CurrencyID          string
 	ClientID            string
-	IPAddress           string
+	Reserve2            string
 	MacAddress          string
+	InstrumentID        string
+	IPAddress           string
 }
 
 func NewCThostFtdcInputOrderField(p *C.CThostFtdcInputOrderField) *CThostFtdcInputOrderField {
@@ -2449,7 +2535,7 @@ func NewCThostFtdcInputOrderField(p *C.CThostFtdcInputOrderField) *CThostFtdcInp
 	ret := new(CThostFtdcInputOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.OrderRef = c2goStr(&p.OrderRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.OrderPriceType = byte(p.OrderPriceType)
@@ -2475,8 +2561,10 @@ func NewCThostFtdcInputOrderField(p *C.CThostFtdcInputOrderField) *CThostFtdcInp
 	ret.AccountID = c2goStr(&p.AccountID[0], 13)
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -2484,7 +2572,7 @@ func CThostFtdcInputOrderFieldCValue(s *CThostFtdcInputOrderField) *C.CThostFtdc
 	ptr := (*C.CThostFtdcInputOrderField)(C.malloc(C.sizeof_CThostFtdcInputOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.OrderRef, &ptr.OrderRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.OrderPriceType = C.char(s.OrderPriceType)
@@ -2510,15 +2598,17 @@ func CThostFtdcInputOrderFieldCValue(s *CThostFtdcInputOrderField) *C.CThostFtdc
 	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcOrderField struct {
 	BrokerID             string
 	InvestorID           string
-	InstrumentID         string
+	Reserve1             string
 	OrderRef             string
 	UserID               string
 	OrderPriceType       byte
@@ -2541,7 +2631,7 @@ type CThostFtdcOrderField struct {
 	ExchangeID           string
 	ParticipantID        string
 	ClientID             string
-	ExchangeInstID       string
+	Reserve2             string
 	TraderID             string
 	InstallID            int
 	OrderSubmitStatus    byte
@@ -2577,8 +2667,11 @@ type CThostFtdcOrderField struct {
 	InvestUnitID         string
 	AccountID            string
 	CurrencyID           string
-	IPAddress            string
+	Reserve3             string
 	MacAddress           string
+	InstrumentID         string
+	ExchangeInstID       string
+	IPAddress            string
 }
 
 func NewCThostFtdcOrderField(p *C.CThostFtdcOrderField) *CThostFtdcOrderField {
@@ -2588,7 +2681,7 @@ func NewCThostFtdcOrderField(p *C.CThostFtdcOrderField) *CThostFtdcOrderField {
 	ret := new(CThostFtdcOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.OrderRef = c2goStr(&p.OrderRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.OrderPriceType = byte(p.OrderPriceType)
@@ -2611,7 +2704,7 @@ func NewCThostFtdcOrderField(p *C.CThostFtdcOrderField) *CThostFtdcOrderField {
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.OrderSubmitStatus = byte(p.OrderSubmitStatus)
@@ -2647,8 +2740,11 @@ func NewCThostFtdcOrderField(p *C.CThostFtdcOrderField) *CThostFtdcOrderField {
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
 	ret.AccountID = c2goStr(&p.AccountID[0], 13)
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve3 = c2goStr(&p.reserve3[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -2656,7 +2752,7 @@ func CThostFtdcOrderFieldCValue(s *CThostFtdcOrderField) *C.CThostFtdcOrderField
 	ptr := (*C.CThostFtdcOrderField)(C.malloc(C.sizeof_CThostFtdcOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.OrderRef, &ptr.OrderRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.OrderPriceType = C.char(s.OrderPriceType)
@@ -2679,7 +2775,7 @@ func CThostFtdcOrderFieldCValue(s *CThostFtdcOrderField) *C.CThostFtdcOrderField
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	ptr.OrderSubmitStatus = C.char(s.OrderSubmitStatus)
@@ -2715,8 +2811,11 @@ func CThostFtdcOrderFieldCValue(s *CThostFtdcOrderField) *C.CThostFtdcOrderField
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
 	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve3, &ptr.reserve3[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -2741,7 +2840,7 @@ type CThostFtdcExchangeOrderField struct {
 	ExchangeID          string
 	ParticipantID       string
 	ClientID            string
-	ExchangeInstID      string
+	Reserve1            string
 	TraderID            string
 	InstallID           int
 	OrderSubmitStatus   byte
@@ -2764,8 +2863,10 @@ type CThostFtdcExchangeOrderField struct {
 	ClearingPartID      string
 	SequenceNo          int
 	BranchID            string
-	IPAddress           string
+	Reserve2            string
 	MacAddress          string
+	ExchangeInstID      string
+	IPAddress           string
 }
 
 func NewCThostFtdcExchangeOrderField(p *C.CThostFtdcExchangeOrderField) *CThostFtdcExchangeOrderField {
@@ -2793,7 +2894,7 @@ func NewCThostFtdcExchangeOrderField(p *C.CThostFtdcExchangeOrderField) *CThostF
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.OrderSubmitStatus = byte(p.OrderSubmitStatus)
@@ -2816,8 +2917,10 @@ func NewCThostFtdcExchangeOrderField(p *C.CThostFtdcExchangeOrderField) *CThostF
 	ret.ClearingPartID = c2goStr(&p.ClearingPartID[0], 11)
 	ret.SequenceNo = int(p.SequenceNo)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -2843,7 +2946,7 @@ func CThostFtdcExchangeOrderFieldCValue(s *CThostFtdcExchangeOrderField) *C.CTho
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	ptr.OrderSubmitStatus = C.char(s.OrderSubmitStatus)
@@ -2866,8 +2969,10 @@ func CThostFtdcExchangeOrderFieldCValue(s *CThostFtdcExchangeOrderField) *C.CTho
 	go2cStr(s.ClearingPartID, &ptr.ClearingPartID[0], 11)
 	ptr.SequenceNo = C.int(s.SequenceNo)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -2922,10 +3027,12 @@ type CThostFtdcInputOrderActionField struct {
 	LimitPrice     float64
 	VolumeChange   int
 	UserID         string
-	InstrumentID   string
+	Reserve1       string
 	InvestUnitID   string
-	IPAddress      string
+	Reserve2       string
 	MacAddress     string
+	InstrumentID   string
+	IPAddress      string
 }
 
 func NewCThostFtdcInputOrderActionField(p *C.CThostFtdcInputOrderActionField) *CThostFtdcInputOrderActionField {
@@ -2946,10 +3053,12 @@ func NewCThostFtdcInputOrderActionField(p *C.CThostFtdcInputOrderActionField) *C
 	ret.LimitPrice = goFloat64(p.LimitPrice)
 	ret.VolumeChange = int(p.VolumeChange)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -2968,10 +3077,12 @@ func CThostFtdcInputOrderActionFieldCValue(s *CThostFtdcInputOrderActionField) *
 	ptr.LimitPrice = C.double(s.LimitPrice)
 	ptr.VolumeChange = C.int(s.VolumeChange)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -3000,11 +3111,13 @@ type CThostFtdcOrderActionField struct {
 	OrderActionStatus byte
 	UserID            string
 	StatusMsg         string
-	InstrumentID      string
+	Reserve1          string
 	BranchID          string
 	InvestUnitID      string
-	IPAddress         string
+	Reserve2          string
 	MacAddress        string
+	InstrumentID      string
+	IPAddress         string
 }
 
 func NewCThostFtdcOrderActionField(p *C.CThostFtdcOrderActionField) *CThostFtdcOrderActionField {
@@ -3036,11 +3149,13 @@ func NewCThostFtdcOrderActionField(p *C.CThostFtdcOrderActionField) *CThostFtdcO
 	ret.OrderActionStatus = byte(p.OrderActionStatus)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.StatusMsg = c2goStr(&p.StatusMsg[0], 81)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -3070,11 +3185,13 @@ func CThostFtdcOrderActionFieldCValue(s *CThostFtdcOrderActionField) *C.CThostFt
 	ptr.OrderActionStatus = C.char(s.OrderActionStatus)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.StatusMsg, &ptr.StatusMsg[0], 81)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -3096,8 +3213,9 @@ type CThostFtdcExchangeOrderActionField struct {
 	OrderActionStatus byte
 	UserID            string
 	BranchID          string
-	IPAddress         string
+	Reserve1          string
 	MacAddress        string
+	IPAddress         string
 }
 
 func NewCThostFtdcExchangeOrderActionField(p *C.CThostFtdcExchangeOrderActionField) *CThostFtdcExchangeOrderActionField {
@@ -3122,8 +3240,9 @@ func NewCThostFtdcExchangeOrderActionField(p *C.CThostFtdcExchangeOrderActionFie
 	ret.OrderActionStatus = byte(p.OrderActionStatus)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -3146,8 +3265,9 @@ func CThostFtdcExchangeOrderActionFieldCValue(s *CThostFtdcExchangeOrderActionFi
 	ptr.OrderActionStatus = C.char(s.OrderActionStatus)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -3199,7 +3319,7 @@ type CThostFtdcExchangeTradeField struct {
 	ParticipantID  string
 	ClientID       string
 	TradingRole    byte
-	ExchangeInstID string
+	Reserve1       string
 	OffsetFlag     byte
 	HedgeFlag      byte
 	Price          float64
@@ -3214,6 +3334,7 @@ type CThostFtdcExchangeTradeField struct {
 	BusinessUnit   string
 	SequenceNo     int
 	TradeSource    byte
+	ExchangeInstID string
 }
 
 func NewCThostFtdcExchangeTradeField(p *C.CThostFtdcExchangeTradeField) *CThostFtdcExchangeTradeField {
@@ -3228,7 +3349,7 @@ func NewCThostFtdcExchangeTradeField(p *C.CThostFtdcExchangeTradeField) *CThostF
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
 	ret.TradingRole = byte(p.TradingRole)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.OffsetFlag = byte(p.OffsetFlag)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.Price = goFloat64(p.Price)
@@ -3243,6 +3364,7 @@ func NewCThostFtdcExchangeTradeField(p *C.CThostFtdcExchangeTradeField) *CThostF
 	ret.BusinessUnit = c2goStr(&p.BusinessUnit[0], 21)
 	ret.SequenceNo = int(p.SequenceNo)
 	ret.TradeSource = byte(p.TradeSource)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	return ret
 }
 
@@ -3255,7 +3377,7 @@ func CThostFtdcExchangeTradeFieldCValue(s *CThostFtdcExchangeTradeField) *C.CTho
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
 	ptr.TradingRole = C.char(s.TradingRole)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.OffsetFlag = C.char(s.OffsetFlag)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	ptr.Price = C.double(s.Price)
@@ -3270,13 +3392,14 @@ func CThostFtdcExchangeTradeFieldCValue(s *CThostFtdcExchangeTradeField) *C.CTho
 	go2cStr(s.BusinessUnit, &ptr.BusinessUnit[0], 21)
 	ptr.SequenceNo = C.int(s.SequenceNo)
 	ptr.TradeSource = C.char(s.TradeSource)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	return ptr
 }
 
 type CThostFtdcTradeField struct {
 	BrokerID       string
 	InvestorID     string
-	InstrumentID   string
+	Reserve1       string
 	OrderRef       string
 	UserID         string
 	ExchangeID     string
@@ -3286,7 +3409,7 @@ type CThostFtdcTradeField struct {
 	ParticipantID  string
 	ClientID       string
 	TradingRole    byte
-	ExchangeInstID string
+	Reserve2       string
 	OffsetFlag     byte
 	HedgeFlag      byte
 	Price          float64
@@ -3305,6 +3428,8 @@ type CThostFtdcTradeField struct {
 	BrokerOrderSeq int
 	TradeSource    byte
 	InvestUnitID   string
+	InstrumentID   string
+	ExchangeInstID string
 }
 
 func NewCThostFtdcTradeField(p *C.CThostFtdcTradeField) *CThostFtdcTradeField {
@@ -3314,7 +3439,7 @@ func NewCThostFtdcTradeField(p *C.CThostFtdcTradeField) *CThostFtdcTradeField {
 	ret := new(CThostFtdcTradeField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.OrderRef = c2goStr(&p.OrderRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
@@ -3324,7 +3449,7 @@ func NewCThostFtdcTradeField(p *C.CThostFtdcTradeField) *CThostFtdcTradeField {
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
 	ret.TradingRole = byte(p.TradingRole)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.OffsetFlag = byte(p.OffsetFlag)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.Price = goFloat64(p.Price)
@@ -3343,6 +3468,8 @@ func NewCThostFtdcTradeField(p *C.CThostFtdcTradeField) *CThostFtdcTradeField {
 	ret.BrokerOrderSeq = int(p.BrokerOrderSeq)
 	ret.TradeSource = byte(p.TradeSource)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	return ret
 }
 
@@ -3350,7 +3477,7 @@ func CThostFtdcTradeFieldCValue(s *CThostFtdcTradeField) *C.CThostFtdcTradeField
 	ptr := (*C.CThostFtdcTradeField)(C.malloc(C.sizeof_CThostFtdcTradeField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.OrderRef, &ptr.OrderRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
@@ -3360,7 +3487,7 @@ func CThostFtdcTradeFieldCValue(s *CThostFtdcTradeField) *C.CThostFtdcTradeField
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
 	ptr.TradingRole = C.char(s.TradingRole)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	ptr.OffsetFlag = C.char(s.OffsetFlag)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	ptr.Price = C.double(s.Price)
@@ -3379,6 +3506,8 @@ func CThostFtdcTradeFieldCValue(s *CThostFtdcTradeField) *C.CThostFtdcTradeField
 	ptr.BrokerOrderSeq = C.int(s.BrokerOrderSeq)
 	ptr.TradeSource = C.char(s.TradeSource)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	return ptr
 }
 
@@ -3389,12 +3518,13 @@ type CThostFtdcUserSessionField struct {
 	UserID               string
 	LoginDate            string
 	LoginTime            string
-	IPAddress            string
+	Reserve1             string
 	UserProductInfo      string
 	InterfaceProductInfo string
 	ProtocolInfo         string
 	MacAddress           string
 	LoginRemark          string
+	IPAddress            string
 }
 
 func NewCThostFtdcUserSessionField(p *C.CThostFtdcUserSessionField) *CThostFtdcUserSessionField {
@@ -3408,12 +3538,13 @@ func NewCThostFtdcUserSessionField(p *C.CThostFtdcUserSessionField) *CThostFtdcU
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.LoginDate = c2goStr(&p.LoginDate[0], 9)
 	ret.LoginTime = c2goStr(&p.LoginTime[0], 9)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.UserProductInfo = c2goStr(&p.UserProductInfo[0], 11)
 	ret.InterfaceProductInfo = c2goStr(&p.InterfaceProductInfo[0], 11)
 	ret.ProtocolInfo = c2goStr(&p.ProtocolInfo[0], 11)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.LoginRemark = c2goStr(&p.LoginRemark[0], 36)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -3425,55 +3556,59 @@ func CThostFtdcUserSessionFieldCValue(s *CThostFtdcUserSessionField) *C.CThostFt
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.LoginDate, &ptr.LoginDate[0], 9)
 	go2cStr(s.LoginTime, &ptr.LoginTime[0], 9)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.UserProductInfo, &ptr.UserProductInfo[0], 11)
 	go2cStr(s.InterfaceProductInfo, &ptr.InterfaceProductInfo[0], 11)
 	go2cStr(s.ProtocolInfo, &ptr.ProtocolInfo[0], 11)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.LoginRemark, &ptr.LoginRemark[0], 36)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
-type CThostFtdcQueryMaxOrderVolumeField struct {
+type CThostFtdcQryMaxOrderVolumeField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	Direction    byte
 	OffsetFlag   byte
 	HedgeFlag    byte
 	MaxVolume    int
 	ExchangeID   string
 	InvestUnitID string
+	InstrumentID string
 }
 
-func NewCThostFtdcQueryMaxOrderVolumeField(p *C.CThostFtdcQueryMaxOrderVolumeField) *CThostFtdcQueryMaxOrderVolumeField {
+func NewCThostFtdcQryMaxOrderVolumeField(p *C.CThostFtdcQryMaxOrderVolumeField) *CThostFtdcQryMaxOrderVolumeField {
 	if p == nil {
 		return nil
 	}
-	ret := new(CThostFtdcQueryMaxOrderVolumeField)
+	ret := new(CThostFtdcQryMaxOrderVolumeField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.Direction = byte(p.Direction)
 	ret.OffsetFlag = byte(p.OffsetFlag)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.MaxVolume = int(p.MaxVolume)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
-func CThostFtdcQueryMaxOrderVolumeFieldCValue(s *CThostFtdcQueryMaxOrderVolumeField) *C.CThostFtdcQueryMaxOrderVolumeField {
-	ptr := (*C.CThostFtdcQueryMaxOrderVolumeField)(C.malloc(C.sizeof_CThostFtdcQueryMaxOrderVolumeField))
+func CThostFtdcQryMaxOrderVolumeFieldCValue(s *CThostFtdcQryMaxOrderVolumeField) *C.CThostFtdcQryMaxOrderVolumeField {
+	ptr := (*C.CThostFtdcQryMaxOrderVolumeField)(C.malloc(C.sizeof_CThostFtdcQryMaxOrderVolumeField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.Direction = C.char(s.Direction)
 	ptr.OffsetFlag = C.char(s.OffsetFlag)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	ptr.MaxVolume = C.int(s.MaxVolume)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -3515,12 +3650,14 @@ func CThostFtdcSettlementInfoConfirmFieldCValue(s *CThostFtdcSettlementInfoConfi
 }
 
 type CThostFtdcSyncDepositField struct {
-	DepositSeqNo string
-	BrokerID     string
-	InvestorID   string
-	Deposit      float64
-	IsForce      int
-	CurrencyID   string
+	DepositSeqNo    string
+	BrokerID        string
+	InvestorID      string
+	Deposit         float64
+	IsForce         int
+	CurrencyID      string
+	IsFromSopt      int
+	TradingPassword string
 }
 
 func NewCThostFtdcSyncDepositField(p *C.CThostFtdcSyncDepositField) *CThostFtdcSyncDepositField {
@@ -3534,6 +3671,8 @@ func NewCThostFtdcSyncDepositField(p *C.CThostFtdcSyncDepositField) *CThostFtdcS
 	ret.Deposit = goFloat64(p.Deposit)
 	ret.IsForce = int(p.IsForce)
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
+	ret.IsFromSopt = int(p.IsFromSopt)
+	ret.TradingPassword = c2goStr(&p.TradingPassword[0], 41)
 	return ret
 }
 
@@ -3545,6 +3684,8 @@ func CThostFtdcSyncDepositFieldCValue(s *CThostFtdcSyncDepositField) *C.CThostFt
 	ptr.Deposit = C.double(s.Deposit)
 	ptr.IsForce = C.int(s.IsForce)
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
+	ptr.IsFromSopt = C.int(s.IsFromSopt)
+	go2cStr(s.TradingPassword, &ptr.TradingPassword[0], 41)
 	return ptr
 }
 
@@ -3615,6 +3756,8 @@ type CThostFtdcSyncingInvestorField struct {
 	Mobile             string
 	CommModelID        string
 	MarginModelID      string
+	IsOrderFreq        byte
+	IsOpenVolLimit     byte
 }
 
 func NewCThostFtdcSyncingInvestorField(p *C.CThostFtdcSyncingInvestorField) *CThostFtdcSyncingInvestorField {
@@ -3635,6 +3778,8 @@ func NewCThostFtdcSyncingInvestorField(p *C.CThostFtdcSyncingInvestorField) *CTh
 	ret.Mobile = c2goStr(&p.Mobile[0], 41)
 	ret.CommModelID = c2goStr(&p.CommModelID[0], 13)
 	ret.MarginModelID = c2goStr(&p.MarginModelID[0], 13)
+	ret.IsOrderFreq = byte(p.IsOrderFreq)
+	ret.IsOpenVolLimit = byte(p.IsOpenVolLimit)
 	return ret
 }
 
@@ -3653,6 +3798,8 @@ func CThostFtdcSyncingInvestorFieldCValue(s *CThostFtdcSyncingInvestorField) *C.
 	go2cStr(s.Mobile, &ptr.Mobile[0], 41)
 	go2cStr(s.CommModelID, &ptr.CommModelID[0], 13)
 	go2cStr(s.MarginModelID, &ptr.MarginModelID[0], 13)
+	ptr.IsOrderFreq = C.char(s.IsOrderFreq)
+	ptr.IsOpenVolLimit = C.char(s.IsOpenVolLimit)
 	return ptr
 }
 
@@ -3876,7 +4023,7 @@ func CThostFtdcSyncingTradingAccountFieldCValue(s *CThostFtdcSyncingTradingAccou
 }
 
 type CThostFtdcSyncingInvestorPositionField struct {
-	InstrumentID       string
+	Reserve1           string
 	BrokerID           string
 	InvestorID         string
 	PosiDirection      byte
@@ -3925,6 +4072,7 @@ type CThostFtdcSyncingInvestorPositionField struct {
 	PositionCostOffset float64
 	TasPosition        int
 	TasPositionCost    float64
+	InstrumentID       string
 }
 
 func NewCThostFtdcSyncingInvestorPositionField(p *C.CThostFtdcSyncingInvestorPositionField) *CThostFtdcSyncingInvestorPositionField {
@@ -3932,7 +4080,7 @@ func NewCThostFtdcSyncingInvestorPositionField(p *C.CThostFtdcSyncingInvestorPos
 		return nil
 	}
 	ret := new(CThostFtdcSyncingInvestorPositionField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.PosiDirection = byte(p.PosiDirection)
@@ -3981,12 +4129,13 @@ func NewCThostFtdcSyncingInvestorPositionField(p *C.CThostFtdcSyncingInvestorPos
 	ret.PositionCostOffset = goFloat64(p.PositionCostOffset)
 	ret.TasPosition = int(p.TasPosition)
 	ret.TasPositionCost = goFloat64(p.TasPositionCost)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcSyncingInvestorPositionFieldCValue(s *CThostFtdcSyncingInvestorPositionField) *C.CThostFtdcSyncingInvestorPositionField {
 	ptr := (*C.CThostFtdcSyncingInvestorPositionField)(C.malloc(C.sizeof_CThostFtdcSyncingInvestorPositionField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	ptr.PosiDirection = C.char(s.PosiDirection)
@@ -4035,11 +4184,12 @@ func CThostFtdcSyncingInvestorPositionFieldCValue(s *CThostFtdcSyncingInvestorPo
 	ptr.PositionCostOffset = C.double(s.PositionCostOffset)
 	ptr.TasPosition = C.int(s.TasPosition)
 	ptr.TasPositionCost = C.double(s.TasPositionCost)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcSyncingInstrumentMarginRateField struct {
-	InstrumentID             string
+	Reserve1                 string
 	InvestorRange            byte
 	BrokerID                 string
 	InvestorID               string
@@ -4049,6 +4199,7 @@ type CThostFtdcSyncingInstrumentMarginRateField struct {
 	ShortMarginRatioByMoney  float64
 	ShortMarginRatioByVolume float64
 	IsRelative               int
+	InstrumentID             string
 }
 
 func NewCThostFtdcSyncingInstrumentMarginRateField(p *C.CThostFtdcSyncingInstrumentMarginRateField) *CThostFtdcSyncingInstrumentMarginRateField {
@@ -4056,7 +4207,7 @@ func NewCThostFtdcSyncingInstrumentMarginRateField(p *C.CThostFtdcSyncingInstrum
 		return nil
 	}
 	ret := new(CThostFtdcSyncingInstrumentMarginRateField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
@@ -4066,12 +4217,13 @@ func NewCThostFtdcSyncingInstrumentMarginRateField(p *C.CThostFtdcSyncingInstrum
 	ret.ShortMarginRatioByMoney = goFloat64(p.ShortMarginRatioByMoney)
 	ret.ShortMarginRatioByVolume = goFloat64(p.ShortMarginRatioByVolume)
 	ret.IsRelative = int(p.IsRelative)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcSyncingInstrumentMarginRateFieldCValue(s *CThostFtdcSyncingInstrumentMarginRateField) *C.CThostFtdcSyncingInstrumentMarginRateField {
 	ptr := (*C.CThostFtdcSyncingInstrumentMarginRateField)(C.malloc(C.sizeof_CThostFtdcSyncingInstrumentMarginRateField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
@@ -4081,11 +4233,12 @@ func CThostFtdcSyncingInstrumentMarginRateFieldCValue(s *CThostFtdcSyncingInstru
 	ptr.ShortMarginRatioByMoney = C.double(s.ShortMarginRatioByMoney)
 	ptr.ShortMarginRatioByVolume = C.double(s.ShortMarginRatioByVolume)
 	ptr.IsRelative = C.int(s.IsRelative)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcSyncingInstrumentCommissionRateField struct {
-	InstrumentID            string
+	Reserve1                string
 	InvestorRange           byte
 	BrokerID                string
 	InvestorID              string
@@ -4095,6 +4248,7 @@ type CThostFtdcSyncingInstrumentCommissionRateField struct {
 	CloseRatioByVolume      float64
 	CloseTodayRatioByMoney  float64
 	CloseTodayRatioByVolume float64
+	InstrumentID            string
 }
 
 func NewCThostFtdcSyncingInstrumentCommissionRateField(p *C.CThostFtdcSyncingInstrumentCommissionRateField) *CThostFtdcSyncingInstrumentCommissionRateField {
@@ -4102,7 +4256,7 @@ func NewCThostFtdcSyncingInstrumentCommissionRateField(p *C.CThostFtdcSyncingIns
 		return nil
 	}
 	ret := new(CThostFtdcSyncingInstrumentCommissionRateField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
@@ -4112,12 +4266,13 @@ func NewCThostFtdcSyncingInstrumentCommissionRateField(p *C.CThostFtdcSyncingIns
 	ret.CloseRatioByVolume = goFloat64(p.CloseRatioByVolume)
 	ret.CloseTodayRatioByMoney = goFloat64(p.CloseTodayRatioByMoney)
 	ret.CloseTodayRatioByVolume = goFloat64(p.CloseTodayRatioByVolume)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcSyncingInstrumentCommissionRateFieldCValue(s *CThostFtdcSyncingInstrumentCommissionRateField) *C.CThostFtdcSyncingInstrumentCommissionRateField {
 	ptr := (*C.CThostFtdcSyncingInstrumentCommissionRateField)(C.malloc(C.sizeof_CThostFtdcSyncingInstrumentCommissionRateField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
@@ -4127,15 +4282,17 @@ func CThostFtdcSyncingInstrumentCommissionRateFieldCValue(s *CThostFtdcSyncingIn
 	ptr.CloseRatioByVolume = C.double(s.CloseRatioByVolume)
 	ptr.CloseTodayRatioByMoney = C.double(s.CloseTodayRatioByMoney)
 	ptr.CloseTodayRatioByVolume = C.double(s.CloseTodayRatioByVolume)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcSyncingInstrumentTradingRightField struct {
-	InstrumentID  string
+	Reserve1      string
 	InvestorRange byte
 	BrokerID      string
 	InvestorID    string
 	TradingRight  byte
+	InstrumentID  string
 }
 
 func NewCThostFtdcSyncingInstrumentTradingRightField(p *C.CThostFtdcSyncingInstrumentTradingRightField) *CThostFtdcSyncingInstrumentTradingRightField {
@@ -4143,33 +4300,36 @@ func NewCThostFtdcSyncingInstrumentTradingRightField(p *C.CThostFtdcSyncingInstr
 		return nil
 	}
 	ret := new(CThostFtdcSyncingInstrumentTradingRightField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.TradingRight = byte(p.TradingRight)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcSyncingInstrumentTradingRightFieldCValue(s *CThostFtdcSyncingInstrumentTradingRightField) *C.CThostFtdcSyncingInstrumentTradingRightField {
 	ptr := (*C.CThostFtdcSyncingInstrumentTradingRightField)(C.malloc(C.sizeof_CThostFtdcSyncingInstrumentTradingRightField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	ptr.TradingRight = C.char(s.TradingRight)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryOrderField struct {
 	BrokerID        string
 	InvestorID      string
-	InstrumentID    string
+	Reserve1        string
 	ExchangeID      string
 	OrderSysID      string
 	InsertTimeStart string
 	InsertTimeEnd   string
 	InvestUnitID    string
+	InstrumentID    string
 }
 
 func NewCThostFtdcQryOrderField(p *C.CThostFtdcQryOrderField) *CThostFtdcQryOrderField {
@@ -4179,12 +4339,13 @@ func NewCThostFtdcQryOrderField(p *C.CThostFtdcQryOrderField) *CThostFtdcQryOrde
 	ret := new(CThostFtdcQryOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.OrderSysID = c2goStr(&p.OrderSysID[0], 21)
 	ret.InsertTimeStart = c2goStr(&p.InsertTimeStart[0], 9)
 	ret.InsertTimeEnd = c2goStr(&p.InsertTimeEnd[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -4192,24 +4353,26 @@ func CThostFtdcQryOrderFieldCValue(s *CThostFtdcQryOrderField) *C.CThostFtdcQryO
 	ptr := (*C.CThostFtdcQryOrderField)(C.malloc(C.sizeof_CThostFtdcQryOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.OrderSysID, &ptr.OrderSysID[0], 21)
 	go2cStr(s.InsertTimeStart, &ptr.InsertTimeStart[0], 9)
 	go2cStr(s.InsertTimeEnd, &ptr.InsertTimeEnd[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryTradeField struct {
 	BrokerID       string
 	InvestorID     string
-	InstrumentID   string
+	Reserve1       string
 	ExchangeID     string
 	TradeID        string
 	TradeTimeStart string
 	TradeTimeEnd   string
 	InvestUnitID   string
+	InstrumentID   string
 }
 
 func NewCThostFtdcQryTradeField(p *C.CThostFtdcQryTradeField) *CThostFtdcQryTradeField {
@@ -4219,12 +4382,13 @@ func NewCThostFtdcQryTradeField(p *C.CThostFtdcQryTradeField) *CThostFtdcQryTrad
 	ret := new(CThostFtdcQryTradeField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.TradeID = c2goStr(&p.TradeID[0], 21)
 	ret.TradeTimeStart = c2goStr(&p.TradeTimeStart[0], 9)
 	ret.TradeTimeEnd = c2goStr(&p.TradeTimeEnd[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -4232,21 +4396,23 @@ func CThostFtdcQryTradeFieldCValue(s *CThostFtdcQryTradeField) *C.CThostFtdcQryT
 	ptr := (*C.CThostFtdcQryTradeField)(C.malloc(C.sizeof_CThostFtdcQryTradeField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.TradeID, &ptr.TradeID[0], 21)
 	go2cStr(s.TradeTimeStart, &ptr.TradeTimeStart[0], 9)
 	go2cStr(s.TradeTimeEnd, &ptr.TradeTimeEnd[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryInvestorPositionField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	ExchangeID   string
 	InvestUnitID string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryInvestorPositionField(p *C.CThostFtdcQryInvestorPositionField) *CThostFtdcQryInvestorPositionField {
@@ -4256,9 +4422,10 @@ func NewCThostFtdcQryInvestorPositionField(p *C.CThostFtdcQryInvestorPositionFie
 	ret := new(CThostFtdcQryInvestorPositionField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -4266,9 +4433,10 @@ func CThostFtdcQryInvestorPositionFieldCValue(s *CThostFtdcQryInvestorPositionFi
 	ptr := (*C.CThostFtdcQryInvestorPositionField)(C.malloc(C.sizeof_CThostFtdcQryInvestorPositionField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -4381,10 +4549,11 @@ func CThostFtdcQryInvestorGroupFieldCValue(s *CThostFtdcQryInvestorGroupField) *
 type CThostFtdcQryInstrumentMarginRateField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	HedgeFlag    byte
 	ExchangeID   string
 	InvestUnitID string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryInstrumentMarginRateField(p *C.CThostFtdcQryInstrumentMarginRateField) *CThostFtdcQryInstrumentMarginRateField {
@@ -4394,10 +4563,11 @@ func NewCThostFtdcQryInstrumentMarginRateField(p *C.CThostFtdcQryInstrumentMargi
 	ret := new(CThostFtdcQryInstrumentMarginRateField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -4405,19 +4575,21 @@ func CThostFtdcQryInstrumentMarginRateFieldCValue(s *CThostFtdcQryInstrumentMarg
 	ptr := (*C.CThostFtdcQryInstrumentMarginRateField)(C.malloc(C.sizeof_CThostFtdcQryInstrumentMarginRateField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryInstrumentCommissionRateField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	ExchangeID   string
 	InvestUnitID string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryInstrumentCommissionRateField(p *C.CThostFtdcQryInstrumentCommissionRateField) *CThostFtdcQryInstrumentCommissionRateField {
@@ -4427,9 +4599,10 @@ func NewCThostFtdcQryInstrumentCommissionRateField(p *C.CThostFtdcQryInstrumentC
 	ret := new(CThostFtdcQryInstrumentCommissionRateField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -4437,15 +4610,17 @@ func CThostFtdcQryInstrumentCommissionRateFieldCValue(s *CThostFtdcQryInstrument
 	ptr := (*C.CThostFtdcQryInstrumentCommissionRateField)(C.malloc(C.sizeof_CThostFtdcQryInstrumentCommissionRateField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryInstrumentTradingRightField struct {
 	BrokerID     string
 	InvestorID   string
+	Reserve1     string
 	InstrumentID string
 }
 
@@ -4456,7 +4631,8 @@ func NewCThostFtdcQryInstrumentTradingRightField(p *C.CThostFtdcQryInstrumentTra
 	ret := new(CThostFtdcQryInstrumentTradingRightField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -4464,7 +4640,8 @@ func CThostFtdcQryInstrumentTradingRightFieldCValue(s *CThostFtdcQryInstrumentTr
 	ptr := (*C.CThostFtdcQryInstrumentTradingRightField)(C.malloc(C.sizeof_CThostFtdcQryInstrumentTradingRightField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -4606,9 +4783,10 @@ func CThostFtdcQryFrontStatusFieldCValue(s *CThostFtdcQryFrontStatusField) *C.CT
 type CThostFtdcQryExchangeOrderField struct {
 	ParticipantID  string
 	ClientID       string
-	ExchangeInstID string
+	Reserve1       string
 	ExchangeID     string
 	TraderID       string
+	ExchangeInstID string
 }
 
 func NewCThostFtdcQryExchangeOrderField(p *C.CThostFtdcQryExchangeOrderField) *CThostFtdcQryExchangeOrderField {
@@ -4618,9 +4796,10 @@ func NewCThostFtdcQryExchangeOrderField(p *C.CThostFtdcQryExchangeOrderField) *C
 	ret := new(CThostFtdcQryExchangeOrderField)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	return ret
 }
 
@@ -4628,9 +4807,10 @@ func CThostFtdcQryExchangeOrderFieldCValue(s *CThostFtdcQryExchangeOrderField) *
 	ptr := (*C.CThostFtdcQryExchangeOrderField)(C.malloc(C.sizeof_CThostFtdcQryExchangeOrderField))
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	return ptr
 }
 
@@ -4726,9 +4906,10 @@ func CThostFtdcQryExchangeFieldCValue(s *CThostFtdcQryExchangeField) *C.CThostFt
 }
 
 type CThostFtdcQryProductField struct {
-	ProductID    string
+	Reserve1     string
 	ProductClass byte
 	ExchangeID   string
+	ProductID    string
 }
 
 func NewCThostFtdcQryProductField(p *C.CThostFtdcQryProductField) *CThostFtdcQryProductField {
@@ -4736,23 +4917,28 @@ func NewCThostFtdcQryProductField(p *C.CThostFtdcQryProductField) *CThostFtdcQry
 		return nil
 	}
 	ret := new(CThostFtdcQryProductField)
-	ret.ProductID = c2goStr(&p.ProductID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ProductClass = byte(p.ProductClass)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryProductFieldCValue(s *CThostFtdcQryProductField) *C.CThostFtdcQryProductField {
 	ptr := (*C.CThostFtdcQryProductField)(C.malloc(C.sizeof_CThostFtdcQryProductField))
-	go2cStr(s.ProductID, &ptr.ProductID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.ProductClass = C.char(s.ProductClass)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryInstrumentField struct {
-	InstrumentID   string
+	Reserve1       string
 	ExchangeID     string
+	Reserve2       string
+	Reserve3       string
+	InstrumentID   string
 	ExchangeInstID string
 	ProductID      string
 }
@@ -4762,25 +4948,32 @@ func NewCThostFtdcQryInstrumentField(p *C.CThostFtdcQryInstrumentField) *CThostF
 		return nil
 	}
 	ret := new(CThostFtdcQryInstrumentField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
-	ret.ProductID = c2goStr(&p.ProductID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
+	ret.Reserve3 = c2goStr(&p.reserve3[0], 31)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryInstrumentFieldCValue(s *CThostFtdcQryInstrumentField) *C.CThostFtdcQryInstrumentField {
 	ptr := (*C.CThostFtdcQryInstrumentField)(C.malloc(C.sizeof_CThostFtdcQryInstrumentField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
-	go2cStr(s.ProductID, &ptr.ProductID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
+	go2cStr(s.Reserve3, &ptr.reserve3[0], 31)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryDepthMarketDataField struct {
-	InstrumentID string
+	Reserve1     string
 	ExchangeID   string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryDepthMarketDataField(p *C.CThostFtdcQryDepthMarketDataField) *CThostFtdcQryDepthMarketDataField {
@@ -4788,15 +4981,17 @@ func NewCThostFtdcQryDepthMarketDataField(p *C.CThostFtdcQryDepthMarketDataField
 		return nil
 	}
 	ret := new(CThostFtdcQryDepthMarketDataField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryDepthMarketDataFieldCValue(s *CThostFtdcQryDepthMarketDataField) *C.CThostFtdcQryDepthMarketDataField {
 	ptr := (*C.CThostFtdcQryDepthMarketDataField)(C.malloc(C.sizeof_CThostFtdcQryDepthMarketDataField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -4924,9 +5119,10 @@ func CThostFtdcQrySettlementInfoFieldCValue(s *CThostFtdcQrySettlementInfoField)
 
 type CThostFtdcQryExchangeMarginRateField struct {
 	BrokerID     string
-	InstrumentID string
+	Reserve1     string
 	HedgeFlag    byte
 	ExchangeID   string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryExchangeMarginRateField(p *C.CThostFtdcQryExchangeMarginRateField) *CThostFtdcQryExchangeMarginRateField {
@@ -4935,25 +5131,28 @@ func NewCThostFtdcQryExchangeMarginRateField(p *C.CThostFtdcQryExchangeMarginRat
 	}
 	ret := new(CThostFtdcQryExchangeMarginRateField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryExchangeMarginRateFieldCValue(s *CThostFtdcQryExchangeMarginRateField) *C.CThostFtdcQryExchangeMarginRateField {
 	ptr := (*C.CThostFtdcQryExchangeMarginRateField)(C.malloc(C.sizeof_CThostFtdcQryExchangeMarginRateField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryExchangeMarginRateAdjustField struct {
 	BrokerID     string
-	InstrumentID string
+	Reserve1     string
 	HedgeFlag    byte
+	InstrumentID string
 }
 
 func NewCThostFtdcQryExchangeMarginRateAdjustField(p *C.CThostFtdcQryExchangeMarginRateAdjustField) *CThostFtdcQryExchangeMarginRateAdjustField {
@@ -4962,16 +5161,18 @@ func NewCThostFtdcQryExchangeMarginRateAdjustField(p *C.CThostFtdcQryExchangeMar
 	}
 	ret := new(CThostFtdcQryExchangeMarginRateAdjustField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryExchangeMarginRateAdjustFieldCValue(s *CThostFtdcQryExchangeMarginRateAdjustField) *C.CThostFtdcQryExchangeMarginRateAdjustField {
 	ptr := (*C.CThostFtdcQryExchangeMarginRateAdjustField)(C.malloc(C.sizeof_CThostFtdcQryExchangeMarginRateAdjustField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -5025,13 +5226,14 @@ func CThostFtdcQrySyncFundMortgageFieldCValue(s *CThostFtdcQrySyncFundMortgageFi
 type CThostFtdcQryHisOrderField struct {
 	BrokerID        string
 	InvestorID      string
-	InstrumentID    string
+	Reserve1        string
 	ExchangeID      string
 	OrderSysID      string
 	InsertTimeStart string
 	InsertTimeEnd   string
 	TradingDay      string
 	SettlementID    int
+	InstrumentID    string
 }
 
 func NewCThostFtdcQryHisOrderField(p *C.CThostFtdcQryHisOrderField) *CThostFtdcQryHisOrderField {
@@ -5041,13 +5243,14 @@ func NewCThostFtdcQryHisOrderField(p *C.CThostFtdcQryHisOrderField) *CThostFtdcQ
 	ret := new(CThostFtdcQryHisOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.OrderSysID = c2goStr(&p.OrderSysID[0], 21)
 	ret.InsertTimeStart = c2goStr(&p.InsertTimeStart[0], 9)
 	ret.InsertTimeEnd = c2goStr(&p.InsertTimeEnd[0], 9)
 	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
 	ret.SettlementID = int(p.SettlementID)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -5055,24 +5258,26 @@ func CThostFtdcQryHisOrderFieldCValue(s *CThostFtdcQryHisOrderField) *C.CThostFt
 	ptr := (*C.CThostFtdcQryHisOrderField)(C.malloc(C.sizeof_CThostFtdcQryHisOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.OrderSysID, &ptr.OrderSysID[0], 21)
 	go2cStr(s.InsertTimeStart, &ptr.InsertTimeStart[0], 9)
 	go2cStr(s.InsertTimeEnd, &ptr.InsertTimeEnd[0], 9)
 	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
 	ptr.SettlementID = C.int(s.SettlementID)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcOptionInstrMiniMarginField struct {
-	InstrumentID  string
+	Reserve1      string
 	InvestorRange byte
 	BrokerID      string
 	InvestorID    string
 	MinMargin     float64
 	ValueMethod   byte
 	IsRelative    int
+	InstrumentID  string
 }
 
 func NewCThostFtdcOptionInstrMiniMarginField(p *C.CThostFtdcOptionInstrMiniMarginField) *CThostFtdcOptionInstrMiniMarginField {
@@ -5080,30 +5285,32 @@ func NewCThostFtdcOptionInstrMiniMarginField(p *C.CThostFtdcOptionInstrMiniMargi
 		return nil
 	}
 	ret := new(CThostFtdcOptionInstrMiniMarginField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.MinMargin = goFloat64(p.MinMargin)
 	ret.ValueMethod = byte(p.ValueMethod)
 	ret.IsRelative = int(p.IsRelative)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcOptionInstrMiniMarginFieldCValue(s *CThostFtdcOptionInstrMiniMarginField) *C.CThostFtdcOptionInstrMiniMarginField {
 	ptr := (*C.CThostFtdcOptionInstrMiniMarginField)(C.malloc(C.sizeof_CThostFtdcOptionInstrMiniMarginField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	ptr.MinMargin = C.double(s.MinMargin)
 	ptr.ValueMethod = C.char(s.ValueMethod)
 	ptr.IsRelative = C.int(s.IsRelative)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcOptionInstrMarginAdjustField struct {
-	InstrumentID              string
+	Reserve1                  string
 	InvestorRange             byte
 	BrokerID                  string
 	InvestorID                string
@@ -5116,6 +5323,7 @@ type CThostFtdcOptionInstrMarginAdjustField struct {
 	IsRelative                int
 	MShortMarginRatioByMoney  float64
 	MShortMarginRatioByVolume float64
+	InstrumentID              string
 }
 
 func NewCThostFtdcOptionInstrMarginAdjustField(p *C.CThostFtdcOptionInstrMarginAdjustField) *CThostFtdcOptionInstrMarginAdjustField {
@@ -5123,7 +5331,7 @@ func NewCThostFtdcOptionInstrMarginAdjustField(p *C.CThostFtdcOptionInstrMarginA
 		return nil
 	}
 	ret := new(CThostFtdcOptionInstrMarginAdjustField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
@@ -5136,12 +5344,13 @@ func NewCThostFtdcOptionInstrMarginAdjustField(p *C.CThostFtdcOptionInstrMarginA
 	ret.IsRelative = int(p.IsRelative)
 	ret.MShortMarginRatioByMoney = goFloat64(p.MShortMarginRatioByMoney)
 	ret.MShortMarginRatioByVolume = goFloat64(p.MShortMarginRatioByVolume)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcOptionInstrMarginAdjustFieldCValue(s *CThostFtdcOptionInstrMarginAdjustField) *C.CThostFtdcOptionInstrMarginAdjustField {
 	ptr := (*C.CThostFtdcOptionInstrMarginAdjustField)(C.malloc(C.sizeof_CThostFtdcOptionInstrMarginAdjustField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
@@ -5154,11 +5363,12 @@ func CThostFtdcOptionInstrMarginAdjustFieldCValue(s *CThostFtdcOptionInstrMargin
 	ptr.IsRelative = C.int(s.IsRelative)
 	ptr.MShortMarginRatioByMoney = C.double(s.MShortMarginRatioByMoney)
 	ptr.MShortMarginRatioByVolume = C.double(s.MShortMarginRatioByVolume)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcOptionInstrCommRateField struct {
-	InstrumentID            string
+	Reserve1                string
 	InvestorRange           byte
 	BrokerID                string
 	InvestorID              string
@@ -5172,6 +5382,7 @@ type CThostFtdcOptionInstrCommRateField struct {
 	StrikeRatioByVolume     float64
 	ExchangeID              string
 	InvestUnitID            string
+	InstrumentID            string
 }
 
 func NewCThostFtdcOptionInstrCommRateField(p *C.CThostFtdcOptionInstrCommRateField) *CThostFtdcOptionInstrCommRateField {
@@ -5179,7 +5390,7 @@ func NewCThostFtdcOptionInstrCommRateField(p *C.CThostFtdcOptionInstrCommRateFie
 		return nil
 	}
 	ret := new(CThostFtdcOptionInstrCommRateField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
@@ -5193,12 +5404,13 @@ func NewCThostFtdcOptionInstrCommRateField(p *C.CThostFtdcOptionInstrCommRateFie
 	ret.StrikeRatioByVolume = goFloat64(p.StrikeRatioByVolume)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcOptionInstrCommRateFieldCValue(s *CThostFtdcOptionInstrCommRateField) *C.CThostFtdcOptionInstrCommRateField {
 	ptr := (*C.CThostFtdcOptionInstrCommRateField)(C.malloc(C.sizeof_CThostFtdcOptionInstrCommRateField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
@@ -5212,13 +5424,14 @@ func CThostFtdcOptionInstrCommRateFieldCValue(s *CThostFtdcOptionInstrCommRateFi
 	ptr.StrikeRatioByVolume = C.double(s.StrikeRatioByVolume)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcOptionInstrTradeCostField struct {
 	BrokerID        string
 	InvestorID      string
-	InstrumentID    string
+	Reserve1        string
 	HedgeFlag       byte
 	FixedMargin     float64
 	MiniMargin      float64
@@ -5227,6 +5440,7 @@ type CThostFtdcOptionInstrTradeCostField struct {
 	ExchMiniMargin  float64
 	ExchangeID      string
 	InvestUnitID    string
+	InstrumentID    string
 }
 
 func NewCThostFtdcOptionInstrTradeCostField(p *C.CThostFtdcOptionInstrTradeCostField) *CThostFtdcOptionInstrTradeCostField {
@@ -5236,7 +5450,7 @@ func NewCThostFtdcOptionInstrTradeCostField(p *C.CThostFtdcOptionInstrTradeCostF
 	ret := new(CThostFtdcOptionInstrTradeCostField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.FixedMargin = goFloat64(p.FixedMargin)
 	ret.MiniMargin = goFloat64(p.MiniMargin)
@@ -5245,6 +5459,7 @@ func NewCThostFtdcOptionInstrTradeCostField(p *C.CThostFtdcOptionInstrTradeCostF
 	ret.ExchMiniMargin = goFloat64(p.ExchMiniMargin)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -5252,7 +5467,7 @@ func CThostFtdcOptionInstrTradeCostFieldCValue(s *CThostFtdcOptionInstrTradeCost
 	ptr := (*C.CThostFtdcOptionInstrTradeCostField)(C.malloc(C.sizeof_CThostFtdcOptionInstrTradeCostField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	ptr.FixedMargin = C.double(s.FixedMargin)
 	ptr.MiniMargin = C.double(s.MiniMargin)
@@ -5261,18 +5476,20 @@ func CThostFtdcOptionInstrTradeCostFieldCValue(s *CThostFtdcOptionInstrTradeCost
 	ptr.ExchMiniMargin = C.double(s.ExchMiniMargin)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryOptionInstrTradeCostField struct {
 	BrokerID        string
 	InvestorID      string
-	InstrumentID    string
+	Reserve1        string
 	HedgeFlag       byte
 	InputPrice      float64
 	UnderlyingPrice float64
 	ExchangeID      string
 	InvestUnitID    string
+	InstrumentID    string
 }
 
 func NewCThostFtdcQryOptionInstrTradeCostField(p *C.CThostFtdcQryOptionInstrTradeCostField) *CThostFtdcQryOptionInstrTradeCostField {
@@ -5282,12 +5499,13 @@ func NewCThostFtdcQryOptionInstrTradeCostField(p *C.CThostFtdcQryOptionInstrTrad
 	ret := new(CThostFtdcQryOptionInstrTradeCostField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.InputPrice = goFloat64(p.InputPrice)
 	ret.UnderlyingPrice = goFloat64(p.UnderlyingPrice)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -5295,21 +5513,23 @@ func CThostFtdcQryOptionInstrTradeCostFieldCValue(s *CThostFtdcQryOptionInstrTra
 	ptr := (*C.CThostFtdcQryOptionInstrTradeCostField)(C.malloc(C.sizeof_CThostFtdcQryOptionInstrTradeCostField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	ptr.InputPrice = C.double(s.InputPrice)
 	ptr.UnderlyingPrice = C.double(s.UnderlyingPrice)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryOptionInstrCommRateField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	ExchangeID   string
 	InvestUnitID string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryOptionInstrCommRateField(p *C.CThostFtdcQryOptionInstrCommRateField) *CThostFtdcQryOptionInstrCommRateField {
@@ -5319,9 +5539,10 @@ func NewCThostFtdcQryOptionInstrCommRateField(p *C.CThostFtdcQryOptionInstrCommR
 	ret := new(CThostFtdcQryOptionInstrCommRateField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -5329,16 +5550,18 @@ func CThostFtdcQryOptionInstrCommRateFieldCValue(s *CThostFtdcQryOptionInstrComm
 	ptr := (*C.CThostFtdcQryOptionInstrCommRateField)(C.malloc(C.sizeof_CThostFtdcQryOptionInstrCommRateField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcIndexPriceField struct {
 	BrokerID     string
-	InstrumentID string
+	Reserve1     string
 	ClosePrice   float64
+	InstrumentID string
 }
 
 func NewCThostFtdcIndexPriceField(p *C.CThostFtdcIndexPriceField) *CThostFtdcIndexPriceField {
@@ -5347,23 +5570,25 @@ func NewCThostFtdcIndexPriceField(p *C.CThostFtdcIndexPriceField) *CThostFtdcInd
 	}
 	ret := new(CThostFtdcIndexPriceField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ClosePrice = goFloat64(p.ClosePrice)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcIndexPriceFieldCValue(s *CThostFtdcIndexPriceField) *C.CThostFtdcIndexPriceField {
 	ptr := (*C.CThostFtdcIndexPriceField)(C.malloc(C.sizeof_CThostFtdcIndexPriceField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.ClosePrice = C.double(s.ClosePrice)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcInputExecOrderField struct {
 	BrokerID            string
 	InvestorID          string
-	InstrumentID        string
+	Reserve1            string
 	ExecOrderRef        string
 	UserID              string
 	Volume              int
@@ -5380,8 +5605,10 @@ type CThostFtdcInputExecOrderField struct {
 	AccountID           string
 	CurrencyID          string
 	ClientID            string
-	IPAddress           string
+	Reserve2            string
 	MacAddress          string
+	InstrumentID        string
+	IPAddress           string
 }
 
 func NewCThostFtdcInputExecOrderField(p *C.CThostFtdcInputExecOrderField) *CThostFtdcInputExecOrderField {
@@ -5391,7 +5618,7 @@ func NewCThostFtdcInputExecOrderField(p *C.CThostFtdcInputExecOrderField) *CThos
 	ret := new(CThostFtdcInputExecOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExecOrderRef = c2goStr(&p.ExecOrderRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.Volume = int(p.Volume)
@@ -5408,8 +5635,10 @@ func NewCThostFtdcInputExecOrderField(p *C.CThostFtdcInputExecOrderField) *CThos
 	ret.AccountID = c2goStr(&p.AccountID[0], 13)
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -5417,7 +5646,7 @@ func CThostFtdcInputExecOrderFieldCValue(s *CThostFtdcInputExecOrderField) *C.CT
 	ptr := (*C.CThostFtdcInputExecOrderField)(C.malloc(C.sizeof_CThostFtdcInputExecOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExecOrderRef, &ptr.ExecOrderRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.Volume = C.int(s.Volume)
@@ -5434,8 +5663,10 @@ func CThostFtdcInputExecOrderFieldCValue(s *CThostFtdcInputExecOrderField) *C.CT
 	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -5451,10 +5682,12 @@ type CThostFtdcInputExecOrderActionField struct {
 	ExecOrderSysID     string
 	ActionFlag         byte
 	UserID             string
-	InstrumentID       string
+	Reserve1           string
 	InvestUnitID       string
-	IPAddress          string
+	Reserve2           string
 	MacAddress         string
+	InstrumentID       string
+	IPAddress          string
 }
 
 func NewCThostFtdcInputExecOrderActionField(p *C.CThostFtdcInputExecOrderActionField) *CThostFtdcInputExecOrderActionField {
@@ -5473,10 +5706,12 @@ func NewCThostFtdcInputExecOrderActionField(p *C.CThostFtdcInputExecOrderActionF
 	ret.ExecOrderSysID = c2goStr(&p.ExecOrderSysID[0], 21)
 	ret.ActionFlag = byte(p.ActionFlag)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -5493,17 +5728,19 @@ func CThostFtdcInputExecOrderActionFieldCValue(s *CThostFtdcInputExecOrderAction
 	go2cStr(s.ExecOrderSysID, &ptr.ExecOrderSysID[0], 21)
 	ptr.ActionFlag = C.char(s.ActionFlag)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcExecOrderField struct {
 	BrokerID            string
 	InvestorID          string
-	InstrumentID        string
+	Reserve1            string
 	ExecOrderRef        string
 	UserID              string
 	Volume              int
@@ -5519,7 +5756,7 @@ type CThostFtdcExecOrderField struct {
 	ExchangeID          string
 	ParticipantID       string
 	ClientID            string
-	ExchangeInstID      string
+	Reserve2            string
 	TraderID            string
 	InstallID           int
 	OrderSubmitStatus   byte
@@ -5543,8 +5780,11 @@ type CThostFtdcExecOrderField struct {
 	InvestUnitID        string
 	AccountID           string
 	CurrencyID          string
-	IPAddress           string
+	Reserve3            string
 	MacAddress          string
+	InstrumentID        string
+	ExchangeInstID      string
+	IPAddress           string
 }
 
 func NewCThostFtdcExecOrderField(p *C.CThostFtdcExecOrderField) *CThostFtdcExecOrderField {
@@ -5554,7 +5794,7 @@ func NewCThostFtdcExecOrderField(p *C.CThostFtdcExecOrderField) *CThostFtdcExecO
 	ret := new(CThostFtdcExecOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExecOrderRef = c2goStr(&p.ExecOrderRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.Volume = int(p.Volume)
@@ -5570,7 +5810,7 @@ func NewCThostFtdcExecOrderField(p *C.CThostFtdcExecOrderField) *CThostFtdcExecO
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.OrderSubmitStatus = byte(p.OrderSubmitStatus)
@@ -5594,8 +5834,11 @@ func NewCThostFtdcExecOrderField(p *C.CThostFtdcExecOrderField) *CThostFtdcExecO
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
 	ret.AccountID = c2goStr(&p.AccountID[0], 13)
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve3 = c2goStr(&p.reserve3[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -5603,7 +5846,7 @@ func CThostFtdcExecOrderFieldCValue(s *CThostFtdcExecOrderField) *C.CThostFtdcEx
 	ptr := (*C.CThostFtdcExecOrderField)(C.malloc(C.sizeof_CThostFtdcExecOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExecOrderRef, &ptr.ExecOrderRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.Volume = C.int(s.Volume)
@@ -5619,7 +5862,7 @@ func CThostFtdcExecOrderFieldCValue(s *CThostFtdcExecOrderField) *C.CThostFtdcEx
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	ptr.OrderSubmitStatus = C.char(s.OrderSubmitStatus)
@@ -5643,8 +5886,11 @@ func CThostFtdcExecOrderFieldCValue(s *CThostFtdcExecOrderField) *C.CThostFtdcEx
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
 	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve3, &ptr.reserve3[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -5672,11 +5918,13 @@ type CThostFtdcExecOrderActionField struct {
 	UserID             string
 	ActionType         byte
 	StatusMsg          string
-	InstrumentID       string
+	Reserve1           string
 	BranchID           string
 	InvestUnitID       string
-	IPAddress          string
+	Reserve2           string
 	MacAddress         string
+	InstrumentID       string
+	IPAddress          string
 }
 
 func NewCThostFtdcExecOrderActionField(p *C.CThostFtdcExecOrderActionField) *CThostFtdcExecOrderActionField {
@@ -5707,11 +5955,13 @@ func NewCThostFtdcExecOrderActionField(p *C.CThostFtdcExecOrderActionField) *CTh
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.ActionType = byte(p.ActionType)
 	ret.StatusMsg = c2goStr(&p.StatusMsg[0], 81)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -5740,22 +5990,25 @@ func CThostFtdcExecOrderActionFieldCValue(s *CThostFtdcExecOrderActionField) *C.
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.ActionType = C.char(s.ActionType)
 	go2cStr(s.StatusMsg, &ptr.StatusMsg[0], 81)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQryExecOrderField struct {
 	BrokerID        string
 	InvestorID      string
-	InstrumentID    string
+	Reserve1        string
 	ExchangeID      string
 	ExecOrderSysID  string
 	InsertTimeStart string
 	InsertTimeEnd   string
+	InstrumentID    string
 }
 
 func NewCThostFtdcQryExecOrderField(p *C.CThostFtdcQryExecOrderField) *CThostFtdcQryExecOrderField {
@@ -5765,11 +6018,12 @@ func NewCThostFtdcQryExecOrderField(p *C.CThostFtdcQryExecOrderField) *CThostFtd
 	ret := new(CThostFtdcQryExecOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ExecOrderSysID = c2goStr(&p.ExecOrderSysID[0], 21)
 	ret.InsertTimeStart = c2goStr(&p.InsertTimeStart[0], 9)
 	ret.InsertTimeEnd = c2goStr(&p.InsertTimeEnd[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -5777,11 +6031,12 @@ func CThostFtdcQryExecOrderFieldCValue(s *CThostFtdcQryExecOrderField) *C.CThost
 	ptr := (*C.CThostFtdcQryExecOrderField)(C.malloc(C.sizeof_CThostFtdcQryExecOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ExecOrderSysID, &ptr.ExecOrderSysID[0], 21)
 	go2cStr(s.InsertTimeStart, &ptr.InsertTimeStart[0], 9)
 	go2cStr(s.InsertTimeEnd, &ptr.InsertTimeEnd[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -5799,7 +6054,7 @@ type CThostFtdcExchangeExecOrderField struct {
 	ExchangeID          string
 	ParticipantID       string
 	ClientID            string
-	ExchangeInstID      string
+	Reserve1            string
 	TraderID            string
 	InstallID           int
 	OrderSubmitStatus   byte
@@ -5814,8 +6069,10 @@ type CThostFtdcExchangeExecOrderField struct {
 	ClearingPartID      string
 	SequenceNo          int
 	BranchID            string
-	IPAddress           string
+	Reserve2            string
 	MacAddress          string
+	ExchangeInstID      string
+	IPAddress           string
 }
 
 func NewCThostFtdcExchangeExecOrderField(p *C.CThostFtdcExchangeExecOrderField) *CThostFtdcExchangeExecOrderField {
@@ -5836,7 +6093,7 @@ func NewCThostFtdcExchangeExecOrderField(p *C.CThostFtdcExchangeExecOrderField) 
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.OrderSubmitStatus = byte(p.OrderSubmitStatus)
@@ -5851,8 +6108,10 @@ func NewCThostFtdcExchangeExecOrderField(p *C.CThostFtdcExchangeExecOrderField) 
 	ret.ClearingPartID = c2goStr(&p.ClearingPartID[0], 11)
 	ret.SequenceNo = int(p.SequenceNo)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -5871,7 +6130,7 @@ func CThostFtdcExchangeExecOrderFieldCValue(s *CThostFtdcExchangeExecOrderField)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	ptr.OrderSubmitStatus = C.char(s.OrderSubmitStatus)
@@ -5886,17 +6145,20 @@ func CThostFtdcExchangeExecOrderFieldCValue(s *CThostFtdcExchangeExecOrderField)
 	go2cStr(s.ClearingPartID, &ptr.ClearingPartID[0], 11)
 	ptr.SequenceNo = C.int(s.SequenceNo)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQryExchangeExecOrderField struct {
 	ParticipantID  string
 	ClientID       string
-	ExchangeInstID string
+	Reserve1       string
 	ExchangeID     string
 	TraderID       string
+	ExchangeInstID string
 }
 
 func NewCThostFtdcQryExchangeExecOrderField(p *C.CThostFtdcQryExchangeExecOrderField) *CThostFtdcQryExchangeExecOrderField {
@@ -5906,9 +6168,10 @@ func NewCThostFtdcQryExchangeExecOrderField(p *C.CThostFtdcQryExchangeExecOrderF
 	ret := new(CThostFtdcQryExchangeExecOrderField)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	return ret
 }
 
@@ -5916,9 +6179,10 @@ func CThostFtdcQryExchangeExecOrderFieldCValue(s *CThostFtdcQryExchangeExecOrder
 	ptr := (*C.CThostFtdcQryExchangeExecOrderField)(C.malloc(C.sizeof_CThostFtdcQryExchangeExecOrderField))
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	return ptr
 }
 
@@ -5964,10 +6228,12 @@ type CThostFtdcExchangeExecOrderActionField struct {
 	UserID            string
 	ActionType        byte
 	BranchID          string
-	IPAddress         string
+	Reserve1          string
 	MacAddress        string
-	ExchangeInstID    string
+	Reserve2          string
 	Volume            int
+	IPAddress         string
+	ExchangeInstID    string
 }
 
 func NewCThostFtdcExchangeExecOrderActionField(p *C.CThostFtdcExchangeExecOrderActionField) *CThostFtdcExchangeExecOrderActionField {
@@ -5991,10 +6257,12 @@ func NewCThostFtdcExchangeExecOrderActionField(p *C.CThostFtdcExchangeExecOrderA
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.ActionType = byte(p.ActionType)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.Volume = int(p.Volume)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	return ret
 }
 
@@ -6016,10 +6284,12 @@ func CThostFtdcExchangeExecOrderActionFieldCValue(s *CThostFtdcExchangeExecOrder
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.ActionType = C.char(s.ActionType)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	ptr.Volume = C.int(s.Volume)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	return ptr
 }
 
@@ -6054,7 +6324,7 @@ func CThostFtdcQryExchangeExecOrderActionFieldCValue(s *CThostFtdcQryExchangeExe
 type CThostFtdcErrExecOrderField struct {
 	BrokerID            string
 	InvestorID          string
-	InstrumentID        string
+	Reserve1            string
 	ExecOrderRef        string
 	UserID              string
 	Volume              int
@@ -6071,10 +6341,12 @@ type CThostFtdcErrExecOrderField struct {
 	AccountID           string
 	CurrencyID          string
 	ClientID            string
-	IPAddress           string
+	Reserve2            string
 	MacAddress          string
 	ErrorID             int
 	ErrorMsg            string
+	InstrumentID        string
+	IPAddress           string
 }
 
 func NewCThostFtdcErrExecOrderField(p *C.CThostFtdcErrExecOrderField) *CThostFtdcErrExecOrderField {
@@ -6084,7 +6356,7 @@ func NewCThostFtdcErrExecOrderField(p *C.CThostFtdcErrExecOrderField) *CThostFtd
 	ret := new(CThostFtdcErrExecOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExecOrderRef = c2goStr(&p.ExecOrderRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.Volume = int(p.Volume)
@@ -6101,10 +6373,12 @@ func NewCThostFtdcErrExecOrderField(p *C.CThostFtdcErrExecOrderField) *CThostFtd
 	ret.AccountID = c2goStr(&p.AccountID[0], 13)
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.ErrorID = int(p.ErrorID)
 	ret.ErrorMsg = c2goStr(&p.ErrorMsg[0], 81)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -6112,7 +6386,7 @@ func CThostFtdcErrExecOrderFieldCValue(s *CThostFtdcErrExecOrderField) *C.CThost
 	ptr := (*C.CThostFtdcErrExecOrderField)(C.malloc(C.sizeof_CThostFtdcErrExecOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExecOrderRef, &ptr.ExecOrderRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.Volume = C.int(s.Volume)
@@ -6129,10 +6403,12 @@ func CThostFtdcErrExecOrderFieldCValue(s *CThostFtdcErrExecOrderField) *C.CThost
 	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	ptr.ErrorID = C.int(s.ErrorID)
 	go2cStr(s.ErrorMsg, &ptr.ErrorMsg[0], 81)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -6170,12 +6446,14 @@ type CThostFtdcErrExecOrderActionField struct {
 	ExecOrderSysID     string
 	ActionFlag         byte
 	UserID             string
-	InstrumentID       string
+	Reserve1           string
 	InvestUnitID       string
-	IPAddress          string
+	Reserve2           string
 	MacAddress         string
 	ErrorID            int
 	ErrorMsg           string
+	InstrumentID       string
+	IPAddress          string
 }
 
 func NewCThostFtdcErrExecOrderActionField(p *C.CThostFtdcErrExecOrderActionField) *CThostFtdcErrExecOrderActionField {
@@ -6194,12 +6472,14 @@ func NewCThostFtdcErrExecOrderActionField(p *C.CThostFtdcErrExecOrderActionField
 	ret.ExecOrderSysID = c2goStr(&p.ExecOrderSysID[0], 21)
 	ret.ActionFlag = byte(p.ActionFlag)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.ErrorID = int(p.ErrorID)
 	ret.ErrorMsg = c2goStr(&p.ErrorMsg[0], 81)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -6216,12 +6496,14 @@ func CThostFtdcErrExecOrderActionFieldCValue(s *CThostFtdcErrExecOrderActionFiel
 	go2cStr(s.ExecOrderSysID, &ptr.ExecOrderSysID[0], 21)
 	ptr.ActionFlag = C.char(s.ActionFlag)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	ptr.ErrorID = C.int(s.ErrorID)
 	go2cStr(s.ErrorMsg, &ptr.ErrorMsg[0], 81)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -6248,12 +6530,13 @@ func CThostFtdcQryErrExecOrderActionFieldCValue(s *CThostFtdcQryErrExecOrderActi
 }
 
 type CThostFtdcOptionInstrTradingRightField struct {
-	InstrumentID  string
+	Reserve1      string
 	InvestorRange byte
 	BrokerID      string
 	InvestorID    string
 	Direction     byte
 	TradingRight  byte
+	InstrumentID  string
 }
 
 func NewCThostFtdcOptionInstrTradingRightField(p *C.CThostFtdcOptionInstrTradingRightField) *CThostFtdcOptionInstrTradingRightField {
@@ -6261,31 +6544,34 @@ func NewCThostFtdcOptionInstrTradingRightField(p *C.CThostFtdcOptionInstrTrading
 		return nil
 	}
 	ret := new(CThostFtdcOptionInstrTradingRightField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.Direction = byte(p.Direction)
 	ret.TradingRight = byte(p.TradingRight)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcOptionInstrTradingRightFieldCValue(s *CThostFtdcOptionInstrTradingRightField) *C.CThostFtdcOptionInstrTradingRightField {
 	ptr := (*C.CThostFtdcOptionInstrTradingRightField)(C.malloc(C.sizeof_CThostFtdcOptionInstrTradingRightField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	ptr.Direction = C.char(s.Direction)
 	ptr.TradingRight = C.char(s.TradingRight)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryOptionInstrTradingRightField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	Direction    byte
+	InstrumentID string
 }
 
 func NewCThostFtdcQryOptionInstrTradingRightField(p *C.CThostFtdcQryOptionInstrTradingRightField) *CThostFtdcQryOptionInstrTradingRightField {
@@ -6295,8 +6581,9 @@ func NewCThostFtdcQryOptionInstrTradingRightField(p *C.CThostFtdcQryOptionInstrT
 	ret := new(CThostFtdcQryOptionInstrTradingRightField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.Direction = byte(p.Direction)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -6304,21 +6591,24 @@ func CThostFtdcQryOptionInstrTradingRightFieldCValue(s *CThostFtdcQryOptionInstr
 	ptr := (*C.CThostFtdcQryOptionInstrTradingRightField)(C.malloc(C.sizeof_CThostFtdcQryOptionInstrTradingRightField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.Direction = C.char(s.Direction)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcInputForQuoteField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	ForQuoteRef  string
 	UserID       string
 	ExchangeID   string
 	InvestUnitID string
-	IPAddress    string
+	Reserve2     string
 	MacAddress   string
+	InstrumentID string
+	IPAddress    string
 }
 
 func NewCThostFtdcInputForQuoteField(p *C.CThostFtdcInputForQuoteField) *CThostFtdcInputForQuoteField {
@@ -6328,13 +6618,15 @@ func NewCThostFtdcInputForQuoteField(p *C.CThostFtdcInputForQuoteField) *CThostF
 	ret := new(CThostFtdcInputForQuoteField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ForQuoteRef = c2goStr(&p.ForQuoteRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -6342,27 +6634,29 @@ func CThostFtdcInputForQuoteFieldCValue(s *CThostFtdcInputForQuoteField) *C.CTho
 	ptr := (*C.CThostFtdcInputForQuoteField)(C.malloc(C.sizeof_CThostFtdcInputForQuoteField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ForQuoteRef, &ptr.ForQuoteRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcForQuoteField struct {
 	BrokerID         string
 	InvestorID       string
-	InstrumentID     string
+	Reserve1         string
 	ForQuoteRef      string
 	UserID           string
 	ForQuoteLocalID  string
 	ExchangeID       string
 	ParticipantID    string
 	ClientID         string
-	ExchangeInstID   string
+	Reserve2         string
 	TraderID         string
 	InstallID        int
 	InsertDate       string
@@ -6374,8 +6668,11 @@ type CThostFtdcForQuoteField struct {
 	ActiveUserID     string
 	BrokerForQutoSeq int
 	InvestUnitID     string
-	IPAddress        string
+	Reserve3         string
 	MacAddress       string
+	InstrumentID     string
+	ExchangeInstID   string
+	IPAddress        string
 }
 
 func NewCThostFtdcForQuoteField(p *C.CThostFtdcForQuoteField) *CThostFtdcForQuoteField {
@@ -6385,14 +6682,14 @@ func NewCThostFtdcForQuoteField(p *C.CThostFtdcForQuoteField) *CThostFtdcForQuot
 	ret := new(CThostFtdcForQuoteField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ForQuoteRef = c2goStr(&p.ForQuoteRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.ForQuoteLocalID = c2goStr(&p.ForQuoteLocalID[0], 13)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.InsertDate = c2goStr(&p.InsertDate[0], 9)
@@ -6404,8 +6701,11 @@ func NewCThostFtdcForQuoteField(p *C.CThostFtdcForQuoteField) *CThostFtdcForQuot
 	ret.ActiveUserID = c2goStr(&p.ActiveUserID[0], 16)
 	ret.BrokerForQutoSeq = int(p.BrokerForQutoSeq)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve3 = c2goStr(&p.reserve3[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -6413,14 +6713,14 @@ func CThostFtdcForQuoteFieldCValue(s *CThostFtdcForQuoteField) *C.CThostFtdcForQ
 	ptr := (*C.CThostFtdcForQuoteField)(C.malloc(C.sizeof_CThostFtdcForQuoteField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ForQuoteRef, &ptr.ForQuoteRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.ForQuoteLocalID, &ptr.ForQuoteLocalID[0], 13)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	go2cStr(s.InsertDate, &ptr.InsertDate[0], 9)
@@ -6432,19 +6732,23 @@ func CThostFtdcForQuoteFieldCValue(s *CThostFtdcForQuoteField) *C.CThostFtdcForQ
 	go2cStr(s.ActiveUserID, &ptr.ActiveUserID[0], 16)
 	ptr.BrokerForQutoSeq = C.int(s.BrokerForQutoSeq)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve3, &ptr.reserve3[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQryForQuoteField struct {
 	BrokerID        string
 	InvestorID      string
-	InstrumentID    string
+	Reserve1        string
 	ExchangeID      string
 	InsertTimeStart string
 	InsertTimeEnd   string
 	InvestUnitID    string
+	InstrumentID    string
 }
 
 func NewCThostFtdcQryForQuoteField(p *C.CThostFtdcQryForQuoteField) *CThostFtdcQryForQuoteField {
@@ -6454,11 +6758,12 @@ func NewCThostFtdcQryForQuoteField(p *C.CThostFtdcQryForQuoteField) *CThostFtdcQ
 	ret := new(CThostFtdcQryForQuoteField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InsertTimeStart = c2goStr(&p.InsertTimeStart[0], 9)
 	ret.InsertTimeEnd = c2goStr(&p.InsertTimeEnd[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -6466,11 +6771,12 @@ func CThostFtdcQryForQuoteFieldCValue(s *CThostFtdcQryForQuoteField) *C.CThostFt
 	ptr := (*C.CThostFtdcQryForQuoteField)(C.malloc(C.sizeof_CThostFtdcQryForQuoteField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InsertTimeStart, &ptr.InsertTimeStart[0], 9)
 	go2cStr(s.InsertTimeEnd, &ptr.InsertTimeEnd[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -6479,14 +6785,16 @@ type CThostFtdcExchangeForQuoteField struct {
 	ExchangeID      string
 	ParticipantID   string
 	ClientID        string
-	ExchangeInstID  string
+	Reserve1        string
 	TraderID        string
 	InstallID       int
 	InsertDate      string
 	InsertTime      string
 	ForQuoteStatus  byte
-	IPAddress       string
+	Reserve2        string
 	MacAddress      string
+	ExchangeInstID  string
+	IPAddress       string
 }
 
 func NewCThostFtdcExchangeForQuoteField(p *C.CThostFtdcExchangeForQuoteField) *CThostFtdcExchangeForQuoteField {
@@ -6498,14 +6806,16 @@ func NewCThostFtdcExchangeForQuoteField(p *C.CThostFtdcExchangeForQuoteField) *C
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.InsertDate = c2goStr(&p.InsertDate[0], 9)
 	ret.InsertTime = c2goStr(&p.InsertTime[0], 9)
 	ret.ForQuoteStatus = byte(p.ForQuoteStatus)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -6515,23 +6825,26 @@ func CThostFtdcExchangeForQuoteFieldCValue(s *CThostFtdcExchangeForQuoteField) *
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	go2cStr(s.InsertDate, &ptr.InsertDate[0], 9)
 	go2cStr(s.InsertTime, &ptr.InsertTime[0], 9)
 	ptr.ForQuoteStatus = C.char(s.ForQuoteStatus)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQryExchangeForQuoteField struct {
 	ParticipantID  string
 	ClientID       string
-	ExchangeInstID string
+	Reserve1       string
 	ExchangeID     string
 	TraderID       string
+	ExchangeInstID string
 }
 
 func NewCThostFtdcQryExchangeForQuoteField(p *C.CThostFtdcQryExchangeForQuoteField) *CThostFtdcQryExchangeForQuoteField {
@@ -6541,9 +6854,10 @@ func NewCThostFtdcQryExchangeForQuoteField(p *C.CThostFtdcQryExchangeForQuoteFie
 	ret := new(CThostFtdcQryExchangeForQuoteField)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	return ret
 }
 
@@ -6551,16 +6865,17 @@ func CThostFtdcQryExchangeForQuoteFieldCValue(s *CThostFtdcQryExchangeForQuoteFi
 	ptr := (*C.CThostFtdcQryExchangeForQuoteField)(C.malloc(C.sizeof_CThostFtdcQryExchangeForQuoteField))
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	return ptr
 }
 
 type CThostFtdcInputQuoteField struct {
 	BrokerID      string
 	InvestorID    string
-	InstrumentID  string
+	Reserve1      string
 	QuoteRef      string
 	UserID        string
 	AskPrice      float64
@@ -6579,8 +6894,11 @@ type CThostFtdcInputQuoteField struct {
 	ExchangeID    string
 	InvestUnitID  string
 	ClientID      string
-	IPAddress     string
+	Reserve2      string
 	MacAddress    string
+	InstrumentID  string
+	IPAddress     string
+	ReplaceSysID  string
 }
 
 func NewCThostFtdcInputQuoteField(p *C.CThostFtdcInputQuoteField) *CThostFtdcInputQuoteField {
@@ -6590,7 +6908,7 @@ func NewCThostFtdcInputQuoteField(p *C.CThostFtdcInputQuoteField) *CThostFtdcInp
 	ret := new(CThostFtdcInputQuoteField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.QuoteRef = c2goStr(&p.QuoteRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.AskPrice = goFloat64(p.AskPrice)
@@ -6609,8 +6927,11 @@ func NewCThostFtdcInputQuoteField(p *C.CThostFtdcInputQuoteField) *CThostFtdcInp
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.ReplaceSysID = c2goStr(&p.ReplaceSysID[0], 21)
 	return ret
 }
 
@@ -6618,7 +6939,7 @@ func CThostFtdcInputQuoteFieldCValue(s *CThostFtdcInputQuoteField) *C.CThostFtdc
 	ptr := (*C.CThostFtdcInputQuoteField)(C.malloc(C.sizeof_CThostFtdcInputQuoteField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.QuoteRef, &ptr.QuoteRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.AskPrice = C.double(s.AskPrice)
@@ -6637,8 +6958,11 @@ func CThostFtdcInputQuoteFieldCValue(s *CThostFtdcInputQuoteField) *C.CThostFtdc
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.ReplaceSysID, &ptr.ReplaceSysID[0], 21)
 	return ptr
 }
 
@@ -6654,11 +6978,13 @@ type CThostFtdcInputQuoteActionField struct {
 	QuoteSysID     string
 	ActionFlag     byte
 	UserID         string
-	InstrumentID   string
+	Reserve1       string
 	InvestUnitID   string
 	ClientID       string
-	IPAddress      string
+	Reserve2       string
 	MacAddress     string
+	InstrumentID   string
+	IPAddress      string
 }
 
 func NewCThostFtdcInputQuoteActionField(p *C.CThostFtdcInputQuoteActionField) *CThostFtdcInputQuoteActionField {
@@ -6677,11 +7003,13 @@ func NewCThostFtdcInputQuoteActionField(p *C.CThostFtdcInputQuoteActionField) *C
 	ret.QuoteSysID = c2goStr(&p.QuoteSysID[0], 21)
 	ret.ActionFlag = byte(p.ActionFlag)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -6698,18 +7026,20 @@ func CThostFtdcInputQuoteActionFieldCValue(s *CThostFtdcInputQuoteActionField) *
 	go2cStr(s.QuoteSysID, &ptr.QuoteSysID[0], 21)
 	ptr.ActionFlag = C.char(s.ActionFlag)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQuoteField struct {
 	BrokerID          string
 	InvestorID        string
-	InstrumentID      string
+	Reserve1          string
 	QuoteRef          string
 	UserID            string
 	AskPrice          float64
@@ -6726,7 +7056,7 @@ type CThostFtdcQuoteField struct {
 	ExchangeID        string
 	ParticipantID     string
 	ClientID          string
-	ExchangeInstID    string
+	Reserve2          string
 	TraderID          string
 	InstallID         int
 	NotifySequence    int
@@ -6755,8 +7085,12 @@ type CThostFtdcQuoteField struct {
 	InvestUnitID      string
 	AccountID         string
 	CurrencyID        string
-	IPAddress         string
+	Reserve3          string
 	MacAddress        string
+	InstrumentID      string
+	ExchangeInstID    string
+	IPAddress         string
+	ReplaceSysID      string
 }
 
 func NewCThostFtdcQuoteField(p *C.CThostFtdcQuoteField) *CThostFtdcQuoteField {
@@ -6766,7 +7100,7 @@ func NewCThostFtdcQuoteField(p *C.CThostFtdcQuoteField) *CThostFtdcQuoteField {
 	ret := new(CThostFtdcQuoteField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.QuoteRef = c2goStr(&p.QuoteRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.AskPrice = goFloat64(p.AskPrice)
@@ -6783,7 +7117,7 @@ func NewCThostFtdcQuoteField(p *C.CThostFtdcQuoteField) *CThostFtdcQuoteField {
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.NotifySequence = int(p.NotifySequence)
@@ -6812,8 +7146,12 @@ func NewCThostFtdcQuoteField(p *C.CThostFtdcQuoteField) *CThostFtdcQuoteField {
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
 	ret.AccountID = c2goStr(&p.AccountID[0], 13)
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve3 = c2goStr(&p.reserve3[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.ReplaceSysID = c2goStr(&p.ReplaceSysID[0], 21)
 	return ret
 }
 
@@ -6821,7 +7159,7 @@ func CThostFtdcQuoteFieldCValue(s *CThostFtdcQuoteField) *C.CThostFtdcQuoteField
 	ptr := (*C.CThostFtdcQuoteField)(C.malloc(C.sizeof_CThostFtdcQuoteField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.QuoteRef, &ptr.QuoteRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.AskPrice = C.double(s.AskPrice)
@@ -6838,7 +7176,7 @@ func CThostFtdcQuoteFieldCValue(s *CThostFtdcQuoteField) *C.CThostFtdcQuoteField
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	ptr.NotifySequence = C.int(s.NotifySequence)
@@ -6867,8 +7205,12 @@ func CThostFtdcQuoteFieldCValue(s *CThostFtdcQuoteField) *C.CThostFtdcQuoteField
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
 	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve3, &ptr.reserve3[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.ReplaceSysID, &ptr.ReplaceSysID[0], 21)
 	return ptr
 }
 
@@ -6895,11 +7237,13 @@ type CThostFtdcQuoteActionField struct {
 	OrderActionStatus byte
 	UserID            string
 	StatusMsg         string
-	InstrumentID      string
+	Reserve1          string
 	BranchID          string
 	InvestUnitID      string
-	IPAddress         string
+	Reserve2          string
 	MacAddress        string
+	InstrumentID      string
+	IPAddress         string
 }
 
 func NewCThostFtdcQuoteActionField(p *C.CThostFtdcQuoteActionField) *CThostFtdcQuoteActionField {
@@ -6929,11 +7273,13 @@ func NewCThostFtdcQuoteActionField(p *C.CThostFtdcQuoteActionField) *CThostFtdcQ
 	ret.OrderActionStatus = byte(p.OrderActionStatus)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.StatusMsg = c2goStr(&p.StatusMsg[0], 81)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -6961,23 +7307,26 @@ func CThostFtdcQuoteActionFieldCValue(s *CThostFtdcQuoteActionField) *C.CThostFt
 	ptr.OrderActionStatus = C.char(s.OrderActionStatus)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.StatusMsg, &ptr.StatusMsg[0], 81)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQryQuoteField struct {
 	BrokerID        string
 	InvestorID      string
-	InstrumentID    string
+	Reserve1        string
 	ExchangeID      string
 	QuoteSysID      string
 	InsertTimeStart string
 	InsertTimeEnd   string
 	InvestUnitID    string
+	InstrumentID    string
 }
 
 func NewCThostFtdcQryQuoteField(p *C.CThostFtdcQryQuoteField) *CThostFtdcQryQuoteField {
@@ -6987,12 +7336,13 @@ func NewCThostFtdcQryQuoteField(p *C.CThostFtdcQryQuoteField) *CThostFtdcQryQuot
 	ret := new(CThostFtdcQryQuoteField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.QuoteSysID = c2goStr(&p.QuoteSysID[0], 21)
 	ret.InsertTimeStart = c2goStr(&p.InsertTimeStart[0], 9)
 	ret.InsertTimeEnd = c2goStr(&p.InsertTimeEnd[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -7000,12 +7350,13 @@ func CThostFtdcQryQuoteFieldCValue(s *CThostFtdcQryQuoteField) *C.CThostFtdcQryQ
 	ptr := (*C.CThostFtdcQryQuoteField)(C.malloc(C.sizeof_CThostFtdcQryQuoteField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.QuoteSysID, &ptr.QuoteSysID[0], 21)
 	go2cStr(s.InsertTimeStart, &ptr.InsertTimeStart[0], 9)
 	go2cStr(s.InsertTimeEnd, &ptr.InsertTimeEnd[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -7024,7 +7375,7 @@ type CThostFtdcExchangeQuoteField struct {
 	ExchangeID        string
 	ParticipantID     string
 	ClientID          string
-	ExchangeInstID    string
+	Reserve1          string
 	TraderID          string
 	InstallID         int
 	NotifySequence    int
@@ -7042,8 +7393,10 @@ type CThostFtdcExchangeQuoteField struct {
 	BidOrderSysID     string
 	ForQuoteSysID     string
 	BranchID          string
-	IPAddress         string
+	Reserve2          string
 	MacAddress        string
+	ExchangeInstID    string
+	IPAddress         string
 }
 
 func NewCThostFtdcExchangeQuoteField(p *C.CThostFtdcExchangeQuoteField) *CThostFtdcExchangeQuoteField {
@@ -7065,7 +7418,7 @@ func NewCThostFtdcExchangeQuoteField(p *C.CThostFtdcExchangeQuoteField) *CThostF
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.NotifySequence = int(p.NotifySequence)
@@ -7083,8 +7436,10 @@ func NewCThostFtdcExchangeQuoteField(p *C.CThostFtdcExchangeQuoteField) *CThostF
 	ret.BidOrderSysID = c2goStr(&p.BidOrderSysID[0], 21)
 	ret.ForQuoteSysID = c2goStr(&p.ForQuoteSysID[0], 21)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -7104,7 +7459,7 @@ func CThostFtdcExchangeQuoteFieldCValue(s *CThostFtdcExchangeQuoteField) *C.CTho
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	ptr.NotifySequence = C.int(s.NotifySequence)
@@ -7122,17 +7477,20 @@ func CThostFtdcExchangeQuoteFieldCValue(s *CThostFtdcExchangeQuoteField) *C.CTho
 	go2cStr(s.BidOrderSysID, &ptr.BidOrderSysID[0], 21)
 	go2cStr(s.ForQuoteSysID, &ptr.ForQuoteSysID[0], 21)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQryExchangeQuoteField struct {
 	ParticipantID  string
 	ClientID       string
-	ExchangeInstID string
+	Reserve1       string
 	ExchangeID     string
 	TraderID       string
+	ExchangeInstID string
 }
 
 func NewCThostFtdcQryExchangeQuoteField(p *C.CThostFtdcQryExchangeQuoteField) *CThostFtdcQryExchangeQuoteField {
@@ -7142,9 +7500,10 @@ func NewCThostFtdcQryExchangeQuoteField(p *C.CThostFtdcQryExchangeQuoteField) *C
 	ret := new(CThostFtdcQryExchangeQuoteField)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	return ret
 }
 
@@ -7152,9 +7511,10 @@ func CThostFtdcQryExchangeQuoteFieldCValue(s *CThostFtdcQryExchangeQuoteField) *
 	ptr := (*C.CThostFtdcQryExchangeQuoteField)(C.malloc(C.sizeof_CThostFtdcQryExchangeQuoteField))
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	return ptr
 }
 
@@ -7198,8 +7558,9 @@ type CThostFtdcExchangeQuoteActionField struct {
 	BusinessUnit      string
 	OrderActionStatus byte
 	UserID            string
-	IPAddress         string
+	Reserve1          string
 	MacAddress        string
+	IPAddress         string
 }
 
 func NewCThostFtdcExchangeQuoteActionField(p *C.CThostFtdcExchangeQuoteActionField) *CThostFtdcExchangeQuoteActionField {
@@ -7221,8 +7582,9 @@ func NewCThostFtdcExchangeQuoteActionField(p *C.CThostFtdcExchangeQuoteActionFie
 	ret.BusinessUnit = c2goStr(&p.BusinessUnit[0], 21)
 	ret.OrderActionStatus = byte(p.OrderActionStatus)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -7242,8 +7604,9 @@ func CThostFtdcExchangeQuoteActionFieldCValue(s *CThostFtdcExchangeQuoteActionFi
 	go2cStr(s.BusinessUnit, &ptr.BusinessUnit[0], 21)
 	ptr.OrderActionStatus = C.char(s.OrderActionStatus)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -7276,11 +7639,12 @@ func CThostFtdcQryExchangeQuoteActionFieldCValue(s *CThostFtdcQryExchangeQuoteAc
 }
 
 type CThostFtdcOptionInstrDeltaField struct {
-	InstrumentID  string
+	Reserve1      string
 	InvestorRange byte
 	BrokerID      string
 	InvestorID    string
 	Delta         float64
+	InstrumentID  string
 }
 
 func NewCThostFtdcOptionInstrDeltaField(p *C.CThostFtdcOptionInstrDeltaField) *CThostFtdcOptionInstrDeltaField {
@@ -7288,31 +7652,34 @@ func NewCThostFtdcOptionInstrDeltaField(p *C.CThostFtdcOptionInstrDeltaField) *C
 		return nil
 	}
 	ret := new(CThostFtdcOptionInstrDeltaField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.Delta = goFloat64(p.Delta)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcOptionInstrDeltaFieldCValue(s *CThostFtdcOptionInstrDeltaField) *C.CThostFtdcOptionInstrDeltaField {
 	ptr := (*C.CThostFtdcOptionInstrDeltaField)(C.malloc(C.sizeof_CThostFtdcOptionInstrDeltaField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	ptr.Delta = C.double(s.Delta)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcForQuoteRspField struct {
 	TradingDay    string
-	InstrumentID  string
+	Reserve1      string
 	ForQuoteSysID string
 	ForQuoteTime  string
 	ActionDay     string
 	ExchangeID    string
+	InstrumentID  string
 }
 
 func NewCThostFtdcForQuoteRspField(p *C.CThostFtdcForQuoteRspField) *CThostFtdcForQuoteRspField {
@@ -7321,32 +7688,35 @@ func NewCThostFtdcForQuoteRspField(p *C.CThostFtdcForQuoteRspField) *CThostFtdcF
 	}
 	ret := new(CThostFtdcForQuoteRspField)
 	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ForQuoteSysID = c2goStr(&p.ForQuoteSysID[0], 21)
 	ret.ForQuoteTime = c2goStr(&p.ForQuoteTime[0], 9)
 	ret.ActionDay = c2goStr(&p.ActionDay[0], 9)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcForQuoteRspFieldCValue(s *CThostFtdcForQuoteRspField) *C.CThostFtdcForQuoteRspField {
 	ptr := (*C.CThostFtdcForQuoteRspField)(C.malloc(C.sizeof_CThostFtdcForQuoteRspField))
 	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ForQuoteSysID, &ptr.ForQuoteSysID[0], 21)
 	go2cStr(s.ForQuoteTime, &ptr.ForQuoteTime[0], 9)
 	go2cStr(s.ActionDay, &ptr.ActionDay[0], 9)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcStrikeOffsetField struct {
-	InstrumentID  string
+	Reserve1      string
 	InvestorRange byte
 	BrokerID      string
 	InvestorID    string
 	Offset        float64
 	OffsetType    byte
+	InstrumentID  string
 }
 
 func NewCThostFtdcStrikeOffsetField(p *C.CThostFtdcStrikeOffsetField) *CThostFtdcStrikeOffsetField {
@@ -7354,29 +7724,32 @@ func NewCThostFtdcStrikeOffsetField(p *C.CThostFtdcStrikeOffsetField) *CThostFtd
 		return nil
 	}
 	ret := new(CThostFtdcStrikeOffsetField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.Offset = goFloat64(p.Offset)
 	ret.OffsetType = byte(p.OffsetType)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcStrikeOffsetFieldCValue(s *CThostFtdcStrikeOffsetField) *C.CThostFtdcStrikeOffsetField {
 	ptr := (*C.CThostFtdcStrikeOffsetField)(C.malloc(C.sizeof_CThostFtdcStrikeOffsetField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	ptr.Offset = C.double(s.Offset)
 	ptr.OffsetType = C.char(s.OffsetType)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryStrikeOffsetField struct {
 	BrokerID     string
 	InvestorID   string
+	Reserve1     string
 	InstrumentID string
 }
 
@@ -7387,7 +7760,8 @@ func NewCThostFtdcQryStrikeOffsetField(p *C.CThostFtdcQryStrikeOffsetField) *CTh
 	ret := new(CThostFtdcQryStrikeOffsetField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -7395,7 +7769,8 @@ func CThostFtdcQryStrikeOffsetFieldCValue(s *CThostFtdcQryStrikeOffsetField) *C.
 	ptr := (*C.CThostFtdcQryStrikeOffsetField)(C.malloc(C.sizeof_CThostFtdcQryStrikeOffsetField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -7409,8 +7784,9 @@ type CThostFtdcInputBatchOrderActionField struct {
 	ExchangeID     string
 	UserID         string
 	InvestUnitID   string
-	IPAddress      string
+	Reserve1       string
 	MacAddress     string
+	IPAddress      string
 }
 
 func NewCThostFtdcInputBatchOrderActionField(p *C.CThostFtdcInputBatchOrderActionField) *CThostFtdcInputBatchOrderActionField {
@@ -7427,8 +7803,9 @@ func NewCThostFtdcInputBatchOrderActionField(p *C.CThostFtdcInputBatchOrderActio
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -7443,8 +7820,9 @@ func CThostFtdcInputBatchOrderActionFieldCValue(s *CThostFtdcInputBatchOrderActi
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -7468,8 +7846,9 @@ type CThostFtdcBatchOrderActionField struct {
 	UserID            string
 	StatusMsg         string
 	InvestUnitID      string
-	IPAddress         string
+	Reserve1          string
 	MacAddress        string
+	IPAddress         string
 }
 
 func NewCThostFtdcBatchOrderActionField(p *C.CThostFtdcBatchOrderActionField) *CThostFtdcBatchOrderActionField {
@@ -7496,8 +7875,9 @@ func NewCThostFtdcBatchOrderActionField(p *C.CThostFtdcBatchOrderActionField) *C
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.StatusMsg = c2goStr(&p.StatusMsg[0], 81)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -7522,8 +7902,9 @@ func CThostFtdcBatchOrderActionFieldCValue(s *CThostFtdcBatchOrderActionField) *
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.StatusMsg, &ptr.StatusMsg[0], 81)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -7539,8 +7920,9 @@ type CThostFtdcExchangeBatchOrderActionField struct {
 	BusinessUnit      string
 	OrderActionStatus byte
 	UserID            string
-	IPAddress         string
+	Reserve1          string
 	MacAddress        string
+	IPAddress         string
 }
 
 func NewCThostFtdcExchangeBatchOrderActionField(p *C.CThostFtdcExchangeBatchOrderActionField) *CThostFtdcExchangeBatchOrderActionField {
@@ -7559,8 +7941,9 @@ func NewCThostFtdcExchangeBatchOrderActionField(p *C.CThostFtdcExchangeBatchOrde
 	ret.BusinessUnit = c2goStr(&p.BusinessUnit[0], 21)
 	ret.OrderActionStatus = byte(p.OrderActionStatus)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -7577,8 +7960,9 @@ func CThostFtdcExchangeBatchOrderActionFieldCValue(s *CThostFtdcExchangeBatchOrd
 	go2cStr(s.BusinessUnit, &ptr.BusinessUnit[0], 21)
 	ptr.OrderActionStatus = C.char(s.OrderActionStatus)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -7609,9 +7993,10 @@ func CThostFtdcQryBatchOrderActionFieldCValue(s *CThostFtdcQryBatchOrderActionFi
 
 type CThostFtdcCombInstrumentGuardField struct {
 	BrokerID     string
-	InstrumentID string
+	Reserve1     string
 	GuarantRatio float64
 	ExchangeID   string
+	InstrumentID string
 }
 
 func NewCThostFtdcCombInstrumentGuardField(p *C.CThostFtdcCombInstrumentGuardField) *CThostFtdcCombInstrumentGuardField {
@@ -7620,25 +8005,28 @@ func NewCThostFtdcCombInstrumentGuardField(p *C.CThostFtdcCombInstrumentGuardFie
 	}
 	ret := new(CThostFtdcCombInstrumentGuardField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.GuarantRatio = goFloat64(p.GuarantRatio)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcCombInstrumentGuardFieldCValue(s *CThostFtdcCombInstrumentGuardField) *C.CThostFtdcCombInstrumentGuardField {
 	ptr := (*C.CThostFtdcCombInstrumentGuardField)(C.malloc(C.sizeof_CThostFtdcCombInstrumentGuardField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.GuarantRatio = C.double(s.GuarantRatio)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryCombInstrumentGuardField struct {
 	BrokerID     string
-	InstrumentID string
+	Reserve1     string
 	ExchangeID   string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryCombInstrumentGuardField(p *C.CThostFtdcQryCombInstrumentGuardField) *CThostFtdcQryCombInstrumentGuardField {
@@ -7647,23 +8035,25 @@ func NewCThostFtdcQryCombInstrumentGuardField(p *C.CThostFtdcQryCombInstrumentGu
 	}
 	ret := new(CThostFtdcQryCombInstrumentGuardField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryCombInstrumentGuardFieldCValue(s *CThostFtdcQryCombInstrumentGuardField) *C.CThostFtdcQryCombInstrumentGuardField {
 	ptr := (*C.CThostFtdcQryCombInstrumentGuardField)(C.malloc(C.sizeof_CThostFtdcQryCombInstrumentGuardField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcInputCombActionField struct {
 	BrokerID      string
 	InvestorID    string
-	InstrumentID  string
+	Reserve1      string
 	CombActionRef string
 	UserID        string
 	Direction     byte
@@ -7671,11 +8061,13 @@ type CThostFtdcInputCombActionField struct {
 	CombDirection byte
 	HedgeFlag     byte
 	ExchangeID    string
-	IPAddress     string
+	Reserve2      string
 	MacAddress    string
 	InvestUnitID  string
 	FrontID       int
 	SessionID     int
+	InstrumentID  string
+	IPAddress     string
 }
 
 func NewCThostFtdcInputCombActionField(p *C.CThostFtdcInputCombActionField) *CThostFtdcInputCombActionField {
@@ -7685,7 +8077,7 @@ func NewCThostFtdcInputCombActionField(p *C.CThostFtdcInputCombActionField) *CTh
 	ret := new(CThostFtdcInputCombActionField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.CombActionRef = c2goStr(&p.CombActionRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.Direction = byte(p.Direction)
@@ -7693,11 +8085,13 @@ func NewCThostFtdcInputCombActionField(p *C.CThostFtdcInputCombActionField) *CTh
 	ret.CombDirection = byte(p.CombDirection)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
 	ret.FrontID = int(p.FrontID)
 	ret.SessionID = int(p.SessionID)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -7705,7 +8099,7 @@ func CThostFtdcInputCombActionFieldCValue(s *CThostFtdcInputCombActionField) *C.
 	ptr := (*C.CThostFtdcInputCombActionField)(C.malloc(C.sizeof_CThostFtdcInputCombActionField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.CombActionRef, &ptr.CombActionRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.Direction = C.char(s.Direction)
@@ -7713,18 +8107,20 @@ func CThostFtdcInputCombActionFieldCValue(s *CThostFtdcInputCombActionField) *C.
 	ptr.CombDirection = C.char(s.CombDirection)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
 	ptr.FrontID = C.int(s.FrontID)
 	ptr.SessionID = C.int(s.SessionID)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcCombActionField struct {
 	BrokerID        string
 	InvestorID      string
-	InstrumentID    string
+	Reserve1        string
 	CombActionRef   string
 	UserID          string
 	Direction       byte
@@ -7735,7 +8131,7 @@ type CThostFtdcCombActionField struct {
 	ExchangeID      string
 	ParticipantID   string
 	ClientID        string
-	ExchangeInstID  string
+	Reserve2        string
 	TraderID        string
 	InstallID       int
 	ActionStatus    byte
@@ -7747,11 +8143,14 @@ type CThostFtdcCombActionField struct {
 	SessionID       int
 	UserProductInfo string
 	StatusMsg       string
-	IPAddress       string
+	Reserve3        string
 	MacAddress      string
 	ComTradeID      string
 	BranchID        string
 	InvestUnitID    string
+	InstrumentID    string
+	ExchangeInstID  string
+	IPAddress       string
 }
 
 func NewCThostFtdcCombActionField(p *C.CThostFtdcCombActionField) *CThostFtdcCombActionField {
@@ -7761,7 +8160,7 @@ func NewCThostFtdcCombActionField(p *C.CThostFtdcCombActionField) *CThostFtdcCom
 	ret := new(CThostFtdcCombActionField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.CombActionRef = c2goStr(&p.CombActionRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.Direction = byte(p.Direction)
@@ -7772,7 +8171,7 @@ func NewCThostFtdcCombActionField(p *C.CThostFtdcCombActionField) *CThostFtdcCom
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.ActionStatus = byte(p.ActionStatus)
@@ -7784,11 +8183,14 @@ func NewCThostFtdcCombActionField(p *C.CThostFtdcCombActionField) *CThostFtdcCom
 	ret.SessionID = int(p.SessionID)
 	ret.UserProductInfo = c2goStr(&p.UserProductInfo[0], 11)
 	ret.StatusMsg = c2goStr(&p.StatusMsg[0], 81)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve3 = c2goStr(&p.reserve3[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.ComTradeID = c2goStr(&p.ComTradeID[0], 21)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -7796,7 +8198,7 @@ func CThostFtdcCombActionFieldCValue(s *CThostFtdcCombActionField) *C.CThostFtdc
 	ptr := (*C.CThostFtdcCombActionField)(C.malloc(C.sizeof_CThostFtdcCombActionField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.CombActionRef, &ptr.CombActionRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.Direction = C.char(s.Direction)
@@ -7807,7 +8209,7 @@ func CThostFtdcCombActionFieldCValue(s *CThostFtdcCombActionField) *C.CThostFtdc
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	ptr.ActionStatus = C.char(s.ActionStatus)
@@ -7819,20 +8221,24 @@ func CThostFtdcCombActionFieldCValue(s *CThostFtdcCombActionField) *C.CThostFtdc
 	ptr.SessionID = C.int(s.SessionID)
 	go2cStr(s.UserProductInfo, &ptr.UserProductInfo[0], 11)
 	go2cStr(s.StatusMsg, &ptr.StatusMsg[0], 81)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve3, &ptr.reserve3[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.ComTradeID, &ptr.ComTradeID[0], 21)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQryCombActionField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	ExchangeID   string
 	InvestUnitID string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryCombActionField(p *C.CThostFtdcQryCombActionField) *CThostFtdcQryCombActionField {
@@ -7842,9 +8248,10 @@ func NewCThostFtdcQryCombActionField(p *C.CThostFtdcQryCombActionField) *CThostF
 	ret := new(CThostFtdcQryCombActionField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -7852,9 +8259,10 @@ func CThostFtdcQryCombActionFieldCValue(s *CThostFtdcQryCombActionField) *C.CTho
 	ptr := (*C.CThostFtdcQryCombActionField)(C.malloc(C.sizeof_CThostFtdcQryCombActionField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -7867,7 +8275,7 @@ type CThostFtdcExchangeCombActionField struct {
 	ExchangeID     string
 	ParticipantID  string
 	ClientID       string
-	ExchangeInstID string
+	Reserve1       string
 	TraderID       string
 	InstallID      int
 	ActionStatus   byte
@@ -7875,10 +8283,12 @@ type CThostFtdcExchangeCombActionField struct {
 	TradingDay     string
 	SettlementID   int
 	SequenceNo     int
-	IPAddress      string
+	Reserve2       string
 	MacAddress     string
 	ComTradeID     string
 	BranchID       string
+	ExchangeInstID string
+	IPAddress      string
 }
 
 func NewCThostFtdcExchangeCombActionField(p *C.CThostFtdcExchangeCombActionField) *CThostFtdcExchangeCombActionField {
@@ -7894,7 +8304,7 @@ func NewCThostFtdcExchangeCombActionField(p *C.CThostFtdcExchangeCombActionField
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.ActionStatus = byte(p.ActionStatus)
@@ -7902,10 +8312,12 @@ func NewCThostFtdcExchangeCombActionField(p *C.CThostFtdcExchangeCombActionField
 	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
 	ret.SettlementID = int(p.SettlementID)
 	ret.SequenceNo = int(p.SequenceNo)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.ComTradeID = c2goStr(&p.ComTradeID[0], 21)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -7919,7 +8331,7 @@ func CThostFtdcExchangeCombActionFieldCValue(s *CThostFtdcExchangeCombActionFiel
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	ptr.ActionStatus = C.char(s.ActionStatus)
@@ -7927,19 +8339,22 @@ func CThostFtdcExchangeCombActionFieldCValue(s *CThostFtdcExchangeCombActionFiel
 	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
 	ptr.SettlementID = C.int(s.SettlementID)
 	ptr.SequenceNo = C.int(s.SequenceNo)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.ComTradeID, &ptr.ComTradeID[0], 21)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQryExchangeCombActionField struct {
 	ParticipantID  string
 	ClientID       string
-	ExchangeInstID string
+	Reserve1       string
 	ExchangeID     string
 	TraderID       string
+	ExchangeInstID string
 }
 
 func NewCThostFtdcQryExchangeCombActionField(p *C.CThostFtdcQryExchangeCombActionField) *CThostFtdcQryExchangeCombActionField {
@@ -7949,9 +8364,10 @@ func NewCThostFtdcQryExchangeCombActionField(p *C.CThostFtdcQryExchangeCombActio
 	ret := new(CThostFtdcQryExchangeCombActionField)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	return ret
 }
 
@@ -7959,17 +8375,19 @@ func CThostFtdcQryExchangeCombActionFieldCValue(s *CThostFtdcQryExchangeCombActi
 	ptr := (*C.CThostFtdcQryExchangeCombActionField)(C.malloc(C.sizeof_CThostFtdcQryExchangeCombActionField))
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	return ptr
 }
 
 type CThostFtdcProductExchRateField struct {
-	ProductID       string
+	Reserve1        string
 	QuoteCurrencyID string
 	ExchangeRate    float64
 	ExchangeID      string
+	ProductID       string
 }
 
 func NewCThostFtdcProductExchRateField(p *C.CThostFtdcProductExchRateField) *CThostFtdcProductExchRateField {
@@ -7977,25 +8395,28 @@ func NewCThostFtdcProductExchRateField(p *C.CThostFtdcProductExchRateField) *CTh
 		return nil
 	}
 	ret := new(CThostFtdcProductExchRateField)
-	ret.ProductID = c2goStr(&p.ProductID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.QuoteCurrencyID = c2goStr(&p.QuoteCurrencyID[0], 4)
 	ret.ExchangeRate = goFloat64(p.ExchangeRate)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
 	return ret
 }
 
 func CThostFtdcProductExchRateFieldCValue(s *CThostFtdcProductExchRateField) *C.CThostFtdcProductExchRateField {
 	ptr := (*C.CThostFtdcProductExchRateField)(C.malloc(C.sizeof_CThostFtdcProductExchRateField))
-	go2cStr(s.ProductID, &ptr.ProductID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.QuoteCurrencyID, &ptr.QuoteCurrencyID[0], 4)
 	ptr.ExchangeRate = C.double(s.ExchangeRate)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryProductExchRateField struct {
-	ProductID  string
+	Reserve1   string
 	ExchangeID string
+	ProductID  string
 }
 
 func NewCThostFtdcQryProductExchRateField(p *C.CThostFtdcQryProductExchRateField) *CThostFtdcQryProductExchRateField {
@@ -8003,22 +8424,25 @@ func NewCThostFtdcQryProductExchRateField(p *C.CThostFtdcQryProductExchRateField
 		return nil
 	}
 	ret := new(CThostFtdcQryProductExchRateField)
-	ret.ProductID = c2goStr(&p.ProductID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryProductExchRateFieldCValue(s *CThostFtdcQryProductExchRateField) *C.CThostFtdcQryProductExchRateField {
 	ptr := (*C.CThostFtdcQryProductExchRateField)(C.malloc(C.sizeof_CThostFtdcQryProductExchRateField))
-	go2cStr(s.ProductID, &ptr.ProductID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryForQuoteParamField struct {
 	BrokerID     string
-	InstrumentID string
+	Reserve1     string
 	ExchangeID   string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryForQuoteParamField(p *C.CThostFtdcQryForQuoteParamField) *CThostFtdcQryForQuoteParamField {
@@ -8027,25 +8451,28 @@ func NewCThostFtdcQryForQuoteParamField(p *C.CThostFtdcQryForQuoteParamField) *C
 	}
 	ret := new(CThostFtdcQryForQuoteParamField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryForQuoteParamFieldCValue(s *CThostFtdcQryForQuoteParamField) *C.CThostFtdcQryForQuoteParamField {
 	ptr := (*C.CThostFtdcQryForQuoteParamField)(C.malloc(C.sizeof_CThostFtdcQryForQuoteParamField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcForQuoteParamField struct {
 	BrokerID      string
-	InstrumentID  string
+	Reserve1      string
 	ExchangeID    string
 	LastPrice     float64
 	PriceInterval float64
+	InstrumentID  string
 }
 
 func NewCThostFtdcForQuoteParamField(p *C.CThostFtdcForQuoteParamField) *CThostFtdcForQuoteParamField {
@@ -8054,25 +8481,27 @@ func NewCThostFtdcForQuoteParamField(p *C.CThostFtdcForQuoteParamField) *CThostF
 	}
 	ret := new(CThostFtdcForQuoteParamField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.LastPrice = goFloat64(p.LastPrice)
 	ret.PriceInterval = goFloat64(p.PriceInterval)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcForQuoteParamFieldCValue(s *CThostFtdcForQuoteParamField) *C.CThostFtdcForQuoteParamField {
 	ptr := (*C.CThostFtdcForQuoteParamField)(C.malloc(C.sizeof_CThostFtdcForQuoteParamField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	ptr.LastPrice = C.double(s.LastPrice)
 	ptr.PriceInterval = C.double(s.PriceInterval)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcMMOptionInstrCommRateField struct {
-	InstrumentID            string
+	Reserve1                string
 	InvestorRange           byte
 	BrokerID                string
 	InvestorID              string
@@ -8084,6 +8513,7 @@ type CThostFtdcMMOptionInstrCommRateField struct {
 	CloseTodayRatioByVolume float64
 	StrikeRatioByMoney      float64
 	StrikeRatioByVolume     float64
+	InstrumentID            string
 }
 
 func NewCThostFtdcMMOptionInstrCommRateField(p *C.CThostFtdcMMOptionInstrCommRateField) *CThostFtdcMMOptionInstrCommRateField {
@@ -8091,7 +8521,7 @@ func NewCThostFtdcMMOptionInstrCommRateField(p *C.CThostFtdcMMOptionInstrCommRat
 		return nil
 	}
 	ret := new(CThostFtdcMMOptionInstrCommRateField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
@@ -8103,12 +8533,13 @@ func NewCThostFtdcMMOptionInstrCommRateField(p *C.CThostFtdcMMOptionInstrCommRat
 	ret.CloseTodayRatioByVolume = goFloat64(p.CloseTodayRatioByVolume)
 	ret.StrikeRatioByMoney = goFloat64(p.StrikeRatioByMoney)
 	ret.StrikeRatioByVolume = goFloat64(p.StrikeRatioByVolume)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcMMOptionInstrCommRateFieldCValue(s *CThostFtdcMMOptionInstrCommRateField) *C.CThostFtdcMMOptionInstrCommRateField {
 	ptr := (*C.CThostFtdcMMOptionInstrCommRateField)(C.malloc(C.sizeof_CThostFtdcMMOptionInstrCommRateField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
@@ -8120,12 +8551,14 @@ func CThostFtdcMMOptionInstrCommRateFieldCValue(s *CThostFtdcMMOptionInstrCommRa
 	ptr.CloseTodayRatioByVolume = C.double(s.CloseTodayRatioByVolume)
 	ptr.StrikeRatioByMoney = C.double(s.StrikeRatioByMoney)
 	ptr.StrikeRatioByVolume = C.double(s.StrikeRatioByVolume)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryMMOptionInstrCommRateField struct {
 	BrokerID     string
 	InvestorID   string
+	Reserve1     string
 	InstrumentID string
 }
 
@@ -8136,7 +8569,8 @@ func NewCThostFtdcQryMMOptionInstrCommRateField(p *C.CThostFtdcQryMMOptionInstrC
 	ret := new(CThostFtdcQryMMOptionInstrCommRateField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -8144,12 +8578,13 @@ func CThostFtdcQryMMOptionInstrCommRateFieldCValue(s *CThostFtdcQryMMOptionInstr
 	ptr := (*C.CThostFtdcQryMMOptionInstrCommRateField)(C.malloc(C.sizeof_CThostFtdcQryMMOptionInstrCommRateField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcMMInstrumentCommissionRateField struct {
-	InstrumentID            string
+	Reserve1                string
 	InvestorRange           byte
 	BrokerID                string
 	InvestorID              string
@@ -8159,6 +8594,7 @@ type CThostFtdcMMInstrumentCommissionRateField struct {
 	CloseRatioByVolume      float64
 	CloseTodayRatioByMoney  float64
 	CloseTodayRatioByVolume float64
+	InstrumentID            string
 }
 
 func NewCThostFtdcMMInstrumentCommissionRateField(p *C.CThostFtdcMMInstrumentCommissionRateField) *CThostFtdcMMInstrumentCommissionRateField {
@@ -8166,7 +8602,7 @@ func NewCThostFtdcMMInstrumentCommissionRateField(p *C.CThostFtdcMMInstrumentCom
 		return nil
 	}
 	ret := new(CThostFtdcMMInstrumentCommissionRateField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
@@ -8176,12 +8612,13 @@ func NewCThostFtdcMMInstrumentCommissionRateField(p *C.CThostFtdcMMInstrumentCom
 	ret.CloseRatioByVolume = goFloat64(p.CloseRatioByVolume)
 	ret.CloseTodayRatioByMoney = goFloat64(p.CloseTodayRatioByMoney)
 	ret.CloseTodayRatioByVolume = goFloat64(p.CloseTodayRatioByVolume)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcMMInstrumentCommissionRateFieldCValue(s *CThostFtdcMMInstrumentCommissionRateField) *C.CThostFtdcMMInstrumentCommissionRateField {
 	ptr := (*C.CThostFtdcMMInstrumentCommissionRateField)(C.malloc(C.sizeof_CThostFtdcMMInstrumentCommissionRateField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
@@ -8191,12 +8628,14 @@ func CThostFtdcMMInstrumentCommissionRateFieldCValue(s *CThostFtdcMMInstrumentCo
 	ptr.CloseRatioByVolume = C.double(s.CloseRatioByVolume)
 	ptr.CloseTodayRatioByMoney = C.double(s.CloseTodayRatioByMoney)
 	ptr.CloseTodayRatioByVolume = C.double(s.CloseTodayRatioByVolume)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryMMInstrumentCommissionRateField struct {
 	BrokerID     string
 	InvestorID   string
+	Reserve1     string
 	InstrumentID string
 }
 
@@ -8207,7 +8646,8 @@ func NewCThostFtdcQryMMInstrumentCommissionRateField(p *C.CThostFtdcQryMMInstrum
 	ret := new(CThostFtdcQryMMInstrumentCommissionRateField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -8215,12 +8655,13 @@ func CThostFtdcQryMMInstrumentCommissionRateFieldCValue(s *CThostFtdcQryMMInstru
 	ptr := (*C.CThostFtdcQryMMInstrumentCommissionRateField)(C.malloc(C.sizeof_CThostFtdcQryMMInstrumentCommissionRateField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcInstrumentOrderCommRateField struct {
-	InstrumentID            string
+	Reserve1                string
 	InvestorRange           byte
 	BrokerID                string
 	InvestorID              string
@@ -8229,6 +8670,9 @@ type CThostFtdcInstrumentOrderCommRateField struct {
 	OrderActionCommByVolume float64
 	ExchangeID              string
 	InvestUnitID            string
+	InstrumentID            string
+	OrderCommByTrade        float64
+	OrderActionCommByTrade  float64
 }
 
 func NewCThostFtdcInstrumentOrderCommRateField(p *C.CThostFtdcInstrumentOrderCommRateField) *CThostFtdcInstrumentOrderCommRateField {
@@ -8236,7 +8680,7 @@ func NewCThostFtdcInstrumentOrderCommRateField(p *C.CThostFtdcInstrumentOrderCom
 		return nil
 	}
 	ret := new(CThostFtdcInstrumentOrderCommRateField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
@@ -8245,12 +8689,15 @@ func NewCThostFtdcInstrumentOrderCommRateField(p *C.CThostFtdcInstrumentOrderCom
 	ret.OrderActionCommByVolume = goFloat64(p.OrderActionCommByVolume)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.OrderCommByTrade = goFloat64(p.OrderCommByTrade)
+	ret.OrderActionCommByTrade = goFloat64(p.OrderActionCommByTrade)
 	return ret
 }
 
 func CThostFtdcInstrumentOrderCommRateFieldCValue(s *CThostFtdcInstrumentOrderCommRateField) *C.CThostFtdcInstrumentOrderCommRateField {
 	ptr := (*C.CThostFtdcInstrumentOrderCommRateField)(C.malloc(C.sizeof_CThostFtdcInstrumentOrderCommRateField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
@@ -8259,12 +8706,16 @@ func CThostFtdcInstrumentOrderCommRateFieldCValue(s *CThostFtdcInstrumentOrderCo
 	ptr.OrderActionCommByVolume = C.double(s.OrderActionCommByVolume)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.OrderCommByTrade = C.double(s.OrderCommByTrade)
+	ptr.OrderActionCommByTrade = C.double(s.OrderActionCommByTrade)
 	return ptr
 }
 
 type CThostFtdcQryInstrumentOrderCommRateField struct {
 	BrokerID     string
 	InvestorID   string
+	Reserve1     string
 	InstrumentID string
 }
 
@@ -8275,7 +8726,8 @@ func NewCThostFtdcQryInstrumentOrderCommRateField(p *C.CThostFtdcQryInstrumentOr
 	ret := new(CThostFtdcQryInstrumentOrderCommRateField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -8283,7 +8735,8 @@ func CThostFtdcQryInstrumentOrderCommRateFieldCValue(s *CThostFtdcQryInstrumentO
 	ptr := (*C.CThostFtdcQryInstrumentOrderCommRateField)(C.malloc(C.sizeof_CThostFtdcQryInstrumentOrderCommRateField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -8316,7 +8769,7 @@ func CThostFtdcTradeParamFieldCValue(s *CThostFtdcTradeParamField) *C.CThostFtdc
 }
 
 type CThostFtdcInstrumentMarginRateULField struct {
-	InstrumentID             string
+	Reserve1                 string
 	InvestorRange            byte
 	BrokerID                 string
 	InvestorID               string
@@ -8325,6 +8778,7 @@ type CThostFtdcInstrumentMarginRateULField struct {
 	LongMarginRatioByVolume  float64
 	ShortMarginRatioByMoney  float64
 	ShortMarginRatioByVolume float64
+	InstrumentID             string
 }
 
 func NewCThostFtdcInstrumentMarginRateULField(p *C.CThostFtdcInstrumentMarginRateULField) *CThostFtdcInstrumentMarginRateULField {
@@ -8332,7 +8786,7 @@ func NewCThostFtdcInstrumentMarginRateULField(p *C.CThostFtdcInstrumentMarginRat
 		return nil
 	}
 	ret := new(CThostFtdcInstrumentMarginRateULField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
@@ -8341,12 +8795,13 @@ func NewCThostFtdcInstrumentMarginRateULField(p *C.CThostFtdcInstrumentMarginRat
 	ret.LongMarginRatioByVolume = goFloat64(p.LongMarginRatioByVolume)
 	ret.ShortMarginRatioByMoney = goFloat64(p.ShortMarginRatioByMoney)
 	ret.ShortMarginRatioByVolume = goFloat64(p.ShortMarginRatioByVolume)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcInstrumentMarginRateULFieldCValue(s *CThostFtdcInstrumentMarginRateULField) *C.CThostFtdcInstrumentMarginRateULField {
 	ptr := (*C.CThostFtdcInstrumentMarginRateULField)(C.malloc(C.sizeof_CThostFtdcInstrumentMarginRateULField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
@@ -8355,6 +8810,7 @@ func CThostFtdcInstrumentMarginRateULFieldCValue(s *CThostFtdcInstrumentMarginRa
 	ptr.LongMarginRatioByVolume = C.double(s.LongMarginRatioByVolume)
 	ptr.ShortMarginRatioByMoney = C.double(s.ShortMarginRatioByMoney)
 	ptr.ShortMarginRatioByVolume = C.double(s.ShortMarginRatioByVolume)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -8362,10 +8818,11 @@ type CThostFtdcFutureLimitPosiParamField struct {
 	InvestorRange  byte
 	BrokerID       string
 	InvestorID     string
-	ProductID      string
+	Reserve1       string
 	SpecOpenVolume int
 	ArbiOpenVolume int
 	OpenVolume     int
+	ProductID      string
 }
 
 func NewCThostFtdcFutureLimitPosiParamField(p *C.CThostFtdcFutureLimitPosiParamField) *CThostFtdcFutureLimitPosiParamField {
@@ -8376,10 +8833,11 @@ func NewCThostFtdcFutureLimitPosiParamField(p *C.CThostFtdcFutureLimitPosiParamF
 	ret.InvestorRange = byte(p.InvestorRange)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.ProductID = c2goStr(&p.ProductID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.SpecOpenVolume = int(p.SpecOpenVolume)
 	ret.ArbiOpenVolume = int(p.ArbiOpenVolume)
 	ret.OpenVolume = int(p.OpenVolume)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
 	return ret
 }
 
@@ -8388,14 +8846,16 @@ func CThostFtdcFutureLimitPosiParamFieldCValue(s *CThostFtdcFutureLimitPosiParam
 	ptr.InvestorRange = C.char(s.InvestorRange)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.ProductID, &ptr.ProductID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.SpecOpenVolume = C.int(s.SpecOpenVolume)
 	ptr.ArbiOpenVolume = C.int(s.ArbiOpenVolume)
 	ptr.OpenVolume = C.int(s.OpenVolume)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
 	return ptr
 }
 
 type CThostFtdcLoginForbiddenIPField struct {
+	Reserve1  string
 	IPAddress string
 }
 
@@ -8404,19 +8864,22 @@ func NewCThostFtdcLoginForbiddenIPField(p *C.CThostFtdcLoginForbiddenIPField) *C
 		return nil
 	}
 	ret := new(CThostFtdcLoginForbiddenIPField)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
 func CThostFtdcLoginForbiddenIPFieldCValue(s *CThostFtdcLoginForbiddenIPField) *C.CThostFtdcLoginForbiddenIPField {
 	ptr := (*C.CThostFtdcLoginForbiddenIPField)(C.malloc(C.sizeof_CThostFtdcLoginForbiddenIPField))
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcIPListField struct {
-	IPAddress string
+	Reserve1  string
 	IsWhite   int
+	IPAddress string
 }
 
 func NewCThostFtdcIPListField(p *C.CThostFtdcIPListField) *CThostFtdcIPListField {
@@ -8424,22 +8887,24 @@ func NewCThostFtdcIPListField(p *C.CThostFtdcIPListField) *CThostFtdcIPListField
 		return nil
 	}
 	ret := new(CThostFtdcIPListField)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.IsWhite = int(p.IsWhite)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
 func CThostFtdcIPListFieldCValue(s *CThostFtdcIPListField) *C.CThostFtdcIPListField {
 	ptr := (*C.CThostFtdcIPListField)(C.malloc(C.sizeof_CThostFtdcIPListField))
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	ptr.IsWhite = C.int(s.IsWhite)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcInputOptionSelfCloseField struct {
 	BrokerID           string
 	InvestorID         string
-	InstrumentID       string
+	Reserve1           string
 	OptionSelfCloseRef string
 	UserID             string
 	Volume             int
@@ -8452,8 +8917,10 @@ type CThostFtdcInputOptionSelfCloseField struct {
 	AccountID          string
 	CurrencyID         string
 	ClientID           string
-	IPAddress          string
+	Reserve2           string
 	MacAddress         string
+	InstrumentID       string
+	IPAddress          string
 }
 
 func NewCThostFtdcInputOptionSelfCloseField(p *C.CThostFtdcInputOptionSelfCloseField) *CThostFtdcInputOptionSelfCloseField {
@@ -8463,7 +8930,7 @@ func NewCThostFtdcInputOptionSelfCloseField(p *C.CThostFtdcInputOptionSelfCloseF
 	ret := new(CThostFtdcInputOptionSelfCloseField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.OptionSelfCloseRef = c2goStr(&p.OptionSelfCloseRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.Volume = int(p.Volume)
@@ -8476,8 +8943,10 @@ func NewCThostFtdcInputOptionSelfCloseField(p *C.CThostFtdcInputOptionSelfCloseF
 	ret.AccountID = c2goStr(&p.AccountID[0], 13)
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -8485,7 +8954,7 @@ func CThostFtdcInputOptionSelfCloseFieldCValue(s *CThostFtdcInputOptionSelfClose
 	ptr := (*C.CThostFtdcInputOptionSelfCloseField)(C.malloc(C.sizeof_CThostFtdcInputOptionSelfCloseField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.OptionSelfCloseRef, &ptr.OptionSelfCloseRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.Volume = C.int(s.Volume)
@@ -8498,8 +8967,10 @@ func CThostFtdcInputOptionSelfCloseFieldCValue(s *CThostFtdcInputOptionSelfClose
 	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -8515,10 +8986,12 @@ type CThostFtdcInputOptionSelfCloseActionField struct {
 	OptionSelfCloseSysID     string
 	ActionFlag               byte
 	UserID                   string
-	InstrumentID             string
+	Reserve1                 string
 	InvestUnitID             string
-	IPAddress                string
+	Reserve2                 string
 	MacAddress               string
+	InstrumentID             string
+	IPAddress                string
 }
 
 func NewCThostFtdcInputOptionSelfCloseActionField(p *C.CThostFtdcInputOptionSelfCloseActionField) *CThostFtdcInputOptionSelfCloseActionField {
@@ -8537,10 +9010,12 @@ func NewCThostFtdcInputOptionSelfCloseActionField(p *C.CThostFtdcInputOptionSelf
 	ret.OptionSelfCloseSysID = c2goStr(&p.OptionSelfCloseSysID[0], 21)
 	ret.ActionFlag = byte(p.ActionFlag)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -8557,17 +9032,19 @@ func CThostFtdcInputOptionSelfCloseActionFieldCValue(s *CThostFtdcInputOptionSel
 	go2cStr(s.OptionSelfCloseSysID, &ptr.OptionSelfCloseSysID[0], 21)
 	ptr.ActionFlag = C.char(s.ActionFlag)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcOptionSelfCloseField struct {
 	BrokerID                 string
 	InvestorID               string
-	InstrumentID             string
+	Reserve1                 string
 	OptionSelfCloseRef       string
 	UserID                   string
 	Volume                   int
@@ -8579,7 +9056,7 @@ type CThostFtdcOptionSelfCloseField struct {
 	ExchangeID               string
 	ParticipantID            string
 	ClientID                 string
-	ExchangeInstID           string
+	Reserve2                 string
 	TraderID                 string
 	InstallID                int
 	OrderSubmitStatus        byte
@@ -8603,8 +9080,11 @@ type CThostFtdcOptionSelfCloseField struct {
 	InvestUnitID             string
 	AccountID                string
 	CurrencyID               string
-	IPAddress                string
+	Reserve3                 string
 	MacAddress               string
+	InstrumentID             string
+	ExchangeInstID           string
+	IPAddress                string
 }
 
 func NewCThostFtdcOptionSelfCloseField(p *C.CThostFtdcOptionSelfCloseField) *CThostFtdcOptionSelfCloseField {
@@ -8614,7 +9094,7 @@ func NewCThostFtdcOptionSelfCloseField(p *C.CThostFtdcOptionSelfCloseField) *CTh
 	ret := new(CThostFtdcOptionSelfCloseField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.OptionSelfCloseRef = c2goStr(&p.OptionSelfCloseRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.Volume = int(p.Volume)
@@ -8626,7 +9106,7 @@ func NewCThostFtdcOptionSelfCloseField(p *C.CThostFtdcOptionSelfCloseField) *CTh
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.OrderSubmitStatus = byte(p.OrderSubmitStatus)
@@ -8650,8 +9130,11 @@ func NewCThostFtdcOptionSelfCloseField(p *C.CThostFtdcOptionSelfCloseField) *CTh
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
 	ret.AccountID = c2goStr(&p.AccountID[0], 13)
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve3 = c2goStr(&p.reserve3[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -8659,7 +9142,7 @@ func CThostFtdcOptionSelfCloseFieldCValue(s *CThostFtdcOptionSelfCloseField) *C.
 	ptr := (*C.CThostFtdcOptionSelfCloseField)(C.malloc(C.sizeof_CThostFtdcOptionSelfCloseField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.OptionSelfCloseRef, &ptr.OptionSelfCloseRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.Volume = C.int(s.Volume)
@@ -8671,7 +9154,7 @@ func CThostFtdcOptionSelfCloseFieldCValue(s *CThostFtdcOptionSelfCloseField) *C.
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	ptr.OrderSubmitStatus = C.char(s.OrderSubmitStatus)
@@ -8695,8 +9178,11 @@ func CThostFtdcOptionSelfCloseFieldCValue(s *CThostFtdcOptionSelfCloseField) *C.
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
 	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve3, &ptr.reserve3[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -8723,11 +9209,13 @@ type CThostFtdcOptionSelfCloseActionField struct {
 	OrderActionStatus        byte
 	UserID                   string
 	StatusMsg                string
-	InstrumentID             string
+	Reserve1                 string
 	BranchID                 string
 	InvestUnitID             string
-	IPAddress                string
+	Reserve2                 string
 	MacAddress               string
+	InstrumentID             string
+	IPAddress                string
 }
 
 func NewCThostFtdcOptionSelfCloseActionField(p *C.CThostFtdcOptionSelfCloseActionField) *CThostFtdcOptionSelfCloseActionField {
@@ -8757,11 +9245,13 @@ func NewCThostFtdcOptionSelfCloseActionField(p *C.CThostFtdcOptionSelfCloseActio
 	ret.OrderActionStatus = byte(p.OrderActionStatus)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.StatusMsg = c2goStr(&p.StatusMsg[0], 81)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -8789,22 +9279,25 @@ func CThostFtdcOptionSelfCloseActionFieldCValue(s *CThostFtdcOptionSelfCloseActi
 	ptr.OrderActionStatus = C.char(s.OrderActionStatus)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.StatusMsg, &ptr.StatusMsg[0], 81)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQryOptionSelfCloseField struct {
 	BrokerID             string
 	InvestorID           string
-	InstrumentID         string
+	Reserve1             string
 	ExchangeID           string
 	OptionSelfCloseSysID string
 	InsertTimeStart      string
 	InsertTimeEnd        string
+	InstrumentID         string
 }
 
 func NewCThostFtdcQryOptionSelfCloseField(p *C.CThostFtdcQryOptionSelfCloseField) *CThostFtdcQryOptionSelfCloseField {
@@ -8814,11 +9307,12 @@ func NewCThostFtdcQryOptionSelfCloseField(p *C.CThostFtdcQryOptionSelfCloseField
 	ret := new(CThostFtdcQryOptionSelfCloseField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.OptionSelfCloseSysID = c2goStr(&p.OptionSelfCloseSysID[0], 21)
 	ret.InsertTimeStart = c2goStr(&p.InsertTimeStart[0], 9)
 	ret.InsertTimeEnd = c2goStr(&p.InsertTimeEnd[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -8826,11 +9320,12 @@ func CThostFtdcQryOptionSelfCloseFieldCValue(s *CThostFtdcQryOptionSelfCloseFiel
 	ptr := (*C.CThostFtdcQryOptionSelfCloseField)(C.malloc(C.sizeof_CThostFtdcQryOptionSelfCloseField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.OptionSelfCloseSysID, &ptr.OptionSelfCloseSysID[0], 21)
 	go2cStr(s.InsertTimeStart, &ptr.InsertTimeStart[0], 9)
 	go2cStr(s.InsertTimeEnd, &ptr.InsertTimeEnd[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -8844,7 +9339,7 @@ type CThostFtdcExchangeOptionSelfCloseField struct {
 	ExchangeID             string
 	ParticipantID          string
 	ClientID               string
-	ExchangeInstID         string
+	Reserve1               string
 	TraderID               string
 	InstallID              int
 	OrderSubmitStatus      byte
@@ -8859,8 +9354,10 @@ type CThostFtdcExchangeOptionSelfCloseField struct {
 	ClearingPartID         string
 	SequenceNo             int
 	BranchID               string
-	IPAddress              string
+	Reserve2               string
 	MacAddress             string
+	ExchangeInstID         string
+	IPAddress              string
 }
 
 func NewCThostFtdcExchangeOptionSelfCloseField(p *C.CThostFtdcExchangeOptionSelfCloseField) *CThostFtdcExchangeOptionSelfCloseField {
@@ -8877,7 +9374,7 @@ func NewCThostFtdcExchangeOptionSelfCloseField(p *C.CThostFtdcExchangeOptionSelf
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.OrderSubmitStatus = byte(p.OrderSubmitStatus)
@@ -8892,8 +9389,10 @@ func NewCThostFtdcExchangeOptionSelfCloseField(p *C.CThostFtdcExchangeOptionSelf
 	ret.ClearingPartID = c2goStr(&p.ClearingPartID[0], 11)
 	ret.SequenceNo = int(p.SequenceNo)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -8908,7 +9407,7 @@ func CThostFtdcExchangeOptionSelfCloseFieldCValue(s *CThostFtdcExchangeOptionSel
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	ptr.OrderSubmitStatus = C.char(s.OrderSubmitStatus)
@@ -8923,8 +9422,10 @@ func CThostFtdcExchangeOptionSelfCloseFieldCValue(s *CThostFtdcExchangeOptionSel
 	go2cStr(s.ClearingPartID, &ptr.ClearingPartID[0], 11)
 	ptr.SequenceNo = C.int(s.SequenceNo)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -8969,10 +9470,12 @@ type CThostFtdcExchangeOptionSelfCloseActionField struct {
 	OrderActionStatus      byte
 	UserID                 string
 	BranchID               string
-	IPAddress              string
+	Reserve1               string
 	MacAddress             string
-	ExchangeInstID         string
+	Reserve2               string
 	OptSelfCloseFlag       byte
+	IPAddress              string
+	ExchangeInstID         string
 }
 
 func NewCThostFtdcExchangeOptionSelfCloseActionField(p *C.CThostFtdcExchangeOptionSelfCloseActionField) *CThostFtdcExchangeOptionSelfCloseActionField {
@@ -8995,10 +9498,12 @@ func NewCThostFtdcExchangeOptionSelfCloseActionField(p *C.CThostFtdcExchangeOpti
 	ret.OrderActionStatus = byte(p.OrderActionStatus)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.OptSelfCloseFlag = byte(p.OptSelfCloseFlag)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	return ret
 }
 
@@ -9019,10 +9524,12 @@ func CThostFtdcExchangeOptionSelfCloseActionFieldCValue(s *CThostFtdcExchangeOpt
 	ptr.OrderActionStatus = C.char(s.OrderActionStatus)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	ptr.OptSelfCloseFlag = C.char(s.OptSelfCloseFlag)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	return ptr
 }
 
@@ -9226,9 +9733,9 @@ func CThostFtdcSecAgentTradeInfoFieldCValue(s *CThostFtdcSecAgentTradeInfoField)
 
 type CThostFtdcMarketDataField struct {
 	TradingDay         string
-	InstrumentID       string
+	Reserve1           string
 	ExchangeID         string
-	ExchangeInstID     string
+	Reserve2           string
 	LastPrice          float64
 	PreSettlementPrice float64
 	PreClosePrice      float64
@@ -9248,6 +9755,8 @@ type CThostFtdcMarketDataField struct {
 	UpdateTime         string
 	UpdateMillisec     int
 	ActionDay          string
+	InstrumentID       string
+	ExchangeInstID     string
 }
 
 func NewCThostFtdcMarketDataField(p *C.CThostFtdcMarketDataField) *CThostFtdcMarketDataField {
@@ -9256,9 +9765,9 @@ func NewCThostFtdcMarketDataField(p *C.CThostFtdcMarketDataField) *CThostFtdcMar
 	}
 	ret := new(CThostFtdcMarketDataField)
 	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.LastPrice = goFloat64(p.LastPrice)
 	ret.PreSettlementPrice = goFloat64(p.PreSettlementPrice)
 	ret.PreClosePrice = goFloat64(p.PreClosePrice)
@@ -9278,15 +9787,17 @@ func NewCThostFtdcMarketDataField(p *C.CThostFtdcMarketDataField) *CThostFtdcMar
 	ret.UpdateTime = c2goStr(&p.UpdateTime[0], 9)
 	ret.UpdateMillisec = int(p.UpdateMillisec)
 	ret.ActionDay = c2goStr(&p.ActionDay[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	return ret
 }
 
 func CThostFtdcMarketDataFieldCValue(s *CThostFtdcMarketDataField) *C.CThostFtdcMarketDataField {
 	ptr := (*C.CThostFtdcMarketDataField)(C.malloc(C.sizeof_CThostFtdcMarketDataField))
 	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	ptr.LastPrice = C.double(s.LastPrice)
 	ptr.PreSettlementPrice = C.double(s.PreSettlementPrice)
 	ptr.PreClosePrice = C.double(s.PreClosePrice)
@@ -9306,6 +9817,8 @@ func CThostFtdcMarketDataFieldCValue(s *CThostFtdcMarketDataField) *C.CThostFtdc
 	go2cStr(s.UpdateTime, &ptr.UpdateTime[0], 9)
 	ptr.UpdateMillisec = C.int(s.UpdateMillisec)
 	go2cStr(s.ActionDay, &ptr.ActionDay[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	return ptr
 }
 
@@ -9549,10 +10062,11 @@ func CThostFtdcMarketDataAsk45FieldCValue(s *CThostFtdcMarketDataAsk45Field) *C.
 }
 
 type CThostFtdcMarketDataUpdateTimeField struct {
-	InstrumentID   string
+	Reserve1       string
 	UpdateTime     string
 	UpdateMillisec int
 	ActionDay      string
+	InstrumentID   string
 }
 
 func NewCThostFtdcMarketDataUpdateTimeField(p *C.CThostFtdcMarketDataUpdateTimeField) *CThostFtdcMarketDataUpdateTimeField {
@@ -9560,19 +10074,43 @@ func NewCThostFtdcMarketDataUpdateTimeField(p *C.CThostFtdcMarketDataUpdateTimeF
 		return nil
 	}
 	ret := new(CThostFtdcMarketDataUpdateTimeField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.UpdateTime = c2goStr(&p.UpdateTime[0], 9)
 	ret.UpdateMillisec = int(p.UpdateMillisec)
 	ret.ActionDay = c2goStr(&p.ActionDay[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcMarketDataUpdateTimeFieldCValue(s *CThostFtdcMarketDataUpdateTimeField) *C.CThostFtdcMarketDataUpdateTimeField {
 	ptr := (*C.CThostFtdcMarketDataUpdateTimeField)(C.malloc(C.sizeof_CThostFtdcMarketDataUpdateTimeField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.UpdateTime, &ptr.UpdateTime[0], 9)
 	ptr.UpdateMillisec = C.int(s.UpdateMillisec)
 	go2cStr(s.ActionDay, &ptr.ActionDay[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	return ptr
+}
+
+type CThostFtdcMarketDataBandingPriceField struct {
+	BandingUpperPrice float64
+	BandingLowerPrice float64
+}
+
+func NewCThostFtdcMarketDataBandingPriceField(p *C.CThostFtdcMarketDataBandingPriceField) *CThostFtdcMarketDataBandingPriceField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcMarketDataBandingPriceField)
+	ret.BandingUpperPrice = goFloat64(p.BandingUpperPrice)
+	ret.BandingLowerPrice = goFloat64(p.BandingLowerPrice)
+	return ret
+}
+
+func CThostFtdcMarketDataBandingPriceFieldCValue(s *CThostFtdcMarketDataBandingPriceField) *C.CThostFtdcMarketDataBandingPriceField {
+	ptr := (*C.CThostFtdcMarketDataBandingPriceField)(C.malloc(C.sizeof_CThostFtdcMarketDataBandingPriceField))
+	ptr.BandingUpperPrice = C.double(s.BandingUpperPrice)
+	ptr.BandingLowerPrice = C.double(s.BandingLowerPrice)
 	return ptr
 }
 
@@ -9596,6 +10134,7 @@ func CThostFtdcMarketDataExchangeFieldCValue(s *CThostFtdcMarketDataExchangeFiel
 }
 
 type CThostFtdcSpecificInstrumentField struct {
+	Reserve1     string
 	InstrumentID string
 }
 
@@ -9604,25 +10143,29 @@ func NewCThostFtdcSpecificInstrumentField(p *C.CThostFtdcSpecificInstrumentField
 		return nil
 	}
 	ret := new(CThostFtdcSpecificInstrumentField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcSpecificInstrumentFieldCValue(s *CThostFtdcSpecificInstrumentField) *C.CThostFtdcSpecificInstrumentField {
 	ptr := (*C.CThostFtdcSpecificInstrumentField)(C.malloc(C.sizeof_CThostFtdcSpecificInstrumentField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcInstrumentStatusField struct {
 	ExchangeID        string
-	ExchangeInstID    string
+	Reserve1          string
 	SettlementGroupID string
-	InstrumentID      string
+	Reserve2          string
 	InstrumentStatus  byte
 	TradingSegmentSN  int
 	EnterTime         string
 	EnterReason       byte
+	ExchangeInstID    string
+	InstrumentID      string
 }
 
 func NewCThostFtdcInstrumentStatusField(p *C.CThostFtdcInstrumentStatusField) *CThostFtdcInstrumentStatusField {
@@ -9631,31 +10174,36 @@ func NewCThostFtdcInstrumentStatusField(p *C.CThostFtdcInstrumentStatusField) *C
 	}
 	ret := new(CThostFtdcInstrumentStatusField)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.SettlementGroupID = c2goStr(&p.SettlementGroupID[0], 9)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.InstrumentStatus = byte(p.InstrumentStatus)
 	ret.TradingSegmentSN = int(p.TradingSegmentSN)
 	ret.EnterTime = c2goStr(&p.EnterTime[0], 9)
 	ret.EnterReason = byte(p.EnterReason)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcInstrumentStatusFieldCValue(s *CThostFtdcInstrumentStatusField) *C.CThostFtdcInstrumentStatusField {
 	ptr := (*C.CThostFtdcInstrumentStatusField)(C.malloc(C.sizeof_CThostFtdcInstrumentStatusField))
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.SettlementGroupID, &ptr.SettlementGroupID[0], 9)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	ptr.InstrumentStatus = C.char(s.InstrumentStatus)
 	ptr.TradingSegmentSN = C.int(s.TradingSegmentSN)
 	go2cStr(s.EnterTime, &ptr.EnterTime[0], 9)
 	ptr.EnterReason = C.char(s.EnterReason)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryInstrumentStatusField struct {
 	ExchangeID     string
+	Reserve1       string
 	ExchangeInstID string
 }
 
@@ -9665,14 +10213,16 @@ func NewCThostFtdcQryInstrumentStatusField(p *C.CThostFtdcQryInstrumentStatusFie
 	}
 	ret := new(CThostFtdcQryInstrumentStatusField)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryInstrumentStatusFieldCValue(s *CThostFtdcQryInstrumentStatusField) *C.CThostFtdcQryInstrumentStatusField {
 	ptr := (*C.CThostFtdcQryInstrumentStatusField)(C.malloc(C.sizeof_CThostFtdcQryInstrumentStatusField))
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	return ptr
 }
 
@@ -9816,9 +10366,10 @@ func CThostFtdcTransferBankFieldCValue(s *CThostFtdcTransferBankField) *C.CThost
 type CThostFtdcQryInvestorPositionDetailField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	ExchangeID   string
 	InvestUnitID string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryInvestorPositionDetailField(p *C.CThostFtdcQryInvestorPositionDetailField) *CThostFtdcQryInvestorPositionDetailField {
@@ -9828,9 +10379,10 @@ func NewCThostFtdcQryInvestorPositionDetailField(p *C.CThostFtdcQryInvestorPosit
 	ret := new(CThostFtdcQryInvestorPositionDetailField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -9838,14 +10390,15 @@ func CThostFtdcQryInvestorPositionDetailFieldCValue(s *CThostFtdcQryInvestorPosi
 	ptr := (*C.CThostFtdcQryInvestorPositionDetailField)(C.malloc(C.sizeof_CThostFtdcQryInvestorPositionDetailField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcInvestorPositionDetailField struct {
-	InstrumentID          string
+	Reserve1              string
 	BrokerID              string
 	InvestorID            string
 	HedgeFlag             byte
@@ -9857,7 +10410,7 @@ type CThostFtdcInvestorPositionDetailField struct {
 	TradingDay            string
 	SettlementID          int
 	TradeType             byte
-	CombInstrumentID      string
+	Reserve2              string
 	ExchangeID            string
 	CloseProfitByDate     float64
 	CloseProfitByTrade    float64
@@ -9874,6 +10427,8 @@ type CThostFtdcInvestorPositionDetailField struct {
 	TimeFirstVolume       int
 	InvestUnitID          string
 	SpecPosiType          byte
+	InstrumentID          string
+	CombInstrumentID      string
 }
 
 func NewCThostFtdcInvestorPositionDetailField(p *C.CThostFtdcInvestorPositionDetailField) *CThostFtdcInvestorPositionDetailField {
@@ -9881,7 +10436,7 @@ func NewCThostFtdcInvestorPositionDetailField(p *C.CThostFtdcInvestorPositionDet
 		return nil
 	}
 	ret := new(CThostFtdcInvestorPositionDetailField)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.HedgeFlag = byte(p.HedgeFlag)
@@ -9893,7 +10448,7 @@ func NewCThostFtdcInvestorPositionDetailField(p *C.CThostFtdcInvestorPositionDet
 	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
 	ret.SettlementID = int(p.SettlementID)
 	ret.TradeType = byte(p.TradeType)
-	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.CloseProfitByDate = goFloat64(p.CloseProfitByDate)
 	ret.CloseProfitByTrade = goFloat64(p.CloseProfitByTrade)
@@ -9910,12 +10465,14 @@ func NewCThostFtdcInvestorPositionDetailField(p *C.CThostFtdcInvestorPositionDet
 	ret.TimeFirstVolume = int(p.TimeFirstVolume)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
 	ret.SpecPosiType = byte(p.SpecPosiType)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcInvestorPositionDetailFieldCValue(s *CThostFtdcInvestorPositionDetailField) *C.CThostFtdcInvestorPositionDetailField {
 	ptr := (*C.CThostFtdcInvestorPositionDetailField)(C.malloc(C.sizeof_CThostFtdcInvestorPositionDetailField))
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
@@ -9927,7 +10484,7 @@ func CThostFtdcInvestorPositionDetailFieldCValue(s *CThostFtdcInvestorPositionDe
 	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
 	ptr.SettlementID = C.int(s.SettlementID)
 	ptr.TradeType = C.char(s.TradeType)
-	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	ptr.CloseProfitByDate = C.double(s.CloseProfitByDate)
 	ptr.CloseProfitByTrade = C.double(s.CloseProfitByTrade)
@@ -9944,6 +10501,8 @@ func CThostFtdcInvestorPositionDetailFieldCValue(s *CThostFtdcInvestorPositionDe
 	ptr.TimeFirstVolume = C.int(s.TimeFirstVolume)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
 	ptr.SpecPosiType = C.char(s.SpecPosiType)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 81)
 	return ptr
 }
 
@@ -9995,6 +10554,7 @@ type CThostFtdcMDTraderOfferField struct {
 	BrokerID                 string
 	MaxTradeID               string
 	MaxOrderMessageReference string
+	OrderCancelAlg           byte
 }
 
 func NewCThostFtdcMDTraderOfferField(p *C.CThostFtdcMDTraderOfferField) *CThostFtdcMDTraderOfferField {
@@ -10021,6 +10581,7 @@ func NewCThostFtdcMDTraderOfferField(p *C.CThostFtdcMDTraderOfferField) *CThostF
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.MaxTradeID = c2goStr(&p.MaxTradeID[0], 21)
 	ret.MaxOrderMessageReference = c2goStr(&p.MaxOrderMessageReference[0], 7)
+	ret.OrderCancelAlg = byte(p.OrderCancelAlg)
 	return ret
 }
 
@@ -10045,6 +10606,7 @@ func CThostFtdcMDTraderOfferFieldCValue(s *CThostFtdcMDTraderOfferField) *C.CTho
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.MaxTradeID, &ptr.MaxTradeID[0], 21)
 	go2cStr(s.MaxOrderMessageReference, &ptr.MaxOrderMessageReference[0], 7)
+	ptr.OrderCancelAlg = C.char(s.OrderCancelAlg)
 	return ptr
 }
 
@@ -10298,8 +10860,10 @@ func CThostFtdcTradingAccountPasswordUpdateFieldCValue(s *CThostFtdcTradingAccou
 }
 
 type CThostFtdcQryCombinationLegField struct {
-	CombInstrumentID string
+	Reserve1         string
 	LegID            int
+	Reserve2         string
+	CombInstrumentID string
 	LegInstrumentID  string
 }
 
@@ -10308,17 +10872,21 @@ func NewCThostFtdcQryCombinationLegField(p *C.CThostFtdcQryCombinationLegField) 
 		return nil
 	}
 	ret := new(CThostFtdcQryCombinationLegField)
-	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.LegID = int(p.LegID)
-	ret.LegInstrumentID = c2goStr(&p.LegInstrumentID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
+	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 81)
+	ret.LegInstrumentID = c2goStr(&p.LegInstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryCombinationLegFieldCValue(s *CThostFtdcQryCombinationLegField) *C.CThostFtdcQryCombinationLegField {
 	ptr := (*C.CThostFtdcQryCombinationLegField)(C.malloc(C.sizeof_CThostFtdcQryCombinationLegField))
-	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.LegID = C.int(s.LegID)
-	go2cStr(s.LegInstrumentID, &ptr.LegInstrumentID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
+	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 81)
+	go2cStr(s.LegInstrumentID, &ptr.LegInstrumentID[0], 81)
 	return ptr
 }
 
@@ -10342,12 +10910,14 @@ func CThostFtdcQrySyncStatusFieldCValue(s *CThostFtdcQrySyncStatusField) *C.CTho
 }
 
 type CThostFtdcCombinationLegField struct {
-	CombInstrumentID string
+	Reserve1         string
 	LegID            int
-	LegInstrumentID  string
+	Reserve2         string
 	Direction        byte
 	LegMultiple      int
 	ImplyLevel       int
+	CombInstrumentID string
+	LegInstrumentID  string
 }
 
 func NewCThostFtdcCombinationLegField(p *C.CThostFtdcCombinationLegField) *CThostFtdcCombinationLegField {
@@ -10355,23 +10925,27 @@ func NewCThostFtdcCombinationLegField(p *C.CThostFtdcCombinationLegField) *CThos
 		return nil
 	}
 	ret := new(CThostFtdcCombinationLegField)
-	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.LegID = int(p.LegID)
-	ret.LegInstrumentID = c2goStr(&p.LegInstrumentID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.Direction = byte(p.Direction)
 	ret.LegMultiple = int(p.LegMultiple)
 	ret.ImplyLevel = int(p.ImplyLevel)
+	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 81)
+	ret.LegInstrumentID = c2goStr(&p.LegInstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcCombinationLegFieldCValue(s *CThostFtdcCombinationLegField) *C.CThostFtdcCombinationLegField {
 	ptr := (*C.CThostFtdcCombinationLegField)(C.malloc(C.sizeof_CThostFtdcCombinationLegField))
-	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.LegID = C.int(s.LegID)
-	go2cStr(s.LegInstrumentID, &ptr.LegInstrumentID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	ptr.Direction = C.char(s.Direction)
 	ptr.LegMultiple = C.int(s.LegMultiple)
 	ptr.ImplyLevel = C.int(s.ImplyLevel)
+	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 81)
+	go2cStr(s.LegInstrumentID, &ptr.LegInstrumentID[0], 81)
 	return ptr
 }
 
@@ -10505,6 +11079,7 @@ type CThostFtdcBrokerUserEventField struct {
 	EventTime       string
 	UserEventInfo   string
 	InvestorID      string
+	Reserve1        string
 	InstrumentID    string
 }
 
@@ -10521,7 +11096,8 @@ func NewCThostFtdcBrokerUserEventField(p *C.CThostFtdcBrokerUserEventField) *CTh
 	ret.EventTime = c2goStr(&p.EventTime[0], 9)
 	ret.UserEventInfo = c2goStr(&p.UserEventInfo[0], 1025)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -10535,7 +11111,8 @@ func CThostFtdcBrokerUserEventFieldCValue(s *CThostFtdcBrokerUserEventField) *C.
 	go2cStr(s.EventTime, &ptr.EventTime[0], 9)
 	go2cStr(s.UserEventInfo, &ptr.UserEventInfo[0], 1025)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -10601,7 +11178,7 @@ type CThostFtdcInvestorPositionCombineDetailField struct {
 	InvestorID         string
 	ComTradeID         string
 	TradeID            string
-	InstrumentID       string
+	Reserve1           string
 	HedgeFlag          byte
 	Direction          byte
 	TotalAmt           int
@@ -10611,9 +11188,11 @@ type CThostFtdcInvestorPositionCombineDetailField struct {
 	MarginRateByVolume float64
 	LegID              int
 	LegMultiple        int
-	CombInstrumentID   string
+	Reserve2           string
 	TradeGroupID       int
 	InvestUnitID       string
+	InstrumentID       string
+	CombInstrumentID   string
 }
 
 func NewCThostFtdcInvestorPositionCombineDetailField(p *C.CThostFtdcInvestorPositionCombineDetailField) *CThostFtdcInvestorPositionCombineDetailField {
@@ -10629,7 +11208,7 @@ func NewCThostFtdcInvestorPositionCombineDetailField(p *C.CThostFtdcInvestorPosi
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.ComTradeID = c2goStr(&p.ComTradeID[0], 21)
 	ret.TradeID = c2goStr(&p.TradeID[0], 21)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.Direction = byte(p.Direction)
 	ret.TotalAmt = int(p.TotalAmt)
@@ -10639,9 +11218,11 @@ func NewCThostFtdcInvestorPositionCombineDetailField(p *C.CThostFtdcInvestorPosi
 	ret.MarginRateByVolume = goFloat64(p.MarginRateByVolume)
 	ret.LegID = int(p.LegID)
 	ret.LegMultiple = int(p.LegMultiple)
-	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.TradeGroupID = int(p.TradeGroupID)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 81)
 	return ret
 }
 
@@ -10655,7 +11236,7 @@ func CThostFtdcInvestorPositionCombineDetailFieldCValue(s *CThostFtdcInvestorPos
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	go2cStr(s.ComTradeID, &ptr.ComTradeID[0], 21)
 	go2cStr(s.TradeID, &ptr.TradeID[0], 21)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	ptr.Direction = C.char(s.Direction)
 	ptr.TotalAmt = C.int(s.TotalAmt)
@@ -10665,16 +11246,18 @@ func CThostFtdcInvestorPositionCombineDetailFieldCValue(s *CThostFtdcInvestorPos
 	ptr.MarginRateByVolume = C.double(s.MarginRateByVolume)
 	ptr.LegID = C.int(s.LegID)
 	ptr.LegMultiple = C.int(s.LegMultiple)
-	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	ptr.TradeGroupID = C.int(s.TradeGroupID)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcParkedOrderField struct {
 	BrokerID            string
 	InvestorID          string
-	InstrumentID        string
+	Reserve1            string
 	OrderRef            string
 	UserID              string
 	OrderPriceType      byte
@@ -10705,8 +11288,10 @@ type CThostFtdcParkedOrderField struct {
 	CurrencyID          string
 	ClientID            string
 	InvestUnitID        string
-	IPAddress           string
+	Reserve2            string
 	MacAddress          string
+	InstrumentID        string
+	IPAddress           string
 }
 
 func NewCThostFtdcParkedOrderField(p *C.CThostFtdcParkedOrderField) *CThostFtdcParkedOrderField {
@@ -10716,7 +11301,7 @@ func NewCThostFtdcParkedOrderField(p *C.CThostFtdcParkedOrderField) *CThostFtdcP
 	ret := new(CThostFtdcParkedOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.OrderRef = c2goStr(&p.OrderRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.OrderPriceType = byte(p.OrderPriceType)
@@ -10747,8 +11332,10 @@ func NewCThostFtdcParkedOrderField(p *C.CThostFtdcParkedOrderField) *CThostFtdcP
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -10756,7 +11343,7 @@ func CThostFtdcParkedOrderFieldCValue(s *CThostFtdcParkedOrderField) *C.CThostFt
 	ptr := (*C.CThostFtdcParkedOrderField)(C.malloc(C.sizeof_CThostFtdcParkedOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.OrderRef, &ptr.OrderRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.OrderPriceType = C.char(s.OrderPriceType)
@@ -10787,8 +11374,10 @@ func CThostFtdcParkedOrderFieldCValue(s *CThostFtdcParkedOrderField) *C.CThostFt
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -10806,15 +11395,17 @@ type CThostFtdcParkedOrderActionField struct {
 	LimitPrice          float64
 	VolumeChange        int
 	UserID              string
-	InstrumentID        string
+	Reserve1            string
 	ParkedOrderActionID string
 	UserType            byte
 	Status              byte
 	ErrorID             int
 	ErrorMsg            string
 	InvestUnitID        string
-	IPAddress           string
+	Reserve2            string
 	MacAddress          string
+	InstrumentID        string
+	IPAddress           string
 }
 
 func NewCThostFtdcParkedOrderActionField(p *C.CThostFtdcParkedOrderActionField) *CThostFtdcParkedOrderActionField {
@@ -10835,15 +11426,17 @@ func NewCThostFtdcParkedOrderActionField(p *C.CThostFtdcParkedOrderActionField) 
 	ret.LimitPrice = goFloat64(p.LimitPrice)
 	ret.VolumeChange = int(p.VolumeChange)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ParkedOrderActionID = c2goStr(&p.ParkedOrderActionID[0], 13)
 	ret.UserType = byte(p.UserType)
 	ret.Status = byte(p.Status)
 	ret.ErrorID = int(p.ErrorID)
 	ret.ErrorMsg = c2goStr(&p.ErrorMsg[0], 81)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -10862,24 +11455,27 @@ func CThostFtdcParkedOrderActionFieldCValue(s *CThostFtdcParkedOrderActionField)
 	ptr.LimitPrice = C.double(s.LimitPrice)
 	ptr.VolumeChange = C.int(s.VolumeChange)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ParkedOrderActionID, &ptr.ParkedOrderActionID[0], 13)
 	ptr.UserType = C.char(s.UserType)
 	ptr.Status = C.char(s.Status)
 	ptr.ErrorID = C.int(s.ErrorID)
 	go2cStr(s.ErrorMsg, &ptr.ErrorMsg[0], 81)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQryParkedOrderField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	ExchangeID   string
 	InvestUnitID string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryParkedOrderField(p *C.CThostFtdcQryParkedOrderField) *CThostFtdcQryParkedOrderField {
@@ -10889,9 +11485,10 @@ func NewCThostFtdcQryParkedOrderField(p *C.CThostFtdcQryParkedOrderField) *CThos
 	ret := new(CThostFtdcQryParkedOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -10899,18 +11496,20 @@ func CThostFtdcQryParkedOrderFieldCValue(s *CThostFtdcQryParkedOrderField) *C.CT
 	ptr := (*C.CThostFtdcQryParkedOrderField)(C.malloc(C.sizeof_CThostFtdcQryParkedOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryParkedOrderActionField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	ExchangeID   string
 	InvestUnitID string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryParkedOrderActionField(p *C.CThostFtdcQryParkedOrderActionField) *CThostFtdcQryParkedOrderActionField {
@@ -10920,9 +11519,10 @@ func NewCThostFtdcQryParkedOrderActionField(p *C.CThostFtdcQryParkedOrderActionF
 	ret := new(CThostFtdcQryParkedOrderActionField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -10930,9 +11530,10 @@ func CThostFtdcQryParkedOrderActionFieldCValue(s *CThostFtdcQryParkedOrderAction
 	ptr := (*C.CThostFtdcQryParkedOrderActionField)(C.malloc(C.sizeof_CThostFtdcQryParkedOrderActionField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -11029,9 +11630,10 @@ func CThostFtdcInvestorWithdrawAlgorithmFieldCValue(s *CThostFtdcInvestorWithdra
 type CThostFtdcQryInvestorPositionCombineDetailField struct {
 	BrokerID         string
 	InvestorID       string
-	CombInstrumentID string
+	Reserve1         string
 	ExchangeID       string
 	InvestUnitID     string
+	CombInstrumentID string
 }
 
 func NewCThostFtdcQryInvestorPositionCombineDetailField(p *C.CThostFtdcQryInvestorPositionCombineDetailField) *CThostFtdcQryInvestorPositionCombineDetailField {
@@ -11041,9 +11643,10 @@ func NewCThostFtdcQryInvestorPositionCombineDetailField(p *C.CThostFtdcQryInvest
 	ret := new(CThostFtdcQryInvestorPositionCombineDetailField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 81)
 	return ret
 }
 
@@ -11051,9 +11654,10 @@ func CThostFtdcQryInvestorPositionCombineDetailFieldCValue(s *CThostFtdcQryInves
 	ptr := (*C.CThostFtdcQryInvestorPositionCombineDetailField)(C.malloc(C.sizeof_CThostFtdcQryInvestorPositionCombineDetailField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 81)
 	return ptr
 }
 
@@ -11104,9 +11708,11 @@ func CThostFtdcVerifyInvestorPasswordFieldCValue(s *CThostFtdcVerifyInvestorPass
 type CThostFtdcUserIPField struct {
 	BrokerID   string
 	UserID     string
+	Reserve1   string
+	Reserve2   string
+	MacAddress string
 	IPAddress  string
 	IPMask     string
-	MacAddress string
 }
 
 func NewCThostFtdcUserIPField(p *C.CThostFtdcUserIPField) *CThostFtdcUserIPField {
@@ -11116,9 +11722,11 @@ func NewCThostFtdcUserIPField(p *C.CThostFtdcUserIPField) *CThostFtdcUserIPField
 	ret := new(CThostFtdcUserIPField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
-	ret.IPMask = c2goStr(&p.IPMask[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.IPMask = c2goStr(&p.IPMask[0], 33)
 	return ret
 }
 
@@ -11126,9 +11734,11 @@ func CThostFtdcUserIPFieldCValue(s *CThostFtdcUserIPField) *C.CThostFtdcUserIPFi
 	ptr := (*C.CThostFtdcUserIPField)(C.malloc(C.sizeof_CThostFtdcUserIPField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
-	go2cStr(s.IPMask, &ptr.IPMask[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.IPMask, &ptr.IPMask[0], 33)
 	return ptr
 }
 
@@ -11262,7 +11872,7 @@ func CThostFtdcQryErrOrderFieldCValue(s *CThostFtdcQryErrOrderField) *C.CThostFt
 type CThostFtdcErrOrderField struct {
 	BrokerID            string
 	InvestorID          string
-	InstrumentID        string
+	Reserve1            string
 	OrderRef            string
 	UserID              string
 	OrderPriceType      byte
@@ -11290,8 +11900,10 @@ type CThostFtdcErrOrderField struct {
 	AccountID           string
 	CurrencyID          string
 	ClientID            string
-	IPAddress           string
+	Reserve2            string
 	MacAddress          string
+	InstrumentID        string
+	IPAddress           string
 }
 
 func NewCThostFtdcErrOrderField(p *C.CThostFtdcErrOrderField) *CThostFtdcErrOrderField {
@@ -11301,7 +11913,7 @@ func NewCThostFtdcErrOrderField(p *C.CThostFtdcErrOrderField) *CThostFtdcErrOrde
 	ret := new(CThostFtdcErrOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.OrderRef = c2goStr(&p.OrderRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.OrderPriceType = byte(p.OrderPriceType)
@@ -11329,8 +11941,10 @@ func NewCThostFtdcErrOrderField(p *C.CThostFtdcErrOrderField) *CThostFtdcErrOrde
 	ret.AccountID = c2goStr(&p.AccountID[0], 13)
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -11338,7 +11952,7 @@ func CThostFtdcErrOrderFieldCValue(s *CThostFtdcErrOrderField) *C.CThostFtdcErrO
 	ptr := (*C.CThostFtdcErrOrderField)(C.malloc(C.sizeof_CThostFtdcErrOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.OrderRef, &ptr.OrderRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.OrderPriceType = C.char(s.OrderPriceType)
@@ -11366,15 +11980,17 @@ func CThostFtdcErrOrderFieldCValue(s *CThostFtdcErrOrderField) *C.CThostFtdcErrO
 	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcErrorConditionalOrderField struct {
 	BrokerID             string
 	InvestorID           string
-	InstrumentID         string
+	Reserve1             string
 	OrderRef             string
 	UserID               string
 	OrderPriceType       byte
@@ -11397,7 +12013,7 @@ type CThostFtdcErrorConditionalOrderField struct {
 	ExchangeID           string
 	ParticipantID        string
 	ClientID             string
-	ExchangeInstID       string
+	Reserve2             string
 	TraderID             string
 	InstallID            int
 	OrderSubmitStatus    byte
@@ -11435,8 +12051,11 @@ type CThostFtdcErrorConditionalOrderField struct {
 	InvestUnitID         string
 	AccountID            string
 	CurrencyID           string
-	IPAddress            string
+	Reserve3             string
 	MacAddress           string
+	InstrumentID         string
+	ExchangeInstID       string
+	IPAddress            string
 }
 
 func NewCThostFtdcErrorConditionalOrderField(p *C.CThostFtdcErrorConditionalOrderField) *CThostFtdcErrorConditionalOrderField {
@@ -11446,7 +12065,7 @@ func NewCThostFtdcErrorConditionalOrderField(p *C.CThostFtdcErrorConditionalOrde
 	ret := new(CThostFtdcErrorConditionalOrderField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.OrderRef = c2goStr(&p.OrderRef[0], 13)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.OrderPriceType = byte(p.OrderPriceType)
@@ -11469,7 +12088,7 @@ func NewCThostFtdcErrorConditionalOrderField(p *C.CThostFtdcErrorConditionalOrde
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
 	ret.ClientID = c2goStr(&p.ClientID[0], 11)
-	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
 	ret.TraderID = c2goStr(&p.TraderID[0], 21)
 	ret.InstallID = int(p.InstallID)
 	ret.OrderSubmitStatus = byte(p.OrderSubmitStatus)
@@ -11507,8 +12126,11 @@ func NewCThostFtdcErrorConditionalOrderField(p *C.CThostFtdcErrorConditionalOrde
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
 	ret.AccountID = c2goStr(&p.AccountID[0], 13)
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve3 = c2goStr(&p.reserve3[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -11516,7 +12138,7 @@ func CThostFtdcErrorConditionalOrderFieldCValue(s *CThostFtdcErrorConditionalOrd
 	ptr := (*C.CThostFtdcErrorConditionalOrderField)(C.malloc(C.sizeof_CThostFtdcErrorConditionalOrderField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.OrderRef, &ptr.OrderRef[0], 13)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	ptr.OrderPriceType = C.char(s.OrderPriceType)
@@ -11539,7 +12161,7 @@ func CThostFtdcErrorConditionalOrderFieldCValue(s *CThostFtdcErrorConditionalOrd
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
 	go2cStr(s.ClientID, &ptr.ClientID[0], 11)
-	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
 	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
 	ptr.InstallID = C.int(s.InstallID)
 	ptr.OrderSubmitStatus = C.char(s.OrderSubmitStatus)
@@ -11577,8 +12199,11 @@ func CThostFtdcErrorConditionalOrderFieldCValue(s *CThostFtdcErrorConditionalOrd
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
 	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve3, &ptr.reserve3[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -11629,13 +12254,15 @@ type CThostFtdcErrOrderActionField struct {
 	OrderActionStatus byte
 	UserID            string
 	StatusMsg         string
-	InstrumentID      string
+	Reserve1          string
 	BranchID          string
 	InvestUnitID      string
-	IPAddress         string
+	Reserve2          string
 	MacAddress        string
 	ErrorID           int
 	ErrorMsg          string
+	InstrumentID      string
+	IPAddress         string
 }
 
 func NewCThostFtdcErrOrderActionField(p *C.CThostFtdcErrOrderActionField) *CThostFtdcErrOrderActionField {
@@ -11667,13 +12294,15 @@ func NewCThostFtdcErrOrderActionField(p *C.CThostFtdcErrOrderActionField) *CThos
 	ret.OrderActionStatus = byte(p.OrderActionStatus)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
 	ret.StatusMsg = c2goStr(&p.StatusMsg[0], 81)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.BranchID = c2goStr(&p.BranchID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 16)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.ErrorID = int(p.ErrorID)
 	ret.ErrorMsg = c2goStr(&p.ErrorMsg[0], 81)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -11703,13 +12332,15 @@ func CThostFtdcErrOrderActionFieldCValue(s *CThostFtdcErrOrderActionField) *C.CT
 	ptr.OrderActionStatus = C.char(s.OrderActionStatus)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
 	go2cStr(s.StatusMsg, &ptr.StatusMsg[0], 81)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.BranchID, &ptr.BranchID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 16)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	ptr.ErrorID = C.int(s.ErrorID)
 	go2cStr(s.ErrorMsg, &ptr.ErrorMsg[0], 81)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -11757,10 +12388,10 @@ func CThostFtdcExchangeSequenceFieldCValue(s *CThostFtdcExchangeSequenceField) *
 	return ptr
 }
 
-type CThostFtdcQueryMaxOrderVolumeWithPriceField struct {
+type CThostFtdcQryMaxOrderVolumeWithPriceField struct {
 	BrokerID     string
 	InvestorID   string
-	InstrumentID string
+	Reserve1     string
 	Direction    byte
 	OffsetFlag   byte
 	HedgeFlag    byte
@@ -11768,16 +12399,17 @@ type CThostFtdcQueryMaxOrderVolumeWithPriceField struct {
 	Price        float64
 	ExchangeID   string
 	InvestUnitID string
+	InstrumentID string
 }
 
-func NewCThostFtdcQueryMaxOrderVolumeWithPriceField(p *C.CThostFtdcQueryMaxOrderVolumeWithPriceField) *CThostFtdcQueryMaxOrderVolumeWithPriceField {
+func NewCThostFtdcQryMaxOrderVolumeWithPriceField(p *C.CThostFtdcQryMaxOrderVolumeWithPriceField) *CThostFtdcQryMaxOrderVolumeWithPriceField {
 	if p == nil {
 		return nil
 	}
-	ret := new(CThostFtdcQueryMaxOrderVolumeWithPriceField)
+	ret := new(CThostFtdcQryMaxOrderVolumeWithPriceField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.Direction = byte(p.Direction)
 	ret.OffsetFlag = byte(p.OffsetFlag)
 	ret.HedgeFlag = byte(p.HedgeFlag)
@@ -11785,14 +12417,15 @@ func NewCThostFtdcQueryMaxOrderVolumeWithPriceField(p *C.CThostFtdcQueryMaxOrder
 	ret.Price = goFloat64(p.Price)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
-func CThostFtdcQueryMaxOrderVolumeWithPriceFieldCValue(s *CThostFtdcQueryMaxOrderVolumeWithPriceField) *C.CThostFtdcQueryMaxOrderVolumeWithPriceField {
-	ptr := (*C.CThostFtdcQueryMaxOrderVolumeWithPriceField)(C.malloc(C.sizeof_CThostFtdcQueryMaxOrderVolumeWithPriceField))
+func CThostFtdcQryMaxOrderVolumeWithPriceFieldCValue(s *CThostFtdcQryMaxOrderVolumeWithPriceField) *C.CThostFtdcQryMaxOrderVolumeWithPriceField {
+	ptr := (*C.CThostFtdcQryMaxOrderVolumeWithPriceField)(C.malloc(C.sizeof_CThostFtdcQryMaxOrderVolumeWithPriceField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.Direction = C.char(s.Direction)
 	ptr.OffsetFlag = C.char(s.OffsetFlag)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
@@ -11800,6 +12433,7 @@ func CThostFtdcQueryMaxOrderVolumeWithPriceFieldCValue(s *CThostFtdcQueryMaxOrde
 	ptr.Price = C.double(s.Price)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -11874,6 +12508,7 @@ func CThostFtdcBrokerTradingParamsFieldCValue(s *CThostFtdcBrokerTradingParamsFi
 type CThostFtdcQryBrokerTradingAlgosField struct {
 	BrokerID     string
 	ExchangeID   string
+	Reserve1     string
 	InstrumentID string
 }
 
@@ -11884,7 +12519,8 @@ func NewCThostFtdcQryBrokerTradingAlgosField(p *C.CThostFtdcQryBrokerTradingAlgo
 	ret := new(CThostFtdcQryBrokerTradingAlgosField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -11892,17 +12528,19 @@ func CThostFtdcQryBrokerTradingAlgosFieldCValue(s *CThostFtdcQryBrokerTradingAlg
 	ptr := (*C.CThostFtdcQryBrokerTradingAlgosField)(C.malloc(C.sizeof_CThostFtdcQryBrokerTradingAlgosField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcBrokerTradingAlgosField struct {
 	BrokerID                   string
 	ExchangeID                 string
-	InstrumentID               string
+	Reserve1                   string
 	HandlePositionAlgoID       byte
 	FindMarginRateAlgoID       byte
 	HandleTradingAccountAlgoID byte
+	InstrumentID               string
 }
 
 func NewCThostFtdcBrokerTradingAlgosField(p *C.CThostFtdcBrokerTradingAlgosField) *CThostFtdcBrokerTradingAlgosField {
@@ -11912,10 +12550,11 @@ func NewCThostFtdcBrokerTradingAlgosField(p *C.CThostFtdcBrokerTradingAlgosField
 	ret := new(CThostFtdcBrokerTradingAlgosField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.HandlePositionAlgoID = byte(p.HandlePositionAlgoID)
 	ret.FindMarginRateAlgoID = byte(p.FindMarginRateAlgoID)
 	ret.HandleTradingAccountAlgoID = byte(p.HandleTradingAccountAlgoID)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -11923,10 +12562,11 @@ func CThostFtdcBrokerTradingAlgosFieldCValue(s *CThostFtdcBrokerTradingAlgosFiel
 	ptr := (*C.CThostFtdcBrokerTradingAlgosField)(C.malloc(C.sizeof_CThostFtdcBrokerTradingAlgosField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.HandlePositionAlgoID = C.char(s.HandlePositionAlgoID)
 	ptr.FindMarginRateAlgoID = C.char(s.FindMarginRateAlgoID)
 	ptr.HandleTradingAccountAlgoID = C.char(s.HandleTradingAccountAlgoID)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -12286,11 +12926,12 @@ type CThostFtdcEWarrantOffsetField struct {
 	BrokerID     string
 	InvestorID   string
 	ExchangeID   string
-	InstrumentID string
+	Reserve1     string
 	Direction    byte
 	HedgeFlag    byte
 	Volume       int
 	InvestUnitID string
+	InstrumentID string
 }
 
 func NewCThostFtdcEWarrantOffsetField(p *C.CThostFtdcEWarrantOffsetField) *CThostFtdcEWarrantOffsetField {
@@ -12302,11 +12943,12 @@ func NewCThostFtdcEWarrantOffsetField(p *C.CThostFtdcEWarrantOffsetField) *CThos
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.Direction = byte(p.Direction)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.Volume = int(p.Volume)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -12316,11 +12958,12 @@ func CThostFtdcEWarrantOffsetFieldCValue(s *CThostFtdcEWarrantOffsetField) *C.CT
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.Direction = C.char(s.Direction)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	ptr.Volume = C.int(s.Volume)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -12328,8 +12971,9 @@ type CThostFtdcQryEWarrantOffsetField struct {
 	BrokerID     string
 	InvestorID   string
 	ExchangeID   string
-	InstrumentID string
+	Reserve1     string
 	InvestUnitID string
+	InstrumentID string
 }
 
 func NewCThostFtdcQryEWarrantOffsetField(p *C.CThostFtdcQryEWarrantOffsetField) *CThostFtdcQryEWarrantOffsetField {
@@ -12340,8 +12984,9 @@ func NewCThostFtdcQryEWarrantOffsetField(p *C.CThostFtdcQryEWarrantOffsetField) 
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
@@ -12350,18 +12995,20 @@ func CThostFtdcQryEWarrantOffsetFieldCValue(s *CThostFtdcQryEWarrantOffsetField)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryInvestorProductGroupMarginField struct {
 	BrokerID       string
 	InvestorID     string
-	ProductGroupID string
+	Reserve1       string
 	HedgeFlag      byte
 	ExchangeID     string
 	InvestUnitID   string
+	ProductGroupID string
 }
 
 func NewCThostFtdcQryInvestorProductGroupMarginField(p *C.CThostFtdcQryInvestorProductGroupMarginField) *CThostFtdcQryInvestorProductGroupMarginField {
@@ -12371,10 +13018,11 @@ func NewCThostFtdcQryInvestorProductGroupMarginField(p *C.CThostFtdcQryInvestorP
 	ret := new(CThostFtdcQryInvestorProductGroupMarginField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
-	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 81)
 	return ret
 }
 
@@ -12382,15 +13030,16 @@ func CThostFtdcQryInvestorProductGroupMarginFieldCValue(s *CThostFtdcQryInvestor
 	ptr := (*C.CThostFtdcQryInvestorProductGroupMarginField)(C.malloc(C.sizeof_CThostFtdcQryInvestorProductGroupMarginField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
-	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 81)
 	return ptr
 }
 
 type CThostFtdcInvestorProductGroupMarginField struct {
-	ProductGroupID        string
+	Reserve1              string
 	BrokerID              string
 	InvestorID            string
 	TradingDay            string
@@ -12419,6 +13068,7 @@ type CThostFtdcInvestorProductGroupMarginField struct {
 	HedgeFlag             byte
 	ExchangeID            string
 	InvestUnitID          string
+	ProductGroupID        string
 }
 
 func NewCThostFtdcInvestorProductGroupMarginField(p *C.CThostFtdcInvestorProductGroupMarginField) *CThostFtdcInvestorProductGroupMarginField {
@@ -12426,7 +13076,7 @@ func NewCThostFtdcInvestorProductGroupMarginField(p *C.CThostFtdcInvestorProduct
 		return nil
 	}
 	ret := new(CThostFtdcInvestorProductGroupMarginField)
-	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
@@ -12455,12 +13105,13 @@ func NewCThostFtdcInvestorProductGroupMarginField(p *C.CThostFtdcInvestorProduct
 	ret.HedgeFlag = byte(p.HedgeFlag)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 81)
 	return ret
 }
 
 func CThostFtdcInvestorProductGroupMarginFieldCValue(s *CThostFtdcInvestorProductGroupMarginField) *C.CThostFtdcInvestorProductGroupMarginField {
 	ptr := (*C.CThostFtdcInvestorProductGroupMarginField)(C.malloc(C.sizeof_CThostFtdcInvestorProductGroupMarginField))
-	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
@@ -12489,6 +13140,7 @@ func CThostFtdcInvestorProductGroupMarginFieldCValue(s *CThostFtdcInvestorProduc
 	ptr.HedgeFlag = C.char(s.HedgeFlag)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 81)
 	return ptr
 }
 
@@ -12549,8 +13201,9 @@ func CThostFtdcCFMMCTradingAccountTokenFieldCValue(s *CThostFtdcCFMMCTradingAcco
 }
 
 type CThostFtdcQryProductGroupField struct {
-	ProductID  string
+	Reserve1   string
 	ExchangeID string
+	ProductID  string
 }
 
 func NewCThostFtdcQryProductGroupField(p *C.CThostFtdcQryProductGroupField) *CThostFtdcQryProductGroupField {
@@ -12558,21 +13211,25 @@ func NewCThostFtdcQryProductGroupField(p *C.CThostFtdcQryProductGroupField) *CTh
 		return nil
 	}
 	ret := new(CThostFtdcQryProductGroupField)
-	ret.ProductID = c2goStr(&p.ProductID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryProductGroupFieldCValue(s *CThostFtdcQryProductGroupField) *C.CThostFtdcQryProductGroupField {
 	ptr := (*C.CThostFtdcQryProductGroupField)(C.malloc(C.sizeof_CThostFtdcQryProductGroupField))
-	go2cStr(s.ProductID, &ptr.ProductID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
 	return ptr
 }
 
 type CThostFtdcProductGroupField struct {
-	ProductID      string
+	Reserve1       string
 	ExchangeID     string
+	Reserve2       string
+	ProductID      string
 	ProductGroupID string
 }
 
@@ -12581,17 +13238,21 @@ func NewCThostFtdcProductGroupField(p *C.CThostFtdcProductGroupField) *CThostFtd
 		return nil
 	}
 	ret := new(CThostFtdcProductGroupField)
-	ret.ProductID = c2goStr(&p.ProductID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
-	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 31)
+	ret.Reserve2 = c2goStr(&p.reserve2[0], 31)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 81)
 	return ret
 }
 
 func CThostFtdcProductGroupFieldCValue(s *CThostFtdcProductGroupField) *C.CThostFtdcProductGroupField {
 	ptr := (*C.CThostFtdcProductGroupField)(C.malloc(C.sizeof_CThostFtdcProductGroupField))
-	go2cStr(s.ProductID, &ptr.ProductID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
-	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 31)
+	go2cStr(s.Reserve2, &ptr.reserve2[0], 31)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 81)
 	return ptr
 }
 
@@ -12680,11 +13341,12 @@ func CThostFtdcQryBulletinFieldCValue(s *CThostFtdcQryBulletinField) *C.CThostFt
 
 type CThostFtdcMulticastInstrumentField struct {
 	TopicID        int
-	InstrumentID   string
+	Reserve1       string
 	InstrumentNo   int
 	CodePrice      float64
 	VolumeMultiple int
 	PriceTick      float64
+	InstrumentID   string
 }
 
 func NewCThostFtdcMulticastInstrumentField(p *C.CThostFtdcMulticastInstrumentField) *CThostFtdcMulticastInstrumentField {
@@ -12693,27 +13355,30 @@ func NewCThostFtdcMulticastInstrumentField(p *C.CThostFtdcMulticastInstrumentFie
 	}
 	ret := new(CThostFtdcMulticastInstrumentField)
 	ret.TopicID = int(p.TopicID)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InstrumentNo = int(p.InstrumentNo)
 	ret.CodePrice = goFloat64(p.CodePrice)
 	ret.VolumeMultiple = int(p.VolumeMultiple)
 	ret.PriceTick = goFloat64(p.PriceTick)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcMulticastInstrumentFieldCValue(s *CThostFtdcMulticastInstrumentField) *C.CThostFtdcMulticastInstrumentField {
 	ptr := (*C.CThostFtdcMulticastInstrumentField)(C.malloc(C.sizeof_CThostFtdcMulticastInstrumentField))
 	ptr.TopicID = C.int(s.TopicID)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	ptr.InstrumentNo = C.int(s.InstrumentNo)
 	ptr.CodePrice = C.double(s.CodePrice)
 	ptr.VolumeMultiple = C.int(s.VolumeMultiple)
 	ptr.PriceTick = C.double(s.PriceTick)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
 type CThostFtdcQryMulticastInstrumentField struct {
 	TopicID      int
+	Reserve1     string
 	InstrumentID string
 }
 
@@ -12723,14 +13388,16 @@ func NewCThostFtdcQryMulticastInstrumentField(p *C.CThostFtdcQryMulticastInstrum
 	}
 	ret := new(CThostFtdcQryMulticastInstrumentField)
 	ret.TopicID = int(p.TopicID)
-	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 31)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	return ret
 }
 
 func CThostFtdcQryMulticastInstrumentFieldCValue(s *CThostFtdcQryMulticastInstrumentField) *C.CThostFtdcQryMulticastInstrumentField {
 	ptr := (*C.CThostFtdcQryMulticastInstrumentField)(C.malloc(C.sizeof_CThostFtdcQryMulticastInstrumentField))
 	ptr.TopicID = C.int(s.TopicID)
-	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 31)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	return ptr
 }
 
@@ -16319,6 +16986,7 @@ func CThostFtdcCurrTransferIdentityFieldCValue(s *CThostFtdcCurrTransferIdentity
 type CThostFtdcLoginForbiddenUserField struct {
 	BrokerID  string
 	UserID    string
+	Reserve1  string
 	IPAddress string
 }
 
@@ -16329,7 +16997,8 @@ func NewCThostFtdcLoginForbiddenUserField(p *C.CThostFtdcLoginForbiddenUserField
 	ret := new(CThostFtdcLoginForbiddenUserField)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
@@ -16337,7 +17006,8 @@ func CThostFtdcLoginForbiddenUserFieldCValue(s *CThostFtdcLoginForbiddenUserFiel
 	ptr := (*C.CThostFtdcLoginForbiddenUserField)(C.malloc(C.sizeof_CThostFtdcLoginForbiddenUserField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -16360,31 +17030,6 @@ func CThostFtdcQryLoginForbiddenUserFieldCValue(s *CThostFtdcQryLoginForbiddenUs
 	ptr := (*C.CThostFtdcQryLoginForbiddenUserField)(C.malloc(C.sizeof_CThostFtdcQryLoginForbiddenUserField))
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	return ptr
-}
-
-type CThostFtdcMulticastGroupInfoField struct {
-	GroupIP   string
-	GroupPort int
-	SourceIP  string
-}
-
-func NewCThostFtdcMulticastGroupInfoField(p *C.CThostFtdcMulticastGroupInfoField) *CThostFtdcMulticastGroupInfoField {
-	if p == nil {
-		return nil
-	}
-	ret := new(CThostFtdcMulticastGroupInfoField)
-	ret.GroupIP = c2goStr(&p.GroupIP[0], 16)
-	ret.GroupPort = int(p.GroupPort)
-	ret.SourceIP = c2goStr(&p.SourceIP[0], 16)
-	return ret
-}
-
-func CThostFtdcMulticastGroupInfoFieldCValue(s *CThostFtdcMulticastGroupInfoField) *C.CThostFtdcMulticastGroupInfoField {
-	ptr := (*C.CThostFtdcMulticastGroupInfoField)(C.malloc(C.sizeof_CThostFtdcMulticastGroupInfoField))
-	go2cStr(s.GroupIP, &ptr.GroupIP[0], 16)
-	ptr.GroupPort = C.int(s.GroupPort)
-	go2cStr(s.SourceIP, &ptr.SourceIP[0], 16)
 	return ptr
 }
 
@@ -16417,6 +17062,7 @@ func CThostFtdcTradingAccountReserveFieldCValue(s *CThostFtdcTradingAccountReser
 }
 
 type CThostFtdcQryLoginForbiddenIPField struct {
+	Reserve1  string
 	IPAddress string
 }
 
@@ -16425,17 +17071,20 @@ func NewCThostFtdcQryLoginForbiddenIPField(p *C.CThostFtdcQryLoginForbiddenIPFie
 		return nil
 	}
 	ret := new(CThostFtdcQryLoginForbiddenIPField)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
 func CThostFtdcQryLoginForbiddenIPFieldCValue(s *CThostFtdcQryLoginForbiddenIPField) *C.CThostFtdcQryLoginForbiddenIPField {
 	ptr := (*C.CThostFtdcQryLoginForbiddenIPField)(C.malloc(C.sizeof_CThostFtdcQryLoginForbiddenIPField))
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
 type CThostFtdcQryIPListField struct {
+	Reserve1  string
 	IPAddress string
 }
 
@@ -16444,13 +17093,15 @@ func NewCThostFtdcQryIPListField(p *C.CThostFtdcQryIPListField) *CThostFtdcQryIP
 		return nil
 	}
 	ret := new(CThostFtdcQryIPListField)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
 func CThostFtdcQryIPListFieldCValue(s *CThostFtdcQryIPListField) *C.CThostFtdcQryIPListField {
 	ptr := (*C.CThostFtdcQryIPListField)(C.malloc(C.sizeof_CThostFtdcQryIPListField))
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -16882,46 +17533,6 @@ func CThostFtdcQrySecAgentTradeInfoFieldCValue(s *CThostFtdcQrySecAgentTradeInfo
 	return ptr
 }
 
-type CThostFtdcUserSystemInfoField struct {
-	BrokerID            string
-	UserID              string
-	ClientSystemInfoLen int
-	ClientSystemInfo    string
-	ClientPublicIP      string
-	ClientIPPort        int
-	ClientLoginTime     string
-	ClientAppID         string
-}
-
-func NewCThostFtdcUserSystemInfoField(p *C.CThostFtdcUserSystemInfoField) *CThostFtdcUserSystemInfoField {
-	if p == nil {
-		return nil
-	}
-	ret := new(CThostFtdcUserSystemInfoField)
-	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
-	ret.UserID = c2goStr(&p.UserID[0], 16)
-	ret.ClientSystemInfoLen = int(p.ClientSystemInfoLen)
-	ret.ClientSystemInfo = c2goStr(&p.ClientSystemInfo[0], 273)
-	ret.ClientPublicIP = c2goStr(&p.ClientPublicIP[0], 16)
-	ret.ClientIPPort = int(p.ClientIPPort)
-	ret.ClientLoginTime = c2goStr(&p.ClientLoginTime[0], 9)
-	ret.ClientAppID = c2goStr(&p.ClientAppID[0], 33)
-	return ret
-}
-
-func CThostFtdcUserSystemInfoFieldCValue(s *CThostFtdcUserSystemInfoField) *C.CThostFtdcUserSystemInfoField {
-	ptr := (*C.CThostFtdcUserSystemInfoField)(C.malloc(C.sizeof_CThostFtdcUserSystemInfoField))
-	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
-	go2cStr(s.UserID, &ptr.UserID[0], 16)
-	ptr.ClientSystemInfoLen = C.int(s.ClientSystemInfoLen)
-	go2cStr(s.ClientSystemInfo, &ptr.ClientSystemInfo[0], 273)
-	go2cStr(s.ClientPublicIP, &ptr.ClientPublicIP[0], 16)
-	ptr.ClientIPPort = C.int(s.ClientIPPort)
-	go2cStr(s.ClientLoginTime, &ptr.ClientLoginTime[0], 9)
-	go2cStr(s.ClientAppID, &ptr.ClientAppID[0], 33)
-	return ptr
-}
-
 type CThostFtdcReqUserAuthMethodField struct {
 	TradingDay string
 	BrokerID   string
@@ -17072,10 +17683,11 @@ type CThostFtdcReqUserLoginWithCaptchaField struct {
 	InterfaceProductInfo string
 	ProtocolInfo         string
 	MacAddress           string
-	ClientIPAddress      string
+	Reserve1             string
 	LoginRemark          string
 	Captcha              string
 	ClientIPPort         int
+	ClientIPAddress      string
 }
 
 func NewCThostFtdcReqUserLoginWithCaptchaField(p *C.CThostFtdcReqUserLoginWithCaptchaField) *CThostFtdcReqUserLoginWithCaptchaField {
@@ -17091,10 +17703,11 @@ func NewCThostFtdcReqUserLoginWithCaptchaField(p *C.CThostFtdcReqUserLoginWithCa
 	ret.InterfaceProductInfo = c2goStr(&p.InterfaceProductInfo[0], 11)
 	ret.ProtocolInfo = c2goStr(&p.ProtocolInfo[0], 11)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
-	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.LoginRemark = c2goStr(&p.LoginRemark[0], 36)
 	ret.Captcha = c2goStr(&p.Captcha[0], 41)
 	ret.ClientIPPort = int(p.ClientIPPort)
+	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 33)
 	return ret
 }
 
@@ -17108,10 +17721,11 @@ func CThostFtdcReqUserLoginWithCaptchaFieldCValue(s *CThostFtdcReqUserLoginWithC
 	go2cStr(s.InterfaceProductInfo, &ptr.InterfaceProductInfo[0], 11)
 	go2cStr(s.ProtocolInfo, &ptr.ProtocolInfo[0], 11)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
-	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.LoginRemark, &ptr.LoginRemark[0], 36)
 	go2cStr(s.Captcha, &ptr.Captcha[0], 41)
 	ptr.ClientIPPort = C.int(s.ClientIPPort)
+	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 33)
 	return ptr
 }
 
@@ -17124,10 +17738,11 @@ type CThostFtdcReqUserLoginWithTextField struct {
 	InterfaceProductInfo string
 	ProtocolInfo         string
 	MacAddress           string
-	ClientIPAddress      string
+	Reserve1             string
 	LoginRemark          string
 	Text                 string
 	ClientIPPort         int
+	ClientIPAddress      string
 }
 
 func NewCThostFtdcReqUserLoginWithTextField(p *C.CThostFtdcReqUserLoginWithTextField) *CThostFtdcReqUserLoginWithTextField {
@@ -17143,10 +17758,11 @@ func NewCThostFtdcReqUserLoginWithTextField(p *C.CThostFtdcReqUserLoginWithTextF
 	ret.InterfaceProductInfo = c2goStr(&p.InterfaceProductInfo[0], 11)
 	ret.ProtocolInfo = c2goStr(&p.ProtocolInfo[0], 11)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
-	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.LoginRemark = c2goStr(&p.LoginRemark[0], 36)
 	ret.Text = c2goStr(&p.Text[0], 41)
 	ret.ClientIPPort = int(p.ClientIPPort)
+	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 33)
 	return ret
 }
 
@@ -17160,10 +17776,11 @@ func CThostFtdcReqUserLoginWithTextFieldCValue(s *CThostFtdcReqUserLoginWithText
 	go2cStr(s.InterfaceProductInfo, &ptr.InterfaceProductInfo[0], 11)
 	go2cStr(s.ProtocolInfo, &ptr.ProtocolInfo[0], 11)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
-	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.LoginRemark, &ptr.LoginRemark[0], 36)
 	go2cStr(s.Text, &ptr.Text[0], 41)
 	ptr.ClientIPPort = C.int(s.ClientIPPort)
+	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 33)
 	return ptr
 }
 
@@ -17176,10 +17793,11 @@ type CThostFtdcReqUserLoginWithOTPField struct {
 	InterfaceProductInfo string
 	ProtocolInfo         string
 	MacAddress           string
-	ClientIPAddress      string
+	Reserve1             string
 	LoginRemark          string
 	OTPPassword          string
 	ClientIPPort         int
+	ClientIPAddress      string
 }
 
 func NewCThostFtdcReqUserLoginWithOTPField(p *C.CThostFtdcReqUserLoginWithOTPField) *CThostFtdcReqUserLoginWithOTPField {
@@ -17195,10 +17813,11 @@ func NewCThostFtdcReqUserLoginWithOTPField(p *C.CThostFtdcReqUserLoginWithOTPFie
 	ret.InterfaceProductInfo = c2goStr(&p.InterfaceProductInfo[0], 11)
 	ret.ProtocolInfo = c2goStr(&p.ProtocolInfo[0], 11)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
-	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 16)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.LoginRemark = c2goStr(&p.LoginRemark[0], 36)
 	ret.OTPPassword = c2goStr(&p.OTPPassword[0], 41)
 	ret.ClientIPPort = int(p.ClientIPPort)
+	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 33)
 	return ret
 }
 
@@ -17212,10 +17831,11 @@ func CThostFtdcReqUserLoginWithOTPFieldCValue(s *CThostFtdcReqUserLoginWithOTPFi
 	go2cStr(s.InterfaceProductInfo, &ptr.InterfaceProductInfo[0], 11)
 	go2cStr(s.ProtocolInfo, &ptr.ProtocolInfo[0], 11)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
-	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 16)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.LoginRemark, &ptr.LoginRemark[0], 36)
 	go2cStr(s.OTPPassword, &ptr.OTPPassword[0], 41)
 	ptr.ClientIPPort = C.int(s.ClientIPPort)
+	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 33)
 	return ptr
 }
 
@@ -17341,13 +17961,13 @@ func NewCThostFtdcAuthForbiddenIPField(p *C.CThostFtdcAuthForbiddenIPField) *CTh
 		return nil
 	}
 	ret := new(CThostFtdcAuthForbiddenIPField)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
 func CThostFtdcAuthForbiddenIPFieldCValue(s *CThostFtdcAuthForbiddenIPField) *C.CThostFtdcAuthForbiddenIPField {
 	ptr := (*C.CThostFtdcAuthForbiddenIPField)(C.malloc(C.sizeof_CThostFtdcAuthForbiddenIPField))
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -17360,13 +17980,13 @@ func NewCThostFtdcQryAuthForbiddenIPField(p *C.CThostFtdcQryAuthForbiddenIPField
 		return nil
 	}
 	ret := new(CThostFtdcQryAuthForbiddenIPField)
-	ret.IPAddress = c2goStr(&p.IPAddress[0], 16)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	return ret
 }
 
 func CThostFtdcQryAuthForbiddenIPFieldCValue(s *CThostFtdcQryAuthForbiddenIPField) *C.CThostFtdcQryAuthForbiddenIPField {
 	ptr := (*C.CThostFtdcQryAuthForbiddenIPField)(C.malloc(C.sizeof_CThostFtdcQryAuthForbiddenIPField))
-	go2cStr(s.IPAddress, &ptr.IPAddress[0], 16)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	return ptr
 }
 
@@ -17401,5 +18021,2197 @@ func CThostFtdcSyncDelaySwapFrozenFieldCValue(s *CThostFtdcSyncDelaySwapFrozenFi
 	go2cStr(s.FromCurrencyID, &ptr.FromCurrencyID[0], 4)
 	ptr.FromRemainSwap = C.double(s.FromRemainSwap)
 	ptr.IsManualSwap = C.int(s.IsManualSwap)
+	return ptr
+}
+
+type CThostFtdcUserSystemInfoField struct {
+	BrokerID            string
+	UserID              string
+	ClientSystemInfoLen int
+	ClientSystemInfo    string
+	Reserve1            string
+	ClientIPPort        int
+	ClientLoginTime     string
+	ClientAppID         string
+	ClientPublicIP      string
+	ClientLoginRemark   string
+}
+
+func NewCThostFtdcUserSystemInfoField(p *C.CThostFtdcUserSystemInfoField) *CThostFtdcUserSystemInfoField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcUserSystemInfoField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	ret.ClientSystemInfoLen = int(p.ClientSystemInfoLen)
+	ret.ClientSystemInfo = c2goStr(&p.ClientSystemInfo[0], 273)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
+	ret.ClientIPPort = int(p.ClientIPPort)
+	ret.ClientLoginTime = c2goStr(&p.ClientLoginTime[0], 9)
+	ret.ClientAppID = c2goStr(&p.ClientAppID[0], 33)
+	ret.ClientPublicIP = c2goStr(&p.ClientPublicIP[0], 33)
+	ret.ClientLoginRemark = c2goStr(&p.ClientLoginRemark[0], 151)
+	return ret
+}
+
+func CThostFtdcUserSystemInfoFieldCValue(s *CThostFtdcUserSystemInfoField) *C.CThostFtdcUserSystemInfoField {
+	ptr := (*C.CThostFtdcUserSystemInfoField)(C.malloc(C.sizeof_CThostFtdcUserSystemInfoField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	ptr.ClientSystemInfoLen = C.int(s.ClientSystemInfoLen)
+	go2cStr(s.ClientSystemInfo, &ptr.ClientSystemInfo[0], 273)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
+	ptr.ClientIPPort = C.int(s.ClientIPPort)
+	go2cStr(s.ClientLoginTime, &ptr.ClientLoginTime[0], 9)
+	go2cStr(s.ClientAppID, &ptr.ClientAppID[0], 33)
+	go2cStr(s.ClientPublicIP, &ptr.ClientPublicIP[0], 33)
+	go2cStr(s.ClientLoginRemark, &ptr.ClientLoginRemark[0], 151)
+	return ptr
+}
+
+type CThostFtdcAuthUserIDField struct {
+	BrokerID string
+	AppID    string
+	UserID   string
+	AuthType byte
+}
+
+func NewCThostFtdcAuthUserIDField(p *C.CThostFtdcAuthUserIDField) *CThostFtdcAuthUserIDField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcAuthUserIDField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.AppID = c2goStr(&p.AppID[0], 33)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	ret.AuthType = byte(p.AuthType)
+	return ret
+}
+
+func CThostFtdcAuthUserIDFieldCValue(s *CThostFtdcAuthUserIDField) *C.CThostFtdcAuthUserIDField {
+	ptr := (*C.CThostFtdcAuthUserIDField)(C.malloc(C.sizeof_CThostFtdcAuthUserIDField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.AppID, &ptr.AppID[0], 33)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	ptr.AuthType = C.char(s.AuthType)
+	return ptr
+}
+
+type CThostFtdcAuthIPField struct {
+	BrokerID  string
+	AppID     string
+	IPAddress string
+}
+
+func NewCThostFtdcAuthIPField(p *C.CThostFtdcAuthIPField) *CThostFtdcAuthIPField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcAuthIPField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.AppID = c2goStr(&p.AppID[0], 33)
+	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	return ret
+}
+
+func CThostFtdcAuthIPFieldCValue(s *CThostFtdcAuthIPField) *C.CThostFtdcAuthIPField {
+	ptr := (*C.CThostFtdcAuthIPField)(C.malloc(C.sizeof_CThostFtdcAuthIPField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.AppID, &ptr.AppID[0], 33)
+	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	return ptr
+}
+
+type CThostFtdcQryClassifiedInstrumentField struct {
+	InstrumentID   string
+	ExchangeID     string
+	ExchangeInstID string
+	ProductID      string
+	TradingType    byte
+	ClassType      byte
+}
+
+func NewCThostFtdcQryClassifiedInstrumentField(p *C.CThostFtdcQryClassifiedInstrumentField) *CThostFtdcQryClassifiedInstrumentField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryClassifiedInstrumentField)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
+	ret.TradingType = byte(p.TradingType)
+	ret.ClassType = byte(p.ClassType)
+	return ret
+}
+
+func CThostFtdcQryClassifiedInstrumentFieldCValue(s *CThostFtdcQryClassifiedInstrumentField) *C.CThostFtdcQryClassifiedInstrumentField {
+	ptr := (*C.CThostFtdcQryClassifiedInstrumentField)(C.malloc(C.sizeof_CThostFtdcQryClassifiedInstrumentField))
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
+	ptr.TradingType = C.char(s.TradingType)
+	ptr.ClassType = C.char(s.ClassType)
+	return ptr
+}
+
+type CThostFtdcQryCombPromotionParamField struct {
+	ExchangeID   string
+	InstrumentID string
+}
+
+func NewCThostFtdcQryCombPromotionParamField(p *C.CThostFtdcQryCombPromotionParamField) *CThostFtdcQryCombPromotionParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryCombPromotionParamField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	return ret
+}
+
+func CThostFtdcQryCombPromotionParamFieldCValue(s *CThostFtdcQryCombPromotionParamField) *C.CThostFtdcQryCombPromotionParamField {
+	ptr := (*C.CThostFtdcQryCombPromotionParamField)(C.malloc(C.sizeof_CThostFtdcQryCombPromotionParamField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	return ptr
+}
+
+type CThostFtdcCombPromotionParamField struct {
+	ExchangeID    string
+	InstrumentID  string
+	CombHedgeFlag string
+	Xparameter    float64
+}
+
+func NewCThostFtdcCombPromotionParamField(p *C.CThostFtdcCombPromotionParamField) *CThostFtdcCombPromotionParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcCombPromotionParamField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.CombHedgeFlag = c2goStr(&p.CombHedgeFlag[0], 5)
+	ret.Xparameter = goFloat64(p.Xparameter)
+	return ret
+}
+
+func CThostFtdcCombPromotionParamFieldCValue(s *CThostFtdcCombPromotionParamField) *C.CThostFtdcCombPromotionParamField {
+	ptr := (*C.CThostFtdcCombPromotionParamField)(C.malloc(C.sizeof_CThostFtdcCombPromotionParamField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.CombHedgeFlag, &ptr.CombHedgeFlag[0], 5)
+	ptr.Xparameter = C.double(s.Xparameter)
+	return ptr
+}
+
+type CThostFtdcReqUserLoginSCField struct {
+	TradingDay           string
+	BrokerID             string
+	UserID               string
+	Password             string
+	UserProductInfo      string
+	InterfaceProductInfo string
+	ProtocolInfo         string
+	MacAddress           string
+	OneTimePassword      string
+	ClientIPAddress      string
+	LoginRemark          string
+	ClientIPPort         int
+	AuthCode             string
+	AppID                string
+}
+
+func NewCThostFtdcReqUserLoginSCField(p *C.CThostFtdcReqUserLoginSCField) *CThostFtdcReqUserLoginSCField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcReqUserLoginSCField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	ret.Password = c2goStr(&p.Password[0], 41)
+	ret.UserProductInfo = c2goStr(&p.UserProductInfo[0], 11)
+	ret.InterfaceProductInfo = c2goStr(&p.InterfaceProductInfo[0], 11)
+	ret.ProtocolInfo = c2goStr(&p.ProtocolInfo[0], 11)
+	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
+	ret.OneTimePassword = c2goStr(&p.OneTimePassword[0], 41)
+	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 33)
+	ret.LoginRemark = c2goStr(&p.LoginRemark[0], 36)
+	ret.ClientIPPort = int(p.ClientIPPort)
+	ret.AuthCode = c2goStr(&p.AuthCode[0], 17)
+	ret.AppID = c2goStr(&p.AppID[0], 33)
+	return ret
+}
+
+func CThostFtdcReqUserLoginSCFieldCValue(s *CThostFtdcReqUserLoginSCField) *C.CThostFtdcReqUserLoginSCField {
+	ptr := (*C.CThostFtdcReqUserLoginSCField)(C.malloc(C.sizeof_CThostFtdcReqUserLoginSCField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	go2cStr(s.Password, &ptr.Password[0], 41)
+	go2cStr(s.UserProductInfo, &ptr.UserProductInfo[0], 11)
+	go2cStr(s.InterfaceProductInfo, &ptr.InterfaceProductInfo[0], 11)
+	go2cStr(s.ProtocolInfo, &ptr.ProtocolInfo[0], 11)
+	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
+	go2cStr(s.OneTimePassword, &ptr.OneTimePassword[0], 41)
+	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 33)
+	go2cStr(s.LoginRemark, &ptr.LoginRemark[0], 36)
+	ptr.ClientIPPort = C.int(s.ClientIPPort)
+	go2cStr(s.AuthCode, &ptr.AuthCode[0], 17)
+	go2cStr(s.AppID, &ptr.AppID[0], 33)
+	return ptr
+}
+
+type CThostFtdcQryRiskSettleInvstPositionField struct {
+	BrokerID     string
+	InvestorID   string
+	InstrumentID string
+}
+
+func NewCThostFtdcQryRiskSettleInvstPositionField(p *C.CThostFtdcQryRiskSettleInvstPositionField) *CThostFtdcQryRiskSettleInvstPositionField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryRiskSettleInvstPositionField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	return ret
+}
+
+func CThostFtdcQryRiskSettleInvstPositionFieldCValue(s *CThostFtdcQryRiskSettleInvstPositionField) *C.CThostFtdcQryRiskSettleInvstPositionField {
+	ptr := (*C.CThostFtdcQryRiskSettleInvstPositionField)(C.malloc(C.sizeof_CThostFtdcQryRiskSettleInvstPositionField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	return ptr
+}
+
+type CThostFtdcQryRiskSettleProductStatusField struct {
+	ProductID string
+}
+
+func NewCThostFtdcQryRiskSettleProductStatusField(p *C.CThostFtdcQryRiskSettleProductStatusField) *CThostFtdcQryRiskSettleProductStatusField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryRiskSettleProductStatusField)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
+	return ret
+}
+
+func CThostFtdcQryRiskSettleProductStatusFieldCValue(s *CThostFtdcQryRiskSettleProductStatusField) *C.CThostFtdcQryRiskSettleProductStatusField {
+	ptr := (*C.CThostFtdcQryRiskSettleProductStatusField)(C.malloc(C.sizeof_CThostFtdcQryRiskSettleProductStatusField))
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
+	return ptr
+}
+
+type CThostFtdcRiskSettleInvstPositionField struct {
+	InstrumentID       string
+	BrokerID           string
+	InvestorID         string
+	PosiDirection      byte
+	HedgeFlag          byte
+	PositionDate       byte
+	YdPosition         int
+	Position           int
+	LongFrozen         int
+	ShortFrozen        int
+	LongFrozenAmount   float64
+	ShortFrozenAmount  float64
+	OpenVolume         int
+	CloseVolume        int
+	OpenAmount         float64
+	CloseAmount        float64
+	PositionCost       float64
+	PreMargin          float64
+	UseMargin          float64
+	FrozenMargin       float64
+	FrozenCash         float64
+	FrozenCommission   float64
+	CashIn             float64
+	Commission         float64
+	CloseProfit        float64
+	PositionProfit     float64
+	PreSettlementPrice float64
+	SettlementPrice    float64
+	TradingDay         string
+	SettlementID       int
+	OpenCost           float64
+	ExchangeMargin     float64
+	CombPosition       int
+	CombLongFrozen     int
+	CombShortFrozen    int
+	CloseProfitByDate  float64
+	CloseProfitByTrade float64
+	TodayPosition      int
+	MarginRateByMoney  float64
+	MarginRateByVolume float64
+	StrikeFrozen       int
+	StrikeFrozenAmount float64
+	AbandonFrozen      int
+	ExchangeID         string
+	YdStrikeFrozen     int
+	InvestUnitID       string
+	PositionCostOffset float64
+	TasPosition        int
+	TasPositionCost    float64
+}
+
+func NewCThostFtdcRiskSettleInvstPositionField(p *C.CThostFtdcRiskSettleInvstPositionField) *CThostFtdcRiskSettleInvstPositionField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRiskSettleInvstPositionField)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.PosiDirection = byte(p.PosiDirection)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.PositionDate = byte(p.PositionDate)
+	ret.YdPosition = int(p.YdPosition)
+	ret.Position = int(p.Position)
+	ret.LongFrozen = int(p.LongFrozen)
+	ret.ShortFrozen = int(p.ShortFrozen)
+	ret.LongFrozenAmount = goFloat64(p.LongFrozenAmount)
+	ret.ShortFrozenAmount = goFloat64(p.ShortFrozenAmount)
+	ret.OpenVolume = int(p.OpenVolume)
+	ret.CloseVolume = int(p.CloseVolume)
+	ret.OpenAmount = goFloat64(p.OpenAmount)
+	ret.CloseAmount = goFloat64(p.CloseAmount)
+	ret.PositionCost = goFloat64(p.PositionCost)
+	ret.PreMargin = goFloat64(p.PreMargin)
+	ret.UseMargin = goFloat64(p.UseMargin)
+	ret.FrozenMargin = goFloat64(p.FrozenMargin)
+	ret.FrozenCash = goFloat64(p.FrozenCash)
+	ret.FrozenCommission = goFloat64(p.FrozenCommission)
+	ret.CashIn = goFloat64(p.CashIn)
+	ret.Commission = goFloat64(p.Commission)
+	ret.CloseProfit = goFloat64(p.CloseProfit)
+	ret.PositionProfit = goFloat64(p.PositionProfit)
+	ret.PreSettlementPrice = goFloat64(p.PreSettlementPrice)
+	ret.SettlementPrice = goFloat64(p.SettlementPrice)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.SettlementID = int(p.SettlementID)
+	ret.OpenCost = goFloat64(p.OpenCost)
+	ret.ExchangeMargin = goFloat64(p.ExchangeMargin)
+	ret.CombPosition = int(p.CombPosition)
+	ret.CombLongFrozen = int(p.CombLongFrozen)
+	ret.CombShortFrozen = int(p.CombShortFrozen)
+	ret.CloseProfitByDate = goFloat64(p.CloseProfitByDate)
+	ret.CloseProfitByTrade = goFloat64(p.CloseProfitByTrade)
+	ret.TodayPosition = int(p.TodayPosition)
+	ret.MarginRateByMoney = goFloat64(p.MarginRateByMoney)
+	ret.MarginRateByVolume = goFloat64(p.MarginRateByVolume)
+	ret.StrikeFrozen = int(p.StrikeFrozen)
+	ret.StrikeFrozenAmount = goFloat64(p.StrikeFrozenAmount)
+	ret.AbandonFrozen = int(p.AbandonFrozen)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.YdStrikeFrozen = int(p.YdStrikeFrozen)
+	ret.InvestUnitID = c2goStr(&p.InvestUnitID[0], 17)
+	ret.PositionCostOffset = goFloat64(p.PositionCostOffset)
+	ret.TasPosition = int(p.TasPosition)
+	ret.TasPositionCost = goFloat64(p.TasPositionCost)
+	return ret
+}
+
+func CThostFtdcRiskSettleInvstPositionFieldCValue(s *CThostFtdcRiskSettleInvstPositionField) *C.CThostFtdcRiskSettleInvstPositionField {
+	ptr := (*C.CThostFtdcRiskSettleInvstPositionField)(C.malloc(C.sizeof_CThostFtdcRiskSettleInvstPositionField))
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.PosiDirection = C.char(s.PosiDirection)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.PositionDate = C.char(s.PositionDate)
+	ptr.YdPosition = C.int(s.YdPosition)
+	ptr.Position = C.int(s.Position)
+	ptr.LongFrozen = C.int(s.LongFrozen)
+	ptr.ShortFrozen = C.int(s.ShortFrozen)
+	ptr.LongFrozenAmount = C.double(s.LongFrozenAmount)
+	ptr.ShortFrozenAmount = C.double(s.ShortFrozenAmount)
+	ptr.OpenVolume = C.int(s.OpenVolume)
+	ptr.CloseVolume = C.int(s.CloseVolume)
+	ptr.OpenAmount = C.double(s.OpenAmount)
+	ptr.CloseAmount = C.double(s.CloseAmount)
+	ptr.PositionCost = C.double(s.PositionCost)
+	ptr.PreMargin = C.double(s.PreMargin)
+	ptr.UseMargin = C.double(s.UseMargin)
+	ptr.FrozenMargin = C.double(s.FrozenMargin)
+	ptr.FrozenCash = C.double(s.FrozenCash)
+	ptr.FrozenCommission = C.double(s.FrozenCommission)
+	ptr.CashIn = C.double(s.CashIn)
+	ptr.Commission = C.double(s.Commission)
+	ptr.CloseProfit = C.double(s.CloseProfit)
+	ptr.PositionProfit = C.double(s.PositionProfit)
+	ptr.PreSettlementPrice = C.double(s.PreSettlementPrice)
+	ptr.SettlementPrice = C.double(s.SettlementPrice)
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	ptr.SettlementID = C.int(s.SettlementID)
+	ptr.OpenCost = C.double(s.OpenCost)
+	ptr.ExchangeMargin = C.double(s.ExchangeMargin)
+	ptr.CombPosition = C.int(s.CombPosition)
+	ptr.CombLongFrozen = C.int(s.CombLongFrozen)
+	ptr.CombShortFrozen = C.int(s.CombShortFrozen)
+	ptr.CloseProfitByDate = C.double(s.CloseProfitByDate)
+	ptr.CloseProfitByTrade = C.double(s.CloseProfitByTrade)
+	ptr.TodayPosition = C.int(s.TodayPosition)
+	ptr.MarginRateByMoney = C.double(s.MarginRateByMoney)
+	ptr.MarginRateByVolume = C.double(s.MarginRateByVolume)
+	ptr.StrikeFrozen = C.int(s.StrikeFrozen)
+	ptr.StrikeFrozenAmount = C.double(s.StrikeFrozenAmount)
+	ptr.AbandonFrozen = C.int(s.AbandonFrozen)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.YdStrikeFrozen = C.int(s.YdStrikeFrozen)
+	go2cStr(s.InvestUnitID, &ptr.InvestUnitID[0], 17)
+	ptr.PositionCostOffset = C.double(s.PositionCostOffset)
+	ptr.TasPosition = C.int(s.TasPosition)
+	ptr.TasPositionCost = C.double(s.TasPositionCost)
+	return ptr
+}
+
+type CThostFtdcRiskSettleProductStatusField struct {
+	ExchangeID    string
+	ProductID     string
+	ProductStatus byte
+}
+
+func NewCThostFtdcRiskSettleProductStatusField(p *C.CThostFtdcRiskSettleProductStatusField) *CThostFtdcRiskSettleProductStatusField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRiskSettleProductStatusField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
+	ret.ProductStatus = byte(p.ProductStatus)
+	return ret
+}
+
+func CThostFtdcRiskSettleProductStatusFieldCValue(s *CThostFtdcRiskSettleProductStatusField) *C.CThostFtdcRiskSettleProductStatusField {
+	ptr := (*C.CThostFtdcRiskSettleProductStatusField)(C.malloc(C.sizeof_CThostFtdcRiskSettleProductStatusField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
+	ptr.ProductStatus = C.char(s.ProductStatus)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaInfoField struct {
+	SyncDeltaSequenceNo int
+	SyncDeltaStatus     byte
+	SyncDescription     string
+	IsOnlyTrdDelta      int
+}
+
+func NewCThostFtdcSyncDeltaInfoField(p *C.CThostFtdcSyncDeltaInfoField) *CThostFtdcSyncDeltaInfoField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaInfoField)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	ret.SyncDeltaStatus = byte(p.SyncDeltaStatus)
+	ret.SyncDescription = c2goStr(&p.SyncDescription[0], 257)
+	ret.IsOnlyTrdDelta = int(p.IsOnlyTrdDelta)
+	return ret
+}
+
+func CThostFtdcSyncDeltaInfoFieldCValue(s *CThostFtdcSyncDeltaInfoField) *C.CThostFtdcSyncDeltaInfoField {
+	ptr := (*C.CThostFtdcSyncDeltaInfoField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaInfoField))
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	ptr.SyncDeltaStatus = C.char(s.SyncDeltaStatus)
+	go2cStr(s.SyncDescription, &ptr.SyncDescription[0], 257)
+	ptr.IsOnlyTrdDelta = C.int(s.IsOnlyTrdDelta)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaProductStatusField struct {
+	SyncDeltaSequenceNo int
+	ExchangeID          string
+	ProductID           string
+	ProductStatus       byte
+}
+
+func NewCThostFtdcSyncDeltaProductStatusField(p *C.CThostFtdcSyncDeltaProductStatusField) *CThostFtdcSyncDeltaProductStatusField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaProductStatusField)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
+	ret.ProductStatus = byte(p.ProductStatus)
+	return ret
+}
+
+func CThostFtdcSyncDeltaProductStatusFieldCValue(s *CThostFtdcSyncDeltaProductStatusField) *C.CThostFtdcSyncDeltaProductStatusField {
+	ptr := (*C.CThostFtdcSyncDeltaProductStatusField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaProductStatusField))
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
+	ptr.ProductStatus = C.char(s.ProductStatus)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaInvstPosDtlField struct {
+	InstrumentID          string
+	BrokerID              string
+	InvestorID            string
+	HedgeFlag             byte
+	Direction             byte
+	OpenDate              string
+	TradeID               string
+	Volume                int
+	OpenPrice             float64
+	TradingDay            string
+	SettlementID          int
+	TradeType             byte
+	CombInstrumentID      string
+	ExchangeID            string
+	CloseProfitByDate     float64
+	CloseProfitByTrade    float64
+	PositionProfitByDate  float64
+	PositionProfitByTrade float64
+	Margin                float64
+	ExchMargin            float64
+	MarginRateByMoney     float64
+	MarginRateByVolume    float64
+	LastSettlementPrice   float64
+	SettlementPrice       float64
+	CloseVolume           int
+	CloseAmount           float64
+	TimeFirstVolume       int
+	SpecPosiType          byte
+	ActionDirection       byte
+	SyncDeltaSequenceNo   int
+}
+
+func NewCThostFtdcSyncDeltaInvstPosDtlField(p *C.CThostFtdcSyncDeltaInvstPosDtlField) *CThostFtdcSyncDeltaInvstPosDtlField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaInvstPosDtlField)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.Direction = byte(p.Direction)
+	ret.OpenDate = c2goStr(&p.OpenDate[0], 9)
+	ret.TradeID = c2goStr(&p.TradeID[0], 21)
+	ret.Volume = int(p.Volume)
+	ret.OpenPrice = goFloat64(p.OpenPrice)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.SettlementID = int(p.SettlementID)
+	ret.TradeType = byte(p.TradeType)
+	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 81)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.CloseProfitByDate = goFloat64(p.CloseProfitByDate)
+	ret.CloseProfitByTrade = goFloat64(p.CloseProfitByTrade)
+	ret.PositionProfitByDate = goFloat64(p.PositionProfitByDate)
+	ret.PositionProfitByTrade = goFloat64(p.PositionProfitByTrade)
+	ret.Margin = goFloat64(p.Margin)
+	ret.ExchMargin = goFloat64(p.ExchMargin)
+	ret.MarginRateByMoney = goFloat64(p.MarginRateByMoney)
+	ret.MarginRateByVolume = goFloat64(p.MarginRateByVolume)
+	ret.LastSettlementPrice = goFloat64(p.LastSettlementPrice)
+	ret.SettlementPrice = goFloat64(p.SettlementPrice)
+	ret.CloseVolume = int(p.CloseVolume)
+	ret.CloseAmount = goFloat64(p.CloseAmount)
+	ret.TimeFirstVolume = int(p.TimeFirstVolume)
+	ret.SpecPosiType = byte(p.SpecPosiType)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaInvstPosDtlFieldCValue(s *CThostFtdcSyncDeltaInvstPosDtlField) *C.CThostFtdcSyncDeltaInvstPosDtlField {
+	ptr := (*C.CThostFtdcSyncDeltaInvstPosDtlField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaInvstPosDtlField))
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.Direction = C.char(s.Direction)
+	go2cStr(s.OpenDate, &ptr.OpenDate[0], 9)
+	go2cStr(s.TradeID, &ptr.TradeID[0], 21)
+	ptr.Volume = C.int(s.Volume)
+	ptr.OpenPrice = C.double(s.OpenPrice)
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	ptr.SettlementID = C.int(s.SettlementID)
+	ptr.TradeType = C.char(s.TradeType)
+	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 81)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.CloseProfitByDate = C.double(s.CloseProfitByDate)
+	ptr.CloseProfitByTrade = C.double(s.CloseProfitByTrade)
+	ptr.PositionProfitByDate = C.double(s.PositionProfitByDate)
+	ptr.PositionProfitByTrade = C.double(s.PositionProfitByTrade)
+	ptr.Margin = C.double(s.Margin)
+	ptr.ExchMargin = C.double(s.ExchMargin)
+	ptr.MarginRateByMoney = C.double(s.MarginRateByMoney)
+	ptr.MarginRateByVolume = C.double(s.MarginRateByVolume)
+	ptr.LastSettlementPrice = C.double(s.LastSettlementPrice)
+	ptr.SettlementPrice = C.double(s.SettlementPrice)
+	ptr.CloseVolume = C.int(s.CloseVolume)
+	ptr.CloseAmount = C.double(s.CloseAmount)
+	ptr.TimeFirstVolume = C.int(s.TimeFirstVolume)
+	ptr.SpecPosiType = C.char(s.SpecPosiType)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaInvstPosCombDtlField struct {
+	TradingDay          string
+	OpenDate            string
+	ExchangeID          string
+	SettlementID        int
+	BrokerID            string
+	InvestorID          string
+	ComTradeID          string
+	TradeID             string
+	InstrumentID        string
+	HedgeFlag           byte
+	Direction           byte
+	TotalAmt            int
+	Margin              float64
+	ExchMargin          float64
+	MarginRateByMoney   float64
+	MarginRateByVolume  float64
+	LegID               int
+	LegMultiple         int
+	TradeGroupID        int
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaInvstPosCombDtlField(p *C.CThostFtdcSyncDeltaInvstPosCombDtlField) *CThostFtdcSyncDeltaInvstPosCombDtlField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaInvstPosCombDtlField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.OpenDate = c2goStr(&p.OpenDate[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.SettlementID = int(p.SettlementID)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.ComTradeID = c2goStr(&p.ComTradeID[0], 21)
+	ret.TradeID = c2goStr(&p.TradeID[0], 21)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.Direction = byte(p.Direction)
+	ret.TotalAmt = int(p.TotalAmt)
+	ret.Margin = goFloat64(p.Margin)
+	ret.ExchMargin = goFloat64(p.ExchMargin)
+	ret.MarginRateByMoney = goFloat64(p.MarginRateByMoney)
+	ret.MarginRateByVolume = goFloat64(p.MarginRateByVolume)
+	ret.LegID = int(p.LegID)
+	ret.LegMultiple = int(p.LegMultiple)
+	ret.TradeGroupID = int(p.TradeGroupID)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaInvstPosCombDtlFieldCValue(s *CThostFtdcSyncDeltaInvstPosCombDtlField) *C.CThostFtdcSyncDeltaInvstPosCombDtlField {
+	ptr := (*C.CThostFtdcSyncDeltaInvstPosCombDtlField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaInvstPosCombDtlField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.OpenDate, &ptr.OpenDate[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.SettlementID = C.int(s.SettlementID)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.ComTradeID, &ptr.ComTradeID[0], 21)
+	go2cStr(s.TradeID, &ptr.TradeID[0], 21)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.Direction = C.char(s.Direction)
+	ptr.TotalAmt = C.int(s.TotalAmt)
+	ptr.Margin = C.double(s.Margin)
+	ptr.ExchMargin = C.double(s.ExchMargin)
+	ptr.MarginRateByMoney = C.double(s.MarginRateByMoney)
+	ptr.MarginRateByVolume = C.double(s.MarginRateByVolume)
+	ptr.LegID = C.int(s.LegID)
+	ptr.LegMultiple = C.int(s.LegMultiple)
+	ptr.TradeGroupID = C.int(s.TradeGroupID)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaTradingAccountField struct {
+	BrokerID                       string
+	AccountID                      string
+	PreMortgage                    float64
+	PreCredit                      float64
+	PreDeposit                     float64
+	PreBalance                     float64
+	PreMargin                      float64
+	InterestBase                   float64
+	Interest                       float64
+	Deposit                        float64
+	Withdraw                       float64
+	FrozenMargin                   float64
+	FrozenCash                     float64
+	FrozenCommission               float64
+	CurrMargin                     float64
+	CashIn                         float64
+	Commission                     float64
+	CloseProfit                    float64
+	PositionProfit                 float64
+	Balance                        float64
+	Available                      float64
+	WithdrawQuota                  float64
+	Reserve                        float64
+	TradingDay                     string
+	SettlementID                   int
+	Credit                         float64
+	Mortgage                       float64
+	ExchangeMargin                 float64
+	DeliveryMargin                 float64
+	ExchangeDeliveryMargin         float64
+	ReserveBalance                 float64
+	CurrencyID                     string
+	PreFundMortgageIn              float64
+	PreFundMortgageOut             float64
+	FundMortgageIn                 float64
+	FundMortgageOut                float64
+	FundMortgageAvailable          float64
+	MortgageableFund               float64
+	SpecProductMargin              float64
+	SpecProductFrozenMargin        float64
+	SpecProductCommission          float64
+	SpecProductFrozenCommission    float64
+	SpecProductPositionProfit      float64
+	SpecProductCloseProfit         float64
+	SpecProductPositionProfitByAlg float64
+	SpecProductExchangeMargin      float64
+	FrozenSwap                     float64
+	RemainSwap                     float64
+	SyncDeltaSequenceNo            int
+}
+
+func NewCThostFtdcSyncDeltaTradingAccountField(p *C.CThostFtdcSyncDeltaTradingAccountField) *CThostFtdcSyncDeltaTradingAccountField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaTradingAccountField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.AccountID = c2goStr(&p.AccountID[0], 13)
+	ret.PreMortgage = goFloat64(p.PreMortgage)
+	ret.PreCredit = goFloat64(p.PreCredit)
+	ret.PreDeposit = goFloat64(p.PreDeposit)
+	ret.PreBalance = goFloat64(p.PreBalance)
+	ret.PreMargin = goFloat64(p.PreMargin)
+	ret.InterestBase = goFloat64(p.InterestBase)
+	ret.Interest = goFloat64(p.Interest)
+	ret.Deposit = goFloat64(p.Deposit)
+	ret.Withdraw = goFloat64(p.Withdraw)
+	ret.FrozenMargin = goFloat64(p.FrozenMargin)
+	ret.FrozenCash = goFloat64(p.FrozenCash)
+	ret.FrozenCommission = goFloat64(p.FrozenCommission)
+	ret.CurrMargin = goFloat64(p.CurrMargin)
+	ret.CashIn = goFloat64(p.CashIn)
+	ret.Commission = goFloat64(p.Commission)
+	ret.CloseProfit = goFloat64(p.CloseProfit)
+	ret.PositionProfit = goFloat64(p.PositionProfit)
+	ret.Balance = goFloat64(p.Balance)
+	ret.Available = goFloat64(p.Available)
+	ret.WithdrawQuota = goFloat64(p.WithdrawQuota)
+	ret.Reserve = goFloat64(p.Reserve)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.SettlementID = int(p.SettlementID)
+	ret.Credit = goFloat64(p.Credit)
+	ret.Mortgage = goFloat64(p.Mortgage)
+	ret.ExchangeMargin = goFloat64(p.ExchangeMargin)
+	ret.DeliveryMargin = goFloat64(p.DeliveryMargin)
+	ret.ExchangeDeliveryMargin = goFloat64(p.ExchangeDeliveryMargin)
+	ret.ReserveBalance = goFloat64(p.ReserveBalance)
+	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
+	ret.PreFundMortgageIn = goFloat64(p.PreFundMortgageIn)
+	ret.PreFundMortgageOut = goFloat64(p.PreFundMortgageOut)
+	ret.FundMortgageIn = goFloat64(p.FundMortgageIn)
+	ret.FundMortgageOut = goFloat64(p.FundMortgageOut)
+	ret.FundMortgageAvailable = goFloat64(p.FundMortgageAvailable)
+	ret.MortgageableFund = goFloat64(p.MortgageableFund)
+	ret.SpecProductMargin = goFloat64(p.SpecProductMargin)
+	ret.SpecProductFrozenMargin = goFloat64(p.SpecProductFrozenMargin)
+	ret.SpecProductCommission = goFloat64(p.SpecProductCommission)
+	ret.SpecProductFrozenCommission = goFloat64(p.SpecProductFrozenCommission)
+	ret.SpecProductPositionProfit = goFloat64(p.SpecProductPositionProfit)
+	ret.SpecProductCloseProfit = goFloat64(p.SpecProductCloseProfit)
+	ret.SpecProductPositionProfitByAlg = goFloat64(p.SpecProductPositionProfitByAlg)
+	ret.SpecProductExchangeMargin = goFloat64(p.SpecProductExchangeMargin)
+	ret.FrozenSwap = goFloat64(p.FrozenSwap)
+	ret.RemainSwap = goFloat64(p.RemainSwap)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaTradingAccountFieldCValue(s *CThostFtdcSyncDeltaTradingAccountField) *C.CThostFtdcSyncDeltaTradingAccountField {
+	ptr := (*C.CThostFtdcSyncDeltaTradingAccountField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaTradingAccountField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
+	ptr.PreMortgage = C.double(s.PreMortgage)
+	ptr.PreCredit = C.double(s.PreCredit)
+	ptr.PreDeposit = C.double(s.PreDeposit)
+	ptr.PreBalance = C.double(s.PreBalance)
+	ptr.PreMargin = C.double(s.PreMargin)
+	ptr.InterestBase = C.double(s.InterestBase)
+	ptr.Interest = C.double(s.Interest)
+	ptr.Deposit = C.double(s.Deposit)
+	ptr.Withdraw = C.double(s.Withdraw)
+	ptr.FrozenMargin = C.double(s.FrozenMargin)
+	ptr.FrozenCash = C.double(s.FrozenCash)
+	ptr.FrozenCommission = C.double(s.FrozenCommission)
+	ptr.CurrMargin = C.double(s.CurrMargin)
+	ptr.CashIn = C.double(s.CashIn)
+	ptr.Commission = C.double(s.Commission)
+	ptr.CloseProfit = C.double(s.CloseProfit)
+	ptr.PositionProfit = C.double(s.PositionProfit)
+	ptr.Balance = C.double(s.Balance)
+	ptr.Available = C.double(s.Available)
+	ptr.WithdrawQuota = C.double(s.WithdrawQuota)
+	ptr.Reserve = C.double(s.Reserve)
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	ptr.SettlementID = C.int(s.SettlementID)
+	ptr.Credit = C.double(s.Credit)
+	ptr.Mortgage = C.double(s.Mortgage)
+	ptr.ExchangeMargin = C.double(s.ExchangeMargin)
+	ptr.DeliveryMargin = C.double(s.DeliveryMargin)
+	ptr.ExchangeDeliveryMargin = C.double(s.ExchangeDeliveryMargin)
+	ptr.ReserveBalance = C.double(s.ReserveBalance)
+	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
+	ptr.PreFundMortgageIn = C.double(s.PreFundMortgageIn)
+	ptr.PreFundMortgageOut = C.double(s.PreFundMortgageOut)
+	ptr.FundMortgageIn = C.double(s.FundMortgageIn)
+	ptr.FundMortgageOut = C.double(s.FundMortgageOut)
+	ptr.FundMortgageAvailable = C.double(s.FundMortgageAvailable)
+	ptr.MortgageableFund = C.double(s.MortgageableFund)
+	ptr.SpecProductMargin = C.double(s.SpecProductMargin)
+	ptr.SpecProductFrozenMargin = C.double(s.SpecProductFrozenMargin)
+	ptr.SpecProductCommission = C.double(s.SpecProductCommission)
+	ptr.SpecProductFrozenCommission = C.double(s.SpecProductFrozenCommission)
+	ptr.SpecProductPositionProfit = C.double(s.SpecProductPositionProfit)
+	ptr.SpecProductCloseProfit = C.double(s.SpecProductCloseProfit)
+	ptr.SpecProductPositionProfitByAlg = C.double(s.SpecProductPositionProfitByAlg)
+	ptr.SpecProductExchangeMargin = C.double(s.SpecProductExchangeMargin)
+	ptr.FrozenSwap = C.double(s.FrozenSwap)
+	ptr.RemainSwap = C.double(s.RemainSwap)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaInitInvstMarginField struct {
+	BrokerID                     string
+	InvestorID                   string
+	LastRiskTotalInvstMargin     float64
+	LastRiskTotalExchMargin      float64
+	ThisSyncInvstMargin          float64
+	ThisSyncExchMargin           float64
+	RemainRiskInvstMargin        float64
+	RemainRiskExchMargin         float64
+	LastRiskSpecTotalInvstMargin float64
+	LastRiskSpecTotalExchMargin  float64
+	ThisSyncSpecInvstMargin      float64
+	ThisSyncSpecExchMargin       float64
+	RemainRiskSpecInvstMargin    float64
+	RemainRiskSpecExchMargin     float64
+	SyncDeltaSequenceNo          int
+}
+
+func NewCThostFtdcSyncDeltaInitInvstMarginField(p *C.CThostFtdcSyncDeltaInitInvstMarginField) *CThostFtdcSyncDeltaInitInvstMarginField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaInitInvstMarginField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.LastRiskTotalInvstMargin = goFloat64(p.LastRiskTotalInvstMargin)
+	ret.LastRiskTotalExchMargin = goFloat64(p.LastRiskTotalExchMargin)
+	ret.ThisSyncInvstMargin = goFloat64(p.ThisSyncInvstMargin)
+	ret.ThisSyncExchMargin = goFloat64(p.ThisSyncExchMargin)
+	ret.RemainRiskInvstMargin = goFloat64(p.RemainRiskInvstMargin)
+	ret.RemainRiskExchMargin = goFloat64(p.RemainRiskExchMargin)
+	ret.LastRiskSpecTotalInvstMargin = goFloat64(p.LastRiskSpecTotalInvstMargin)
+	ret.LastRiskSpecTotalExchMargin = goFloat64(p.LastRiskSpecTotalExchMargin)
+	ret.ThisSyncSpecInvstMargin = goFloat64(p.ThisSyncSpecInvstMargin)
+	ret.ThisSyncSpecExchMargin = goFloat64(p.ThisSyncSpecExchMargin)
+	ret.RemainRiskSpecInvstMargin = goFloat64(p.RemainRiskSpecInvstMargin)
+	ret.RemainRiskSpecExchMargin = goFloat64(p.RemainRiskSpecExchMargin)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaInitInvstMarginFieldCValue(s *CThostFtdcSyncDeltaInitInvstMarginField) *C.CThostFtdcSyncDeltaInitInvstMarginField {
+	ptr := (*C.CThostFtdcSyncDeltaInitInvstMarginField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaInitInvstMarginField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.LastRiskTotalInvstMargin = C.double(s.LastRiskTotalInvstMargin)
+	ptr.LastRiskTotalExchMargin = C.double(s.LastRiskTotalExchMargin)
+	ptr.ThisSyncInvstMargin = C.double(s.ThisSyncInvstMargin)
+	ptr.ThisSyncExchMargin = C.double(s.ThisSyncExchMargin)
+	ptr.RemainRiskInvstMargin = C.double(s.RemainRiskInvstMargin)
+	ptr.RemainRiskExchMargin = C.double(s.RemainRiskExchMargin)
+	ptr.LastRiskSpecTotalInvstMargin = C.double(s.LastRiskSpecTotalInvstMargin)
+	ptr.LastRiskSpecTotalExchMargin = C.double(s.LastRiskSpecTotalExchMargin)
+	ptr.ThisSyncSpecInvstMargin = C.double(s.ThisSyncSpecInvstMargin)
+	ptr.ThisSyncSpecExchMargin = C.double(s.ThisSyncSpecExchMargin)
+	ptr.RemainRiskSpecInvstMargin = C.double(s.RemainRiskSpecInvstMargin)
+	ptr.RemainRiskSpecExchMargin = C.double(s.RemainRiskSpecExchMargin)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaDceCombInstrumentField struct {
+	CombInstrumentID    string
+	ExchangeID          string
+	ExchangeInstID      string
+	TradeGroupID        int
+	CombHedgeFlag       byte
+	CombinationType     byte
+	Direction           byte
+	ProductID           string
+	Xparameter          float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaDceCombInstrumentField(p *C.CThostFtdcSyncDeltaDceCombInstrumentField) *CThostFtdcSyncDeltaDceCombInstrumentField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaDceCombInstrumentField)
+	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 81)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.TradeGroupID = int(p.TradeGroupID)
+	ret.CombHedgeFlag = byte(p.CombHedgeFlag)
+	ret.CombinationType = byte(p.CombinationType)
+	ret.Direction = byte(p.Direction)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
+	ret.Xparameter = goFloat64(p.Xparameter)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaDceCombInstrumentFieldCValue(s *CThostFtdcSyncDeltaDceCombInstrumentField) *C.CThostFtdcSyncDeltaDceCombInstrumentField {
+	ptr := (*C.CThostFtdcSyncDeltaDceCombInstrumentField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaDceCombInstrumentField))
+	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 81)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	ptr.TradeGroupID = C.int(s.TradeGroupID)
+	ptr.CombHedgeFlag = C.char(s.CombHedgeFlag)
+	ptr.CombinationType = C.char(s.CombinationType)
+	ptr.Direction = C.char(s.Direction)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
+	ptr.Xparameter = C.double(s.Xparameter)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaInvstMarginRateField struct {
+	InstrumentID             string
+	InvestorRange            byte
+	BrokerID                 string
+	InvestorID               string
+	HedgeFlag                byte
+	LongMarginRatioByMoney   float64
+	LongMarginRatioByVolume  float64
+	ShortMarginRatioByMoney  float64
+	ShortMarginRatioByVolume float64
+	IsRelative               int
+	ActionDirection          byte
+	SyncDeltaSequenceNo      int
+}
+
+func NewCThostFtdcSyncDeltaInvstMarginRateField(p *C.CThostFtdcSyncDeltaInvstMarginRateField) *CThostFtdcSyncDeltaInvstMarginRateField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaInvstMarginRateField)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.InvestorRange = byte(p.InvestorRange)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.LongMarginRatioByMoney = goFloat64(p.LongMarginRatioByMoney)
+	ret.LongMarginRatioByVolume = goFloat64(p.LongMarginRatioByVolume)
+	ret.ShortMarginRatioByMoney = goFloat64(p.ShortMarginRatioByMoney)
+	ret.ShortMarginRatioByVolume = goFloat64(p.ShortMarginRatioByVolume)
+	ret.IsRelative = int(p.IsRelative)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaInvstMarginRateFieldCValue(s *CThostFtdcSyncDeltaInvstMarginRateField) *C.CThostFtdcSyncDeltaInvstMarginRateField {
+	ptr := (*C.CThostFtdcSyncDeltaInvstMarginRateField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaInvstMarginRateField))
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.InvestorRange = C.char(s.InvestorRange)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.LongMarginRatioByMoney = C.double(s.LongMarginRatioByMoney)
+	ptr.LongMarginRatioByVolume = C.double(s.LongMarginRatioByVolume)
+	ptr.ShortMarginRatioByMoney = C.double(s.ShortMarginRatioByMoney)
+	ptr.ShortMarginRatioByVolume = C.double(s.ShortMarginRatioByVolume)
+	ptr.IsRelative = C.int(s.IsRelative)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaExchMarginRateField struct {
+	BrokerID                 string
+	InstrumentID             string
+	HedgeFlag                byte
+	LongMarginRatioByMoney   float64
+	LongMarginRatioByVolume  float64
+	ShortMarginRatioByMoney  float64
+	ShortMarginRatioByVolume float64
+	ActionDirection          byte
+	SyncDeltaSequenceNo      int
+}
+
+func NewCThostFtdcSyncDeltaExchMarginRateField(p *C.CThostFtdcSyncDeltaExchMarginRateField) *CThostFtdcSyncDeltaExchMarginRateField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaExchMarginRateField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.LongMarginRatioByMoney = goFloat64(p.LongMarginRatioByMoney)
+	ret.LongMarginRatioByVolume = goFloat64(p.LongMarginRatioByVolume)
+	ret.ShortMarginRatioByMoney = goFloat64(p.ShortMarginRatioByMoney)
+	ret.ShortMarginRatioByVolume = goFloat64(p.ShortMarginRatioByVolume)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaExchMarginRateFieldCValue(s *CThostFtdcSyncDeltaExchMarginRateField) *C.CThostFtdcSyncDeltaExchMarginRateField {
+	ptr := (*C.CThostFtdcSyncDeltaExchMarginRateField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaExchMarginRateField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.LongMarginRatioByMoney = C.double(s.LongMarginRatioByMoney)
+	ptr.LongMarginRatioByVolume = C.double(s.LongMarginRatioByVolume)
+	ptr.ShortMarginRatioByMoney = C.double(s.ShortMarginRatioByMoney)
+	ptr.ShortMarginRatioByVolume = C.double(s.ShortMarginRatioByVolume)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaOptExchMarginField struct {
+	BrokerID                  string
+	InstrumentID              string
+	SShortMarginRatioByMoney  float64
+	SShortMarginRatioByVolume float64
+	HShortMarginRatioByMoney  float64
+	HShortMarginRatioByVolume float64
+	AShortMarginRatioByMoney  float64
+	AShortMarginRatioByVolume float64
+	MShortMarginRatioByMoney  float64
+	MShortMarginRatioByVolume float64
+	ActionDirection           byte
+	SyncDeltaSequenceNo       int
+}
+
+func NewCThostFtdcSyncDeltaOptExchMarginField(p *C.CThostFtdcSyncDeltaOptExchMarginField) *CThostFtdcSyncDeltaOptExchMarginField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaOptExchMarginField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.SShortMarginRatioByMoney = goFloat64(p.SShortMarginRatioByMoney)
+	ret.SShortMarginRatioByVolume = goFloat64(p.SShortMarginRatioByVolume)
+	ret.HShortMarginRatioByMoney = goFloat64(p.HShortMarginRatioByMoney)
+	ret.HShortMarginRatioByVolume = goFloat64(p.HShortMarginRatioByVolume)
+	ret.AShortMarginRatioByMoney = goFloat64(p.AShortMarginRatioByMoney)
+	ret.AShortMarginRatioByVolume = goFloat64(p.AShortMarginRatioByVolume)
+	ret.MShortMarginRatioByMoney = goFloat64(p.MShortMarginRatioByMoney)
+	ret.MShortMarginRatioByVolume = goFloat64(p.MShortMarginRatioByVolume)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaOptExchMarginFieldCValue(s *CThostFtdcSyncDeltaOptExchMarginField) *C.CThostFtdcSyncDeltaOptExchMarginField {
+	ptr := (*C.CThostFtdcSyncDeltaOptExchMarginField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaOptExchMarginField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.SShortMarginRatioByMoney = C.double(s.SShortMarginRatioByMoney)
+	ptr.SShortMarginRatioByVolume = C.double(s.SShortMarginRatioByVolume)
+	ptr.HShortMarginRatioByMoney = C.double(s.HShortMarginRatioByMoney)
+	ptr.HShortMarginRatioByVolume = C.double(s.HShortMarginRatioByVolume)
+	ptr.AShortMarginRatioByMoney = C.double(s.AShortMarginRatioByMoney)
+	ptr.AShortMarginRatioByVolume = C.double(s.AShortMarginRatioByVolume)
+	ptr.MShortMarginRatioByMoney = C.double(s.MShortMarginRatioByMoney)
+	ptr.MShortMarginRatioByVolume = C.double(s.MShortMarginRatioByVolume)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaOptInvstMarginField struct {
+	InstrumentID              string
+	InvestorRange             byte
+	BrokerID                  string
+	InvestorID                string
+	SShortMarginRatioByMoney  float64
+	SShortMarginRatioByVolume float64
+	HShortMarginRatioByMoney  float64
+	HShortMarginRatioByVolume float64
+	AShortMarginRatioByMoney  float64
+	AShortMarginRatioByVolume float64
+	IsRelative                int
+	MShortMarginRatioByMoney  float64
+	MShortMarginRatioByVolume float64
+	ActionDirection           byte
+	SyncDeltaSequenceNo       int
+}
+
+func NewCThostFtdcSyncDeltaOptInvstMarginField(p *C.CThostFtdcSyncDeltaOptInvstMarginField) *CThostFtdcSyncDeltaOptInvstMarginField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaOptInvstMarginField)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.InvestorRange = byte(p.InvestorRange)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.SShortMarginRatioByMoney = goFloat64(p.SShortMarginRatioByMoney)
+	ret.SShortMarginRatioByVolume = goFloat64(p.SShortMarginRatioByVolume)
+	ret.HShortMarginRatioByMoney = goFloat64(p.HShortMarginRatioByMoney)
+	ret.HShortMarginRatioByVolume = goFloat64(p.HShortMarginRatioByVolume)
+	ret.AShortMarginRatioByMoney = goFloat64(p.AShortMarginRatioByMoney)
+	ret.AShortMarginRatioByVolume = goFloat64(p.AShortMarginRatioByVolume)
+	ret.IsRelative = int(p.IsRelative)
+	ret.MShortMarginRatioByMoney = goFloat64(p.MShortMarginRatioByMoney)
+	ret.MShortMarginRatioByVolume = goFloat64(p.MShortMarginRatioByVolume)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaOptInvstMarginFieldCValue(s *CThostFtdcSyncDeltaOptInvstMarginField) *C.CThostFtdcSyncDeltaOptInvstMarginField {
+	ptr := (*C.CThostFtdcSyncDeltaOptInvstMarginField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaOptInvstMarginField))
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.InvestorRange = C.char(s.InvestorRange)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.SShortMarginRatioByMoney = C.double(s.SShortMarginRatioByMoney)
+	ptr.SShortMarginRatioByVolume = C.double(s.SShortMarginRatioByVolume)
+	ptr.HShortMarginRatioByMoney = C.double(s.HShortMarginRatioByMoney)
+	ptr.HShortMarginRatioByVolume = C.double(s.HShortMarginRatioByVolume)
+	ptr.AShortMarginRatioByMoney = C.double(s.AShortMarginRatioByMoney)
+	ptr.AShortMarginRatioByVolume = C.double(s.AShortMarginRatioByVolume)
+	ptr.IsRelative = C.int(s.IsRelative)
+	ptr.MShortMarginRatioByMoney = C.double(s.MShortMarginRatioByMoney)
+	ptr.MShortMarginRatioByVolume = C.double(s.MShortMarginRatioByVolume)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaInvstMarginRateULField struct {
+	InstrumentID             string
+	InvestorRange            byte
+	BrokerID                 string
+	InvestorID               string
+	HedgeFlag                byte
+	LongMarginRatioByMoney   float64
+	LongMarginRatioByVolume  float64
+	ShortMarginRatioByMoney  float64
+	ShortMarginRatioByVolume float64
+	ActionDirection          byte
+	SyncDeltaSequenceNo      int
+}
+
+func NewCThostFtdcSyncDeltaInvstMarginRateULField(p *C.CThostFtdcSyncDeltaInvstMarginRateULField) *CThostFtdcSyncDeltaInvstMarginRateULField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaInvstMarginRateULField)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.InvestorRange = byte(p.InvestorRange)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.LongMarginRatioByMoney = goFloat64(p.LongMarginRatioByMoney)
+	ret.LongMarginRatioByVolume = goFloat64(p.LongMarginRatioByVolume)
+	ret.ShortMarginRatioByMoney = goFloat64(p.ShortMarginRatioByMoney)
+	ret.ShortMarginRatioByVolume = goFloat64(p.ShortMarginRatioByVolume)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaInvstMarginRateULFieldCValue(s *CThostFtdcSyncDeltaInvstMarginRateULField) *C.CThostFtdcSyncDeltaInvstMarginRateULField {
+	ptr := (*C.CThostFtdcSyncDeltaInvstMarginRateULField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaInvstMarginRateULField))
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.InvestorRange = C.char(s.InvestorRange)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.LongMarginRatioByMoney = C.double(s.LongMarginRatioByMoney)
+	ptr.LongMarginRatioByVolume = C.double(s.LongMarginRatioByVolume)
+	ptr.ShortMarginRatioByMoney = C.double(s.ShortMarginRatioByMoney)
+	ptr.ShortMarginRatioByVolume = C.double(s.ShortMarginRatioByVolume)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaOptInvstCommRateField struct {
+	InstrumentID            string
+	InvestorRange           byte
+	BrokerID                string
+	InvestorID              string
+	OpenRatioByMoney        float64
+	OpenRatioByVolume       float64
+	CloseRatioByMoney       float64
+	CloseRatioByVolume      float64
+	CloseTodayRatioByMoney  float64
+	CloseTodayRatioByVolume float64
+	StrikeRatioByMoney      float64
+	StrikeRatioByVolume     float64
+	ActionDirection         byte
+	SyncDeltaSequenceNo     int
+}
+
+func NewCThostFtdcSyncDeltaOptInvstCommRateField(p *C.CThostFtdcSyncDeltaOptInvstCommRateField) *CThostFtdcSyncDeltaOptInvstCommRateField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaOptInvstCommRateField)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.InvestorRange = byte(p.InvestorRange)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.OpenRatioByMoney = goFloat64(p.OpenRatioByMoney)
+	ret.OpenRatioByVolume = goFloat64(p.OpenRatioByVolume)
+	ret.CloseRatioByMoney = goFloat64(p.CloseRatioByMoney)
+	ret.CloseRatioByVolume = goFloat64(p.CloseRatioByVolume)
+	ret.CloseTodayRatioByMoney = goFloat64(p.CloseTodayRatioByMoney)
+	ret.CloseTodayRatioByVolume = goFloat64(p.CloseTodayRatioByVolume)
+	ret.StrikeRatioByMoney = goFloat64(p.StrikeRatioByMoney)
+	ret.StrikeRatioByVolume = goFloat64(p.StrikeRatioByVolume)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaOptInvstCommRateFieldCValue(s *CThostFtdcSyncDeltaOptInvstCommRateField) *C.CThostFtdcSyncDeltaOptInvstCommRateField {
+	ptr := (*C.CThostFtdcSyncDeltaOptInvstCommRateField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaOptInvstCommRateField))
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.InvestorRange = C.char(s.InvestorRange)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.OpenRatioByMoney = C.double(s.OpenRatioByMoney)
+	ptr.OpenRatioByVolume = C.double(s.OpenRatioByVolume)
+	ptr.CloseRatioByMoney = C.double(s.CloseRatioByMoney)
+	ptr.CloseRatioByVolume = C.double(s.CloseRatioByVolume)
+	ptr.CloseTodayRatioByMoney = C.double(s.CloseTodayRatioByMoney)
+	ptr.CloseTodayRatioByVolume = C.double(s.CloseTodayRatioByVolume)
+	ptr.StrikeRatioByMoney = C.double(s.StrikeRatioByMoney)
+	ptr.StrikeRatioByVolume = C.double(s.StrikeRatioByVolume)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaInvstCommRateField struct {
+	InstrumentID            string
+	InvestorRange           byte
+	BrokerID                string
+	InvestorID              string
+	OpenRatioByMoney        float64
+	OpenRatioByVolume       float64
+	CloseRatioByMoney       float64
+	CloseRatioByVolume      float64
+	CloseTodayRatioByMoney  float64
+	CloseTodayRatioByVolume float64
+	ActionDirection         byte
+	SyncDeltaSequenceNo     int
+}
+
+func NewCThostFtdcSyncDeltaInvstCommRateField(p *C.CThostFtdcSyncDeltaInvstCommRateField) *CThostFtdcSyncDeltaInvstCommRateField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaInvstCommRateField)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.InvestorRange = byte(p.InvestorRange)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.OpenRatioByMoney = goFloat64(p.OpenRatioByMoney)
+	ret.OpenRatioByVolume = goFloat64(p.OpenRatioByVolume)
+	ret.CloseRatioByMoney = goFloat64(p.CloseRatioByMoney)
+	ret.CloseRatioByVolume = goFloat64(p.CloseRatioByVolume)
+	ret.CloseTodayRatioByMoney = goFloat64(p.CloseTodayRatioByMoney)
+	ret.CloseTodayRatioByVolume = goFloat64(p.CloseTodayRatioByVolume)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaInvstCommRateFieldCValue(s *CThostFtdcSyncDeltaInvstCommRateField) *C.CThostFtdcSyncDeltaInvstCommRateField {
+	ptr := (*C.CThostFtdcSyncDeltaInvstCommRateField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaInvstCommRateField))
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.InvestorRange = C.char(s.InvestorRange)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.OpenRatioByMoney = C.double(s.OpenRatioByMoney)
+	ptr.OpenRatioByVolume = C.double(s.OpenRatioByVolume)
+	ptr.CloseRatioByMoney = C.double(s.CloseRatioByMoney)
+	ptr.CloseRatioByVolume = C.double(s.CloseRatioByVolume)
+	ptr.CloseTodayRatioByMoney = C.double(s.CloseTodayRatioByMoney)
+	ptr.CloseTodayRatioByVolume = C.double(s.CloseTodayRatioByVolume)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaProductExchRateField struct {
+	ProductID           string
+	QuoteCurrencyID     string
+	ExchangeRate        float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaProductExchRateField(p *C.CThostFtdcSyncDeltaProductExchRateField) *CThostFtdcSyncDeltaProductExchRateField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaProductExchRateField)
+	ret.ProductID = c2goStr(&p.ProductID[0], 81)
+	ret.QuoteCurrencyID = c2goStr(&p.QuoteCurrencyID[0], 4)
+	ret.ExchangeRate = goFloat64(p.ExchangeRate)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaProductExchRateFieldCValue(s *CThostFtdcSyncDeltaProductExchRateField) *C.CThostFtdcSyncDeltaProductExchRateField {
+	ptr := (*C.CThostFtdcSyncDeltaProductExchRateField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaProductExchRateField))
+	go2cStr(s.ProductID, &ptr.ProductID[0], 81)
+	go2cStr(s.QuoteCurrencyID, &ptr.QuoteCurrencyID[0], 4)
+	ptr.ExchangeRate = C.double(s.ExchangeRate)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaDepthMarketDataField struct {
+	TradingDay          string
+	InstrumentID        string
+	ExchangeID          string
+	ExchangeInstID      string
+	LastPrice           float64
+	PreSettlementPrice  float64
+	PreClosePrice       float64
+	PreOpenInterest     float64
+	OpenPrice           float64
+	HighestPrice        float64
+	LowestPrice         float64
+	Volume              int
+	Turnover            float64
+	OpenInterest        float64
+	ClosePrice          float64
+	SettlementPrice     float64
+	UpperLimitPrice     float64
+	LowerLimitPrice     float64
+	PreDelta            float64
+	CurrDelta           float64
+	UpdateTime          string
+	UpdateMillisec      int
+	BidPrice1           float64
+	BidVolume1          int
+	AskPrice1           float64
+	AskVolume1          int
+	BidPrice2           float64
+	BidVolume2          int
+	AskPrice2           float64
+	AskVolume2          int
+	BidPrice3           float64
+	BidVolume3          int
+	AskPrice3           float64
+	AskVolume3          int
+	BidPrice4           float64
+	BidVolume4          int
+	AskPrice4           float64
+	AskVolume4          int
+	BidPrice5           float64
+	BidVolume5          int
+	AskPrice5           float64
+	AskVolume5          int
+	AveragePrice        float64
+	ActionDay           string
+	BandingUpperPrice   float64
+	BandingLowerPrice   float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaDepthMarketDataField(p *C.CThostFtdcSyncDeltaDepthMarketDataField) *CThostFtdcSyncDeltaDepthMarketDataField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaDepthMarketDataField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.LastPrice = goFloat64(p.LastPrice)
+	ret.PreSettlementPrice = goFloat64(p.PreSettlementPrice)
+	ret.PreClosePrice = goFloat64(p.PreClosePrice)
+	ret.PreOpenInterest = goFloat64(p.PreOpenInterest)
+	ret.OpenPrice = goFloat64(p.OpenPrice)
+	ret.HighestPrice = goFloat64(p.HighestPrice)
+	ret.LowestPrice = goFloat64(p.LowestPrice)
+	ret.Volume = int(p.Volume)
+	ret.Turnover = goFloat64(p.Turnover)
+	ret.OpenInterest = goFloat64(p.OpenInterest)
+	ret.ClosePrice = goFloat64(p.ClosePrice)
+	ret.SettlementPrice = goFloat64(p.SettlementPrice)
+	ret.UpperLimitPrice = goFloat64(p.UpperLimitPrice)
+	ret.LowerLimitPrice = goFloat64(p.LowerLimitPrice)
+	ret.PreDelta = goFloat64(p.PreDelta)
+	ret.CurrDelta = goFloat64(p.CurrDelta)
+	ret.UpdateTime = c2goStr(&p.UpdateTime[0], 9)
+	ret.UpdateMillisec = int(p.UpdateMillisec)
+	ret.BidPrice1 = goFloat64(p.BidPrice1)
+	ret.BidVolume1 = int(p.BidVolume1)
+	ret.AskPrice1 = goFloat64(p.AskPrice1)
+	ret.AskVolume1 = int(p.AskVolume1)
+	ret.BidPrice2 = goFloat64(p.BidPrice2)
+	ret.BidVolume2 = int(p.BidVolume2)
+	ret.AskPrice2 = goFloat64(p.AskPrice2)
+	ret.AskVolume2 = int(p.AskVolume2)
+	ret.BidPrice3 = goFloat64(p.BidPrice3)
+	ret.BidVolume3 = int(p.BidVolume3)
+	ret.AskPrice3 = goFloat64(p.AskPrice3)
+	ret.AskVolume3 = int(p.AskVolume3)
+	ret.BidPrice4 = goFloat64(p.BidPrice4)
+	ret.BidVolume4 = int(p.BidVolume4)
+	ret.AskPrice4 = goFloat64(p.AskPrice4)
+	ret.AskVolume4 = int(p.AskVolume4)
+	ret.BidPrice5 = goFloat64(p.BidPrice5)
+	ret.BidVolume5 = int(p.BidVolume5)
+	ret.AskPrice5 = goFloat64(p.AskPrice5)
+	ret.AskVolume5 = int(p.AskVolume5)
+	ret.AveragePrice = goFloat64(p.AveragePrice)
+	ret.ActionDay = c2goStr(&p.ActionDay[0], 9)
+	ret.BandingUpperPrice = goFloat64(p.BandingUpperPrice)
+	ret.BandingLowerPrice = goFloat64(p.BandingLowerPrice)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaDepthMarketDataFieldCValue(s *CThostFtdcSyncDeltaDepthMarketDataField) *C.CThostFtdcSyncDeltaDepthMarketDataField {
+	ptr := (*C.CThostFtdcSyncDeltaDepthMarketDataField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaDepthMarketDataField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	ptr.LastPrice = C.double(s.LastPrice)
+	ptr.PreSettlementPrice = C.double(s.PreSettlementPrice)
+	ptr.PreClosePrice = C.double(s.PreClosePrice)
+	ptr.PreOpenInterest = C.double(s.PreOpenInterest)
+	ptr.OpenPrice = C.double(s.OpenPrice)
+	ptr.HighestPrice = C.double(s.HighestPrice)
+	ptr.LowestPrice = C.double(s.LowestPrice)
+	ptr.Volume = C.int(s.Volume)
+	ptr.Turnover = C.double(s.Turnover)
+	ptr.OpenInterest = C.double(s.OpenInterest)
+	ptr.ClosePrice = C.double(s.ClosePrice)
+	ptr.SettlementPrice = C.double(s.SettlementPrice)
+	ptr.UpperLimitPrice = C.double(s.UpperLimitPrice)
+	ptr.LowerLimitPrice = C.double(s.LowerLimitPrice)
+	ptr.PreDelta = C.double(s.PreDelta)
+	ptr.CurrDelta = C.double(s.CurrDelta)
+	go2cStr(s.UpdateTime, &ptr.UpdateTime[0], 9)
+	ptr.UpdateMillisec = C.int(s.UpdateMillisec)
+	ptr.BidPrice1 = C.double(s.BidPrice1)
+	ptr.BidVolume1 = C.int(s.BidVolume1)
+	ptr.AskPrice1 = C.double(s.AskPrice1)
+	ptr.AskVolume1 = C.int(s.AskVolume1)
+	ptr.BidPrice2 = C.double(s.BidPrice2)
+	ptr.BidVolume2 = C.int(s.BidVolume2)
+	ptr.AskPrice2 = C.double(s.AskPrice2)
+	ptr.AskVolume2 = C.int(s.AskVolume2)
+	ptr.BidPrice3 = C.double(s.BidPrice3)
+	ptr.BidVolume3 = C.int(s.BidVolume3)
+	ptr.AskPrice3 = C.double(s.AskPrice3)
+	ptr.AskVolume3 = C.int(s.AskVolume3)
+	ptr.BidPrice4 = C.double(s.BidPrice4)
+	ptr.BidVolume4 = C.int(s.BidVolume4)
+	ptr.AskPrice4 = C.double(s.AskPrice4)
+	ptr.AskVolume4 = C.int(s.AskVolume4)
+	ptr.BidPrice5 = C.double(s.BidPrice5)
+	ptr.BidVolume5 = C.int(s.BidVolume5)
+	ptr.AskPrice5 = C.double(s.AskPrice5)
+	ptr.AskVolume5 = C.int(s.AskVolume5)
+	ptr.AveragePrice = C.double(s.AveragePrice)
+	go2cStr(s.ActionDay, &ptr.ActionDay[0], 9)
+	ptr.BandingUpperPrice = C.double(s.BandingUpperPrice)
+	ptr.BandingLowerPrice = C.double(s.BandingLowerPrice)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaIndexPriceField struct {
+	BrokerID            string
+	InstrumentID        string
+	ClosePrice          float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaIndexPriceField(p *C.CThostFtdcSyncDeltaIndexPriceField) *CThostFtdcSyncDeltaIndexPriceField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaIndexPriceField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ClosePrice = goFloat64(p.ClosePrice)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaIndexPriceFieldCValue(s *CThostFtdcSyncDeltaIndexPriceField) *C.CThostFtdcSyncDeltaIndexPriceField {
+	ptr := (*C.CThostFtdcSyncDeltaIndexPriceField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaIndexPriceField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.ClosePrice = C.double(s.ClosePrice)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaEWarrantOffsetField struct {
+	TradingDay          string
+	BrokerID            string
+	InvestorID          string
+	ExchangeID          string
+	InstrumentID        string
+	Direction           byte
+	HedgeFlag           byte
+	Volume              int
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaEWarrantOffsetField(p *C.CThostFtdcSyncDeltaEWarrantOffsetField) *CThostFtdcSyncDeltaEWarrantOffsetField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaEWarrantOffsetField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.Direction = byte(p.Direction)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.Volume = int(p.Volume)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaEWarrantOffsetFieldCValue(s *CThostFtdcSyncDeltaEWarrantOffsetField) *C.CThostFtdcSyncDeltaEWarrantOffsetField {
+	ptr := (*C.CThostFtdcSyncDeltaEWarrantOffsetField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaEWarrantOffsetField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.Direction = C.char(s.Direction)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.Volume = C.int(s.Volume)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSPBMFutureParameterField struct {
+	TradingDay         string
+	ExchangeID         string
+	InstrumentID       string
+	ProdFamilyCode     string
+	Cvf                int
+	TimeRange          byte
+	MarginRate         float64
+	LockRateX          float64
+	AddOnRate          float64
+	PreSettlementPrice float64
+}
+
+func NewCThostFtdcSPBMFutureParameterField(p *C.CThostFtdcSPBMFutureParameterField) *CThostFtdcSPBMFutureParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSPBMFutureParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.Cvf = int(p.Cvf)
+	ret.TimeRange = byte(p.TimeRange)
+	ret.MarginRate = goFloat64(p.MarginRate)
+	ret.LockRateX = goFloat64(p.LockRateX)
+	ret.AddOnRate = goFloat64(p.AddOnRate)
+	ret.PreSettlementPrice = goFloat64(p.PreSettlementPrice)
+	return ret
+}
+
+func CThostFtdcSPBMFutureParameterFieldCValue(s *CThostFtdcSPBMFutureParameterField) *C.CThostFtdcSPBMFutureParameterField {
+	ptr := (*C.CThostFtdcSPBMFutureParameterField)(C.malloc(C.sizeof_CThostFtdcSPBMFutureParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	ptr.Cvf = C.int(s.Cvf)
+	ptr.TimeRange = C.char(s.TimeRange)
+	ptr.MarginRate = C.double(s.MarginRate)
+	ptr.LockRateX = C.double(s.LockRateX)
+	ptr.AddOnRate = C.double(s.AddOnRate)
+	ptr.PreSettlementPrice = C.double(s.PreSettlementPrice)
+	return ptr
+}
+
+type CThostFtdcSPBMOptionParameterField struct {
+	TradingDay         string
+	ExchangeID         string
+	InstrumentID       string
+	ProdFamilyCode     string
+	Cvf                int
+	DownPrice          float64
+	Delta              float64
+	SlimiDelta         float64
+	PreSettlementPrice float64
+}
+
+func NewCThostFtdcSPBMOptionParameterField(p *C.CThostFtdcSPBMOptionParameterField) *CThostFtdcSPBMOptionParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSPBMOptionParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.Cvf = int(p.Cvf)
+	ret.DownPrice = goFloat64(p.DownPrice)
+	ret.Delta = goFloat64(p.Delta)
+	ret.SlimiDelta = goFloat64(p.SlimiDelta)
+	ret.PreSettlementPrice = goFloat64(p.PreSettlementPrice)
+	return ret
+}
+
+func CThostFtdcSPBMOptionParameterFieldCValue(s *CThostFtdcSPBMOptionParameterField) *C.CThostFtdcSPBMOptionParameterField {
+	ptr := (*C.CThostFtdcSPBMOptionParameterField)(C.malloc(C.sizeof_CThostFtdcSPBMOptionParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	ptr.Cvf = C.int(s.Cvf)
+	ptr.DownPrice = C.double(s.DownPrice)
+	ptr.Delta = C.double(s.Delta)
+	ptr.SlimiDelta = C.double(s.SlimiDelta)
+	ptr.PreSettlementPrice = C.double(s.PreSettlementPrice)
+	return ptr
+}
+
+type CThostFtdcSPBMIntraParameterField struct {
+	TradingDay     string
+	ExchangeID     string
+	ProdFamilyCode string
+	IntraRateY     float64
+}
+
+func NewCThostFtdcSPBMIntraParameterField(p *C.CThostFtdcSPBMIntraParameterField) *CThostFtdcSPBMIntraParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSPBMIntraParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.IntraRateY = goFloat64(p.IntraRateY)
+	return ret
+}
+
+func CThostFtdcSPBMIntraParameterFieldCValue(s *CThostFtdcSPBMIntraParameterField) *C.CThostFtdcSPBMIntraParameterField {
+	ptr := (*C.CThostFtdcSPBMIntraParameterField)(C.malloc(C.sizeof_CThostFtdcSPBMIntraParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	ptr.IntraRateY = C.double(s.IntraRateY)
+	return ptr
+}
+
+type CThostFtdcSPBMInterParameterField struct {
+	TradingDay         string
+	ExchangeID         string
+	SpreadId           int
+	InterRateZ         float64
+	Leg1ProdFamilyCode string
+	Leg2ProdFamilyCode string
+}
+
+func NewCThostFtdcSPBMInterParameterField(p *C.CThostFtdcSPBMInterParameterField) *CThostFtdcSPBMInterParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSPBMInterParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.SpreadId = int(p.SpreadId)
+	ret.InterRateZ = goFloat64(p.InterRateZ)
+	ret.Leg1ProdFamilyCode = c2goStr(&p.Leg1ProdFamilyCode[0], 81)
+	ret.Leg2ProdFamilyCode = c2goStr(&p.Leg2ProdFamilyCode[0], 81)
+	return ret
+}
+
+func CThostFtdcSPBMInterParameterFieldCValue(s *CThostFtdcSPBMInterParameterField) *C.CThostFtdcSPBMInterParameterField {
+	ptr := (*C.CThostFtdcSPBMInterParameterField)(C.malloc(C.sizeof_CThostFtdcSPBMInterParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.SpreadId = C.int(s.SpreadId)
+	ptr.InterRateZ = C.double(s.InterRateZ)
+	go2cStr(s.Leg1ProdFamilyCode, &ptr.Leg1ProdFamilyCode[0], 81)
+	go2cStr(s.Leg2ProdFamilyCode, &ptr.Leg2ProdFamilyCode[0], 81)
+	return ptr
+}
+
+type CThostFtdcSyncSPBMParameterEndField struct {
+	TradingDay string
+}
+
+func NewCThostFtdcSyncSPBMParameterEndField(p *C.CThostFtdcSyncSPBMParameterEndField) *CThostFtdcSyncSPBMParameterEndField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncSPBMParameterEndField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	return ret
+}
+
+func CThostFtdcSyncSPBMParameterEndFieldCValue(s *CThostFtdcSyncSPBMParameterEndField) *C.CThostFtdcSyncSPBMParameterEndField {
+	ptr := (*C.CThostFtdcSyncSPBMParameterEndField)(C.malloc(C.sizeof_CThostFtdcSyncSPBMParameterEndField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	return ptr
+}
+
+type CThostFtdcQrySPBMFutureParameterField struct {
+	ExchangeID     string
+	InstrumentID   string
+	ProdFamilyCode string
+}
+
+func NewCThostFtdcQrySPBMFutureParameterField(p *C.CThostFtdcQrySPBMFutureParameterField) *CThostFtdcQrySPBMFutureParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQrySPBMFutureParameterField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	return ret
+}
+
+func CThostFtdcQrySPBMFutureParameterFieldCValue(s *CThostFtdcQrySPBMFutureParameterField) *C.CThostFtdcQrySPBMFutureParameterField {
+	ptr := (*C.CThostFtdcQrySPBMFutureParameterField)(C.malloc(C.sizeof_CThostFtdcQrySPBMFutureParameterField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	return ptr
+}
+
+type CThostFtdcQrySPBMOptionParameterField struct {
+	ExchangeID     string
+	InstrumentID   string
+	ProdFamilyCode string
+}
+
+func NewCThostFtdcQrySPBMOptionParameterField(p *C.CThostFtdcQrySPBMOptionParameterField) *CThostFtdcQrySPBMOptionParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQrySPBMOptionParameterField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	return ret
+}
+
+func CThostFtdcQrySPBMOptionParameterFieldCValue(s *CThostFtdcQrySPBMOptionParameterField) *C.CThostFtdcQrySPBMOptionParameterField {
+	ptr := (*C.CThostFtdcQrySPBMOptionParameterField)(C.malloc(C.sizeof_CThostFtdcQrySPBMOptionParameterField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	return ptr
+}
+
+type CThostFtdcQrySPBMIntraParameterField struct {
+	ExchangeID     string
+	ProdFamilyCode string
+}
+
+func NewCThostFtdcQrySPBMIntraParameterField(p *C.CThostFtdcQrySPBMIntraParameterField) *CThostFtdcQrySPBMIntraParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQrySPBMIntraParameterField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	return ret
+}
+
+func CThostFtdcQrySPBMIntraParameterFieldCValue(s *CThostFtdcQrySPBMIntraParameterField) *C.CThostFtdcQrySPBMIntraParameterField {
+	ptr := (*C.CThostFtdcQrySPBMIntraParameterField)(C.malloc(C.sizeof_CThostFtdcQrySPBMIntraParameterField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	return ptr
+}
+
+type CThostFtdcQrySPBMInterParameterField struct {
+	ExchangeID         string
+	Leg1ProdFamilyCode string
+	Leg2ProdFamilyCode string
+}
+
+func NewCThostFtdcQrySPBMInterParameterField(p *C.CThostFtdcQrySPBMInterParameterField) *CThostFtdcQrySPBMInterParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQrySPBMInterParameterField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.Leg1ProdFamilyCode = c2goStr(&p.Leg1ProdFamilyCode[0], 81)
+	ret.Leg2ProdFamilyCode = c2goStr(&p.Leg2ProdFamilyCode[0], 81)
+	return ret
+}
+
+func CThostFtdcQrySPBMInterParameterFieldCValue(s *CThostFtdcQrySPBMInterParameterField) *C.CThostFtdcQrySPBMInterParameterField {
+	ptr := (*C.CThostFtdcQrySPBMInterParameterField)(C.malloc(C.sizeof_CThostFtdcQrySPBMInterParameterField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.Leg1ProdFamilyCode, &ptr.Leg1ProdFamilyCode[0], 81)
+	go2cStr(s.Leg2ProdFamilyCode, &ptr.Leg2ProdFamilyCode[0], 81)
+	return ptr
+}
+
+type CThostFtdcSPBMPortfDefinitionField struct {
+	ExchangeID     string
+	PortfolioDefID int
+	ProdFamilyCode string
+	IsSPBM         int
+}
+
+func NewCThostFtdcSPBMPortfDefinitionField(p *C.CThostFtdcSPBMPortfDefinitionField) *CThostFtdcSPBMPortfDefinitionField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSPBMPortfDefinitionField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.PortfolioDefID = int(p.PortfolioDefID)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.IsSPBM = int(p.IsSPBM)
+	return ret
+}
+
+func CThostFtdcSPBMPortfDefinitionFieldCValue(s *CThostFtdcSPBMPortfDefinitionField) *C.CThostFtdcSPBMPortfDefinitionField {
+	ptr := (*C.CThostFtdcSPBMPortfDefinitionField)(C.malloc(C.sizeof_CThostFtdcSPBMPortfDefinitionField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.PortfolioDefID = C.int(s.PortfolioDefID)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	ptr.IsSPBM = C.int(s.IsSPBM)
+	return ptr
+}
+
+type CThostFtdcSPBMInvestorPortfDefField struct {
+	ExchangeID     string
+	BrokerID       string
+	InvestorID     string
+	PortfolioDefID int
+}
+
+func NewCThostFtdcSPBMInvestorPortfDefField(p *C.CThostFtdcSPBMInvestorPortfDefField) *CThostFtdcSPBMInvestorPortfDefField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSPBMInvestorPortfDefField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.PortfolioDefID = int(p.PortfolioDefID)
+	return ret
+}
+
+func CThostFtdcSPBMInvestorPortfDefFieldCValue(s *CThostFtdcSPBMInvestorPortfDefField) *C.CThostFtdcSPBMInvestorPortfDefField {
+	ptr := (*C.CThostFtdcSPBMInvestorPortfDefField)(C.malloc(C.sizeof_CThostFtdcSPBMInvestorPortfDefField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.PortfolioDefID = C.int(s.PortfolioDefID)
+	return ptr
+}
+
+type CThostFtdcInvestorPortfMarginRatioField struct {
+	InvestorRange byte
+	BrokerID      string
+	InvestorID    string
+	ExchangeID    string
+	MarginRatio   float64
+}
+
+func NewCThostFtdcInvestorPortfMarginRatioField(p *C.CThostFtdcInvestorPortfMarginRatioField) *CThostFtdcInvestorPortfMarginRatioField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcInvestorPortfMarginRatioField)
+	ret.InvestorRange = byte(p.InvestorRange)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.MarginRatio = goFloat64(p.MarginRatio)
+	return ret
+}
+
+func CThostFtdcInvestorPortfMarginRatioFieldCValue(s *CThostFtdcInvestorPortfMarginRatioField) *C.CThostFtdcInvestorPortfMarginRatioField {
+	ptr := (*C.CThostFtdcInvestorPortfMarginRatioField)(C.malloc(C.sizeof_CThostFtdcInvestorPortfMarginRatioField))
+	ptr.InvestorRange = C.char(s.InvestorRange)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.MarginRatio = C.double(s.MarginRatio)
+	return ptr
+}
+
+type CThostFtdcQrySPBMPortfDefinitionField struct {
+	ExchangeID     string
+	PortfolioDefID int
+	ProdFamilyCode string
+}
+
+func NewCThostFtdcQrySPBMPortfDefinitionField(p *C.CThostFtdcQrySPBMPortfDefinitionField) *CThostFtdcQrySPBMPortfDefinitionField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQrySPBMPortfDefinitionField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.PortfolioDefID = int(p.PortfolioDefID)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	return ret
+}
+
+func CThostFtdcQrySPBMPortfDefinitionFieldCValue(s *CThostFtdcQrySPBMPortfDefinitionField) *C.CThostFtdcQrySPBMPortfDefinitionField {
+	ptr := (*C.CThostFtdcQrySPBMPortfDefinitionField)(C.malloc(C.sizeof_CThostFtdcQrySPBMPortfDefinitionField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.PortfolioDefID = C.int(s.PortfolioDefID)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	return ptr
+}
+
+type CThostFtdcQrySPBMInvestorPortfDefField struct {
+	ExchangeID string
+	BrokerID   string
+	InvestorID string
+}
+
+func NewCThostFtdcQrySPBMInvestorPortfDefField(p *C.CThostFtdcQrySPBMInvestorPortfDefField) *CThostFtdcQrySPBMInvestorPortfDefField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQrySPBMInvestorPortfDefField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	return ret
+}
+
+func CThostFtdcQrySPBMInvestorPortfDefFieldCValue(s *CThostFtdcQrySPBMInvestorPortfDefField) *C.CThostFtdcQrySPBMInvestorPortfDefField {
+	ptr := (*C.CThostFtdcQrySPBMInvestorPortfDefField)(C.malloc(C.sizeof_CThostFtdcQrySPBMInvestorPortfDefField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	return ptr
+}
+
+type CThostFtdcQryInvestorPortfMarginRatioField struct {
+	BrokerID   string
+	InvestorID string
+	ExchangeID string
+}
+
+func NewCThostFtdcQryInvestorPortfMarginRatioField(p *C.CThostFtdcQryInvestorPortfMarginRatioField) *CThostFtdcQryInvestorPortfMarginRatioField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryInvestorPortfMarginRatioField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	return ret
+}
+
+func CThostFtdcQryInvestorPortfMarginRatioFieldCValue(s *CThostFtdcQryInvestorPortfMarginRatioField) *C.CThostFtdcQryInvestorPortfMarginRatioField {
+	ptr := (*C.CThostFtdcQryInvestorPortfMarginRatioField)(C.malloc(C.sizeof_CThostFtdcQryInvestorPortfMarginRatioField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	return ptr
+}
+
+type CThostFtdcInvestorProdSPBMDetailField struct {
+	ExchangeID            string
+	BrokerID              string
+	InvestorID            string
+	ProdFamilyCode        string
+	IntraInstrMargin      float64
+	BCollectingMargin     float64
+	SCollectingMargin     float64
+	IntraProdMargin       float64
+	NetMargin             float64
+	InterProdMargin       float64
+	SingleMargin          float64
+	AddOnMargin           float64
+	DeliveryMargin        float64
+	CallOptionMinRisk     float64
+	PutOptionMinRisk      float64
+	OptionMinRisk         float64
+	OptionValueOffset     float64
+	OptionRoyalty         float64
+	RealOptionValueOffset float64
+	Margin                float64
+	ExchMargin            float64
+}
+
+func NewCThostFtdcInvestorProdSPBMDetailField(p *C.CThostFtdcInvestorProdSPBMDetailField) *CThostFtdcInvestorProdSPBMDetailField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcInvestorProdSPBMDetailField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.IntraInstrMargin = goFloat64(p.IntraInstrMargin)
+	ret.BCollectingMargin = goFloat64(p.BCollectingMargin)
+	ret.SCollectingMargin = goFloat64(p.SCollectingMargin)
+	ret.IntraProdMargin = goFloat64(p.IntraProdMargin)
+	ret.NetMargin = goFloat64(p.NetMargin)
+	ret.InterProdMargin = goFloat64(p.InterProdMargin)
+	ret.SingleMargin = goFloat64(p.SingleMargin)
+	ret.AddOnMargin = goFloat64(p.AddOnMargin)
+	ret.DeliveryMargin = goFloat64(p.DeliveryMargin)
+	ret.CallOptionMinRisk = goFloat64(p.CallOptionMinRisk)
+	ret.PutOptionMinRisk = goFloat64(p.PutOptionMinRisk)
+	ret.OptionMinRisk = goFloat64(p.OptionMinRisk)
+	ret.OptionValueOffset = goFloat64(p.OptionValueOffset)
+	ret.OptionRoyalty = goFloat64(p.OptionRoyalty)
+	ret.RealOptionValueOffset = goFloat64(p.RealOptionValueOffset)
+	ret.Margin = goFloat64(p.Margin)
+	ret.ExchMargin = goFloat64(p.ExchMargin)
+	return ret
+}
+
+func CThostFtdcInvestorProdSPBMDetailFieldCValue(s *CThostFtdcInvestorProdSPBMDetailField) *C.CThostFtdcInvestorProdSPBMDetailField {
+	ptr := (*C.CThostFtdcInvestorProdSPBMDetailField)(C.malloc(C.sizeof_CThostFtdcInvestorProdSPBMDetailField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	ptr.IntraInstrMargin = C.double(s.IntraInstrMargin)
+	ptr.BCollectingMargin = C.double(s.BCollectingMargin)
+	ptr.SCollectingMargin = C.double(s.SCollectingMargin)
+	ptr.IntraProdMargin = C.double(s.IntraProdMargin)
+	ptr.NetMargin = C.double(s.NetMargin)
+	ptr.InterProdMargin = C.double(s.InterProdMargin)
+	ptr.SingleMargin = C.double(s.SingleMargin)
+	ptr.AddOnMargin = C.double(s.AddOnMargin)
+	ptr.DeliveryMargin = C.double(s.DeliveryMargin)
+	ptr.CallOptionMinRisk = C.double(s.CallOptionMinRisk)
+	ptr.PutOptionMinRisk = C.double(s.PutOptionMinRisk)
+	ptr.OptionMinRisk = C.double(s.OptionMinRisk)
+	ptr.OptionValueOffset = C.double(s.OptionValueOffset)
+	ptr.OptionRoyalty = C.double(s.OptionRoyalty)
+	ptr.RealOptionValueOffset = C.double(s.RealOptionValueOffset)
+	ptr.Margin = C.double(s.Margin)
+	ptr.ExchMargin = C.double(s.ExchMargin)
+	return ptr
+}
+
+type CThostFtdcQryInvestorProdSPBMDetailField struct {
+	ExchangeID     string
+	BrokerID       string
+	InvestorID     string
+	ProdFamilyCode string
+}
+
+func NewCThostFtdcQryInvestorProdSPBMDetailField(p *C.CThostFtdcQryInvestorProdSPBMDetailField) *CThostFtdcQryInvestorProdSPBMDetailField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryInvestorProdSPBMDetailField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	return ret
+}
+
+func CThostFtdcQryInvestorProdSPBMDetailFieldCValue(s *CThostFtdcQryInvestorProdSPBMDetailField) *C.CThostFtdcQryInvestorProdSPBMDetailField {
+	ptr := (*C.CThostFtdcQryInvestorProdSPBMDetailField)(C.malloc(C.sizeof_CThostFtdcQryInvestorProdSPBMDetailField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	return ptr
+}
+
+type CThostFtdcPortfTradeParamSettingField struct {
+	ExchangeID     string
+	BrokerID       string
+	InvestorID     string
+	Portfolio      byte
+	IsActionVerify int
+	IsCloseVerify  int
+}
+
+func NewCThostFtdcPortfTradeParamSettingField(p *C.CThostFtdcPortfTradeParamSettingField) *CThostFtdcPortfTradeParamSettingField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcPortfTradeParamSettingField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.Portfolio = byte(p.Portfolio)
+	ret.IsActionVerify = int(p.IsActionVerify)
+	ret.IsCloseVerify = int(p.IsCloseVerify)
+	return ret
+}
+
+func CThostFtdcPortfTradeParamSettingFieldCValue(s *CThostFtdcPortfTradeParamSettingField) *C.CThostFtdcPortfTradeParamSettingField {
+	ptr := (*C.CThostFtdcPortfTradeParamSettingField)(C.malloc(C.sizeof_CThostFtdcPortfTradeParamSettingField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.Portfolio = C.char(s.Portfolio)
+	ptr.IsActionVerify = C.int(s.IsActionVerify)
+	ptr.IsCloseVerify = C.int(s.IsCloseVerify)
 	return ptr
 }

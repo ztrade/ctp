@@ -39,7 +39,7 @@ public:
 
   virtual void OnRspOrderAction(CThostFtdcInputOrderActionField * pInputOrderAction,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
 
-  virtual void OnRspQueryMaxOrderVolume(CThostFtdcQueryMaxOrderVolumeField * pQueryMaxOrderVolume,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+  virtual void OnRspQryMaxOrderVolume(CThostFtdcQryMaxOrderVolumeField * pQryMaxOrderVolume,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
 
   virtual void OnRspSettlementInfoConfirm(CThostFtdcSettlementInfoConfirmField * pSettlementInfoConfirm,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
 
@@ -88,6 +88,8 @@ public:
   virtual void OnRspQryInstrument(CThostFtdcInstrumentField * pInstrument,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
 
   virtual void OnRspQryDepthMarketData(CThostFtdcDepthMarketDataField * pDepthMarketData,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryTraderOffer(CThostFtdcTraderOfferField * pTraderOffer,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
 
   virtual void OnRspQrySettlementInfo(CThostFtdcSettlementInfoField * pSettlementInfo,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
 
@@ -258,6 +260,30 @@ public:
   virtual void OnRtnCancelAccountByBank(CThostFtdcCancelAccountField * pCancelAccount);
 
   virtual void OnRtnChangeAccountByBank(CThostFtdcChangeAccountField * pChangeAccount);
+
+  virtual void OnRspQryClassifiedInstrument(CThostFtdcInstrumentField * pInstrument,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryCombPromotionParam(CThostFtdcCombPromotionParamField * pCombPromotionParam,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryRiskSettleInvstPosition(CThostFtdcRiskSettleInvstPositionField * pRiskSettleInvstPosition,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryRiskSettleProductStatus(CThostFtdcRiskSettleProductStatusField * pRiskSettleProductStatus,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQrySPBMFutureParameter(CThostFtdcSPBMFutureParameterField * pSPBMFutureParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQrySPBMOptionParameter(CThostFtdcSPBMOptionParameterField * pSPBMOptionParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQrySPBMIntraParameter(CThostFtdcSPBMIntraParameterField * pSPBMIntraParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQrySPBMInterParameter(CThostFtdcSPBMInterParameterField * pSPBMInterParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQrySPBMPortfDefinition(CThostFtdcSPBMPortfDefinitionField * pSPBMPortfDefinition,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQrySPBMInvestorPortfDef(CThostFtdcSPBMInvestorPortfDefField * pSPBMInvestorPortfDef,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryInvestorPortfMarginRatio(CThostFtdcInvestorPortfMarginRatioField * pInvestorPortfMarginRatio,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryInvestorProdSPBMDetail(CThostFtdcInvestorProdSPBMDetailField * pInvestorProdSPBMDetail,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
 
 
 private:
