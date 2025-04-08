@@ -279,6 +279,44 @@ extern "C"{
 
   void tdOnRspQryInvestorProdSPBMDetail(uint64_t ptr,CThostFtdcInvestorProdSPBMDetailField * pInvestorProdSPBMDetail,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
 
+  void tdOnRspQryInvestorCommoditySPMMMargin(uint64_t ptr,CThostFtdcInvestorCommoditySPMMMarginField * pInvestorCommoditySPMMMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryInvestorCommodityGroupSPMMMargin(uint64_t ptr,CThostFtdcInvestorCommodityGroupSPMMMarginField * pInvestorCommodityGroupSPMMMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQrySPMMInstParam(uint64_t ptr,CThostFtdcSPMMInstParamField * pSPMMInstParam,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQrySPMMProductParam(uint64_t ptr,CThostFtdcSPMMProductParamField * pSPMMProductParam,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQrySPBMAddOnInterParameter(uint64_t ptr,CThostFtdcSPBMAddOnInterParameterField * pSPBMAddOnInterParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryRCAMSCombProductInfo(uint64_t ptr,CThostFtdcRCAMSCombProductInfoField * pRCAMSCombProductInfo,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryRCAMSInstrParameter(uint64_t ptr,CThostFtdcRCAMSInstrParameterField * pRCAMSInstrParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryRCAMSIntraParameter(uint64_t ptr,CThostFtdcRCAMSIntraParameterField * pRCAMSIntraParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryRCAMSInterParameter(uint64_t ptr,CThostFtdcRCAMSInterParameterField * pRCAMSInterParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryRCAMSShortOptAdjustParam(uint64_t ptr,CThostFtdcRCAMSShortOptAdjustParamField * pRCAMSShortOptAdjustParam,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryRCAMSInvestorCombPosition(uint64_t ptr,CThostFtdcRCAMSInvestorCombPositionField * pRCAMSInvestorCombPosition,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryInvestorProdRCAMSMargin(uint64_t ptr,CThostFtdcInvestorProdRCAMSMarginField * pInvestorProdRCAMSMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryRULEInstrParameter(uint64_t ptr,CThostFtdcRULEInstrParameterField * pRULEInstrParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryRULEIntraParameter(uint64_t ptr,CThostFtdcRULEIntraParameterField * pRULEIntraParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryRULEInterParameter(uint64_t ptr,CThostFtdcRULEInterParameterField * pRULEInterParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryInvestorProdRULEMargin(uint64_t ptr,CThostFtdcInvestorProdRULEMarginField * pInvestorProdRULEMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryInvestorPortfSetting(uint64_t ptr,CThostFtdcInvestorPortfSettingField * pInvestorPortfSetting,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryInvestorInfoCommRec(uint64_t ptr,CThostFtdcInvestorInfoCommRecField * pInvestorInfoCommRec,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  void tdOnRspQryCombLeg(uint64_t ptr,CThostFtdcCombLegField * pCombLeg,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
 }
 
 CThostFtdcTraderSpiImpl::CThostFtdcTraderSpiImpl(uint64_t ptr):ptr(ptr){
@@ -1113,5 +1151,119 @@ void CThostFtdcTraderSpiImpl::OnRspQryInvestorPortfMarginRatio(CThostFtdcInvesto
 void CThostFtdcTraderSpiImpl::OnRspQryInvestorProdSPBMDetail(CThostFtdcInvestorProdSPBMDetailField * pInvestorProdSPBMDetail,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
 {
   tdOnRspQryInvestorProdSPBMDetail(ptr,pInvestorProdSPBMDetail,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryInvestorCommoditySPMMMargin(CThostFtdcInvestorCommoditySPMMMarginField * pInvestorCommoditySPMMMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryInvestorCommoditySPMMMargin(ptr,pInvestorCommoditySPMMMargin,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryInvestorCommodityGroupSPMMMargin(CThostFtdcInvestorCommodityGroupSPMMMarginField * pInvestorCommodityGroupSPMMMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryInvestorCommodityGroupSPMMMargin(ptr,pInvestorCommodityGroupSPMMMargin,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQrySPMMInstParam(CThostFtdcSPMMInstParamField * pSPMMInstParam,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQrySPMMInstParam(ptr,pSPMMInstParam,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQrySPMMProductParam(CThostFtdcSPMMProductParamField * pSPMMProductParam,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQrySPMMProductParam(ptr,pSPMMProductParam,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQrySPBMAddOnInterParameter(CThostFtdcSPBMAddOnInterParameterField * pSPBMAddOnInterParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQrySPBMAddOnInterParameter(ptr,pSPBMAddOnInterParameter,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryRCAMSCombProductInfo(CThostFtdcRCAMSCombProductInfoField * pRCAMSCombProductInfo,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryRCAMSCombProductInfo(ptr,pRCAMSCombProductInfo,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryRCAMSInstrParameter(CThostFtdcRCAMSInstrParameterField * pRCAMSInstrParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryRCAMSInstrParameter(ptr,pRCAMSInstrParameter,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryRCAMSIntraParameter(CThostFtdcRCAMSIntraParameterField * pRCAMSIntraParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryRCAMSIntraParameter(ptr,pRCAMSIntraParameter,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryRCAMSInterParameter(CThostFtdcRCAMSInterParameterField * pRCAMSInterParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryRCAMSInterParameter(ptr,pRCAMSInterParameter,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryRCAMSShortOptAdjustParam(CThostFtdcRCAMSShortOptAdjustParamField * pRCAMSShortOptAdjustParam,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryRCAMSShortOptAdjustParam(ptr,pRCAMSShortOptAdjustParam,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryRCAMSInvestorCombPosition(CThostFtdcRCAMSInvestorCombPositionField * pRCAMSInvestorCombPosition,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryRCAMSInvestorCombPosition(ptr,pRCAMSInvestorCombPosition,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryInvestorProdRCAMSMargin(CThostFtdcInvestorProdRCAMSMarginField * pInvestorProdRCAMSMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryInvestorProdRCAMSMargin(ptr,pInvestorProdRCAMSMargin,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryRULEInstrParameter(CThostFtdcRULEInstrParameterField * pRULEInstrParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryRULEInstrParameter(ptr,pRULEInstrParameter,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryRULEIntraParameter(CThostFtdcRULEIntraParameterField * pRULEIntraParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryRULEIntraParameter(ptr,pRULEIntraParameter,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryRULEInterParameter(CThostFtdcRULEInterParameterField * pRULEInterParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryRULEInterParameter(ptr,pRULEInterParameter,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryInvestorProdRULEMargin(CThostFtdcInvestorProdRULEMarginField * pInvestorProdRULEMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryInvestorProdRULEMargin(ptr,pInvestorProdRULEMargin,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryInvestorPortfSetting(CThostFtdcInvestorPortfSettingField * pInvestorPortfSetting,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryInvestorPortfSetting(ptr,pInvestorPortfSetting,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryInvestorInfoCommRec(CThostFtdcInvestorInfoCommRecField * pInvestorInfoCommRec,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryInvestorInfoCommRec(ptr,pInvestorInfoCommRec,pRspInfo,nRequestID,bIsLast);
+
+}
+
+void CThostFtdcTraderSpiImpl::OnRspQryCombLeg(CThostFtdcCombLegField * pCombLeg,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast)
+{
+  tdOnRspQryCombLeg(ptr,pCombLeg,pRspInfo,nRequestID,bIsLast);
 
 }

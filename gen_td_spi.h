@@ -285,6 +285,44 @@ public:
 
   virtual void OnRspQryInvestorProdSPBMDetail(CThostFtdcInvestorProdSPBMDetailField * pInvestorProdSPBMDetail,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
 
+  virtual void OnRspQryInvestorCommoditySPMMMargin(CThostFtdcInvestorCommoditySPMMMarginField * pInvestorCommoditySPMMMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryInvestorCommodityGroupSPMMMargin(CThostFtdcInvestorCommodityGroupSPMMMarginField * pInvestorCommodityGroupSPMMMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQrySPMMInstParam(CThostFtdcSPMMInstParamField * pSPMMInstParam,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQrySPMMProductParam(CThostFtdcSPMMProductParamField * pSPMMProductParam,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQrySPBMAddOnInterParameter(CThostFtdcSPBMAddOnInterParameterField * pSPBMAddOnInterParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryRCAMSCombProductInfo(CThostFtdcRCAMSCombProductInfoField * pRCAMSCombProductInfo,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryRCAMSInstrParameter(CThostFtdcRCAMSInstrParameterField * pRCAMSInstrParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryRCAMSIntraParameter(CThostFtdcRCAMSIntraParameterField * pRCAMSIntraParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryRCAMSInterParameter(CThostFtdcRCAMSInterParameterField * pRCAMSInterParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryRCAMSShortOptAdjustParam(CThostFtdcRCAMSShortOptAdjustParamField * pRCAMSShortOptAdjustParam,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryRCAMSInvestorCombPosition(CThostFtdcRCAMSInvestorCombPositionField * pRCAMSInvestorCombPosition,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryInvestorProdRCAMSMargin(CThostFtdcInvestorProdRCAMSMarginField * pInvestorProdRCAMSMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryRULEInstrParameter(CThostFtdcRULEInstrParameterField * pRULEInstrParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryRULEIntraParameter(CThostFtdcRULEIntraParameterField * pRULEIntraParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryRULEInterParameter(CThostFtdcRULEInterParameterField * pRULEInterParameter,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryInvestorProdRULEMargin(CThostFtdcInvestorProdRULEMarginField * pInvestorProdRULEMargin,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryInvestorPortfSetting(CThostFtdcInvestorPortfSettingField * pInvestorPortfSetting,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryInvestorInfoCommRec(CThostFtdcInvestorInfoCommRecField * pInvestorInfoCommRec,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
+  virtual void OnRspQryCombLeg(CThostFtdcCombLegField * pCombLeg,CThostFtdcRspInfoField * pRspInfo,int nRequestID,bool bIsLast);
+
 
 private:
   uint64_t ptr = 0;

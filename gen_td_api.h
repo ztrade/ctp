@@ -21,6 +21,7 @@ void td_release(tdApi a);
 void td_init(tdApi a);
 int td_join(tdApi a);
 const char * td_get_trading_day(tdApi a);
+void td_get_front_info(tdApi a, CThostFtdcFrontInfoField * pFrontInfo);
 void td_register_front(tdApi a, char * pszFrontAddress);
 void td_register_name_server(tdApi a, char * pszNsAddress);
 void td_register_fens_user_info(tdApi a, CThostFtdcFensUserInfoField * pFensUserInfo);
@@ -124,6 +125,25 @@ int td_req_qry_s_p_b_m_portf_definition(tdApi a, CThostFtdcQrySPBMPortfDefinitio
 int td_req_qry_s_p_b_m_investor_portf_def(tdApi a, CThostFtdcQrySPBMInvestorPortfDefField * pQrySPBMInvestorPortfDef, int nRequestID);
 int td_req_qry_investor_portf_margin_ratio(tdApi a, CThostFtdcQryInvestorPortfMarginRatioField * pQryInvestorPortfMarginRatio, int nRequestID);
 int td_req_qry_investor_prod_s_p_b_m_detail(tdApi a, CThostFtdcQryInvestorProdSPBMDetailField * pQryInvestorProdSPBMDetail, int nRequestID);
+int td_req_qry_investor_commodity_s_p_m_m_margin(tdApi a, CThostFtdcQryInvestorCommoditySPMMMarginField * pQryInvestorCommoditySPMMMargin, int nRequestID);
+int td_req_qry_investor_commodity_group_s_p_m_m_margin(tdApi a, CThostFtdcQryInvestorCommodityGroupSPMMMarginField * pQryInvestorCommodityGroupSPMMMargin, int nRequestID);
+int td_req_qry_s_p_m_m_inst_param(tdApi a, CThostFtdcQrySPMMInstParamField * pQrySPMMInstParam, int nRequestID);
+int td_req_qry_s_p_m_m_product_param(tdApi a, CThostFtdcQrySPMMProductParamField * pQrySPMMProductParam, int nRequestID);
+int td_req_qry_s_p_b_m_add_on_inter_parameter(tdApi a, CThostFtdcQrySPBMAddOnInterParameterField * pQrySPBMAddOnInterParameter, int nRequestID);
+int td_req_qry_r_c_a_m_s_comb_product_info(tdApi a, CThostFtdcQryRCAMSCombProductInfoField * pQryRCAMSCombProductInfo, int nRequestID);
+int td_req_qry_r_c_a_m_s_instr_parameter(tdApi a, CThostFtdcQryRCAMSInstrParameterField * pQryRCAMSInstrParameter, int nRequestID);
+int td_req_qry_r_c_a_m_s_intra_parameter(tdApi a, CThostFtdcQryRCAMSIntraParameterField * pQryRCAMSIntraParameter, int nRequestID);
+int td_req_qry_r_c_a_m_s_inter_parameter(tdApi a, CThostFtdcQryRCAMSInterParameterField * pQryRCAMSInterParameter, int nRequestID);
+int td_req_qry_r_c_a_m_s_short_opt_adjust_param(tdApi a, CThostFtdcQryRCAMSShortOptAdjustParamField * pQryRCAMSShortOptAdjustParam, int nRequestID);
+int td_req_qry_r_c_a_m_s_investor_comb_position(tdApi a, CThostFtdcQryRCAMSInvestorCombPositionField * pQryRCAMSInvestorCombPosition, int nRequestID);
+int td_req_qry_investor_prod_r_c_a_m_s_margin(tdApi a, CThostFtdcQryInvestorProdRCAMSMarginField * pQryInvestorProdRCAMSMargin, int nRequestID);
+int td_req_qry_r_u_l_e_instr_parameter(tdApi a, CThostFtdcQryRULEInstrParameterField * pQryRULEInstrParameter, int nRequestID);
+int td_req_qry_r_u_l_e_intra_parameter(tdApi a, CThostFtdcQryRULEIntraParameterField * pQryRULEIntraParameter, int nRequestID);
+int td_req_qry_r_u_l_e_inter_parameter(tdApi a, CThostFtdcQryRULEInterParameterField * pQryRULEInterParameter, int nRequestID);
+int td_req_qry_investor_prod_r_u_l_e_margin(tdApi a, CThostFtdcQryInvestorProdRULEMarginField * pQryInvestorProdRULEMargin, int nRequestID);
+int td_req_qry_investor_portf_setting(tdApi a, CThostFtdcQryInvestorPortfSettingField * pQryInvestorPortfSetting, int nRequestID);
+int td_req_qry_investor_info_comm_rec(tdApi a, CThostFtdcQryInvestorInfoCommRecField * pQryInvestorInfoCommRec, int nRequestID);
+int td_req_qry_comb_leg(tdApi a, CThostFtdcQryCombLegField * pQryCombLeg, int nRequestID);
 
 #ifdef  __cplusplus
 };

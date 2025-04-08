@@ -147,6 +147,25 @@ type CThostFtdcTraderSpi interface {
 	OnRspQrySPBMInvestorPortfDef(pSPBMInvestorPortfDef *CThostFtdcSPBMInvestorPortfDefField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspQryInvestorPortfMarginRatio(pInvestorPortfMarginRatio *CThostFtdcInvestorPortfMarginRatioField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 	OnRspQryInvestorProdSPBMDetail(pInvestorProdSPBMDetail *CThostFtdcInvestorProdSPBMDetailField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryInvestorCommoditySPMMMargin(pInvestorCommoditySPMMMargin *CThostFtdcInvestorCommoditySPMMMarginField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryInvestorCommodityGroupSPMMMargin(pInvestorCommodityGroupSPMMMargin *CThostFtdcInvestorCommodityGroupSPMMMarginField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQrySPMMInstParam(pSPMMInstParam *CThostFtdcSPMMInstParamField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQrySPMMProductParam(pSPMMProductParam *CThostFtdcSPMMProductParamField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQrySPBMAddOnInterParameter(pSPBMAddOnInterParameter *CThostFtdcSPBMAddOnInterParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryRCAMSCombProductInfo(pRCAMSCombProductInfo *CThostFtdcRCAMSCombProductInfoField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryRCAMSInstrParameter(pRCAMSInstrParameter *CThostFtdcRCAMSInstrParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryRCAMSIntraParameter(pRCAMSIntraParameter *CThostFtdcRCAMSIntraParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryRCAMSInterParameter(pRCAMSInterParameter *CThostFtdcRCAMSInterParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryRCAMSShortOptAdjustParam(pRCAMSShortOptAdjustParam *CThostFtdcRCAMSShortOptAdjustParamField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryRCAMSInvestorCombPosition(pRCAMSInvestorCombPosition *CThostFtdcRCAMSInvestorCombPositionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryInvestorProdRCAMSMargin(pInvestorProdRCAMSMargin *CThostFtdcInvestorProdRCAMSMarginField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryRULEInstrParameter(pRULEInstrParameter *CThostFtdcRULEInstrParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryRULEIntraParameter(pRULEIntraParameter *CThostFtdcRULEIntraParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryRULEInterParameter(pRULEInterParameter *CThostFtdcRULEInterParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryInvestorProdRULEMargin(pInvestorProdRULEMargin *CThostFtdcInvestorProdRULEMarginField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryInvestorPortfSetting(pInvestorPortfSetting *CThostFtdcInvestorPortfSettingField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryInvestorInfoCommRec(pInvestorInfoCommRec *CThostFtdcInvestorInfoCommRecField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
+	OnRspQryCombLeg(pCombLeg *CThostFtdcCombLegField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool)
 }
 
 type CThostFtdcTraderSpiBase struct {
@@ -565,6 +584,63 @@ func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorPortfMarginRatio(pInvestorPort
 }
 func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorProdSPBMDetail(pInvestorProdSPBMDetail *CThostFtdcInvestorProdSPBMDetailField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
 	fmt.Println("OnRspQryInvestorProdSPBMDetail")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorCommoditySPMMMargin(pInvestorCommoditySPMMMargin *CThostFtdcInvestorCommoditySPMMMarginField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorCommoditySPMMMargin")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorCommodityGroupSPMMMargin(pInvestorCommodityGroupSPMMMargin *CThostFtdcInvestorCommodityGroupSPMMMarginField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorCommodityGroupSPMMMargin")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySPMMInstParam(pSPMMInstParam *CThostFtdcSPMMInstParamField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySPMMInstParam")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySPMMProductParam(pSPMMProductParam *CThostFtdcSPMMProductParamField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySPMMProductParam")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQrySPBMAddOnInterParameter(pSPBMAddOnInterParameter *CThostFtdcSPBMAddOnInterParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQrySPBMAddOnInterParameter")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryRCAMSCombProductInfo(pRCAMSCombProductInfo *CThostFtdcRCAMSCombProductInfoField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryRCAMSCombProductInfo")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryRCAMSInstrParameter(pRCAMSInstrParameter *CThostFtdcRCAMSInstrParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryRCAMSInstrParameter")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryRCAMSIntraParameter(pRCAMSIntraParameter *CThostFtdcRCAMSIntraParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryRCAMSIntraParameter")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryRCAMSInterParameter(pRCAMSInterParameter *CThostFtdcRCAMSInterParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryRCAMSInterParameter")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryRCAMSShortOptAdjustParam(pRCAMSShortOptAdjustParam *CThostFtdcRCAMSShortOptAdjustParamField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryRCAMSShortOptAdjustParam")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryRCAMSInvestorCombPosition(pRCAMSInvestorCombPosition *CThostFtdcRCAMSInvestorCombPositionField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryRCAMSInvestorCombPosition")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorProdRCAMSMargin(pInvestorProdRCAMSMargin *CThostFtdcInvestorProdRCAMSMarginField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorProdRCAMSMargin")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryRULEInstrParameter(pRULEInstrParameter *CThostFtdcRULEInstrParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryRULEInstrParameter")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryRULEIntraParameter(pRULEIntraParameter *CThostFtdcRULEIntraParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryRULEIntraParameter")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryRULEInterParameter(pRULEInterParameter *CThostFtdcRULEInterParameterField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryRULEInterParameter")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorProdRULEMargin(pInvestorProdRULEMargin *CThostFtdcInvestorProdRULEMarginField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorProdRULEMargin")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorPortfSetting(pInvestorPortfSetting *CThostFtdcInvestorPortfSettingField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorPortfSetting")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryInvestorInfoCommRec(pInvestorInfoCommRec *CThostFtdcInvestorInfoCommRecField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryInvestorInfoCommRec")
+}
+func (b *CThostFtdcTraderSpiBase) OnRspQryCombLeg(pCombLeg *CThostFtdcCombLegField, pRspInfo *CThostFtdcRspInfoField, nRequestID int, bIsLast bool) {
+	fmt.Println("OnRspQryCombLeg")
 }
 
 func getCThostFtdcTraderSpi(ptr uint64) CThostFtdcTraderSpi {
@@ -2108,5 +2184,233 @@ func tdOnRspQryInvestorProdSPBMDetail(ptr uint64, pInvestorProdSPBMDetail *C.CTh
 		gonRequestID := int(nRequestID)
 		gobIsLast := c2goBool(bIsLast)
 		p.OnRspQryInvestorProdSPBMDetail(gopInvestorProdSPBMDetail, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryInvestorCommoditySPMMMargin
+func tdOnRspQryInvestorCommoditySPMMMargin(ptr uint64, pInvestorCommoditySPMMMargin *C.CThostFtdcInvestorCommoditySPMMMarginField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopInvestorCommoditySPMMMargin := NewCThostFtdcInvestorCommoditySPMMMarginField(pInvestorCommoditySPMMMargin)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryInvestorCommoditySPMMMargin(gopInvestorCommoditySPMMMargin, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryInvestorCommodityGroupSPMMMargin
+func tdOnRspQryInvestorCommodityGroupSPMMMargin(ptr uint64, pInvestorCommodityGroupSPMMMargin *C.CThostFtdcInvestorCommodityGroupSPMMMarginField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopInvestorCommodityGroupSPMMMargin := NewCThostFtdcInvestorCommodityGroupSPMMMarginField(pInvestorCommodityGroupSPMMMargin)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryInvestorCommodityGroupSPMMMargin(gopInvestorCommodityGroupSPMMMargin, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQrySPMMInstParam
+func tdOnRspQrySPMMInstParam(ptr uint64, pSPMMInstParam *C.CThostFtdcSPMMInstParamField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopSPMMInstParam := NewCThostFtdcSPMMInstParamField(pSPMMInstParam)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQrySPMMInstParam(gopSPMMInstParam, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQrySPMMProductParam
+func tdOnRspQrySPMMProductParam(ptr uint64, pSPMMProductParam *C.CThostFtdcSPMMProductParamField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopSPMMProductParam := NewCThostFtdcSPMMProductParamField(pSPMMProductParam)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQrySPMMProductParam(gopSPMMProductParam, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQrySPBMAddOnInterParameter
+func tdOnRspQrySPBMAddOnInterParameter(ptr uint64, pSPBMAddOnInterParameter *C.CThostFtdcSPBMAddOnInterParameterField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopSPBMAddOnInterParameter := NewCThostFtdcSPBMAddOnInterParameterField(pSPBMAddOnInterParameter)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQrySPBMAddOnInterParameter(gopSPBMAddOnInterParameter, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryRCAMSCombProductInfo
+func tdOnRspQryRCAMSCombProductInfo(ptr uint64, pRCAMSCombProductInfo *C.CThostFtdcRCAMSCombProductInfoField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopRCAMSCombProductInfo := NewCThostFtdcRCAMSCombProductInfoField(pRCAMSCombProductInfo)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryRCAMSCombProductInfo(gopRCAMSCombProductInfo, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryRCAMSInstrParameter
+func tdOnRspQryRCAMSInstrParameter(ptr uint64, pRCAMSInstrParameter *C.CThostFtdcRCAMSInstrParameterField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopRCAMSInstrParameter := NewCThostFtdcRCAMSInstrParameterField(pRCAMSInstrParameter)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryRCAMSInstrParameter(gopRCAMSInstrParameter, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryRCAMSIntraParameter
+func tdOnRspQryRCAMSIntraParameter(ptr uint64, pRCAMSIntraParameter *C.CThostFtdcRCAMSIntraParameterField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopRCAMSIntraParameter := NewCThostFtdcRCAMSIntraParameterField(pRCAMSIntraParameter)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryRCAMSIntraParameter(gopRCAMSIntraParameter, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryRCAMSInterParameter
+func tdOnRspQryRCAMSInterParameter(ptr uint64, pRCAMSInterParameter *C.CThostFtdcRCAMSInterParameterField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopRCAMSInterParameter := NewCThostFtdcRCAMSInterParameterField(pRCAMSInterParameter)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryRCAMSInterParameter(gopRCAMSInterParameter, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryRCAMSShortOptAdjustParam
+func tdOnRspQryRCAMSShortOptAdjustParam(ptr uint64, pRCAMSShortOptAdjustParam *C.CThostFtdcRCAMSShortOptAdjustParamField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopRCAMSShortOptAdjustParam := NewCThostFtdcRCAMSShortOptAdjustParamField(pRCAMSShortOptAdjustParam)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryRCAMSShortOptAdjustParam(gopRCAMSShortOptAdjustParam, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryRCAMSInvestorCombPosition
+func tdOnRspQryRCAMSInvestorCombPosition(ptr uint64, pRCAMSInvestorCombPosition *C.CThostFtdcRCAMSInvestorCombPositionField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopRCAMSInvestorCombPosition := NewCThostFtdcRCAMSInvestorCombPositionField(pRCAMSInvestorCombPosition)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryRCAMSInvestorCombPosition(gopRCAMSInvestorCombPosition, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryInvestorProdRCAMSMargin
+func tdOnRspQryInvestorProdRCAMSMargin(ptr uint64, pInvestorProdRCAMSMargin *C.CThostFtdcInvestorProdRCAMSMarginField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopInvestorProdRCAMSMargin := NewCThostFtdcInvestorProdRCAMSMarginField(pInvestorProdRCAMSMargin)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryInvestorProdRCAMSMargin(gopInvestorProdRCAMSMargin, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryRULEInstrParameter
+func tdOnRspQryRULEInstrParameter(ptr uint64, pRULEInstrParameter *C.CThostFtdcRULEInstrParameterField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopRULEInstrParameter := NewCThostFtdcRULEInstrParameterField(pRULEInstrParameter)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryRULEInstrParameter(gopRULEInstrParameter, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryRULEIntraParameter
+func tdOnRspQryRULEIntraParameter(ptr uint64, pRULEIntraParameter *C.CThostFtdcRULEIntraParameterField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopRULEIntraParameter := NewCThostFtdcRULEIntraParameterField(pRULEIntraParameter)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryRULEIntraParameter(gopRULEIntraParameter, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryRULEInterParameter
+func tdOnRspQryRULEInterParameter(ptr uint64, pRULEInterParameter *C.CThostFtdcRULEInterParameterField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopRULEInterParameter := NewCThostFtdcRULEInterParameterField(pRULEInterParameter)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryRULEInterParameter(gopRULEInterParameter, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryInvestorProdRULEMargin
+func tdOnRspQryInvestorProdRULEMargin(ptr uint64, pInvestorProdRULEMargin *C.CThostFtdcInvestorProdRULEMarginField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopInvestorProdRULEMargin := NewCThostFtdcInvestorProdRULEMarginField(pInvestorProdRULEMargin)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryInvestorProdRULEMargin(gopInvestorProdRULEMargin, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryInvestorPortfSetting
+func tdOnRspQryInvestorPortfSetting(ptr uint64, pInvestorPortfSetting *C.CThostFtdcInvestorPortfSettingField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopInvestorPortfSetting := NewCThostFtdcInvestorPortfSettingField(pInvestorPortfSetting)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryInvestorPortfSetting(gopInvestorPortfSetting, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryInvestorInfoCommRec
+func tdOnRspQryInvestorInfoCommRec(ptr uint64, pInvestorInfoCommRec *C.CThostFtdcInvestorInfoCommRecField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopInvestorInfoCommRec := NewCThostFtdcInvestorInfoCommRecField(pInvestorInfoCommRec)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryInvestorInfoCommRec(gopInvestorInfoCommRec, gopRspInfo, gonRequestID, gobIsLast)
+	}
+}
+
+//export tdOnRspQryCombLeg
+func tdOnRspQryCombLeg(ptr uint64, pCombLeg *C.CThostFtdcCombLegField, pRspInfo *C.CThostFtdcRspInfoField, nRequestID int, bIsLast C.int8_t) {
+	p := getCThostFtdcTraderSpi(ptr)
+	if p != nil {
+		gopCombLeg := NewCThostFtdcCombLegField(pCombLeg)
+		gopRspInfo := NewCThostFtdcRspInfoField(pRspInfo)
+		gonRequestID := int(nRequestID)
+		gobIsLast := c2goBool(bIsLast)
+		p.OnRspQryCombLeg(gopCombLeg, gopRspInfo, gonRequestID, gobIsLast)
 	}
 }

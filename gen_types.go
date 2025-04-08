@@ -92,21 +92,23 @@ func CThostFtdcReqUserLoginFieldCValue(s *CThostFtdcReqUserLoginField) *C.CThost
 }
 
 type CThostFtdcRspUserLoginField struct {
-	TradingDay  string
-	LoginTime   string
-	BrokerID    string
-	UserID      string
-	SystemName  string
-	FrontID     int
-	SessionID   int
-	MaxOrderRef string
-	SHFETime    string
-	DCETime     string
-	CZCETime    string
-	FFEXTime    string
-	INETime     string
-	SysVersion  string
-	GFEXTime    string
+	TradingDay        string
+	LoginTime         string
+	BrokerID          string
+	UserID            string
+	SystemName        string
+	FrontID           int
+	SessionID         int
+	MaxOrderRef       string
+	SHFETime          string
+	DCETime           string
+	CZCETime          string
+	FFEXTime          string
+	INETime           string
+	SysVersion        string
+	GFEXTime          string
+	LoginDRIdentityID int
+	UserDRIdentityID  int
 }
 
 func NewCThostFtdcRspUserLoginField(p *C.CThostFtdcRspUserLoginField) *CThostFtdcRspUserLoginField {
@@ -129,6 +131,8 @@ func NewCThostFtdcRspUserLoginField(p *C.CThostFtdcRspUserLoginField) *CThostFtd
 	ret.INETime = c2goStr(&p.INETime[0], 9)
 	ret.SysVersion = c2goStr(&p.SysVersion[0], 41)
 	ret.GFEXTime = c2goStr(&p.GFEXTime[0], 9)
+	ret.LoginDRIdentityID = int(p.LoginDRIdentityID)
+	ret.UserDRIdentityID = int(p.UserDRIdentityID)
 	return ret
 }
 
@@ -149,6 +153,8 @@ func CThostFtdcRspUserLoginFieldCValue(s *CThostFtdcRspUserLoginField) *C.CThost
 	go2cStr(s.INETime, &ptr.INETime[0], 9)
 	go2cStr(s.SysVersion, &ptr.SysVersion[0], 41)
 	go2cStr(s.GFEXTime, &ptr.GFEXTime[0], 9)
+	ptr.LoginDRIdentityID = C.int(s.LoginDRIdentityID)
+	ptr.UserDRIdentityID = C.int(s.UserDRIdentityID)
 	return ptr
 }
 
@@ -968,13 +974,15 @@ func CThostFtdcBrokerFieldCValue(s *CThostFtdcBrokerField) *C.CThostFtdcBrokerFi
 }
 
 type CThostFtdcTraderField struct {
-	ExchangeID     string
-	TraderID       string
-	ParticipantID  string
-	Password       string
-	InstallCount   int
-	BrokerID       string
-	OrderCancelAlg byte
+	ExchangeID        string
+	TraderID          string
+	ParticipantID     string
+	Password          string
+	InstallCount      int
+	BrokerID          string
+	OrderCancelAlg    byte
+	TradeInstallCount int
+	MDInstallCount    int
 }
 
 func NewCThostFtdcTraderField(p *C.CThostFtdcTraderField) *CThostFtdcTraderField {
@@ -989,6 +997,8 @@ func NewCThostFtdcTraderField(p *C.CThostFtdcTraderField) *CThostFtdcTraderField
 	ret.InstallCount = int(p.InstallCount)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.OrderCancelAlg = byte(p.OrderCancelAlg)
+	ret.TradeInstallCount = int(p.TradeInstallCount)
+	ret.MDInstallCount = int(p.MDInstallCount)
 	return ret
 }
 
@@ -1001,6 +1011,8 @@ func CThostFtdcTraderFieldCValue(s *CThostFtdcTraderField) *C.CThostFtdcTraderFi
 	ptr.InstallCount = C.int(s.InstallCount)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	ptr.OrderCancelAlg = C.char(s.OrderCancelAlg)
+	ptr.TradeInstallCount = C.int(s.TradeInstallCount)
+	ptr.MDInstallCount = C.int(s.MDInstallCount)
 	return ptr
 }
 
@@ -2526,6 +2538,8 @@ type CThostFtdcInputOrderField struct {
 	MacAddress          string
 	InstrumentID        string
 	IPAddress           string
+	OrderMemo           string
+	SessionReqSeq       int
 }
 
 func NewCThostFtdcInputOrderField(p *C.CThostFtdcInputOrderField) *CThostFtdcInputOrderField {
@@ -2565,6 +2579,8 @@ func NewCThostFtdcInputOrderField(p *C.CThostFtdcInputOrderField) *CThostFtdcInp
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.OrderMemo = c2goStr(&p.OrderMemo[0], 13)
+	ret.SessionReqSeq = int(p.SessionReqSeq)
 	return ret
 }
 
@@ -2602,6 +2618,8 @@ func CThostFtdcInputOrderFieldCValue(s *CThostFtdcInputOrderField) *C.CThostFtdc
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.OrderMemo, &ptr.OrderMemo[0], 13)
+	ptr.SessionReqSeq = C.int(s.SessionReqSeq)
 	return ptr
 }
 
@@ -2672,6 +2690,8 @@ type CThostFtdcOrderField struct {
 	InstrumentID         string
 	ExchangeInstID       string
 	IPAddress            string
+	OrderMemo            string
+	SessionReqSeq        int
 }
 
 func NewCThostFtdcOrderField(p *C.CThostFtdcOrderField) *CThostFtdcOrderField {
@@ -2745,6 +2765,8 @@ func NewCThostFtdcOrderField(p *C.CThostFtdcOrderField) *CThostFtdcOrderField {
 	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.OrderMemo = c2goStr(&p.OrderMemo[0], 13)
+	ret.SessionReqSeq = int(p.SessionReqSeq)
 	return ret
 }
 
@@ -2816,6 +2838,8 @@ func CThostFtdcOrderFieldCValue(s *CThostFtdcOrderField) *C.CThostFtdcOrderField
 	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.OrderMemo, &ptr.OrderMemo[0], 13)
+	ptr.SessionReqSeq = C.int(s.SessionReqSeq)
 	return ptr
 }
 
@@ -3033,6 +3057,8 @@ type CThostFtdcInputOrderActionField struct {
 	MacAddress     string
 	InstrumentID   string
 	IPAddress      string
+	OrderMemo      string
+	SessionReqSeq  int
 }
 
 func NewCThostFtdcInputOrderActionField(p *C.CThostFtdcInputOrderActionField) *CThostFtdcInputOrderActionField {
@@ -3059,6 +3085,8 @@ func NewCThostFtdcInputOrderActionField(p *C.CThostFtdcInputOrderActionField) *C
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.OrderMemo = c2goStr(&p.OrderMemo[0], 13)
+	ret.SessionReqSeq = int(p.SessionReqSeq)
 	return ret
 }
 
@@ -3083,6 +3111,8 @@ func CThostFtdcInputOrderActionFieldCValue(s *CThostFtdcInputOrderActionField) *
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.OrderMemo, &ptr.OrderMemo[0], 13)
+	ptr.SessionReqSeq = C.int(s.SessionReqSeq)
 	return ptr
 }
 
@@ -3118,6 +3148,8 @@ type CThostFtdcOrderActionField struct {
 	MacAddress        string
 	InstrumentID      string
 	IPAddress         string
+	OrderMemo         string
+	SessionReqSeq     int
 }
 
 func NewCThostFtdcOrderActionField(p *C.CThostFtdcOrderActionField) *CThostFtdcOrderActionField {
@@ -3156,6 +3188,8 @@ func NewCThostFtdcOrderActionField(p *C.CThostFtdcOrderActionField) *CThostFtdcO
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.OrderMemo = c2goStr(&p.OrderMemo[0], 13)
+	ret.SessionReqSeq = int(p.SessionReqSeq)
 	return ret
 }
 
@@ -3192,6 +3226,8 @@ func CThostFtdcOrderActionFieldCValue(s *CThostFtdcOrderActionField) *C.CThostFt
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.OrderMemo, &ptr.OrderMemo[0], 13)
+	ptr.SessionReqSeq = C.int(s.SessionReqSeq)
 	return ptr
 }
 
@@ -3650,14 +3686,15 @@ func CThostFtdcSettlementInfoConfirmFieldCValue(s *CThostFtdcSettlementInfoConfi
 }
 
 type CThostFtdcSyncDepositField struct {
-	DepositSeqNo    string
-	BrokerID        string
-	InvestorID      string
-	Deposit         float64
-	IsForce         int
-	CurrencyID      string
-	IsFromSopt      int
-	TradingPassword string
+	DepositSeqNo      string
+	BrokerID          string
+	InvestorID        string
+	Deposit           float64
+	IsForce           int
+	CurrencyID        string
+	IsFromSopt        int
+	TradingPassword   string
+	IsSecAgentTranfer int
 }
 
 func NewCThostFtdcSyncDepositField(p *C.CThostFtdcSyncDepositField) *CThostFtdcSyncDepositField {
@@ -3673,6 +3710,7 @@ func NewCThostFtdcSyncDepositField(p *C.CThostFtdcSyncDepositField) *CThostFtdcS
 	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
 	ret.IsFromSopt = int(p.IsFromSopt)
 	ret.TradingPassword = c2goStr(&p.TradingPassword[0], 41)
+	ret.IsSecAgentTranfer = int(p.IsSecAgentTranfer)
 	return ret
 }
 
@@ -3686,6 +3724,7 @@ func CThostFtdcSyncDepositFieldCValue(s *CThostFtdcSyncDepositField) *C.CThostFt
 	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
 	ptr.IsFromSopt = C.int(s.IsFromSopt)
 	go2cStr(s.TradingPassword, &ptr.TradingPassword[0], 41)
+	ptr.IsSecAgentTranfer = C.int(s.IsSecAgentTranfer)
 	return ptr
 }
 
@@ -4974,6 +5013,7 @@ type CThostFtdcQryDepthMarketDataField struct {
 	Reserve1     string
 	ExchangeID   string
 	InstrumentID string
+	ProductClass byte
 }
 
 func NewCThostFtdcQryDepthMarketDataField(p *C.CThostFtdcQryDepthMarketDataField) *CThostFtdcQryDepthMarketDataField {
@@ -4984,6 +5024,7 @@ func NewCThostFtdcQryDepthMarketDataField(p *C.CThostFtdcQryDepthMarketDataField
 	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ProductClass = byte(p.ProductClass)
 	return ret
 }
 
@@ -4992,6 +5033,7 @@ func CThostFtdcQryDepthMarketDataFieldCValue(s *CThostFtdcQryDepthMarketDataFiel
 	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.ProductClass = C.char(s.ProductClass)
 	return ptr
 }
 
@@ -6899,6 +6941,9 @@ type CThostFtdcInputQuoteField struct {
 	InstrumentID  string
 	IPAddress     string
 	ReplaceSysID  string
+	TimeCondition byte
+	OrderMemo     string
+	SessionReqSeq int
 }
 
 func NewCThostFtdcInputQuoteField(p *C.CThostFtdcInputQuoteField) *CThostFtdcInputQuoteField {
@@ -6932,6 +6977,9 @@ func NewCThostFtdcInputQuoteField(p *C.CThostFtdcInputQuoteField) *CThostFtdcInp
 	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	ret.ReplaceSysID = c2goStr(&p.ReplaceSysID[0], 21)
+	ret.TimeCondition = byte(p.TimeCondition)
+	ret.OrderMemo = c2goStr(&p.OrderMemo[0], 13)
+	ret.SessionReqSeq = int(p.SessionReqSeq)
 	return ret
 }
 
@@ -6963,6 +7011,9 @@ func CThostFtdcInputQuoteFieldCValue(s *CThostFtdcInputQuoteField) *C.CThostFtdc
 	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	go2cStr(s.ReplaceSysID, &ptr.ReplaceSysID[0], 21)
+	ptr.TimeCondition = C.char(s.TimeCondition)
+	go2cStr(s.OrderMemo, &ptr.OrderMemo[0], 13)
+	ptr.SessionReqSeq = C.int(s.SessionReqSeq)
 	return ptr
 }
 
@@ -6985,6 +7036,8 @@ type CThostFtdcInputQuoteActionField struct {
 	MacAddress     string
 	InstrumentID   string
 	IPAddress      string
+	OrderMemo      string
+	SessionReqSeq  int
 }
 
 func NewCThostFtdcInputQuoteActionField(p *C.CThostFtdcInputQuoteActionField) *CThostFtdcInputQuoteActionField {
@@ -7010,6 +7063,8 @@ func NewCThostFtdcInputQuoteActionField(p *C.CThostFtdcInputQuoteActionField) *C
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.OrderMemo = c2goStr(&p.OrderMemo[0], 13)
+	ret.SessionReqSeq = int(p.SessionReqSeq)
 	return ret
 }
 
@@ -7033,6 +7088,8 @@ func CThostFtdcInputQuoteActionFieldCValue(s *CThostFtdcInputQuoteActionField) *
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.OrderMemo, &ptr.OrderMemo[0], 13)
+	ptr.SessionReqSeq = C.int(s.SessionReqSeq)
 	return ptr
 }
 
@@ -7091,6 +7148,9 @@ type CThostFtdcQuoteField struct {
 	ExchangeInstID    string
 	IPAddress         string
 	ReplaceSysID      string
+	TimeCondition     byte
+	OrderMemo         string
+	SessionReqSeq     int
 }
 
 func NewCThostFtdcQuoteField(p *C.CThostFtdcQuoteField) *CThostFtdcQuoteField {
@@ -7152,6 +7212,9 @@ func NewCThostFtdcQuoteField(p *C.CThostFtdcQuoteField) *CThostFtdcQuoteField {
 	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
 	ret.ReplaceSysID = c2goStr(&p.ReplaceSysID[0], 21)
+	ret.TimeCondition = byte(p.TimeCondition)
+	ret.OrderMemo = c2goStr(&p.OrderMemo[0], 13)
+	ret.SessionReqSeq = int(p.SessionReqSeq)
 	return ret
 }
 
@@ -7211,6 +7274,9 @@ func CThostFtdcQuoteFieldCValue(s *CThostFtdcQuoteField) *C.CThostFtdcQuoteField
 	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
 	go2cStr(s.ReplaceSysID, &ptr.ReplaceSysID[0], 21)
+	ptr.TimeCondition = C.char(s.TimeCondition)
+	go2cStr(s.OrderMemo, &ptr.OrderMemo[0], 13)
+	ptr.SessionReqSeq = C.int(s.SessionReqSeq)
 	return ptr
 }
 
@@ -7244,6 +7310,8 @@ type CThostFtdcQuoteActionField struct {
 	MacAddress        string
 	InstrumentID      string
 	IPAddress         string
+	OrderMemo         string
+	SessionReqSeq     int
 }
 
 func NewCThostFtdcQuoteActionField(p *C.CThostFtdcQuoteActionField) *CThostFtdcQuoteActionField {
@@ -7280,6 +7348,8 @@ func NewCThostFtdcQuoteActionField(p *C.CThostFtdcQuoteActionField) *CThostFtdcQ
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.OrderMemo = c2goStr(&p.OrderMemo[0], 13)
+	ret.SessionReqSeq = int(p.SessionReqSeq)
 	return ret
 }
 
@@ -7314,6 +7384,8 @@ func CThostFtdcQuoteActionFieldCValue(s *CThostFtdcQuoteActionField) *C.CThostFt
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.OrderMemo, &ptr.OrderMemo[0], 13)
+	ptr.SessionReqSeq = C.int(s.SessionReqSeq)
 	return ptr
 }
 
@@ -7397,6 +7469,7 @@ type CThostFtdcExchangeQuoteField struct {
 	MacAddress        string
 	ExchangeInstID    string
 	IPAddress         string
+	TimeCondition     byte
 }
 
 func NewCThostFtdcExchangeQuoteField(p *C.CThostFtdcExchangeQuoteField) *CThostFtdcExchangeQuoteField {
@@ -7440,6 +7513,7 @@ func NewCThostFtdcExchangeQuoteField(p *C.CThostFtdcExchangeQuoteField) *CThostF
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
 	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.TimeCondition = byte(p.TimeCondition)
 	return ret
 }
 
@@ -7481,6 +7555,7 @@ func CThostFtdcExchangeQuoteFieldCValue(s *CThostFtdcExchangeQuoteField) *C.CTho
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
 	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	ptr.TimeCondition = C.char(s.TimeCondition)
 	return ptr
 }
 
@@ -11081,6 +11156,8 @@ type CThostFtdcBrokerUserEventField struct {
 	InvestorID      string
 	Reserve1        string
 	InstrumentID    string
+	DRIdentityID    int
+	TradingDay      string
 }
 
 func NewCThostFtdcBrokerUserEventField(p *C.CThostFtdcBrokerUserEventField) *CThostFtdcBrokerUserEventField {
@@ -11098,6 +11175,8 @@ func NewCThostFtdcBrokerUserEventField(p *C.CThostFtdcBrokerUserEventField) *CTh
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.Reserve1 = c2goStr(&p.reserve1[0], 31)
 	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.DRIdentityID = int(p.DRIdentityID)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
 	return ret
 }
 
@@ -11113,6 +11192,8 @@ func CThostFtdcBrokerUserEventFieldCValue(s *CThostFtdcBrokerUserEventField) *C.
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	go2cStr(s.Reserve1, &ptr.reserve1[0], 31)
 	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.DRIdentityID = C.int(s.DRIdentityID)
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
 	return ptr
 }
 
@@ -11904,6 +11985,8 @@ type CThostFtdcErrOrderField struct {
 	MacAddress          string
 	InstrumentID        string
 	IPAddress           string
+	OrderMemo           string
+	SessionReqSeq       int
 }
 
 func NewCThostFtdcErrOrderField(p *C.CThostFtdcErrOrderField) *CThostFtdcErrOrderField {
@@ -11945,6 +12028,8 @@ func NewCThostFtdcErrOrderField(p *C.CThostFtdcErrOrderField) *CThostFtdcErrOrde
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.OrderMemo = c2goStr(&p.OrderMemo[0], 13)
+	ret.SessionReqSeq = int(p.SessionReqSeq)
 	return ret
 }
 
@@ -11984,6 +12069,8 @@ func CThostFtdcErrOrderFieldCValue(s *CThostFtdcErrOrderField) *C.CThostFtdcErrO
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.OrderMemo, &ptr.OrderMemo[0], 13)
+	ptr.SessionReqSeq = C.int(s.SessionReqSeq)
 	return ptr
 }
 
@@ -12263,6 +12350,8 @@ type CThostFtdcErrOrderActionField struct {
 	ErrorMsg          string
 	InstrumentID      string
 	IPAddress         string
+	OrderMemo         string
+	SessionReqSeq     int
 }
 
 func NewCThostFtdcErrOrderActionField(p *C.CThostFtdcErrOrderActionField) *CThostFtdcErrOrderActionField {
@@ -12303,6 +12392,8 @@ func NewCThostFtdcErrOrderActionField(p *C.CThostFtdcErrOrderActionField) *CThos
 	ret.ErrorMsg = c2goStr(&p.ErrorMsg[0], 81)
 	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
 	ret.IPAddress = c2goStr(&p.IPAddress[0], 33)
+	ret.OrderMemo = c2goStr(&p.OrderMemo[0], 13)
+	ret.SessionReqSeq = int(p.SessionReqSeq)
 	return ret
 }
 
@@ -12341,6 +12432,8 @@ func CThostFtdcErrOrderActionFieldCValue(s *CThostFtdcErrOrderActionField) *C.CT
 	go2cStr(s.ErrorMsg, &ptr.ErrorMsg[0], 81)
 	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
 	go2cStr(s.IPAddress, &ptr.IPAddress[0], 33)
+	go2cStr(s.OrderMemo, &ptr.OrderMemo[0], 13)
+	ptr.SessionReqSeq = C.int(s.SessionReqSeq)
 	return ptr
 }
 
@@ -17934,7 +18027,8 @@ func CThostFtdcDepartmentUserFieldCValue(s *CThostFtdcDepartmentUserField) *C.CT
 }
 
 type CThostFtdcQueryFreqField struct {
-	QueryFreq int
+	QueryFreq  int
+	FTDPkgFreq int
 }
 
 func NewCThostFtdcQueryFreqField(p *C.CThostFtdcQueryFreqField) *CThostFtdcQueryFreqField {
@@ -17943,12 +18037,14 @@ func NewCThostFtdcQueryFreqField(p *C.CThostFtdcQueryFreqField) *CThostFtdcQuery
 	}
 	ret := new(CThostFtdcQueryFreqField)
 	ret.QueryFreq = int(p.QueryFreq)
+	ret.FTDPkgFreq = int(p.FTDPkgFreq)
 	return ret
 }
 
 func CThostFtdcQueryFreqFieldCValue(s *CThostFtdcQueryFreqField) *C.CThostFtdcQueryFreqField {
 	ptr := (*C.CThostFtdcQueryFreqField)(C.malloc(C.sizeof_CThostFtdcQueryFreqField))
 	ptr.QueryFreq = C.int(s.QueryFreq)
+	ptr.FTDPkgFreq = C.int(s.FTDPkgFreq)
 	return ptr
 }
 
@@ -18207,7 +18303,7 @@ func CThostFtdcCombPromotionParamFieldCValue(s *CThostFtdcCombPromotionParamFiel
 	return ptr
 }
 
-type CThostFtdcReqUserLoginSCField struct {
+type CThostFtdcReqUserLoginSMField struct {
 	TradingDay           string
 	BrokerID             string
 	UserID               string
@@ -18217,18 +18313,21 @@ type CThostFtdcReqUserLoginSCField struct {
 	ProtocolInfo         string
 	MacAddress           string
 	OneTimePassword      string
-	ClientIPAddress      string
+	Reserve1             string
 	LoginRemark          string
 	ClientIPPort         int
+	ClientIPAddress      string
+	BrokerName           string
 	AuthCode             string
 	AppID                string
+	PIN                  string
 }
 
-func NewCThostFtdcReqUserLoginSCField(p *C.CThostFtdcReqUserLoginSCField) *CThostFtdcReqUserLoginSCField {
+func NewCThostFtdcReqUserLoginSMField(p *C.CThostFtdcReqUserLoginSMField) *CThostFtdcReqUserLoginSMField {
 	if p == nil {
 		return nil
 	}
-	ret := new(CThostFtdcReqUserLoginSCField)
+	ret := new(CThostFtdcReqUserLoginSMField)
 	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.UserID = c2goStr(&p.UserID[0], 16)
@@ -18238,16 +18337,19 @@ func NewCThostFtdcReqUserLoginSCField(p *C.CThostFtdcReqUserLoginSCField) *CThos
 	ret.ProtocolInfo = c2goStr(&p.ProtocolInfo[0], 11)
 	ret.MacAddress = c2goStr(&p.MacAddress[0], 21)
 	ret.OneTimePassword = c2goStr(&p.OneTimePassword[0], 41)
-	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 33)
+	ret.Reserve1 = c2goStr(&p.reserve1[0], 16)
 	ret.LoginRemark = c2goStr(&p.LoginRemark[0], 36)
 	ret.ClientIPPort = int(p.ClientIPPort)
+	ret.ClientIPAddress = c2goStr(&p.ClientIPAddress[0], 33)
+	ret.BrokerName = c2goStr(&p.BrokerName[0], 81)
 	ret.AuthCode = c2goStr(&p.AuthCode[0], 17)
 	ret.AppID = c2goStr(&p.AppID[0], 33)
+	ret.PIN = c2goStr(&p.PIN[0], 41)
 	return ret
 }
 
-func CThostFtdcReqUserLoginSCFieldCValue(s *CThostFtdcReqUserLoginSCField) *C.CThostFtdcReqUserLoginSCField {
-	ptr := (*C.CThostFtdcReqUserLoginSCField)(C.malloc(C.sizeof_CThostFtdcReqUserLoginSCField))
+func CThostFtdcReqUserLoginSMFieldCValue(s *CThostFtdcReqUserLoginSMField) *C.CThostFtdcReqUserLoginSMField {
+	ptr := (*C.CThostFtdcReqUserLoginSMField)(C.malloc(C.sizeof_CThostFtdcReqUserLoginSMField))
 	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.UserID, &ptr.UserID[0], 16)
@@ -18257,11 +18359,14 @@ func CThostFtdcReqUserLoginSCFieldCValue(s *CThostFtdcReqUserLoginSCField) *C.CT
 	go2cStr(s.ProtocolInfo, &ptr.ProtocolInfo[0], 11)
 	go2cStr(s.MacAddress, &ptr.MacAddress[0], 21)
 	go2cStr(s.OneTimePassword, &ptr.OneTimePassword[0], 41)
-	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 33)
+	go2cStr(s.Reserve1, &ptr.reserve1[0], 16)
 	go2cStr(s.LoginRemark, &ptr.LoginRemark[0], 36)
 	ptr.ClientIPPort = C.int(s.ClientIPPort)
+	go2cStr(s.ClientIPAddress, &ptr.ClientIPAddress[0], 33)
+	go2cStr(s.BrokerName, &ptr.BrokerName[0], 81)
 	go2cStr(s.AuthCode, &ptr.AuthCode[0], 17)
 	go2cStr(s.AppID, &ptr.AppID[0], 33)
+	go2cStr(s.PIN, &ptr.PIN[0], 41)
 	return ptr
 }
 
@@ -19657,6 +19762,7 @@ type CThostFtdcSPBMFutureParameterField struct {
 	LockRateX          float64
 	AddOnRate          float64
 	PreSettlementPrice float64
+	AddOnLockRateX2    float64
 }
 
 func NewCThostFtdcSPBMFutureParameterField(p *C.CThostFtdcSPBMFutureParameterField) *CThostFtdcSPBMFutureParameterField {
@@ -19674,6 +19780,7 @@ func NewCThostFtdcSPBMFutureParameterField(p *C.CThostFtdcSPBMFutureParameterFie
 	ret.LockRateX = goFloat64(p.LockRateX)
 	ret.AddOnRate = goFloat64(p.AddOnRate)
 	ret.PreSettlementPrice = goFloat64(p.PreSettlementPrice)
+	ret.AddOnLockRateX2 = goFloat64(p.AddOnLockRateX2)
 	return ret
 }
 
@@ -19689,6 +19796,7 @@ func CThostFtdcSPBMFutureParameterFieldCValue(s *CThostFtdcSPBMFutureParameterFi
 	ptr.LockRateX = C.double(s.LockRateX)
 	ptr.AddOnRate = C.double(s.AddOnRate)
 	ptr.PreSettlementPrice = C.double(s.PreSettlementPrice)
+	ptr.AddOnLockRateX2 = C.double(s.AddOnLockRateX2)
 	return ptr
 }
 
@@ -19736,10 +19844,11 @@ func CThostFtdcSPBMOptionParameterFieldCValue(s *CThostFtdcSPBMOptionParameterFi
 }
 
 type CThostFtdcSPBMIntraParameterField struct {
-	TradingDay     string
-	ExchangeID     string
-	ProdFamilyCode string
-	IntraRateY     float64
+	TradingDay       string
+	ExchangeID       string
+	ProdFamilyCode   string
+	IntraRateY       float64
+	AddOnIntraRateY2 float64
 }
 
 func NewCThostFtdcSPBMIntraParameterField(p *C.CThostFtdcSPBMIntraParameterField) *CThostFtdcSPBMIntraParameterField {
@@ -19751,6 +19860,7 @@ func NewCThostFtdcSPBMIntraParameterField(p *C.CThostFtdcSPBMIntraParameterField
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
 	ret.IntraRateY = goFloat64(p.IntraRateY)
+	ret.AddOnIntraRateY2 = goFloat64(p.AddOnIntraRateY2)
 	return ret
 }
 
@@ -19760,6 +19870,7 @@ func CThostFtdcSPBMIntraParameterFieldCValue(s *CThostFtdcSPBMIntraParameterFiel
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
 	ptr.IntraRateY = C.double(s.IntraRateY)
+	ptr.AddOnIntraRateY2 = C.double(s.AddOnIntraRateY2)
 	return ptr
 }
 
@@ -19970,11 +20081,12 @@ func CThostFtdcSPBMInvestorPortfDefFieldCValue(s *CThostFtdcSPBMInvestorPortfDef
 }
 
 type CThostFtdcInvestorPortfMarginRatioField struct {
-	InvestorRange byte
-	BrokerID      string
-	InvestorID    string
-	ExchangeID    string
-	MarginRatio   float64
+	InvestorRange  byte
+	BrokerID       string
+	InvestorID     string
+	ExchangeID     string
+	MarginRatio    float64
+	ProductGroupID string
 }
 
 func NewCThostFtdcInvestorPortfMarginRatioField(p *C.CThostFtdcInvestorPortfMarginRatioField) *CThostFtdcInvestorPortfMarginRatioField {
@@ -19987,6 +20099,7 @@ func NewCThostFtdcInvestorPortfMarginRatioField(p *C.CThostFtdcInvestorPortfMarg
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
 	ret.MarginRatio = goFloat64(p.MarginRatio)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 41)
 	return ret
 }
 
@@ -19997,6 +20110,7 @@ func CThostFtdcInvestorPortfMarginRatioFieldCValue(s *CThostFtdcInvestorPortfMar
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
 	ptr.MarginRatio = C.double(s.MarginRatio)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 41)
 	return ptr
 }
 
@@ -20051,9 +20165,10 @@ func CThostFtdcQrySPBMInvestorPortfDefFieldCValue(s *CThostFtdcQrySPBMInvestorPo
 }
 
 type CThostFtdcQryInvestorPortfMarginRatioField struct {
-	BrokerID   string
-	InvestorID string
-	ExchangeID string
+	BrokerID       string
+	InvestorID     string
+	ExchangeID     string
+	ProductGroupID string
 }
 
 func NewCThostFtdcQryInvestorPortfMarginRatioField(p *C.CThostFtdcQryInvestorPortfMarginRatioField) *CThostFtdcQryInvestorPortfMarginRatioField {
@@ -20064,6 +20179,7 @@ func NewCThostFtdcQryInvestorPortfMarginRatioField(p *C.CThostFtdcQryInvestorPor
 	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
 	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
 	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 41)
 	return ret
 }
 
@@ -20072,6 +20188,7 @@ func CThostFtdcQryInvestorPortfMarginRatioFieldCValue(s *CThostFtdcQryInvestorPo
 	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
 	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
 	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 41)
 	return ptr
 }
 
@@ -20213,5 +20330,3604 @@ func CThostFtdcPortfTradeParamSettingFieldCValue(s *CThostFtdcPortfTradeParamSet
 	ptr.Portfolio = C.char(s.Portfolio)
 	ptr.IsActionVerify = C.int(s.IsActionVerify)
 	ptr.IsCloseVerify = C.int(s.IsCloseVerify)
+	return ptr
+}
+
+type CThostFtdcInvestorTradingRightField struct {
+	BrokerID          string
+	InvestorID        string
+	InvstTradingRight byte
+}
+
+func NewCThostFtdcInvestorTradingRightField(p *C.CThostFtdcInvestorTradingRightField) *CThostFtdcInvestorTradingRightField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcInvestorTradingRightField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.InvstTradingRight = byte(p.InvstTradingRight)
+	return ret
+}
+
+func CThostFtdcInvestorTradingRightFieldCValue(s *CThostFtdcInvestorTradingRightField) *C.CThostFtdcInvestorTradingRightField {
+	ptr := (*C.CThostFtdcInvestorTradingRightField)(C.malloc(C.sizeof_CThostFtdcInvestorTradingRightField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.InvstTradingRight = C.char(s.InvstTradingRight)
+	return ptr
+}
+
+type CThostFtdcMortgageParamField struct {
+	BrokerID           string
+	AccountID          string
+	MortgageBalance    float64
+	CheckMortgageRatio int
+}
+
+func NewCThostFtdcMortgageParamField(p *C.CThostFtdcMortgageParamField) *CThostFtdcMortgageParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcMortgageParamField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.AccountID = c2goStr(&p.AccountID[0], 13)
+	ret.MortgageBalance = goFloat64(p.MortgageBalance)
+	ret.CheckMortgageRatio = int(p.CheckMortgageRatio)
+	return ret
+}
+
+func CThostFtdcMortgageParamFieldCValue(s *CThostFtdcMortgageParamField) *C.CThostFtdcMortgageParamField {
+	ptr := (*C.CThostFtdcMortgageParamField)(C.malloc(C.sizeof_CThostFtdcMortgageParamField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
+	ptr.MortgageBalance = C.double(s.MortgageBalance)
+	ptr.CheckMortgageRatio = C.int(s.CheckMortgageRatio)
+	return ptr
+}
+
+type CThostFtdcWithDrawParamField struct {
+	BrokerID           string
+	AccountID          string
+	WithDrawParamID    byte
+	WithDrawParamValue string
+}
+
+func NewCThostFtdcWithDrawParamField(p *C.CThostFtdcWithDrawParamField) *CThostFtdcWithDrawParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcWithDrawParamField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.AccountID = c2goStr(&p.AccountID[0], 13)
+	ret.WithDrawParamID = byte(p.WithDrawParamID)
+	ret.WithDrawParamValue = c2goStr(&p.WithDrawParamValue[0], 41)
+	return ret
+}
+
+func CThostFtdcWithDrawParamFieldCValue(s *CThostFtdcWithDrawParamField) *C.CThostFtdcWithDrawParamField {
+	ptr := (*C.CThostFtdcWithDrawParamField)(C.malloc(C.sizeof_CThostFtdcWithDrawParamField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
+	ptr.WithDrawParamID = C.char(s.WithDrawParamID)
+	go2cStr(s.WithDrawParamValue, &ptr.WithDrawParamValue[0], 41)
+	return ptr
+}
+
+type CThostFtdcThostUserFunctionField struct {
+	BrokerID          string
+	UserID            string
+	ThostFunctionCode int
+}
+
+func NewCThostFtdcThostUserFunctionField(p *C.CThostFtdcThostUserFunctionField) *CThostFtdcThostUserFunctionField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcThostUserFunctionField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	ret.ThostFunctionCode = int(p.ThostFunctionCode)
+	return ret
+}
+
+func CThostFtdcThostUserFunctionFieldCValue(s *CThostFtdcThostUserFunctionField) *C.CThostFtdcThostUserFunctionField {
+	ptr := (*C.CThostFtdcThostUserFunctionField)(C.malloc(C.sizeof_CThostFtdcThostUserFunctionField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	ptr.ThostFunctionCode = C.int(s.ThostFunctionCode)
+	return ptr
+}
+
+type CThostFtdcQryThostUserFunctionField struct {
+	BrokerID string
+	UserID   string
+}
+
+func NewCThostFtdcQryThostUserFunctionField(p *C.CThostFtdcQryThostUserFunctionField) *CThostFtdcQryThostUserFunctionField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryThostUserFunctionField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	return ret
+}
+
+func CThostFtdcQryThostUserFunctionFieldCValue(s *CThostFtdcQryThostUserFunctionField) *C.CThostFtdcQryThostUserFunctionField {
+	ptr := (*C.CThostFtdcQryThostUserFunctionField)(C.malloc(C.sizeof_CThostFtdcQryThostUserFunctionField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	return ptr
+}
+
+type CThostFtdcSPBMAddOnInterParameterField struct {
+	TradingDay         string
+	ExchangeID         string
+	SpreadId           int
+	AddOnInterRateZ2   float64
+	Leg1ProdFamilyCode string
+	Leg2ProdFamilyCode string
+}
+
+func NewCThostFtdcSPBMAddOnInterParameterField(p *C.CThostFtdcSPBMAddOnInterParameterField) *CThostFtdcSPBMAddOnInterParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSPBMAddOnInterParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.SpreadId = int(p.SpreadId)
+	ret.AddOnInterRateZ2 = goFloat64(p.AddOnInterRateZ2)
+	ret.Leg1ProdFamilyCode = c2goStr(&p.Leg1ProdFamilyCode[0], 81)
+	ret.Leg2ProdFamilyCode = c2goStr(&p.Leg2ProdFamilyCode[0], 81)
+	return ret
+}
+
+func CThostFtdcSPBMAddOnInterParameterFieldCValue(s *CThostFtdcSPBMAddOnInterParameterField) *C.CThostFtdcSPBMAddOnInterParameterField {
+	ptr := (*C.CThostFtdcSPBMAddOnInterParameterField)(C.malloc(C.sizeof_CThostFtdcSPBMAddOnInterParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.SpreadId = C.int(s.SpreadId)
+	ptr.AddOnInterRateZ2 = C.double(s.AddOnInterRateZ2)
+	go2cStr(s.Leg1ProdFamilyCode, &ptr.Leg1ProdFamilyCode[0], 81)
+	go2cStr(s.Leg2ProdFamilyCode, &ptr.Leg2ProdFamilyCode[0], 81)
+	return ptr
+}
+
+type CThostFtdcQrySPBMAddOnInterParameterField struct {
+	ExchangeID         string
+	Leg1ProdFamilyCode string
+	Leg2ProdFamilyCode string
+}
+
+func NewCThostFtdcQrySPBMAddOnInterParameterField(p *C.CThostFtdcQrySPBMAddOnInterParameterField) *CThostFtdcQrySPBMAddOnInterParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQrySPBMAddOnInterParameterField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.Leg1ProdFamilyCode = c2goStr(&p.Leg1ProdFamilyCode[0], 81)
+	ret.Leg2ProdFamilyCode = c2goStr(&p.Leg2ProdFamilyCode[0], 81)
+	return ret
+}
+
+func CThostFtdcQrySPBMAddOnInterParameterFieldCValue(s *CThostFtdcQrySPBMAddOnInterParameterField) *C.CThostFtdcQrySPBMAddOnInterParameterField {
+	ptr := (*C.CThostFtdcQrySPBMAddOnInterParameterField)(C.malloc(C.sizeof_CThostFtdcQrySPBMAddOnInterParameterField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.Leg1ProdFamilyCode, &ptr.Leg1ProdFamilyCode[0], 81)
+	go2cStr(s.Leg2ProdFamilyCode, &ptr.Leg2ProdFamilyCode[0], 81)
+	return ptr
+}
+
+type CThostFtdcQryInvestorCommoditySPMMMarginField struct {
+	BrokerID    string
+	InvestorID  string
+	CommodityID string
+}
+
+func NewCThostFtdcQryInvestorCommoditySPMMMarginField(p *C.CThostFtdcQryInvestorCommoditySPMMMarginField) *CThostFtdcQryInvestorCommoditySPMMMarginField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryInvestorCommoditySPMMMarginField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.CommodityID = c2goStr(&p.CommodityID[0], 41)
+	return ret
+}
+
+func CThostFtdcQryInvestorCommoditySPMMMarginFieldCValue(s *CThostFtdcQryInvestorCommoditySPMMMarginField) *C.CThostFtdcQryInvestorCommoditySPMMMarginField {
+	ptr := (*C.CThostFtdcQryInvestorCommoditySPMMMarginField)(C.malloc(C.sizeof_CThostFtdcQryInvestorCommoditySPMMMarginField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.CommodityID, &ptr.CommodityID[0], 41)
+	return ptr
+}
+
+type CThostFtdcQryInvestorCommodityGroupSPMMMarginField struct {
+	BrokerID         string
+	InvestorID       string
+	CommodityGroupID string
+}
+
+func NewCThostFtdcQryInvestorCommodityGroupSPMMMarginField(p *C.CThostFtdcQryInvestorCommodityGroupSPMMMarginField) *CThostFtdcQryInvestorCommodityGroupSPMMMarginField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryInvestorCommodityGroupSPMMMarginField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.CommodityGroupID = c2goStr(&p.CommodityGroupID[0], 41)
+	return ret
+}
+
+func CThostFtdcQryInvestorCommodityGroupSPMMMarginFieldCValue(s *CThostFtdcQryInvestorCommodityGroupSPMMMarginField) *C.CThostFtdcQryInvestorCommodityGroupSPMMMarginField {
+	ptr := (*C.CThostFtdcQryInvestorCommodityGroupSPMMMarginField)(C.malloc(C.sizeof_CThostFtdcQryInvestorCommodityGroupSPMMMarginField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.CommodityGroupID, &ptr.CommodityGroupID[0], 41)
+	return ptr
+}
+
+type CThostFtdcQrySPMMInstParamField struct {
+	InstrumentID string
+}
+
+func NewCThostFtdcQrySPMMInstParamField(p *C.CThostFtdcQrySPMMInstParamField) *CThostFtdcQrySPMMInstParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQrySPMMInstParamField)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	return ret
+}
+
+func CThostFtdcQrySPMMInstParamFieldCValue(s *CThostFtdcQrySPMMInstParamField) *C.CThostFtdcQrySPMMInstParamField {
+	ptr := (*C.CThostFtdcQrySPMMInstParamField)(C.malloc(C.sizeof_CThostFtdcQrySPMMInstParamField))
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	return ptr
+}
+
+type CThostFtdcQrySPMMProductParamField struct {
+	ProductID string
+}
+
+func NewCThostFtdcQrySPMMProductParamField(p *C.CThostFtdcQrySPMMProductParamField) *CThostFtdcQrySPMMProductParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQrySPMMProductParamField)
+	ret.ProductID = c2goStr(&p.ProductID[0], 41)
+	return ret
+}
+
+func CThostFtdcQrySPMMProductParamFieldCValue(s *CThostFtdcQrySPMMProductParamField) *C.CThostFtdcQrySPMMProductParamField {
+	ptr := (*C.CThostFtdcQrySPMMProductParamField)(C.malloc(C.sizeof_CThostFtdcQrySPMMProductParamField))
+	go2cStr(s.ProductID, &ptr.ProductID[0], 41)
+	return ptr
+}
+
+type CThostFtdcInvestorCommoditySPMMMarginField struct {
+	ExchangeID           string
+	BrokerID             string
+	InvestorID           string
+	CommodityID          string
+	MarginBeforeDiscount float64
+	MarginNoDiscount     float64
+	LongPosRisk          float64
+	LongOpenFrozenRisk   float64
+	LongCloseFrozenRisk  float64
+	ShortPosRisk         float64
+	ShortOpenFrozenRisk  float64
+	ShortCloseFrozenRisk float64
+	IntraCommodityRate   float64
+	OptionDiscountRate   float64
+	PosDiscount          float64
+	OpenFrozenDiscount   float64
+	NetRisk              float64
+	CloseFrozenMargin    float64
+	FrozenCommission     float64
+	Commission           float64
+	FrozenCash           float64
+	CashIn               float64
+	StrikeFrozenMargin   float64
+}
+
+func NewCThostFtdcInvestorCommoditySPMMMarginField(p *C.CThostFtdcInvestorCommoditySPMMMarginField) *CThostFtdcInvestorCommoditySPMMMarginField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcInvestorCommoditySPMMMarginField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.CommodityID = c2goStr(&p.CommodityID[0], 41)
+	ret.MarginBeforeDiscount = goFloat64(p.MarginBeforeDiscount)
+	ret.MarginNoDiscount = goFloat64(p.MarginNoDiscount)
+	ret.LongPosRisk = goFloat64(p.LongPosRisk)
+	ret.LongOpenFrozenRisk = goFloat64(p.LongOpenFrozenRisk)
+	ret.LongCloseFrozenRisk = goFloat64(p.LongCloseFrozenRisk)
+	ret.ShortPosRisk = goFloat64(p.ShortPosRisk)
+	ret.ShortOpenFrozenRisk = goFloat64(p.ShortOpenFrozenRisk)
+	ret.ShortCloseFrozenRisk = goFloat64(p.ShortCloseFrozenRisk)
+	ret.IntraCommodityRate = goFloat64(p.IntraCommodityRate)
+	ret.OptionDiscountRate = goFloat64(p.OptionDiscountRate)
+	ret.PosDiscount = goFloat64(p.PosDiscount)
+	ret.OpenFrozenDiscount = goFloat64(p.OpenFrozenDiscount)
+	ret.NetRisk = goFloat64(p.NetRisk)
+	ret.CloseFrozenMargin = goFloat64(p.CloseFrozenMargin)
+	ret.FrozenCommission = goFloat64(p.FrozenCommission)
+	ret.Commission = goFloat64(p.Commission)
+	ret.FrozenCash = goFloat64(p.FrozenCash)
+	ret.CashIn = goFloat64(p.CashIn)
+	ret.StrikeFrozenMargin = goFloat64(p.StrikeFrozenMargin)
+	return ret
+}
+
+func CThostFtdcInvestorCommoditySPMMMarginFieldCValue(s *CThostFtdcInvestorCommoditySPMMMarginField) *C.CThostFtdcInvestorCommoditySPMMMarginField {
+	ptr := (*C.CThostFtdcInvestorCommoditySPMMMarginField)(C.malloc(C.sizeof_CThostFtdcInvestorCommoditySPMMMarginField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.CommodityID, &ptr.CommodityID[0], 41)
+	ptr.MarginBeforeDiscount = C.double(s.MarginBeforeDiscount)
+	ptr.MarginNoDiscount = C.double(s.MarginNoDiscount)
+	ptr.LongPosRisk = C.double(s.LongPosRisk)
+	ptr.LongOpenFrozenRisk = C.double(s.LongOpenFrozenRisk)
+	ptr.LongCloseFrozenRisk = C.double(s.LongCloseFrozenRisk)
+	ptr.ShortPosRisk = C.double(s.ShortPosRisk)
+	ptr.ShortOpenFrozenRisk = C.double(s.ShortOpenFrozenRisk)
+	ptr.ShortCloseFrozenRisk = C.double(s.ShortCloseFrozenRisk)
+	ptr.IntraCommodityRate = C.double(s.IntraCommodityRate)
+	ptr.OptionDiscountRate = C.double(s.OptionDiscountRate)
+	ptr.PosDiscount = C.double(s.PosDiscount)
+	ptr.OpenFrozenDiscount = C.double(s.OpenFrozenDiscount)
+	ptr.NetRisk = C.double(s.NetRisk)
+	ptr.CloseFrozenMargin = C.double(s.CloseFrozenMargin)
+	ptr.FrozenCommission = C.double(s.FrozenCommission)
+	ptr.Commission = C.double(s.Commission)
+	ptr.FrozenCash = C.double(s.FrozenCash)
+	ptr.CashIn = C.double(s.CashIn)
+	ptr.StrikeFrozenMargin = C.double(s.StrikeFrozenMargin)
+	return ptr
+}
+
+type CThostFtdcInvestorCommodityGroupSPMMMarginField struct {
+	ExchangeID             string
+	BrokerID               string
+	InvestorID             string
+	CommodityGroupID       string
+	MarginBeforeDiscount   float64
+	MarginNoDiscount       float64
+	LongRisk               float64
+	ShortRisk              float64
+	CloseFrozenMargin      float64
+	InterCommodityRate     float64
+	MiniMarginRatio        float64
+	AdjustRatio            float64
+	IntraCommodityDiscount float64
+	InterCommodityDiscount float64
+	ExchMargin             float64
+	InvestorMargin         float64
+	FrozenCommission       float64
+	Commission             float64
+	FrozenCash             float64
+	CashIn                 float64
+	StrikeFrozenMargin     float64
+}
+
+func NewCThostFtdcInvestorCommodityGroupSPMMMarginField(p *C.CThostFtdcInvestorCommodityGroupSPMMMarginField) *CThostFtdcInvestorCommodityGroupSPMMMarginField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcInvestorCommodityGroupSPMMMarginField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.CommodityGroupID = c2goStr(&p.CommodityGroupID[0], 41)
+	ret.MarginBeforeDiscount = goFloat64(p.MarginBeforeDiscount)
+	ret.MarginNoDiscount = goFloat64(p.MarginNoDiscount)
+	ret.LongRisk = goFloat64(p.LongRisk)
+	ret.ShortRisk = goFloat64(p.ShortRisk)
+	ret.CloseFrozenMargin = goFloat64(p.CloseFrozenMargin)
+	ret.InterCommodityRate = goFloat64(p.InterCommodityRate)
+	ret.MiniMarginRatio = goFloat64(p.MiniMarginRatio)
+	ret.AdjustRatio = goFloat64(p.AdjustRatio)
+	ret.IntraCommodityDiscount = goFloat64(p.IntraCommodityDiscount)
+	ret.InterCommodityDiscount = goFloat64(p.InterCommodityDiscount)
+	ret.ExchMargin = goFloat64(p.ExchMargin)
+	ret.InvestorMargin = goFloat64(p.InvestorMargin)
+	ret.FrozenCommission = goFloat64(p.FrozenCommission)
+	ret.Commission = goFloat64(p.Commission)
+	ret.FrozenCash = goFloat64(p.FrozenCash)
+	ret.CashIn = goFloat64(p.CashIn)
+	ret.StrikeFrozenMargin = goFloat64(p.StrikeFrozenMargin)
+	return ret
+}
+
+func CThostFtdcInvestorCommodityGroupSPMMMarginFieldCValue(s *CThostFtdcInvestorCommodityGroupSPMMMarginField) *C.CThostFtdcInvestorCommodityGroupSPMMMarginField {
+	ptr := (*C.CThostFtdcInvestorCommodityGroupSPMMMarginField)(C.malloc(C.sizeof_CThostFtdcInvestorCommodityGroupSPMMMarginField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.CommodityGroupID, &ptr.CommodityGroupID[0], 41)
+	ptr.MarginBeforeDiscount = C.double(s.MarginBeforeDiscount)
+	ptr.MarginNoDiscount = C.double(s.MarginNoDiscount)
+	ptr.LongRisk = C.double(s.LongRisk)
+	ptr.ShortRisk = C.double(s.ShortRisk)
+	ptr.CloseFrozenMargin = C.double(s.CloseFrozenMargin)
+	ptr.InterCommodityRate = C.double(s.InterCommodityRate)
+	ptr.MiniMarginRatio = C.double(s.MiniMarginRatio)
+	ptr.AdjustRatio = C.double(s.AdjustRatio)
+	ptr.IntraCommodityDiscount = C.double(s.IntraCommodityDiscount)
+	ptr.InterCommodityDiscount = C.double(s.InterCommodityDiscount)
+	ptr.ExchMargin = C.double(s.ExchMargin)
+	ptr.InvestorMargin = C.double(s.InvestorMargin)
+	ptr.FrozenCommission = C.double(s.FrozenCommission)
+	ptr.Commission = C.double(s.Commission)
+	ptr.FrozenCash = C.double(s.FrozenCash)
+	ptr.CashIn = C.double(s.CashIn)
+	ptr.StrikeFrozenMargin = C.double(s.StrikeFrozenMargin)
+	return ptr
+}
+
+type CThostFtdcSPMMInstParamField struct {
+	ExchangeID       string
+	InstrumentID     string
+	InstMarginCalID  byte
+	CommodityID      string
+	CommodityGroupID string
+}
+
+func NewCThostFtdcSPMMInstParamField(p *C.CThostFtdcSPMMInstParamField) *CThostFtdcSPMMInstParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSPMMInstParamField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.InstMarginCalID = byte(p.InstMarginCalID)
+	ret.CommodityID = c2goStr(&p.CommodityID[0], 41)
+	ret.CommodityGroupID = c2goStr(&p.CommodityGroupID[0], 41)
+	return ret
+}
+
+func CThostFtdcSPMMInstParamFieldCValue(s *CThostFtdcSPMMInstParamField) *C.CThostFtdcSPMMInstParamField {
+	ptr := (*C.CThostFtdcSPMMInstParamField)(C.malloc(C.sizeof_CThostFtdcSPMMInstParamField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.InstMarginCalID = C.char(s.InstMarginCalID)
+	go2cStr(s.CommodityID, &ptr.CommodityID[0], 41)
+	go2cStr(s.CommodityGroupID, &ptr.CommodityGroupID[0], 41)
+	return ptr
+}
+
+type CThostFtdcSPMMProductParamField struct {
+	ExchangeID       string
+	ProductID        string
+	CommodityID      string
+	CommodityGroupID string
+}
+
+func NewCThostFtdcSPMMProductParamField(p *C.CThostFtdcSPMMProductParamField) *CThostFtdcSPMMProductParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSPMMProductParamField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 41)
+	ret.CommodityID = c2goStr(&p.CommodityID[0], 41)
+	ret.CommodityGroupID = c2goStr(&p.CommodityGroupID[0], 41)
+	return ret
+}
+
+func CThostFtdcSPMMProductParamFieldCValue(s *CThostFtdcSPMMProductParamField) *C.CThostFtdcSPMMProductParamField {
+	ptr := (*C.CThostFtdcSPMMProductParamField)(C.malloc(C.sizeof_CThostFtdcSPMMProductParamField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 41)
+	go2cStr(s.CommodityID, &ptr.CommodityID[0], 41)
+	go2cStr(s.CommodityGroupID, &ptr.CommodityGroupID[0], 41)
+	return ptr
+}
+
+type CThostFtdcQryTraderAssignField struct {
+	TraderID string
+}
+
+func NewCThostFtdcQryTraderAssignField(p *C.CThostFtdcQryTraderAssignField) *CThostFtdcQryTraderAssignField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryTraderAssignField)
+	ret.TraderID = c2goStr(&p.TraderID[0], 21)
+	return ret
+}
+
+func CThostFtdcQryTraderAssignFieldCValue(s *CThostFtdcQryTraderAssignField) *C.CThostFtdcQryTraderAssignField {
+	ptr := (*C.CThostFtdcQryTraderAssignField)(C.malloc(C.sizeof_CThostFtdcQryTraderAssignField))
+	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
+	return ptr
+}
+
+type CThostFtdcTraderAssignField struct {
+	BrokerID      string
+	ExchangeID    string
+	TraderID      string
+	ParticipantID string
+	DRIdentityID  int
+}
+
+func NewCThostFtdcTraderAssignField(p *C.CThostFtdcTraderAssignField) *CThostFtdcTraderAssignField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcTraderAssignField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.TraderID = c2goStr(&p.TraderID[0], 21)
+	ret.ParticipantID = c2goStr(&p.ParticipantID[0], 11)
+	ret.DRIdentityID = int(p.DRIdentityID)
+	return ret
+}
+
+func CThostFtdcTraderAssignFieldCValue(s *CThostFtdcTraderAssignField) *C.CThostFtdcTraderAssignField {
+	ptr := (*C.CThostFtdcTraderAssignField)(C.malloc(C.sizeof_CThostFtdcTraderAssignField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.TraderID, &ptr.TraderID[0], 21)
+	go2cStr(s.ParticipantID, &ptr.ParticipantID[0], 11)
+	ptr.DRIdentityID = C.int(s.DRIdentityID)
+	return ptr
+}
+
+type CThostFtdcInvestorInfoCntSettingField struct {
+	ExchangeID     string
+	BrokerID       string
+	InvestorID     string
+	ProductID      string
+	IsCalInfoComm  int
+	IsLimitInfoMax int
+	InfoMaxLimit   int
+}
+
+func NewCThostFtdcInvestorInfoCntSettingField(p *C.CThostFtdcInvestorInfoCntSettingField) *CThostFtdcInvestorInfoCntSettingField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcInvestorInfoCntSettingField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.ProductID = c2goStr(&p.ProductID[0], 41)
+	ret.IsCalInfoComm = int(p.IsCalInfoComm)
+	ret.IsLimitInfoMax = int(p.IsLimitInfoMax)
+	ret.InfoMaxLimit = int(p.InfoMaxLimit)
+	return ret
+}
+
+func CThostFtdcInvestorInfoCntSettingFieldCValue(s *CThostFtdcInvestorInfoCntSettingField) *C.CThostFtdcInvestorInfoCntSettingField {
+	ptr := (*C.CThostFtdcInvestorInfoCntSettingField)(C.malloc(C.sizeof_CThostFtdcInvestorInfoCntSettingField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 41)
+	ptr.IsCalInfoComm = C.int(s.IsCalInfoComm)
+	ptr.IsLimitInfoMax = C.int(s.IsLimitInfoMax)
+	ptr.InfoMaxLimit = C.int(s.InfoMaxLimit)
+	return ptr
+}
+
+type CThostFtdcRCAMSCombProductInfoField struct {
+	TradingDay     string
+	ExchangeID     string
+	ProductID      string
+	CombProductID  string
+	ProductGroupID string
+}
+
+func NewCThostFtdcRCAMSCombProductInfoField(p *C.CThostFtdcRCAMSCombProductInfoField) *CThostFtdcRCAMSCombProductInfoField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRCAMSCombProductInfoField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 41)
+	ret.CombProductID = c2goStr(&p.CombProductID[0], 41)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 41)
+	return ret
+}
+
+func CThostFtdcRCAMSCombProductInfoFieldCValue(s *CThostFtdcRCAMSCombProductInfoField) *C.CThostFtdcRCAMSCombProductInfoField {
+	ptr := (*C.CThostFtdcRCAMSCombProductInfoField)(C.malloc(C.sizeof_CThostFtdcRCAMSCombProductInfoField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 41)
+	go2cStr(s.CombProductID, &ptr.CombProductID[0], 41)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 41)
+	return ptr
+}
+
+type CThostFtdcRCAMSInstrParameterField struct {
+	TradingDay string
+	ExchangeID string
+	ProductID  string
+	HedgeRate  float64
+}
+
+func NewCThostFtdcRCAMSInstrParameterField(p *C.CThostFtdcRCAMSInstrParameterField) *CThostFtdcRCAMSInstrParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRCAMSInstrParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 41)
+	ret.HedgeRate = goFloat64(p.HedgeRate)
+	return ret
+}
+
+func CThostFtdcRCAMSInstrParameterFieldCValue(s *CThostFtdcRCAMSInstrParameterField) *C.CThostFtdcRCAMSInstrParameterField {
+	ptr := (*C.CThostFtdcRCAMSInstrParameterField)(C.malloc(C.sizeof_CThostFtdcRCAMSInstrParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 41)
+	ptr.HedgeRate = C.double(s.HedgeRate)
+	return ptr
+}
+
+type CThostFtdcRCAMSIntraParameterField struct {
+	TradingDay    string
+	ExchangeID    string
+	CombProductID string
+	HedgeRate     float64
+}
+
+func NewCThostFtdcRCAMSIntraParameterField(p *C.CThostFtdcRCAMSIntraParameterField) *CThostFtdcRCAMSIntraParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRCAMSIntraParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.CombProductID = c2goStr(&p.CombProductID[0], 41)
+	ret.HedgeRate = goFloat64(p.HedgeRate)
+	return ret
+}
+
+func CThostFtdcRCAMSIntraParameterFieldCValue(s *CThostFtdcRCAMSIntraParameterField) *C.CThostFtdcRCAMSIntraParameterField {
+	ptr := (*C.CThostFtdcRCAMSIntraParameterField)(C.malloc(C.sizeof_CThostFtdcRCAMSIntraParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.CombProductID, &ptr.CombProductID[0], 41)
+	ptr.HedgeRate = C.double(s.HedgeRate)
+	return ptr
+}
+
+type CThostFtdcRCAMSInterParameterField struct {
+	TradingDay     string
+	ExchangeID     string
+	ProductGroupID string
+	Priority       int
+	CreditRate     float64
+	CombProduct1   string
+	CombProduct2   string
+}
+
+func NewCThostFtdcRCAMSInterParameterField(p *C.CThostFtdcRCAMSInterParameterField) *CThostFtdcRCAMSInterParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRCAMSInterParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 41)
+	ret.Priority = int(p.Priority)
+	ret.CreditRate = goFloat64(p.CreditRate)
+	ret.CombProduct1 = c2goStr(&p.CombProduct1[0], 41)
+	ret.CombProduct2 = c2goStr(&p.CombProduct2[0], 41)
+	return ret
+}
+
+func CThostFtdcRCAMSInterParameterFieldCValue(s *CThostFtdcRCAMSInterParameterField) *C.CThostFtdcRCAMSInterParameterField {
+	ptr := (*C.CThostFtdcRCAMSInterParameterField)(C.malloc(C.sizeof_CThostFtdcRCAMSInterParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 41)
+	ptr.Priority = C.int(s.Priority)
+	ptr.CreditRate = C.double(s.CreditRate)
+	go2cStr(s.CombProduct1, &ptr.CombProduct1[0], 41)
+	go2cStr(s.CombProduct2, &ptr.CombProduct2[0], 41)
+	return ptr
+}
+
+type CThostFtdcRCAMSShortOptAdjustParamField struct {
+	TradingDay    string
+	ExchangeID    string
+	CombProductID string
+	HedgeFlag     byte
+	AdjustValue   float64
+}
+
+func NewCThostFtdcRCAMSShortOptAdjustParamField(p *C.CThostFtdcRCAMSShortOptAdjustParamField) *CThostFtdcRCAMSShortOptAdjustParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRCAMSShortOptAdjustParamField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.CombProductID = c2goStr(&p.CombProductID[0], 41)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.AdjustValue = goFloat64(p.AdjustValue)
+	return ret
+}
+
+func CThostFtdcRCAMSShortOptAdjustParamFieldCValue(s *CThostFtdcRCAMSShortOptAdjustParamField) *C.CThostFtdcRCAMSShortOptAdjustParamField {
+	ptr := (*C.CThostFtdcRCAMSShortOptAdjustParamField)(C.malloc(C.sizeof_CThostFtdcRCAMSShortOptAdjustParamField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.CombProductID, &ptr.CombProductID[0], 41)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.AdjustValue = C.double(s.AdjustValue)
+	return ptr
+}
+
+type CThostFtdcRCAMSInvestorCombPositionField struct {
+	ExchangeID       string
+	BrokerID         string
+	InvestorID       string
+	InstrumentID     string
+	HedgeFlag        byte
+	PosiDirection    byte
+	CombInstrumentID string
+	LegID            int
+	ExchangeInstID   string
+	TotalAmt         int
+	ExchMargin       float64
+	Margin           float64
+}
+
+func NewCThostFtdcRCAMSInvestorCombPositionField(p *C.CThostFtdcRCAMSInvestorCombPositionField) *CThostFtdcRCAMSInvestorCombPositionField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRCAMSInvestorCombPositionField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.PosiDirection = byte(p.PosiDirection)
+	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 81)
+	ret.LegID = int(p.LegID)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.TotalAmt = int(p.TotalAmt)
+	ret.ExchMargin = goFloat64(p.ExchMargin)
+	ret.Margin = goFloat64(p.Margin)
+	return ret
+}
+
+func CThostFtdcRCAMSInvestorCombPositionFieldCValue(s *CThostFtdcRCAMSInvestorCombPositionField) *C.CThostFtdcRCAMSInvestorCombPositionField {
+	ptr := (*C.CThostFtdcRCAMSInvestorCombPositionField)(C.malloc(C.sizeof_CThostFtdcRCAMSInvestorCombPositionField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.PosiDirection = C.char(s.PosiDirection)
+	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 81)
+	ptr.LegID = C.int(s.LegID)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	ptr.TotalAmt = C.int(s.TotalAmt)
+	ptr.ExchMargin = C.double(s.ExchMargin)
+	ptr.Margin = C.double(s.Margin)
+	return ptr
+}
+
+type CThostFtdcInvestorProdRCAMSMarginField struct {
+	ExchangeID               string
+	BrokerID                 string
+	InvestorID               string
+	CombProductID            string
+	HedgeFlag                byte
+	ProductGroupID           string
+	RiskBeforeDiscount       float64
+	IntraInstrRisk           float64
+	BPosRisk                 float64
+	SPosRisk                 float64
+	IntraProdRisk            float64
+	NetRisk                  float64
+	InterProdRisk            float64
+	ShortOptRiskAdj          float64
+	OptionRoyalty            float64
+	MMSACloseFrozenMargin    float64
+	CloseCombFrozenMargin    float64
+	CloseFrozenMargin        float64
+	MMSAOpenFrozenMargin     float64
+	DeliveryOpenFrozenMargin float64
+	OpenFrozenMargin         float64
+	UseFrozenMargin          float64
+	MMSAExchMargin           float64
+	DeliveryExchMargin       float64
+	CombExchMargin           float64
+	ExchMargin               float64
+	UseMargin                float64
+}
+
+func NewCThostFtdcInvestorProdRCAMSMarginField(p *C.CThostFtdcInvestorProdRCAMSMarginField) *CThostFtdcInvestorProdRCAMSMarginField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcInvestorProdRCAMSMarginField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.CombProductID = c2goStr(&p.CombProductID[0], 41)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 41)
+	ret.RiskBeforeDiscount = goFloat64(p.RiskBeforeDiscount)
+	ret.IntraInstrRisk = goFloat64(p.IntraInstrRisk)
+	ret.BPosRisk = goFloat64(p.BPosRisk)
+	ret.SPosRisk = goFloat64(p.SPosRisk)
+	ret.IntraProdRisk = goFloat64(p.IntraProdRisk)
+	ret.NetRisk = goFloat64(p.NetRisk)
+	ret.InterProdRisk = goFloat64(p.InterProdRisk)
+	ret.ShortOptRiskAdj = goFloat64(p.ShortOptRiskAdj)
+	ret.OptionRoyalty = goFloat64(p.OptionRoyalty)
+	ret.MMSACloseFrozenMargin = goFloat64(p.MMSACloseFrozenMargin)
+	ret.CloseCombFrozenMargin = goFloat64(p.CloseCombFrozenMargin)
+	ret.CloseFrozenMargin = goFloat64(p.CloseFrozenMargin)
+	ret.MMSAOpenFrozenMargin = goFloat64(p.MMSAOpenFrozenMargin)
+	ret.DeliveryOpenFrozenMargin = goFloat64(p.DeliveryOpenFrozenMargin)
+	ret.OpenFrozenMargin = goFloat64(p.OpenFrozenMargin)
+	ret.UseFrozenMargin = goFloat64(p.UseFrozenMargin)
+	ret.MMSAExchMargin = goFloat64(p.MMSAExchMargin)
+	ret.DeliveryExchMargin = goFloat64(p.DeliveryExchMargin)
+	ret.CombExchMargin = goFloat64(p.CombExchMargin)
+	ret.ExchMargin = goFloat64(p.ExchMargin)
+	ret.UseMargin = goFloat64(p.UseMargin)
+	return ret
+}
+
+func CThostFtdcInvestorProdRCAMSMarginFieldCValue(s *CThostFtdcInvestorProdRCAMSMarginField) *C.CThostFtdcInvestorProdRCAMSMarginField {
+	ptr := (*C.CThostFtdcInvestorProdRCAMSMarginField)(C.malloc(C.sizeof_CThostFtdcInvestorProdRCAMSMarginField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.CombProductID, &ptr.CombProductID[0], 41)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 41)
+	ptr.RiskBeforeDiscount = C.double(s.RiskBeforeDiscount)
+	ptr.IntraInstrRisk = C.double(s.IntraInstrRisk)
+	ptr.BPosRisk = C.double(s.BPosRisk)
+	ptr.SPosRisk = C.double(s.SPosRisk)
+	ptr.IntraProdRisk = C.double(s.IntraProdRisk)
+	ptr.NetRisk = C.double(s.NetRisk)
+	ptr.InterProdRisk = C.double(s.InterProdRisk)
+	ptr.ShortOptRiskAdj = C.double(s.ShortOptRiskAdj)
+	ptr.OptionRoyalty = C.double(s.OptionRoyalty)
+	ptr.MMSACloseFrozenMargin = C.double(s.MMSACloseFrozenMargin)
+	ptr.CloseCombFrozenMargin = C.double(s.CloseCombFrozenMargin)
+	ptr.CloseFrozenMargin = C.double(s.CloseFrozenMargin)
+	ptr.MMSAOpenFrozenMargin = C.double(s.MMSAOpenFrozenMargin)
+	ptr.DeliveryOpenFrozenMargin = C.double(s.DeliveryOpenFrozenMargin)
+	ptr.OpenFrozenMargin = C.double(s.OpenFrozenMargin)
+	ptr.UseFrozenMargin = C.double(s.UseFrozenMargin)
+	ptr.MMSAExchMargin = C.double(s.MMSAExchMargin)
+	ptr.DeliveryExchMargin = C.double(s.DeliveryExchMargin)
+	ptr.CombExchMargin = C.double(s.CombExchMargin)
+	ptr.ExchMargin = C.double(s.ExchMargin)
+	ptr.UseMargin = C.double(s.UseMargin)
+	return ptr
+}
+
+type CThostFtdcQryRCAMSCombProductInfoField struct {
+	ProductID      string
+	CombProductID  string
+	ProductGroupID string
+}
+
+func NewCThostFtdcQryRCAMSCombProductInfoField(p *C.CThostFtdcQryRCAMSCombProductInfoField) *CThostFtdcQryRCAMSCombProductInfoField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryRCAMSCombProductInfoField)
+	ret.ProductID = c2goStr(&p.ProductID[0], 41)
+	ret.CombProductID = c2goStr(&p.CombProductID[0], 41)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 41)
+	return ret
+}
+
+func CThostFtdcQryRCAMSCombProductInfoFieldCValue(s *CThostFtdcQryRCAMSCombProductInfoField) *C.CThostFtdcQryRCAMSCombProductInfoField {
+	ptr := (*C.CThostFtdcQryRCAMSCombProductInfoField)(C.malloc(C.sizeof_CThostFtdcQryRCAMSCombProductInfoField))
+	go2cStr(s.ProductID, &ptr.ProductID[0], 41)
+	go2cStr(s.CombProductID, &ptr.CombProductID[0], 41)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 41)
+	return ptr
+}
+
+type CThostFtdcQryRCAMSInstrParameterField struct {
+	ProductID string
+}
+
+func NewCThostFtdcQryRCAMSInstrParameterField(p *C.CThostFtdcQryRCAMSInstrParameterField) *CThostFtdcQryRCAMSInstrParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryRCAMSInstrParameterField)
+	ret.ProductID = c2goStr(&p.ProductID[0], 41)
+	return ret
+}
+
+func CThostFtdcQryRCAMSInstrParameterFieldCValue(s *CThostFtdcQryRCAMSInstrParameterField) *C.CThostFtdcQryRCAMSInstrParameterField {
+	ptr := (*C.CThostFtdcQryRCAMSInstrParameterField)(C.malloc(C.sizeof_CThostFtdcQryRCAMSInstrParameterField))
+	go2cStr(s.ProductID, &ptr.ProductID[0], 41)
+	return ptr
+}
+
+type CThostFtdcQryRCAMSIntraParameterField struct {
+	CombProductID string
+}
+
+func NewCThostFtdcQryRCAMSIntraParameterField(p *C.CThostFtdcQryRCAMSIntraParameterField) *CThostFtdcQryRCAMSIntraParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryRCAMSIntraParameterField)
+	ret.CombProductID = c2goStr(&p.CombProductID[0], 41)
+	return ret
+}
+
+func CThostFtdcQryRCAMSIntraParameterFieldCValue(s *CThostFtdcQryRCAMSIntraParameterField) *C.CThostFtdcQryRCAMSIntraParameterField {
+	ptr := (*C.CThostFtdcQryRCAMSIntraParameterField)(C.malloc(C.sizeof_CThostFtdcQryRCAMSIntraParameterField))
+	go2cStr(s.CombProductID, &ptr.CombProductID[0], 41)
+	return ptr
+}
+
+type CThostFtdcQryRCAMSInterParameterField struct {
+	ProductGroupID string
+	CombProduct1   string
+	CombProduct2   string
+}
+
+func NewCThostFtdcQryRCAMSInterParameterField(p *C.CThostFtdcQryRCAMSInterParameterField) *CThostFtdcQryRCAMSInterParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryRCAMSInterParameterField)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 41)
+	ret.CombProduct1 = c2goStr(&p.CombProduct1[0], 41)
+	ret.CombProduct2 = c2goStr(&p.CombProduct2[0], 41)
+	return ret
+}
+
+func CThostFtdcQryRCAMSInterParameterFieldCValue(s *CThostFtdcQryRCAMSInterParameterField) *C.CThostFtdcQryRCAMSInterParameterField {
+	ptr := (*C.CThostFtdcQryRCAMSInterParameterField)(C.malloc(C.sizeof_CThostFtdcQryRCAMSInterParameterField))
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 41)
+	go2cStr(s.CombProduct1, &ptr.CombProduct1[0], 41)
+	go2cStr(s.CombProduct2, &ptr.CombProduct2[0], 41)
+	return ptr
+}
+
+type CThostFtdcQryRCAMSShortOptAdjustParamField struct {
+	CombProductID string
+}
+
+func NewCThostFtdcQryRCAMSShortOptAdjustParamField(p *C.CThostFtdcQryRCAMSShortOptAdjustParamField) *CThostFtdcQryRCAMSShortOptAdjustParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryRCAMSShortOptAdjustParamField)
+	ret.CombProductID = c2goStr(&p.CombProductID[0], 41)
+	return ret
+}
+
+func CThostFtdcQryRCAMSShortOptAdjustParamFieldCValue(s *CThostFtdcQryRCAMSShortOptAdjustParamField) *C.CThostFtdcQryRCAMSShortOptAdjustParamField {
+	ptr := (*C.CThostFtdcQryRCAMSShortOptAdjustParamField)(C.malloc(C.sizeof_CThostFtdcQryRCAMSShortOptAdjustParamField))
+	go2cStr(s.CombProductID, &ptr.CombProductID[0], 41)
+	return ptr
+}
+
+type CThostFtdcQryRCAMSInvestorCombPositionField struct {
+	BrokerID         string
+	InvestorID       string
+	InstrumentID     string
+	CombInstrumentID string
+}
+
+func NewCThostFtdcQryRCAMSInvestorCombPositionField(p *C.CThostFtdcQryRCAMSInvestorCombPositionField) *CThostFtdcQryRCAMSInvestorCombPositionField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryRCAMSInvestorCombPositionField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 81)
+	return ret
+}
+
+func CThostFtdcQryRCAMSInvestorCombPositionFieldCValue(s *CThostFtdcQryRCAMSInvestorCombPositionField) *C.CThostFtdcQryRCAMSInvestorCombPositionField {
+	ptr := (*C.CThostFtdcQryRCAMSInvestorCombPositionField)(C.malloc(C.sizeof_CThostFtdcQryRCAMSInvestorCombPositionField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 81)
+	return ptr
+}
+
+type CThostFtdcQryInvestorProdRCAMSMarginField struct {
+	BrokerID       string
+	InvestorID     string
+	CombProductID  string
+	ProductGroupID string
+}
+
+func NewCThostFtdcQryInvestorProdRCAMSMarginField(p *C.CThostFtdcQryInvestorProdRCAMSMarginField) *CThostFtdcQryInvestorProdRCAMSMarginField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryInvestorProdRCAMSMarginField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.CombProductID = c2goStr(&p.CombProductID[0], 41)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 41)
+	return ret
+}
+
+func CThostFtdcQryInvestorProdRCAMSMarginFieldCValue(s *CThostFtdcQryInvestorProdRCAMSMarginField) *C.CThostFtdcQryInvestorProdRCAMSMarginField {
+	ptr := (*C.CThostFtdcQryInvestorProdRCAMSMarginField)(C.malloc(C.sizeof_CThostFtdcQryInvestorProdRCAMSMarginField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.CombProductID, &ptr.CombProductID[0], 41)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 41)
+	return ptr
+}
+
+type CThostFtdcRULEInstrParameterField struct {
+	TradingDay       string
+	ExchangeID       string
+	InstrumentID     string
+	InstrumentClass  byte
+	StdInstrumentID  string
+	BSpecRatio       float64
+	SSpecRatio       float64
+	BHedgeRatio      float64
+	SHedgeRatio      float64
+	BAddOnMargin     float64
+	SAddOnMargin     float64
+	CommodityGroupID int
+}
+
+func NewCThostFtdcRULEInstrParameterField(p *C.CThostFtdcRULEInstrParameterField) *CThostFtdcRULEInstrParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRULEInstrParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.InstrumentClass = byte(p.InstrumentClass)
+	ret.StdInstrumentID = c2goStr(&p.StdInstrumentID[0], 81)
+	ret.BSpecRatio = goFloat64(p.BSpecRatio)
+	ret.SSpecRatio = goFloat64(p.SSpecRatio)
+	ret.BHedgeRatio = goFloat64(p.BHedgeRatio)
+	ret.SHedgeRatio = goFloat64(p.SHedgeRatio)
+	ret.BAddOnMargin = goFloat64(p.BAddOnMargin)
+	ret.SAddOnMargin = goFloat64(p.SAddOnMargin)
+	ret.CommodityGroupID = int(p.CommodityGroupID)
+	return ret
+}
+
+func CThostFtdcRULEInstrParameterFieldCValue(s *CThostFtdcRULEInstrParameterField) *C.CThostFtdcRULEInstrParameterField {
+	ptr := (*C.CThostFtdcRULEInstrParameterField)(C.malloc(C.sizeof_CThostFtdcRULEInstrParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.InstrumentClass = C.char(s.InstrumentClass)
+	go2cStr(s.StdInstrumentID, &ptr.StdInstrumentID[0], 81)
+	ptr.BSpecRatio = C.double(s.BSpecRatio)
+	ptr.SSpecRatio = C.double(s.SSpecRatio)
+	ptr.BHedgeRatio = C.double(s.BHedgeRatio)
+	ptr.SHedgeRatio = C.double(s.SHedgeRatio)
+	ptr.BAddOnMargin = C.double(s.BAddOnMargin)
+	ptr.SAddOnMargin = C.double(s.SAddOnMargin)
+	ptr.CommodityGroupID = C.int(s.CommodityGroupID)
+	return ptr
+}
+
+type CThostFtdcRULEIntraParameterField struct {
+	TradingDay        string
+	ExchangeID        string
+	ProdFamilyCode    string
+	StdInstrumentID   string
+	StdInstrMargin    float64
+	UsualIntraRate    float64
+	DeliveryIntraRate float64
+}
+
+func NewCThostFtdcRULEIntraParameterField(p *C.CThostFtdcRULEIntraParameterField) *CThostFtdcRULEIntraParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRULEIntraParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.StdInstrumentID = c2goStr(&p.StdInstrumentID[0], 81)
+	ret.StdInstrMargin = goFloat64(p.StdInstrMargin)
+	ret.UsualIntraRate = goFloat64(p.UsualIntraRate)
+	ret.DeliveryIntraRate = goFloat64(p.DeliveryIntraRate)
+	return ret
+}
+
+func CThostFtdcRULEIntraParameterFieldCValue(s *CThostFtdcRULEIntraParameterField) *C.CThostFtdcRULEIntraParameterField {
+	ptr := (*C.CThostFtdcRULEIntraParameterField)(C.malloc(C.sizeof_CThostFtdcRULEIntraParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	go2cStr(s.StdInstrumentID, &ptr.StdInstrumentID[0], 81)
+	ptr.StdInstrMargin = C.double(s.StdInstrMargin)
+	ptr.UsualIntraRate = C.double(s.UsualIntraRate)
+	ptr.DeliveryIntraRate = C.double(s.DeliveryIntraRate)
+	return ptr
+}
+
+type CThostFtdcRULEInterParameterField struct {
+	TradingDay         string
+	ExchangeID         string
+	SpreadId           int
+	InterRate          float64
+	Leg1ProdFamilyCode string
+	Leg2ProdFamilyCode string
+	Leg1PropFactor     int
+	Leg2PropFactor     int
+	CommodityGroupID   int
+	CommodityGroupName string
+}
+
+func NewCThostFtdcRULEInterParameterField(p *C.CThostFtdcRULEInterParameterField) *CThostFtdcRULEInterParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRULEInterParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.SpreadId = int(p.SpreadId)
+	ret.InterRate = goFloat64(p.InterRate)
+	ret.Leg1ProdFamilyCode = c2goStr(&p.Leg1ProdFamilyCode[0], 81)
+	ret.Leg2ProdFamilyCode = c2goStr(&p.Leg2ProdFamilyCode[0], 81)
+	ret.Leg1PropFactor = int(p.Leg1PropFactor)
+	ret.Leg2PropFactor = int(p.Leg2PropFactor)
+	ret.CommodityGroupID = int(p.CommodityGroupID)
+	ret.CommodityGroupName = c2goStr(&p.CommodityGroupName[0], 21)
+	return ret
+}
+
+func CThostFtdcRULEInterParameterFieldCValue(s *CThostFtdcRULEInterParameterField) *C.CThostFtdcRULEInterParameterField {
+	ptr := (*C.CThostFtdcRULEInterParameterField)(C.malloc(C.sizeof_CThostFtdcRULEInterParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.SpreadId = C.int(s.SpreadId)
+	ptr.InterRate = C.double(s.InterRate)
+	go2cStr(s.Leg1ProdFamilyCode, &ptr.Leg1ProdFamilyCode[0], 81)
+	go2cStr(s.Leg2ProdFamilyCode, &ptr.Leg2ProdFamilyCode[0], 81)
+	ptr.Leg1PropFactor = C.int(s.Leg1PropFactor)
+	ptr.Leg2PropFactor = C.int(s.Leg2PropFactor)
+	ptr.CommodityGroupID = C.int(s.CommodityGroupID)
+	go2cStr(s.CommodityGroupName, &ptr.CommodityGroupName[0], 21)
+	return ptr
+}
+
+type CThostFtdcQryRULEInstrParameterField struct {
+	ExchangeID   string
+	InstrumentID string
+}
+
+func NewCThostFtdcQryRULEInstrParameterField(p *C.CThostFtdcQryRULEInstrParameterField) *CThostFtdcQryRULEInstrParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryRULEInstrParameterField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	return ret
+}
+
+func CThostFtdcQryRULEInstrParameterFieldCValue(s *CThostFtdcQryRULEInstrParameterField) *C.CThostFtdcQryRULEInstrParameterField {
+	ptr := (*C.CThostFtdcQryRULEInstrParameterField)(C.malloc(C.sizeof_CThostFtdcQryRULEInstrParameterField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	return ptr
+}
+
+type CThostFtdcQryRULEIntraParameterField struct {
+	ExchangeID     string
+	ProdFamilyCode string
+}
+
+func NewCThostFtdcQryRULEIntraParameterField(p *C.CThostFtdcQryRULEIntraParameterField) *CThostFtdcQryRULEIntraParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryRULEIntraParameterField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	return ret
+}
+
+func CThostFtdcQryRULEIntraParameterFieldCValue(s *CThostFtdcQryRULEIntraParameterField) *C.CThostFtdcQryRULEIntraParameterField {
+	ptr := (*C.CThostFtdcQryRULEIntraParameterField)(C.malloc(C.sizeof_CThostFtdcQryRULEIntraParameterField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	return ptr
+}
+
+type CThostFtdcQryRULEInterParameterField struct {
+	ExchangeID         string
+	Leg1ProdFamilyCode string
+	Leg2ProdFamilyCode string
+	CommodityGroupID   int
+}
+
+func NewCThostFtdcQryRULEInterParameterField(p *C.CThostFtdcQryRULEInterParameterField) *CThostFtdcQryRULEInterParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryRULEInterParameterField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.Leg1ProdFamilyCode = c2goStr(&p.Leg1ProdFamilyCode[0], 81)
+	ret.Leg2ProdFamilyCode = c2goStr(&p.Leg2ProdFamilyCode[0], 81)
+	ret.CommodityGroupID = int(p.CommodityGroupID)
+	return ret
+}
+
+func CThostFtdcQryRULEInterParameterFieldCValue(s *CThostFtdcQryRULEInterParameterField) *C.CThostFtdcQryRULEInterParameterField {
+	ptr := (*C.CThostFtdcQryRULEInterParameterField)(C.malloc(C.sizeof_CThostFtdcQryRULEInterParameterField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.Leg1ProdFamilyCode, &ptr.Leg1ProdFamilyCode[0], 81)
+	go2cStr(s.Leg2ProdFamilyCode, &ptr.Leg2ProdFamilyCode[0], 81)
+	ptr.CommodityGroupID = C.int(s.CommodityGroupID)
+	return ptr
+}
+
+type CThostFtdcInvestorProdRULEMarginField struct {
+	ExchangeID           string
+	BrokerID             string
+	InvestorID           string
+	ProdFamilyCode       string
+	InstrumentClass      byte
+	CommodityGroupID     int
+	BStdPosition         float64
+	SStdPosition         float64
+	BStdOpenFrozen       float64
+	SStdOpenFrozen       float64
+	BStdCloseFrozen      float64
+	SStdCloseFrozen      float64
+	IntraProdStdPosition float64
+	NetStdPosition       float64
+	InterProdStdPosition float64
+	SingleStdPosition    float64
+	IntraProdMargin      float64
+	InterProdMargin      float64
+	SingleMargin         float64
+	NonCombMargin        float64
+	AddOnMargin          float64
+	ExchMargin           float64
+	AddOnFrozenMargin    float64
+	OpenFrozenMargin     float64
+	CloseFrozenMargin    float64
+	Margin               float64
+	FrozenMargin         float64
+}
+
+func NewCThostFtdcInvestorProdRULEMarginField(p *C.CThostFtdcInvestorProdRULEMarginField) *CThostFtdcInvestorProdRULEMarginField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcInvestorProdRULEMarginField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.InstrumentClass = byte(p.InstrumentClass)
+	ret.CommodityGroupID = int(p.CommodityGroupID)
+	ret.BStdPosition = goFloat64(p.BStdPosition)
+	ret.SStdPosition = goFloat64(p.SStdPosition)
+	ret.BStdOpenFrozen = goFloat64(p.BStdOpenFrozen)
+	ret.SStdOpenFrozen = goFloat64(p.SStdOpenFrozen)
+	ret.BStdCloseFrozen = goFloat64(p.BStdCloseFrozen)
+	ret.SStdCloseFrozen = goFloat64(p.SStdCloseFrozen)
+	ret.IntraProdStdPosition = goFloat64(p.IntraProdStdPosition)
+	ret.NetStdPosition = goFloat64(p.NetStdPosition)
+	ret.InterProdStdPosition = goFloat64(p.InterProdStdPosition)
+	ret.SingleStdPosition = goFloat64(p.SingleStdPosition)
+	ret.IntraProdMargin = goFloat64(p.IntraProdMargin)
+	ret.InterProdMargin = goFloat64(p.InterProdMargin)
+	ret.SingleMargin = goFloat64(p.SingleMargin)
+	ret.NonCombMargin = goFloat64(p.NonCombMargin)
+	ret.AddOnMargin = goFloat64(p.AddOnMargin)
+	ret.ExchMargin = goFloat64(p.ExchMargin)
+	ret.AddOnFrozenMargin = goFloat64(p.AddOnFrozenMargin)
+	ret.OpenFrozenMargin = goFloat64(p.OpenFrozenMargin)
+	ret.CloseFrozenMargin = goFloat64(p.CloseFrozenMargin)
+	ret.Margin = goFloat64(p.Margin)
+	ret.FrozenMargin = goFloat64(p.FrozenMargin)
+	return ret
+}
+
+func CThostFtdcInvestorProdRULEMarginFieldCValue(s *CThostFtdcInvestorProdRULEMarginField) *C.CThostFtdcInvestorProdRULEMarginField {
+	ptr := (*C.CThostFtdcInvestorProdRULEMarginField)(C.malloc(C.sizeof_CThostFtdcInvestorProdRULEMarginField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	ptr.InstrumentClass = C.char(s.InstrumentClass)
+	ptr.CommodityGroupID = C.int(s.CommodityGroupID)
+	ptr.BStdPosition = C.double(s.BStdPosition)
+	ptr.SStdPosition = C.double(s.SStdPosition)
+	ptr.BStdOpenFrozen = C.double(s.BStdOpenFrozen)
+	ptr.SStdOpenFrozen = C.double(s.SStdOpenFrozen)
+	ptr.BStdCloseFrozen = C.double(s.BStdCloseFrozen)
+	ptr.SStdCloseFrozen = C.double(s.SStdCloseFrozen)
+	ptr.IntraProdStdPosition = C.double(s.IntraProdStdPosition)
+	ptr.NetStdPosition = C.double(s.NetStdPosition)
+	ptr.InterProdStdPosition = C.double(s.InterProdStdPosition)
+	ptr.SingleStdPosition = C.double(s.SingleStdPosition)
+	ptr.IntraProdMargin = C.double(s.IntraProdMargin)
+	ptr.InterProdMargin = C.double(s.InterProdMargin)
+	ptr.SingleMargin = C.double(s.SingleMargin)
+	ptr.NonCombMargin = C.double(s.NonCombMargin)
+	ptr.AddOnMargin = C.double(s.AddOnMargin)
+	ptr.ExchMargin = C.double(s.ExchMargin)
+	ptr.AddOnFrozenMargin = C.double(s.AddOnFrozenMargin)
+	ptr.OpenFrozenMargin = C.double(s.OpenFrozenMargin)
+	ptr.CloseFrozenMargin = C.double(s.CloseFrozenMargin)
+	ptr.Margin = C.double(s.Margin)
+	ptr.FrozenMargin = C.double(s.FrozenMargin)
+	return ptr
+}
+
+type CThostFtdcQryInvestorProdRULEMarginField struct {
+	ExchangeID       string
+	BrokerID         string
+	InvestorID       string
+	ProdFamilyCode   string
+	CommodityGroupID int
+}
+
+func NewCThostFtdcQryInvestorProdRULEMarginField(p *C.CThostFtdcQryInvestorProdRULEMarginField) *CThostFtdcQryInvestorProdRULEMarginField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryInvestorProdRULEMarginField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.CommodityGroupID = int(p.CommodityGroupID)
+	return ret
+}
+
+func CThostFtdcQryInvestorProdRULEMarginFieldCValue(s *CThostFtdcQryInvestorProdRULEMarginField) *C.CThostFtdcQryInvestorProdRULEMarginField {
+	ptr := (*C.CThostFtdcQryInvestorProdRULEMarginField)(C.malloc(C.sizeof_CThostFtdcQryInvestorProdRULEMarginField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	ptr.CommodityGroupID = C.int(s.CommodityGroupID)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaSPBMPortfDefinitionField struct {
+	ExchangeID          string
+	PortfolioDefID      int
+	ProdFamilyCode      string
+	IsSPBM              int
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaSPBMPortfDefinitionField(p *C.CThostFtdcSyncDeltaSPBMPortfDefinitionField) *CThostFtdcSyncDeltaSPBMPortfDefinitionField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaSPBMPortfDefinitionField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.PortfolioDefID = int(p.PortfolioDefID)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.IsSPBM = int(p.IsSPBM)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaSPBMPortfDefinitionFieldCValue(s *CThostFtdcSyncDeltaSPBMPortfDefinitionField) *C.CThostFtdcSyncDeltaSPBMPortfDefinitionField {
+	ptr := (*C.CThostFtdcSyncDeltaSPBMPortfDefinitionField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaSPBMPortfDefinitionField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.PortfolioDefID = C.int(s.PortfolioDefID)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	ptr.IsSPBM = C.int(s.IsSPBM)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaSPBMInvstPortfDefField struct {
+	ExchangeID          string
+	BrokerID            string
+	InvestorID          string
+	PortfolioDefID      int
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaSPBMInvstPortfDefField(p *C.CThostFtdcSyncDeltaSPBMInvstPortfDefField) *CThostFtdcSyncDeltaSPBMInvstPortfDefField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaSPBMInvstPortfDefField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.PortfolioDefID = int(p.PortfolioDefID)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaSPBMInvstPortfDefFieldCValue(s *CThostFtdcSyncDeltaSPBMInvstPortfDefField) *C.CThostFtdcSyncDeltaSPBMInvstPortfDefField {
+	ptr := (*C.CThostFtdcSyncDeltaSPBMInvstPortfDefField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaSPBMInvstPortfDefField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.PortfolioDefID = C.int(s.PortfolioDefID)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaSPBMFutureParameterField struct {
+	TradingDay          string
+	ExchangeID          string
+	InstrumentID        string
+	ProdFamilyCode      string
+	Cvf                 int
+	TimeRange           byte
+	MarginRate          float64
+	LockRateX           float64
+	AddOnRate           float64
+	PreSettlementPrice  float64
+	AddOnLockRateX2     float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaSPBMFutureParameterField(p *C.CThostFtdcSyncDeltaSPBMFutureParameterField) *CThostFtdcSyncDeltaSPBMFutureParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaSPBMFutureParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.Cvf = int(p.Cvf)
+	ret.TimeRange = byte(p.TimeRange)
+	ret.MarginRate = goFloat64(p.MarginRate)
+	ret.LockRateX = goFloat64(p.LockRateX)
+	ret.AddOnRate = goFloat64(p.AddOnRate)
+	ret.PreSettlementPrice = goFloat64(p.PreSettlementPrice)
+	ret.AddOnLockRateX2 = goFloat64(p.AddOnLockRateX2)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaSPBMFutureParameterFieldCValue(s *CThostFtdcSyncDeltaSPBMFutureParameterField) *C.CThostFtdcSyncDeltaSPBMFutureParameterField {
+	ptr := (*C.CThostFtdcSyncDeltaSPBMFutureParameterField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaSPBMFutureParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	ptr.Cvf = C.int(s.Cvf)
+	ptr.TimeRange = C.char(s.TimeRange)
+	ptr.MarginRate = C.double(s.MarginRate)
+	ptr.LockRateX = C.double(s.LockRateX)
+	ptr.AddOnRate = C.double(s.AddOnRate)
+	ptr.PreSettlementPrice = C.double(s.PreSettlementPrice)
+	ptr.AddOnLockRateX2 = C.double(s.AddOnLockRateX2)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaSPBMOptionParameterField struct {
+	TradingDay          string
+	ExchangeID          string
+	InstrumentID        string
+	ProdFamilyCode      string
+	Cvf                 int
+	DownPrice           float64
+	Delta               float64
+	SlimiDelta          float64
+	PreSettlementPrice  float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaSPBMOptionParameterField(p *C.CThostFtdcSyncDeltaSPBMOptionParameterField) *CThostFtdcSyncDeltaSPBMOptionParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaSPBMOptionParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.Cvf = int(p.Cvf)
+	ret.DownPrice = goFloat64(p.DownPrice)
+	ret.Delta = goFloat64(p.Delta)
+	ret.SlimiDelta = goFloat64(p.SlimiDelta)
+	ret.PreSettlementPrice = goFloat64(p.PreSettlementPrice)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaSPBMOptionParameterFieldCValue(s *CThostFtdcSyncDeltaSPBMOptionParameterField) *C.CThostFtdcSyncDeltaSPBMOptionParameterField {
+	ptr := (*C.CThostFtdcSyncDeltaSPBMOptionParameterField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaSPBMOptionParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	ptr.Cvf = C.int(s.Cvf)
+	ptr.DownPrice = C.double(s.DownPrice)
+	ptr.Delta = C.double(s.Delta)
+	ptr.SlimiDelta = C.double(s.SlimiDelta)
+	ptr.PreSettlementPrice = C.double(s.PreSettlementPrice)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaSPBMIntraParameterField struct {
+	TradingDay          string
+	ExchangeID          string
+	ProdFamilyCode      string
+	IntraRateY          float64
+	AddOnIntraRateY2    float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaSPBMIntraParameterField(p *C.CThostFtdcSyncDeltaSPBMIntraParameterField) *CThostFtdcSyncDeltaSPBMIntraParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaSPBMIntraParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.IntraRateY = goFloat64(p.IntraRateY)
+	ret.AddOnIntraRateY2 = goFloat64(p.AddOnIntraRateY2)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaSPBMIntraParameterFieldCValue(s *CThostFtdcSyncDeltaSPBMIntraParameterField) *C.CThostFtdcSyncDeltaSPBMIntraParameterField {
+	ptr := (*C.CThostFtdcSyncDeltaSPBMIntraParameterField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaSPBMIntraParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	ptr.IntraRateY = C.double(s.IntraRateY)
+	ptr.AddOnIntraRateY2 = C.double(s.AddOnIntraRateY2)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaSPBMInterParameterField struct {
+	TradingDay          string
+	ExchangeID          string
+	SpreadId            int
+	InterRateZ          float64
+	Leg1ProdFamilyCode  string
+	Leg2ProdFamilyCode  string
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaSPBMInterParameterField(p *C.CThostFtdcSyncDeltaSPBMInterParameterField) *CThostFtdcSyncDeltaSPBMInterParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaSPBMInterParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.SpreadId = int(p.SpreadId)
+	ret.InterRateZ = goFloat64(p.InterRateZ)
+	ret.Leg1ProdFamilyCode = c2goStr(&p.Leg1ProdFamilyCode[0], 81)
+	ret.Leg2ProdFamilyCode = c2goStr(&p.Leg2ProdFamilyCode[0], 81)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaSPBMInterParameterFieldCValue(s *CThostFtdcSyncDeltaSPBMInterParameterField) *C.CThostFtdcSyncDeltaSPBMInterParameterField {
+	ptr := (*C.CThostFtdcSyncDeltaSPBMInterParameterField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaSPBMInterParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.SpreadId = C.int(s.SpreadId)
+	ptr.InterRateZ = C.double(s.InterRateZ)
+	go2cStr(s.Leg1ProdFamilyCode, &ptr.Leg1ProdFamilyCode[0], 81)
+	go2cStr(s.Leg2ProdFamilyCode, &ptr.Leg2ProdFamilyCode[0], 81)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaSPBMAddOnInterParamField struct {
+	TradingDay          string
+	ExchangeID          string
+	SpreadId            int
+	AddOnInterRateZ2    float64
+	Leg1ProdFamilyCode  string
+	Leg2ProdFamilyCode  string
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaSPBMAddOnInterParamField(p *C.CThostFtdcSyncDeltaSPBMAddOnInterParamField) *CThostFtdcSyncDeltaSPBMAddOnInterParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaSPBMAddOnInterParamField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.SpreadId = int(p.SpreadId)
+	ret.AddOnInterRateZ2 = goFloat64(p.AddOnInterRateZ2)
+	ret.Leg1ProdFamilyCode = c2goStr(&p.Leg1ProdFamilyCode[0], 81)
+	ret.Leg2ProdFamilyCode = c2goStr(&p.Leg2ProdFamilyCode[0], 81)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaSPBMAddOnInterParamFieldCValue(s *CThostFtdcSyncDeltaSPBMAddOnInterParamField) *C.CThostFtdcSyncDeltaSPBMAddOnInterParamField {
+	ptr := (*C.CThostFtdcSyncDeltaSPBMAddOnInterParamField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaSPBMAddOnInterParamField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.SpreadId = C.int(s.SpreadId)
+	ptr.AddOnInterRateZ2 = C.double(s.AddOnInterRateZ2)
+	go2cStr(s.Leg1ProdFamilyCode, &ptr.Leg1ProdFamilyCode[0], 81)
+	go2cStr(s.Leg2ProdFamilyCode, &ptr.Leg2ProdFamilyCode[0], 81)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaSPMMInstParamField struct {
+	ExchangeID          string
+	InstrumentID        string
+	InstMarginCalID     byte
+	CommodityID         string
+	CommodityGroupID    string
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaSPMMInstParamField(p *C.CThostFtdcSyncDeltaSPMMInstParamField) *CThostFtdcSyncDeltaSPMMInstParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaSPMMInstParamField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.InstMarginCalID = byte(p.InstMarginCalID)
+	ret.CommodityID = c2goStr(&p.CommodityID[0], 41)
+	ret.CommodityGroupID = c2goStr(&p.CommodityGroupID[0], 41)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaSPMMInstParamFieldCValue(s *CThostFtdcSyncDeltaSPMMInstParamField) *C.CThostFtdcSyncDeltaSPMMInstParamField {
+	ptr := (*C.CThostFtdcSyncDeltaSPMMInstParamField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaSPMMInstParamField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.InstMarginCalID = C.char(s.InstMarginCalID)
+	go2cStr(s.CommodityID, &ptr.CommodityID[0], 41)
+	go2cStr(s.CommodityGroupID, &ptr.CommodityGroupID[0], 41)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaSPMMProductParamField struct {
+	ExchangeID          string
+	ProductID           string
+	CommodityID         string
+	CommodityGroupID    string
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaSPMMProductParamField(p *C.CThostFtdcSyncDeltaSPMMProductParamField) *CThostFtdcSyncDeltaSPMMProductParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaSPMMProductParamField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 41)
+	ret.CommodityID = c2goStr(&p.CommodityID[0], 41)
+	ret.CommodityGroupID = c2goStr(&p.CommodityGroupID[0], 41)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaSPMMProductParamFieldCValue(s *CThostFtdcSyncDeltaSPMMProductParamField) *C.CThostFtdcSyncDeltaSPMMProductParamField {
+	ptr := (*C.CThostFtdcSyncDeltaSPMMProductParamField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaSPMMProductParamField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 41)
+	go2cStr(s.CommodityID, &ptr.CommodityID[0], 41)
+	go2cStr(s.CommodityGroupID, &ptr.CommodityGroupID[0], 41)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaInvestorSPMMModelField struct {
+	ExchangeID          string
+	BrokerID            string
+	InvestorID          string
+	SPMMModelID         string
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaInvestorSPMMModelField(p *C.CThostFtdcSyncDeltaInvestorSPMMModelField) *CThostFtdcSyncDeltaInvestorSPMMModelField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaInvestorSPMMModelField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.SPMMModelID = c2goStr(&p.SPMMModelID[0], 33)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaInvestorSPMMModelFieldCValue(s *CThostFtdcSyncDeltaInvestorSPMMModelField) *C.CThostFtdcSyncDeltaInvestorSPMMModelField {
+	ptr := (*C.CThostFtdcSyncDeltaInvestorSPMMModelField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaInvestorSPMMModelField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.SPMMModelID, &ptr.SPMMModelID[0], 33)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaSPMMModelParamField struct {
+	ExchangeID          string
+	SPMMModelID         string
+	CommodityGroupID    string
+	IntraCommodityRate  float64
+	InterCommodityRate  float64
+	OptionDiscountRate  float64
+	MiniMarginRatio     float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaSPMMModelParamField(p *C.CThostFtdcSyncDeltaSPMMModelParamField) *CThostFtdcSyncDeltaSPMMModelParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaSPMMModelParamField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.SPMMModelID = c2goStr(&p.SPMMModelID[0], 33)
+	ret.CommodityGroupID = c2goStr(&p.CommodityGroupID[0], 41)
+	ret.IntraCommodityRate = goFloat64(p.IntraCommodityRate)
+	ret.InterCommodityRate = goFloat64(p.InterCommodityRate)
+	ret.OptionDiscountRate = goFloat64(p.OptionDiscountRate)
+	ret.MiniMarginRatio = goFloat64(p.MiniMarginRatio)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaSPMMModelParamFieldCValue(s *CThostFtdcSyncDeltaSPMMModelParamField) *C.CThostFtdcSyncDeltaSPMMModelParamField {
+	ptr := (*C.CThostFtdcSyncDeltaSPMMModelParamField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaSPMMModelParamField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.SPMMModelID, &ptr.SPMMModelID[0], 33)
+	go2cStr(s.CommodityGroupID, &ptr.CommodityGroupID[0], 41)
+	ptr.IntraCommodityRate = C.double(s.IntraCommodityRate)
+	ptr.InterCommodityRate = C.double(s.InterCommodityRate)
+	ptr.OptionDiscountRate = C.double(s.OptionDiscountRate)
+	ptr.MiniMarginRatio = C.double(s.MiniMarginRatio)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaRCAMSCombProdInfoField struct {
+	TradingDay          string
+	ExchangeID          string
+	ProductID           string
+	CombProductID       string
+	ProductGroupID      string
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaRCAMSCombProdInfoField(p *C.CThostFtdcSyncDeltaRCAMSCombProdInfoField) *CThostFtdcSyncDeltaRCAMSCombProdInfoField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaRCAMSCombProdInfoField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 41)
+	ret.CombProductID = c2goStr(&p.CombProductID[0], 41)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 41)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaRCAMSCombProdInfoFieldCValue(s *CThostFtdcSyncDeltaRCAMSCombProdInfoField) *C.CThostFtdcSyncDeltaRCAMSCombProdInfoField {
+	ptr := (*C.CThostFtdcSyncDeltaRCAMSCombProdInfoField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaRCAMSCombProdInfoField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 41)
+	go2cStr(s.CombProductID, &ptr.CombProductID[0], 41)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 41)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaRCAMSInstrParameterField struct {
+	TradingDay          string
+	ExchangeID          string
+	ProductID           string
+	HedgeRate           float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaRCAMSInstrParameterField(p *C.CThostFtdcSyncDeltaRCAMSInstrParameterField) *CThostFtdcSyncDeltaRCAMSInstrParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaRCAMSInstrParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductID = c2goStr(&p.ProductID[0], 41)
+	ret.HedgeRate = goFloat64(p.HedgeRate)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaRCAMSInstrParameterFieldCValue(s *CThostFtdcSyncDeltaRCAMSInstrParameterField) *C.CThostFtdcSyncDeltaRCAMSInstrParameterField {
+	ptr := (*C.CThostFtdcSyncDeltaRCAMSInstrParameterField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaRCAMSInstrParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 41)
+	ptr.HedgeRate = C.double(s.HedgeRate)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaRCAMSIntraParameterField struct {
+	TradingDay          string
+	ExchangeID          string
+	CombProductID       string
+	HedgeRate           float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaRCAMSIntraParameterField(p *C.CThostFtdcSyncDeltaRCAMSIntraParameterField) *CThostFtdcSyncDeltaRCAMSIntraParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaRCAMSIntraParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.CombProductID = c2goStr(&p.CombProductID[0], 41)
+	ret.HedgeRate = goFloat64(p.HedgeRate)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaRCAMSIntraParameterFieldCValue(s *CThostFtdcSyncDeltaRCAMSIntraParameterField) *C.CThostFtdcSyncDeltaRCAMSIntraParameterField {
+	ptr := (*C.CThostFtdcSyncDeltaRCAMSIntraParameterField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaRCAMSIntraParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.CombProductID, &ptr.CombProductID[0], 41)
+	ptr.HedgeRate = C.double(s.HedgeRate)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaRCAMSInterParameterField struct {
+	TradingDay          string
+	ExchangeID          string
+	ProductGroupID      string
+	Priority            int
+	CreditRate          float64
+	CombProduct1        string
+	CombProduct2        string
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaRCAMSInterParameterField(p *C.CThostFtdcSyncDeltaRCAMSInterParameterField) *CThostFtdcSyncDeltaRCAMSInterParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaRCAMSInterParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProductGroupID = c2goStr(&p.ProductGroupID[0], 41)
+	ret.Priority = int(p.Priority)
+	ret.CreditRate = goFloat64(p.CreditRate)
+	ret.CombProduct1 = c2goStr(&p.CombProduct1[0], 41)
+	ret.CombProduct2 = c2goStr(&p.CombProduct2[0], 41)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaRCAMSInterParameterFieldCValue(s *CThostFtdcSyncDeltaRCAMSInterParameterField) *C.CThostFtdcSyncDeltaRCAMSInterParameterField {
+	ptr := (*C.CThostFtdcSyncDeltaRCAMSInterParameterField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaRCAMSInterParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProductGroupID, &ptr.ProductGroupID[0], 41)
+	ptr.Priority = C.int(s.Priority)
+	ptr.CreditRate = C.double(s.CreditRate)
+	go2cStr(s.CombProduct1, &ptr.CombProduct1[0], 41)
+	go2cStr(s.CombProduct2, &ptr.CombProduct2[0], 41)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaRCAMSSOptAdjParamField struct {
+	TradingDay          string
+	ExchangeID          string
+	CombProductID       string
+	HedgeFlag           byte
+	AdjustValue         float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaRCAMSSOptAdjParamField(p *C.CThostFtdcSyncDeltaRCAMSSOptAdjParamField) *CThostFtdcSyncDeltaRCAMSSOptAdjParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaRCAMSSOptAdjParamField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.CombProductID = c2goStr(&p.CombProductID[0], 41)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.AdjustValue = goFloat64(p.AdjustValue)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaRCAMSSOptAdjParamFieldCValue(s *CThostFtdcSyncDeltaRCAMSSOptAdjParamField) *C.CThostFtdcSyncDeltaRCAMSSOptAdjParamField {
+	ptr := (*C.CThostFtdcSyncDeltaRCAMSSOptAdjParamField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaRCAMSSOptAdjParamField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.CombProductID, &ptr.CombProductID[0], 41)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.AdjustValue = C.double(s.AdjustValue)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaRCAMSCombRuleDtlField struct {
+	TradingDay          string
+	ExchangeID          string
+	ProdGroup           string
+	RuleId              string
+	Priority            int
+	HedgeFlag           byte
+	CombMargin          float64
+	ExchangeInstID      string
+	LegID               int
+	LegInstrumentID     string
+	Direction           byte
+	LegMultiple         int
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaRCAMSCombRuleDtlField(p *C.CThostFtdcSyncDeltaRCAMSCombRuleDtlField) *CThostFtdcSyncDeltaRCAMSCombRuleDtlField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaRCAMSCombRuleDtlField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProdGroup = c2goStr(&p.ProdGroup[0], 41)
+	ret.RuleId = c2goStr(&p.RuleId[0], 51)
+	ret.Priority = int(p.Priority)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.CombMargin = goFloat64(p.CombMargin)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.LegID = int(p.LegID)
+	ret.LegInstrumentID = c2goStr(&p.LegInstrumentID[0], 81)
+	ret.Direction = byte(p.Direction)
+	ret.LegMultiple = int(p.LegMultiple)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaRCAMSCombRuleDtlFieldCValue(s *CThostFtdcSyncDeltaRCAMSCombRuleDtlField) *C.CThostFtdcSyncDeltaRCAMSCombRuleDtlField {
+	ptr := (*C.CThostFtdcSyncDeltaRCAMSCombRuleDtlField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaRCAMSCombRuleDtlField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProdGroup, &ptr.ProdGroup[0], 41)
+	go2cStr(s.RuleId, &ptr.RuleId[0], 51)
+	ptr.Priority = C.int(s.Priority)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.CombMargin = C.double(s.CombMargin)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	ptr.LegID = C.int(s.LegID)
+	go2cStr(s.LegInstrumentID, &ptr.LegInstrumentID[0], 81)
+	ptr.Direction = C.char(s.Direction)
+	ptr.LegMultiple = C.int(s.LegMultiple)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaRCAMSInvstCombPosField struct {
+	ExchangeID          string
+	BrokerID            string
+	InvestorID          string
+	InstrumentID        string
+	HedgeFlag           byte
+	PosiDirection       byte
+	CombInstrumentID    string
+	LegID               int
+	ExchangeInstID      string
+	TotalAmt            int
+	ExchMargin          float64
+	Margin              float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaRCAMSInvstCombPosField(p *C.CThostFtdcSyncDeltaRCAMSInvstCombPosField) *CThostFtdcSyncDeltaRCAMSInvstCombPosField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaRCAMSInvstCombPosField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.PosiDirection = byte(p.PosiDirection)
+	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 81)
+	ret.LegID = int(p.LegID)
+	ret.ExchangeInstID = c2goStr(&p.ExchangeInstID[0], 81)
+	ret.TotalAmt = int(p.TotalAmt)
+	ret.ExchMargin = goFloat64(p.ExchMargin)
+	ret.Margin = goFloat64(p.Margin)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaRCAMSInvstCombPosFieldCValue(s *CThostFtdcSyncDeltaRCAMSInvstCombPosField) *C.CThostFtdcSyncDeltaRCAMSInvstCombPosField {
+	ptr := (*C.CThostFtdcSyncDeltaRCAMSInvstCombPosField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaRCAMSInvstCombPosField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.PosiDirection = C.char(s.PosiDirection)
+	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 81)
+	ptr.LegID = C.int(s.LegID)
+	go2cStr(s.ExchangeInstID, &ptr.ExchangeInstID[0], 81)
+	ptr.TotalAmt = C.int(s.TotalAmt)
+	ptr.ExchMargin = C.double(s.ExchMargin)
+	ptr.Margin = C.double(s.Margin)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaRULEInstrParameterField struct {
+	TradingDay          string
+	ExchangeID          string
+	InstrumentID        string
+	InstrumentClass     byte
+	StdInstrumentID     string
+	BSpecRatio          float64
+	SSpecRatio          float64
+	BHedgeRatio         float64
+	SHedgeRatio         float64
+	BAddOnMargin        float64
+	SAddOnMargin        float64
+	CommodityGroupID    int
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaRULEInstrParameterField(p *C.CThostFtdcSyncDeltaRULEInstrParameterField) *CThostFtdcSyncDeltaRULEInstrParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaRULEInstrParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.InstrumentClass = byte(p.InstrumentClass)
+	ret.StdInstrumentID = c2goStr(&p.StdInstrumentID[0], 81)
+	ret.BSpecRatio = goFloat64(p.BSpecRatio)
+	ret.SSpecRatio = goFloat64(p.SSpecRatio)
+	ret.BHedgeRatio = goFloat64(p.BHedgeRatio)
+	ret.SHedgeRatio = goFloat64(p.SHedgeRatio)
+	ret.BAddOnMargin = goFloat64(p.BAddOnMargin)
+	ret.SAddOnMargin = goFloat64(p.SAddOnMargin)
+	ret.CommodityGroupID = int(p.CommodityGroupID)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaRULEInstrParameterFieldCValue(s *CThostFtdcSyncDeltaRULEInstrParameterField) *C.CThostFtdcSyncDeltaRULEInstrParameterField {
+	ptr := (*C.CThostFtdcSyncDeltaRULEInstrParameterField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaRULEInstrParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.InstrumentClass = C.char(s.InstrumentClass)
+	go2cStr(s.StdInstrumentID, &ptr.StdInstrumentID[0], 81)
+	ptr.BSpecRatio = C.double(s.BSpecRatio)
+	ptr.SSpecRatio = C.double(s.SSpecRatio)
+	ptr.BHedgeRatio = C.double(s.BHedgeRatio)
+	ptr.SHedgeRatio = C.double(s.SHedgeRatio)
+	ptr.BAddOnMargin = C.double(s.BAddOnMargin)
+	ptr.SAddOnMargin = C.double(s.SAddOnMargin)
+	ptr.CommodityGroupID = C.int(s.CommodityGroupID)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaRULEIntraParameterField struct {
+	TradingDay          string
+	ExchangeID          string
+	ProdFamilyCode      string
+	StdInstrumentID     string
+	StdInstrMargin      float64
+	UsualIntraRate      float64
+	DeliveryIntraRate   float64
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaRULEIntraParameterField(p *C.CThostFtdcSyncDeltaRULEIntraParameterField) *CThostFtdcSyncDeltaRULEIntraParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaRULEIntraParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.ProdFamilyCode = c2goStr(&p.ProdFamilyCode[0], 81)
+	ret.StdInstrumentID = c2goStr(&p.StdInstrumentID[0], 81)
+	ret.StdInstrMargin = goFloat64(p.StdInstrMargin)
+	ret.UsualIntraRate = goFloat64(p.UsualIntraRate)
+	ret.DeliveryIntraRate = goFloat64(p.DeliveryIntraRate)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaRULEIntraParameterFieldCValue(s *CThostFtdcSyncDeltaRULEIntraParameterField) *C.CThostFtdcSyncDeltaRULEIntraParameterField {
+	ptr := (*C.CThostFtdcSyncDeltaRULEIntraParameterField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaRULEIntraParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.ProdFamilyCode, &ptr.ProdFamilyCode[0], 81)
+	go2cStr(s.StdInstrumentID, &ptr.StdInstrumentID[0], 81)
+	ptr.StdInstrMargin = C.double(s.StdInstrMargin)
+	ptr.UsualIntraRate = C.double(s.UsualIntraRate)
+	ptr.DeliveryIntraRate = C.double(s.DeliveryIntraRate)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcSyncDeltaRULEInterParameterField struct {
+	TradingDay          string
+	ExchangeID          string
+	SpreadId            int
+	InterRate           float64
+	Leg1ProdFamilyCode  string
+	Leg2ProdFamilyCode  string
+	Leg1PropFactor      int
+	Leg2PropFactor      int
+	CommodityGroupID    int
+	CommodityGroupName  string
+	ActionDirection     byte
+	SyncDeltaSequenceNo int
+}
+
+func NewCThostFtdcSyncDeltaRULEInterParameterField(p *C.CThostFtdcSyncDeltaRULEInterParameterField) *CThostFtdcSyncDeltaRULEInterParameterField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSyncDeltaRULEInterParameterField)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.SpreadId = int(p.SpreadId)
+	ret.InterRate = goFloat64(p.InterRate)
+	ret.Leg1ProdFamilyCode = c2goStr(&p.Leg1ProdFamilyCode[0], 81)
+	ret.Leg2ProdFamilyCode = c2goStr(&p.Leg2ProdFamilyCode[0], 81)
+	ret.Leg1PropFactor = int(p.Leg1PropFactor)
+	ret.Leg2PropFactor = int(p.Leg2PropFactor)
+	ret.CommodityGroupID = int(p.CommodityGroupID)
+	ret.CommodityGroupName = c2goStr(&p.CommodityGroupName[0], 21)
+	ret.ActionDirection = byte(p.ActionDirection)
+	ret.SyncDeltaSequenceNo = int(p.SyncDeltaSequenceNo)
+	return ret
+}
+
+func CThostFtdcSyncDeltaRULEInterParameterFieldCValue(s *CThostFtdcSyncDeltaRULEInterParameterField) *C.CThostFtdcSyncDeltaRULEInterParameterField {
+	ptr := (*C.CThostFtdcSyncDeltaRULEInterParameterField)(C.malloc(C.sizeof_CThostFtdcSyncDeltaRULEInterParameterField))
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	ptr.SpreadId = C.int(s.SpreadId)
+	ptr.InterRate = C.double(s.InterRate)
+	go2cStr(s.Leg1ProdFamilyCode, &ptr.Leg1ProdFamilyCode[0], 81)
+	go2cStr(s.Leg2ProdFamilyCode, &ptr.Leg2ProdFamilyCode[0], 81)
+	ptr.Leg1PropFactor = C.int(s.Leg1PropFactor)
+	ptr.Leg2PropFactor = C.int(s.Leg2PropFactor)
+	ptr.CommodityGroupID = C.int(s.CommodityGroupID)
+	go2cStr(s.CommodityGroupName, &ptr.CommodityGroupName[0], 21)
+	ptr.ActionDirection = C.char(s.ActionDirection)
+	ptr.SyncDeltaSequenceNo = C.int(s.SyncDeltaSequenceNo)
+	return ptr
+}
+
+type CThostFtdcIpAddrParamField struct {
+	BrokerID       string
+	Address        string
+	DRIdentityID   int
+	DRIdentityName string
+	AddrSrvMode    byte
+	AddrVer        byte
+	AddrNo         int
+	AddrName       string
+	IsSM           int
+	IsLocalAddr    int
+	Remark         string
+}
+
+func NewCThostFtdcIpAddrParamField(p *C.CThostFtdcIpAddrParamField) *CThostFtdcIpAddrParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcIpAddrParamField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.Address = c2goStr(&p.Address[0], 129)
+	ret.DRIdentityID = int(p.DRIdentityID)
+	ret.DRIdentityName = c2goStr(&p.DRIdentityName[0], 65)
+	ret.AddrSrvMode = byte(p.AddrSrvMode)
+	ret.AddrVer = byte(p.AddrVer)
+	ret.AddrNo = int(p.AddrNo)
+	ret.AddrName = c2goStr(&p.AddrName[0], 65)
+	ret.IsSM = int(p.IsSM)
+	ret.IsLocalAddr = int(p.IsLocalAddr)
+	ret.Remark = c2goStr(&p.Remark[0], 161)
+	return ret
+}
+
+func CThostFtdcIpAddrParamFieldCValue(s *CThostFtdcIpAddrParamField) *C.CThostFtdcIpAddrParamField {
+	ptr := (*C.CThostFtdcIpAddrParamField)(C.malloc(C.sizeof_CThostFtdcIpAddrParamField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.Address, &ptr.Address[0], 129)
+	ptr.DRIdentityID = C.int(s.DRIdentityID)
+	go2cStr(s.DRIdentityName, &ptr.DRIdentityName[0], 65)
+	ptr.AddrSrvMode = C.char(s.AddrSrvMode)
+	ptr.AddrVer = C.char(s.AddrVer)
+	ptr.AddrNo = C.int(s.AddrNo)
+	go2cStr(s.AddrName, &ptr.AddrName[0], 65)
+	ptr.IsSM = C.int(s.IsSM)
+	ptr.IsLocalAddr = C.int(s.IsLocalAddr)
+	go2cStr(s.Remark, &ptr.Remark[0], 161)
+	return ptr
+}
+
+type CThostFtdcQryIpAddrParamField struct {
+	BrokerID string
+}
+
+func NewCThostFtdcQryIpAddrParamField(p *C.CThostFtdcQryIpAddrParamField) *CThostFtdcQryIpAddrParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryIpAddrParamField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	return ret
+}
+
+func CThostFtdcQryIpAddrParamFieldCValue(s *CThostFtdcQryIpAddrParamField) *C.CThostFtdcQryIpAddrParamField {
+	ptr := (*C.CThostFtdcQryIpAddrParamField)(C.malloc(C.sizeof_CThostFtdcQryIpAddrParamField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	return ptr
+}
+
+type CThostFtdcTGIpAddrParamField struct {
+	BrokerID       string
+	UserID         string
+	Address        string
+	DRIdentityID   int
+	DRIdentityName string
+	AddrSrvMode    byte
+	AddrVer        byte
+	AddrNo         int
+	AddrName       string
+	IsSM           int
+	IsLocalAddr    int
+	Remark         string
+}
+
+func NewCThostFtdcTGIpAddrParamField(p *C.CThostFtdcTGIpAddrParamField) *CThostFtdcTGIpAddrParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcTGIpAddrParamField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	ret.Address = c2goStr(&p.Address[0], 129)
+	ret.DRIdentityID = int(p.DRIdentityID)
+	ret.DRIdentityName = c2goStr(&p.DRIdentityName[0], 65)
+	ret.AddrSrvMode = byte(p.AddrSrvMode)
+	ret.AddrVer = byte(p.AddrVer)
+	ret.AddrNo = int(p.AddrNo)
+	ret.AddrName = c2goStr(&p.AddrName[0], 65)
+	ret.IsSM = int(p.IsSM)
+	ret.IsLocalAddr = int(p.IsLocalAddr)
+	ret.Remark = c2goStr(&p.Remark[0], 161)
+	return ret
+}
+
+func CThostFtdcTGIpAddrParamFieldCValue(s *CThostFtdcTGIpAddrParamField) *C.CThostFtdcTGIpAddrParamField {
+	ptr := (*C.CThostFtdcTGIpAddrParamField)(C.malloc(C.sizeof_CThostFtdcTGIpAddrParamField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	go2cStr(s.Address, &ptr.Address[0], 129)
+	ptr.DRIdentityID = C.int(s.DRIdentityID)
+	go2cStr(s.DRIdentityName, &ptr.DRIdentityName[0], 65)
+	ptr.AddrSrvMode = C.char(s.AddrSrvMode)
+	ptr.AddrVer = C.char(s.AddrVer)
+	ptr.AddrNo = C.int(s.AddrNo)
+	go2cStr(s.AddrName, &ptr.AddrName[0], 65)
+	ptr.IsSM = C.int(s.IsSM)
+	ptr.IsLocalAddr = C.int(s.IsLocalAddr)
+	go2cStr(s.Remark, &ptr.Remark[0], 161)
+	return ptr
+}
+
+type CThostFtdcQryTGIpAddrParamField struct {
+	BrokerID string
+	UserID   string
+}
+
+func NewCThostFtdcQryTGIpAddrParamField(p *C.CThostFtdcQryTGIpAddrParamField) *CThostFtdcQryTGIpAddrParamField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryTGIpAddrParamField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	return ret
+}
+
+func CThostFtdcQryTGIpAddrParamFieldCValue(s *CThostFtdcQryTGIpAddrParamField) *C.CThostFtdcQryTGIpAddrParamField {
+	ptr := (*C.CThostFtdcQryTGIpAddrParamField)(C.malloc(C.sizeof_CThostFtdcQryTGIpAddrParamField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	return ptr
+}
+
+type CThostFtdcTGSessionQryStatusField struct {
+	LastQryFreq int
+	QryStatus   byte
+}
+
+func NewCThostFtdcTGSessionQryStatusField(p *C.CThostFtdcTGSessionQryStatusField) *CThostFtdcTGSessionQryStatusField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcTGSessionQryStatusField)
+	ret.LastQryFreq = int(p.LastQryFreq)
+	ret.QryStatus = byte(p.QryStatus)
+	return ret
+}
+
+func CThostFtdcTGSessionQryStatusFieldCValue(s *CThostFtdcTGSessionQryStatusField) *C.CThostFtdcTGSessionQryStatusField {
+	ptr := (*C.CThostFtdcTGSessionQryStatusField)(C.malloc(C.sizeof_CThostFtdcTGSessionQryStatusField))
+	ptr.LastQryFreq = C.int(s.LastQryFreq)
+	ptr.QryStatus = C.char(s.QryStatus)
+	return ptr
+}
+
+type CThostFtdcLocalAddrConfigField struct {
+	BrokerID     string
+	PeerAddr     string
+	NetMask      string
+	DRIdentityID int
+	LocalAddress string
+}
+
+func NewCThostFtdcLocalAddrConfigField(p *C.CThostFtdcLocalAddrConfigField) *CThostFtdcLocalAddrConfigField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcLocalAddrConfigField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.PeerAddr = c2goStr(&p.PeerAddr[0], 129)
+	ret.NetMask = c2goStr(&p.NetMask[0], 129)
+	ret.DRIdentityID = int(p.DRIdentityID)
+	ret.LocalAddress = c2goStr(&p.LocalAddress[0], 129)
+	return ret
+}
+
+func CThostFtdcLocalAddrConfigFieldCValue(s *CThostFtdcLocalAddrConfigField) *C.CThostFtdcLocalAddrConfigField {
+	ptr := (*C.CThostFtdcLocalAddrConfigField)(C.malloc(C.sizeof_CThostFtdcLocalAddrConfigField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.PeerAddr, &ptr.PeerAddr[0], 129)
+	go2cStr(s.NetMask, &ptr.NetMask[0], 129)
+	ptr.DRIdentityID = C.int(s.DRIdentityID)
+	go2cStr(s.LocalAddress, &ptr.LocalAddress[0], 129)
+	return ptr
+}
+
+type CThostFtdcQryLocalAddrConfigField struct {
+	BrokerID string
+}
+
+func NewCThostFtdcQryLocalAddrConfigField(p *C.CThostFtdcQryLocalAddrConfigField) *CThostFtdcQryLocalAddrConfigField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryLocalAddrConfigField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	return ret
+}
+
+func CThostFtdcQryLocalAddrConfigFieldCValue(s *CThostFtdcQryLocalAddrConfigField) *C.CThostFtdcQryLocalAddrConfigField {
+	ptr := (*C.CThostFtdcQryLocalAddrConfigField)(C.malloc(C.sizeof_CThostFtdcQryLocalAddrConfigField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	return ptr
+}
+
+type CThostFtdcReqQueryBankAccountBySecField struct {
+	TradeCode        string
+	BankID           string
+	BankBranchID     string
+	BrokerID         string
+	BrokerBranchID   string
+	TradeDate        string
+	TradeTime        string
+	BankSerial       string
+	TradingDay       string
+	PlateSerial      int
+	LastFragment     byte
+	SessionID        int
+	CustomerName     string
+	IdCardType       byte
+	IdentifiedCardNo string
+	CustType         byte
+	BankAccount      string
+	BankPassWord     string
+	AccountID        string
+	Password         string
+	FutureSerial     int
+	InstallID        int
+	UserID           string
+	VerifyCertNoFlag byte
+	CurrencyID       string
+	Digest           string
+	BankAccType      byte
+	DeviceID         string
+	BankSecuAccType  byte
+	BrokerIDByBank   string
+	BankSecuAcc      string
+	BankPwdFlag      byte
+	SecuPwdFlag      byte
+	OperNo           string
+	RequestID        int
+	TID              int
+	LongCustomerName string
+	DRIdentityID     int
+	SecFutureSerial  int
+}
+
+func NewCThostFtdcReqQueryBankAccountBySecField(p *C.CThostFtdcReqQueryBankAccountBySecField) *CThostFtdcReqQueryBankAccountBySecField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcReqQueryBankAccountBySecField)
+	ret.TradeCode = c2goStr(&p.TradeCode[0], 7)
+	ret.BankID = c2goStr(&p.BankID[0], 4)
+	ret.BankBranchID = c2goStr(&p.BankBranchID[0], 5)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.BrokerBranchID = c2goStr(&p.BrokerBranchID[0], 31)
+	ret.TradeDate = c2goStr(&p.TradeDate[0], 9)
+	ret.TradeTime = c2goStr(&p.TradeTime[0], 9)
+	ret.BankSerial = c2goStr(&p.BankSerial[0], 13)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.PlateSerial = int(p.PlateSerial)
+	ret.LastFragment = byte(p.LastFragment)
+	ret.SessionID = int(p.SessionID)
+	ret.CustomerName = c2goStr(&p.CustomerName[0], 51)
+	ret.IdCardType = byte(p.IdCardType)
+	ret.IdentifiedCardNo = c2goStr(&p.IdentifiedCardNo[0], 51)
+	ret.CustType = byte(p.CustType)
+	ret.BankAccount = c2goStr(&p.BankAccount[0], 41)
+	ret.BankPassWord = c2goStr(&p.BankPassWord[0], 41)
+	ret.AccountID = c2goStr(&p.AccountID[0], 13)
+	ret.Password = c2goStr(&p.Password[0], 41)
+	ret.FutureSerial = int(p.FutureSerial)
+	ret.InstallID = int(p.InstallID)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	ret.VerifyCertNoFlag = byte(p.VerifyCertNoFlag)
+	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
+	ret.Digest = c2goStr(&p.Digest[0], 36)
+	ret.BankAccType = byte(p.BankAccType)
+	ret.DeviceID = c2goStr(&p.DeviceID[0], 3)
+	ret.BankSecuAccType = byte(p.BankSecuAccType)
+	ret.BrokerIDByBank = c2goStr(&p.BrokerIDByBank[0], 33)
+	ret.BankSecuAcc = c2goStr(&p.BankSecuAcc[0], 41)
+	ret.BankPwdFlag = byte(p.BankPwdFlag)
+	ret.SecuPwdFlag = byte(p.SecuPwdFlag)
+	ret.OperNo = c2goStr(&p.OperNo[0], 17)
+	ret.RequestID = int(p.RequestID)
+	ret.TID = int(p.TID)
+	ret.LongCustomerName = c2goStr(&p.LongCustomerName[0], 161)
+	ret.DRIdentityID = int(p.DRIdentityID)
+	ret.SecFutureSerial = int(p.SecFutureSerial)
+	return ret
+}
+
+func CThostFtdcReqQueryBankAccountBySecFieldCValue(s *CThostFtdcReqQueryBankAccountBySecField) *C.CThostFtdcReqQueryBankAccountBySecField {
+	ptr := (*C.CThostFtdcReqQueryBankAccountBySecField)(C.malloc(C.sizeof_CThostFtdcReqQueryBankAccountBySecField))
+	go2cStr(s.TradeCode, &ptr.TradeCode[0], 7)
+	go2cStr(s.BankID, &ptr.BankID[0], 4)
+	go2cStr(s.BankBranchID, &ptr.BankBranchID[0], 5)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.BrokerBranchID, &ptr.BrokerBranchID[0], 31)
+	go2cStr(s.TradeDate, &ptr.TradeDate[0], 9)
+	go2cStr(s.TradeTime, &ptr.TradeTime[0], 9)
+	go2cStr(s.BankSerial, &ptr.BankSerial[0], 13)
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	ptr.PlateSerial = C.int(s.PlateSerial)
+	ptr.LastFragment = C.char(s.LastFragment)
+	ptr.SessionID = C.int(s.SessionID)
+	go2cStr(s.CustomerName, &ptr.CustomerName[0], 51)
+	ptr.IdCardType = C.char(s.IdCardType)
+	go2cStr(s.IdentifiedCardNo, &ptr.IdentifiedCardNo[0], 51)
+	ptr.CustType = C.char(s.CustType)
+	go2cStr(s.BankAccount, &ptr.BankAccount[0], 41)
+	go2cStr(s.BankPassWord, &ptr.BankPassWord[0], 41)
+	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
+	go2cStr(s.Password, &ptr.Password[0], 41)
+	ptr.FutureSerial = C.int(s.FutureSerial)
+	ptr.InstallID = C.int(s.InstallID)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	ptr.VerifyCertNoFlag = C.char(s.VerifyCertNoFlag)
+	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
+	go2cStr(s.Digest, &ptr.Digest[0], 36)
+	ptr.BankAccType = C.char(s.BankAccType)
+	go2cStr(s.DeviceID, &ptr.DeviceID[0], 3)
+	ptr.BankSecuAccType = C.char(s.BankSecuAccType)
+	go2cStr(s.BrokerIDByBank, &ptr.BrokerIDByBank[0], 33)
+	go2cStr(s.BankSecuAcc, &ptr.BankSecuAcc[0], 41)
+	ptr.BankPwdFlag = C.char(s.BankPwdFlag)
+	ptr.SecuPwdFlag = C.char(s.SecuPwdFlag)
+	go2cStr(s.OperNo, &ptr.OperNo[0], 17)
+	ptr.RequestID = C.int(s.RequestID)
+	ptr.TID = C.int(s.TID)
+	go2cStr(s.LongCustomerName, &ptr.LongCustomerName[0], 161)
+	ptr.DRIdentityID = C.int(s.DRIdentityID)
+	ptr.SecFutureSerial = C.int(s.SecFutureSerial)
+	return ptr
+}
+
+type CThostFtdcRspQueryBankAccountBySecField struct {
+	TradeCode        string
+	BankID           string
+	BankBranchID     string
+	BrokerID         string
+	BrokerBranchID   string
+	TradeDate        string
+	TradeTime        string
+	BankSerial       string
+	TradingDay       string
+	PlateSerial      int
+	LastFragment     byte
+	SessionID        int
+	CustomerName     string
+	IdCardType       byte
+	IdentifiedCardNo string
+	CustType         byte
+	BankAccount      string
+	BankPassWord     string
+	AccountID        string
+	Password         string
+	FutureSerial     int
+	InstallID        int
+	UserID           string
+	VerifyCertNoFlag byte
+	CurrencyID       string
+	Digest           string
+	BankAccType      byte
+	DeviceID         string
+	BankSecuAccType  byte
+	BrokerIDByBank   string
+	BankSecuAcc      string
+	BankPwdFlag      byte
+	SecuPwdFlag      byte
+	OperNo           string
+	RequestID        int
+	TID              int
+	BankUseAmount    float64
+	BankFetchAmount  float64
+	LongCustomerName string
+	DRIdentityID     int
+	SecFutureSerial  int
+}
+
+func NewCThostFtdcRspQueryBankAccountBySecField(p *C.CThostFtdcRspQueryBankAccountBySecField) *CThostFtdcRspQueryBankAccountBySecField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRspQueryBankAccountBySecField)
+	ret.TradeCode = c2goStr(&p.TradeCode[0], 7)
+	ret.BankID = c2goStr(&p.BankID[0], 4)
+	ret.BankBranchID = c2goStr(&p.BankBranchID[0], 5)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.BrokerBranchID = c2goStr(&p.BrokerBranchID[0], 31)
+	ret.TradeDate = c2goStr(&p.TradeDate[0], 9)
+	ret.TradeTime = c2goStr(&p.TradeTime[0], 9)
+	ret.BankSerial = c2goStr(&p.BankSerial[0], 13)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.PlateSerial = int(p.PlateSerial)
+	ret.LastFragment = byte(p.LastFragment)
+	ret.SessionID = int(p.SessionID)
+	ret.CustomerName = c2goStr(&p.CustomerName[0], 51)
+	ret.IdCardType = byte(p.IdCardType)
+	ret.IdentifiedCardNo = c2goStr(&p.IdentifiedCardNo[0], 51)
+	ret.CustType = byte(p.CustType)
+	ret.BankAccount = c2goStr(&p.BankAccount[0], 41)
+	ret.BankPassWord = c2goStr(&p.BankPassWord[0], 41)
+	ret.AccountID = c2goStr(&p.AccountID[0], 13)
+	ret.Password = c2goStr(&p.Password[0], 41)
+	ret.FutureSerial = int(p.FutureSerial)
+	ret.InstallID = int(p.InstallID)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	ret.VerifyCertNoFlag = byte(p.VerifyCertNoFlag)
+	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
+	ret.Digest = c2goStr(&p.Digest[0], 36)
+	ret.BankAccType = byte(p.BankAccType)
+	ret.DeviceID = c2goStr(&p.DeviceID[0], 3)
+	ret.BankSecuAccType = byte(p.BankSecuAccType)
+	ret.BrokerIDByBank = c2goStr(&p.BrokerIDByBank[0], 33)
+	ret.BankSecuAcc = c2goStr(&p.BankSecuAcc[0], 41)
+	ret.BankPwdFlag = byte(p.BankPwdFlag)
+	ret.SecuPwdFlag = byte(p.SecuPwdFlag)
+	ret.OperNo = c2goStr(&p.OperNo[0], 17)
+	ret.RequestID = int(p.RequestID)
+	ret.TID = int(p.TID)
+	ret.BankUseAmount = goFloat64(p.BankUseAmount)
+	ret.BankFetchAmount = goFloat64(p.BankFetchAmount)
+	ret.LongCustomerName = c2goStr(&p.LongCustomerName[0], 161)
+	ret.DRIdentityID = int(p.DRIdentityID)
+	ret.SecFutureSerial = int(p.SecFutureSerial)
+	return ret
+}
+
+func CThostFtdcRspQueryBankAccountBySecFieldCValue(s *CThostFtdcRspQueryBankAccountBySecField) *C.CThostFtdcRspQueryBankAccountBySecField {
+	ptr := (*C.CThostFtdcRspQueryBankAccountBySecField)(C.malloc(C.sizeof_CThostFtdcRspQueryBankAccountBySecField))
+	go2cStr(s.TradeCode, &ptr.TradeCode[0], 7)
+	go2cStr(s.BankID, &ptr.BankID[0], 4)
+	go2cStr(s.BankBranchID, &ptr.BankBranchID[0], 5)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.BrokerBranchID, &ptr.BrokerBranchID[0], 31)
+	go2cStr(s.TradeDate, &ptr.TradeDate[0], 9)
+	go2cStr(s.TradeTime, &ptr.TradeTime[0], 9)
+	go2cStr(s.BankSerial, &ptr.BankSerial[0], 13)
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	ptr.PlateSerial = C.int(s.PlateSerial)
+	ptr.LastFragment = C.char(s.LastFragment)
+	ptr.SessionID = C.int(s.SessionID)
+	go2cStr(s.CustomerName, &ptr.CustomerName[0], 51)
+	ptr.IdCardType = C.char(s.IdCardType)
+	go2cStr(s.IdentifiedCardNo, &ptr.IdentifiedCardNo[0], 51)
+	ptr.CustType = C.char(s.CustType)
+	go2cStr(s.BankAccount, &ptr.BankAccount[0], 41)
+	go2cStr(s.BankPassWord, &ptr.BankPassWord[0], 41)
+	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
+	go2cStr(s.Password, &ptr.Password[0], 41)
+	ptr.FutureSerial = C.int(s.FutureSerial)
+	ptr.InstallID = C.int(s.InstallID)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	ptr.VerifyCertNoFlag = C.char(s.VerifyCertNoFlag)
+	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
+	go2cStr(s.Digest, &ptr.Digest[0], 36)
+	ptr.BankAccType = C.char(s.BankAccType)
+	go2cStr(s.DeviceID, &ptr.DeviceID[0], 3)
+	ptr.BankSecuAccType = C.char(s.BankSecuAccType)
+	go2cStr(s.BrokerIDByBank, &ptr.BrokerIDByBank[0], 33)
+	go2cStr(s.BankSecuAcc, &ptr.BankSecuAcc[0], 41)
+	ptr.BankPwdFlag = C.char(s.BankPwdFlag)
+	ptr.SecuPwdFlag = C.char(s.SecuPwdFlag)
+	go2cStr(s.OperNo, &ptr.OperNo[0], 17)
+	ptr.RequestID = C.int(s.RequestID)
+	ptr.TID = C.int(s.TID)
+	ptr.BankUseAmount = C.double(s.BankUseAmount)
+	ptr.BankFetchAmount = C.double(s.BankFetchAmount)
+	go2cStr(s.LongCustomerName, &ptr.LongCustomerName[0], 161)
+	ptr.DRIdentityID = C.int(s.DRIdentityID)
+	ptr.SecFutureSerial = C.int(s.SecFutureSerial)
+	return ptr
+}
+
+type CThostFtdcReqTransferBySecField struct {
+	TradeCode         string
+	BankID            string
+	BankBranchID      string
+	BrokerID          string
+	BrokerBranchID    string
+	TradeDate         string
+	TradeTime         string
+	BankSerial        string
+	TradingDay        string
+	PlateSerial       int
+	LastFragment      byte
+	SessionID         int
+	CustomerName      string
+	IdCardType        byte
+	IdentifiedCardNo  string
+	CustType          byte
+	BankAccount       string
+	BankPassWord      string
+	AccountID         string
+	Password          string
+	InstallID         int
+	FutureSerial      int
+	UserID            string
+	VerifyCertNoFlag  byte
+	CurrencyID        string
+	TradeAmount       float64
+	FutureFetchAmount float64
+	FeePayFlag        byte
+	CustFee           float64
+	BrokerFee         float64
+	Message           string
+	Digest            string
+	BankAccType       byte
+	DeviceID          string
+	BankSecuAccType   byte
+	BrokerIDByBank    string
+	BankSecuAcc       string
+	BankPwdFlag       byte
+	SecuPwdFlag       byte
+	OperNo            string
+	RequestID         int
+	TID               int
+	TransferStatus    byte
+	LongCustomerName  string
+	DRIdentityID      int
+	SecFutureSerial   int
+}
+
+func NewCThostFtdcReqTransferBySecField(p *C.CThostFtdcReqTransferBySecField) *CThostFtdcReqTransferBySecField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcReqTransferBySecField)
+	ret.TradeCode = c2goStr(&p.TradeCode[0], 7)
+	ret.BankID = c2goStr(&p.BankID[0], 4)
+	ret.BankBranchID = c2goStr(&p.BankBranchID[0], 5)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.BrokerBranchID = c2goStr(&p.BrokerBranchID[0], 31)
+	ret.TradeDate = c2goStr(&p.TradeDate[0], 9)
+	ret.TradeTime = c2goStr(&p.TradeTime[0], 9)
+	ret.BankSerial = c2goStr(&p.BankSerial[0], 13)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.PlateSerial = int(p.PlateSerial)
+	ret.LastFragment = byte(p.LastFragment)
+	ret.SessionID = int(p.SessionID)
+	ret.CustomerName = c2goStr(&p.CustomerName[0], 51)
+	ret.IdCardType = byte(p.IdCardType)
+	ret.IdentifiedCardNo = c2goStr(&p.IdentifiedCardNo[0], 51)
+	ret.CustType = byte(p.CustType)
+	ret.BankAccount = c2goStr(&p.BankAccount[0], 41)
+	ret.BankPassWord = c2goStr(&p.BankPassWord[0], 41)
+	ret.AccountID = c2goStr(&p.AccountID[0], 13)
+	ret.Password = c2goStr(&p.Password[0], 41)
+	ret.InstallID = int(p.InstallID)
+	ret.FutureSerial = int(p.FutureSerial)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	ret.VerifyCertNoFlag = byte(p.VerifyCertNoFlag)
+	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
+	ret.TradeAmount = goFloat64(p.TradeAmount)
+	ret.FutureFetchAmount = goFloat64(p.FutureFetchAmount)
+	ret.FeePayFlag = byte(p.FeePayFlag)
+	ret.CustFee = goFloat64(p.CustFee)
+	ret.BrokerFee = goFloat64(p.BrokerFee)
+	ret.Message = c2goStr(&p.Message[0], 129)
+	ret.Digest = c2goStr(&p.Digest[0], 36)
+	ret.BankAccType = byte(p.BankAccType)
+	ret.DeviceID = c2goStr(&p.DeviceID[0], 3)
+	ret.BankSecuAccType = byte(p.BankSecuAccType)
+	ret.BrokerIDByBank = c2goStr(&p.BrokerIDByBank[0], 33)
+	ret.BankSecuAcc = c2goStr(&p.BankSecuAcc[0], 41)
+	ret.BankPwdFlag = byte(p.BankPwdFlag)
+	ret.SecuPwdFlag = byte(p.SecuPwdFlag)
+	ret.OperNo = c2goStr(&p.OperNo[0], 17)
+	ret.RequestID = int(p.RequestID)
+	ret.TID = int(p.TID)
+	ret.TransferStatus = byte(p.TransferStatus)
+	ret.LongCustomerName = c2goStr(&p.LongCustomerName[0], 161)
+	ret.DRIdentityID = int(p.DRIdentityID)
+	ret.SecFutureSerial = int(p.SecFutureSerial)
+	return ret
+}
+
+func CThostFtdcReqTransferBySecFieldCValue(s *CThostFtdcReqTransferBySecField) *C.CThostFtdcReqTransferBySecField {
+	ptr := (*C.CThostFtdcReqTransferBySecField)(C.malloc(C.sizeof_CThostFtdcReqTransferBySecField))
+	go2cStr(s.TradeCode, &ptr.TradeCode[0], 7)
+	go2cStr(s.BankID, &ptr.BankID[0], 4)
+	go2cStr(s.BankBranchID, &ptr.BankBranchID[0], 5)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.BrokerBranchID, &ptr.BrokerBranchID[0], 31)
+	go2cStr(s.TradeDate, &ptr.TradeDate[0], 9)
+	go2cStr(s.TradeTime, &ptr.TradeTime[0], 9)
+	go2cStr(s.BankSerial, &ptr.BankSerial[0], 13)
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	ptr.PlateSerial = C.int(s.PlateSerial)
+	ptr.LastFragment = C.char(s.LastFragment)
+	ptr.SessionID = C.int(s.SessionID)
+	go2cStr(s.CustomerName, &ptr.CustomerName[0], 51)
+	ptr.IdCardType = C.char(s.IdCardType)
+	go2cStr(s.IdentifiedCardNo, &ptr.IdentifiedCardNo[0], 51)
+	ptr.CustType = C.char(s.CustType)
+	go2cStr(s.BankAccount, &ptr.BankAccount[0], 41)
+	go2cStr(s.BankPassWord, &ptr.BankPassWord[0], 41)
+	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
+	go2cStr(s.Password, &ptr.Password[0], 41)
+	ptr.InstallID = C.int(s.InstallID)
+	ptr.FutureSerial = C.int(s.FutureSerial)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	ptr.VerifyCertNoFlag = C.char(s.VerifyCertNoFlag)
+	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
+	ptr.TradeAmount = C.double(s.TradeAmount)
+	ptr.FutureFetchAmount = C.double(s.FutureFetchAmount)
+	ptr.FeePayFlag = C.char(s.FeePayFlag)
+	ptr.CustFee = C.double(s.CustFee)
+	ptr.BrokerFee = C.double(s.BrokerFee)
+	go2cStr(s.Message, &ptr.Message[0], 129)
+	go2cStr(s.Digest, &ptr.Digest[0], 36)
+	ptr.BankAccType = C.char(s.BankAccType)
+	go2cStr(s.DeviceID, &ptr.DeviceID[0], 3)
+	ptr.BankSecuAccType = C.char(s.BankSecuAccType)
+	go2cStr(s.BrokerIDByBank, &ptr.BrokerIDByBank[0], 33)
+	go2cStr(s.BankSecuAcc, &ptr.BankSecuAcc[0], 41)
+	ptr.BankPwdFlag = C.char(s.BankPwdFlag)
+	ptr.SecuPwdFlag = C.char(s.SecuPwdFlag)
+	go2cStr(s.OperNo, &ptr.OperNo[0], 17)
+	ptr.RequestID = C.int(s.RequestID)
+	ptr.TID = C.int(s.TID)
+	ptr.TransferStatus = C.char(s.TransferStatus)
+	go2cStr(s.LongCustomerName, &ptr.LongCustomerName[0], 161)
+	ptr.DRIdentityID = C.int(s.DRIdentityID)
+	ptr.SecFutureSerial = C.int(s.SecFutureSerial)
+	return ptr
+}
+
+type CThostFtdcRspTransferBySecField struct {
+	TradeCode         string
+	BankID            string
+	BankBranchID      string
+	BrokerID          string
+	BrokerBranchID    string
+	TradeDate         string
+	TradeTime         string
+	BankSerial        string
+	TradingDay        string
+	PlateSerial       int
+	LastFragment      byte
+	SessionID         int
+	CustomerName      string
+	IdCardType        byte
+	IdentifiedCardNo  string
+	CustType          byte
+	BankAccount       string
+	BankPassWord      string
+	AccountID         string
+	Password          string
+	InstallID         int
+	FutureSerial      int
+	UserID            string
+	VerifyCertNoFlag  byte
+	CurrencyID        string
+	TradeAmount       float64
+	FutureFetchAmount float64
+	FeePayFlag        byte
+	CustFee           float64
+	BrokerFee         float64
+	Message           string
+	Digest            string
+	BankAccType       byte
+	DeviceID          string
+	BankSecuAccType   byte
+	BrokerIDByBank    string
+	BankSecuAcc       string
+	BankPwdFlag       byte
+	SecuPwdFlag       byte
+	OperNo            string
+	RequestID         int
+	TID               int
+	TransferStatus    byte
+	ErrorID           int
+	ErrorMsg          string
+	LongCustomerName  string
+	DRIdentityID      int
+	SecFutureSerial   int
+}
+
+func NewCThostFtdcRspTransferBySecField(p *C.CThostFtdcRspTransferBySecField) *CThostFtdcRspTransferBySecField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRspTransferBySecField)
+	ret.TradeCode = c2goStr(&p.TradeCode[0], 7)
+	ret.BankID = c2goStr(&p.BankID[0], 4)
+	ret.BankBranchID = c2goStr(&p.BankBranchID[0], 5)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.BrokerBranchID = c2goStr(&p.BrokerBranchID[0], 31)
+	ret.TradeDate = c2goStr(&p.TradeDate[0], 9)
+	ret.TradeTime = c2goStr(&p.TradeTime[0], 9)
+	ret.BankSerial = c2goStr(&p.BankSerial[0], 13)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.PlateSerial = int(p.PlateSerial)
+	ret.LastFragment = byte(p.LastFragment)
+	ret.SessionID = int(p.SessionID)
+	ret.CustomerName = c2goStr(&p.CustomerName[0], 51)
+	ret.IdCardType = byte(p.IdCardType)
+	ret.IdentifiedCardNo = c2goStr(&p.IdentifiedCardNo[0], 51)
+	ret.CustType = byte(p.CustType)
+	ret.BankAccount = c2goStr(&p.BankAccount[0], 41)
+	ret.BankPassWord = c2goStr(&p.BankPassWord[0], 41)
+	ret.AccountID = c2goStr(&p.AccountID[0], 13)
+	ret.Password = c2goStr(&p.Password[0], 41)
+	ret.InstallID = int(p.InstallID)
+	ret.FutureSerial = int(p.FutureSerial)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	ret.VerifyCertNoFlag = byte(p.VerifyCertNoFlag)
+	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
+	ret.TradeAmount = goFloat64(p.TradeAmount)
+	ret.FutureFetchAmount = goFloat64(p.FutureFetchAmount)
+	ret.FeePayFlag = byte(p.FeePayFlag)
+	ret.CustFee = goFloat64(p.CustFee)
+	ret.BrokerFee = goFloat64(p.BrokerFee)
+	ret.Message = c2goStr(&p.Message[0], 129)
+	ret.Digest = c2goStr(&p.Digest[0], 36)
+	ret.BankAccType = byte(p.BankAccType)
+	ret.DeviceID = c2goStr(&p.DeviceID[0], 3)
+	ret.BankSecuAccType = byte(p.BankSecuAccType)
+	ret.BrokerIDByBank = c2goStr(&p.BrokerIDByBank[0], 33)
+	ret.BankSecuAcc = c2goStr(&p.BankSecuAcc[0], 41)
+	ret.BankPwdFlag = byte(p.BankPwdFlag)
+	ret.SecuPwdFlag = byte(p.SecuPwdFlag)
+	ret.OperNo = c2goStr(&p.OperNo[0], 17)
+	ret.RequestID = int(p.RequestID)
+	ret.TID = int(p.TID)
+	ret.TransferStatus = byte(p.TransferStatus)
+	ret.ErrorID = int(p.ErrorID)
+	ret.ErrorMsg = c2goStr(&p.ErrorMsg[0], 81)
+	ret.LongCustomerName = c2goStr(&p.LongCustomerName[0], 161)
+	ret.DRIdentityID = int(p.DRIdentityID)
+	ret.SecFutureSerial = int(p.SecFutureSerial)
+	return ret
+}
+
+func CThostFtdcRspTransferBySecFieldCValue(s *CThostFtdcRspTransferBySecField) *C.CThostFtdcRspTransferBySecField {
+	ptr := (*C.CThostFtdcRspTransferBySecField)(C.malloc(C.sizeof_CThostFtdcRspTransferBySecField))
+	go2cStr(s.TradeCode, &ptr.TradeCode[0], 7)
+	go2cStr(s.BankID, &ptr.BankID[0], 4)
+	go2cStr(s.BankBranchID, &ptr.BankBranchID[0], 5)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.BrokerBranchID, &ptr.BrokerBranchID[0], 31)
+	go2cStr(s.TradeDate, &ptr.TradeDate[0], 9)
+	go2cStr(s.TradeTime, &ptr.TradeTime[0], 9)
+	go2cStr(s.BankSerial, &ptr.BankSerial[0], 13)
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	ptr.PlateSerial = C.int(s.PlateSerial)
+	ptr.LastFragment = C.char(s.LastFragment)
+	ptr.SessionID = C.int(s.SessionID)
+	go2cStr(s.CustomerName, &ptr.CustomerName[0], 51)
+	ptr.IdCardType = C.char(s.IdCardType)
+	go2cStr(s.IdentifiedCardNo, &ptr.IdentifiedCardNo[0], 51)
+	ptr.CustType = C.char(s.CustType)
+	go2cStr(s.BankAccount, &ptr.BankAccount[0], 41)
+	go2cStr(s.BankPassWord, &ptr.BankPassWord[0], 41)
+	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
+	go2cStr(s.Password, &ptr.Password[0], 41)
+	ptr.InstallID = C.int(s.InstallID)
+	ptr.FutureSerial = C.int(s.FutureSerial)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	ptr.VerifyCertNoFlag = C.char(s.VerifyCertNoFlag)
+	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
+	ptr.TradeAmount = C.double(s.TradeAmount)
+	ptr.FutureFetchAmount = C.double(s.FutureFetchAmount)
+	ptr.FeePayFlag = C.char(s.FeePayFlag)
+	ptr.CustFee = C.double(s.CustFee)
+	ptr.BrokerFee = C.double(s.BrokerFee)
+	go2cStr(s.Message, &ptr.Message[0], 129)
+	go2cStr(s.Digest, &ptr.Digest[0], 36)
+	ptr.BankAccType = C.char(s.BankAccType)
+	go2cStr(s.DeviceID, &ptr.DeviceID[0], 3)
+	ptr.BankSecuAccType = C.char(s.BankSecuAccType)
+	go2cStr(s.BrokerIDByBank, &ptr.BrokerIDByBank[0], 33)
+	go2cStr(s.BankSecuAcc, &ptr.BankSecuAcc[0], 41)
+	ptr.BankPwdFlag = C.char(s.BankPwdFlag)
+	ptr.SecuPwdFlag = C.char(s.SecuPwdFlag)
+	go2cStr(s.OperNo, &ptr.OperNo[0], 17)
+	ptr.RequestID = C.int(s.RequestID)
+	ptr.TID = C.int(s.TID)
+	ptr.TransferStatus = C.char(s.TransferStatus)
+	ptr.ErrorID = C.int(s.ErrorID)
+	go2cStr(s.ErrorMsg, &ptr.ErrorMsg[0], 81)
+	go2cStr(s.LongCustomerName, &ptr.LongCustomerName[0], 161)
+	ptr.DRIdentityID = C.int(s.DRIdentityID)
+	ptr.SecFutureSerial = C.int(s.SecFutureSerial)
+	return ptr
+}
+
+type CThostFtdcNotifyQueryFutureAccountBySecField struct {
+	TradeCode        string
+	BankID           string
+	BankBranchID     string
+	BrokerID         string
+	BrokerBranchID   string
+	TradeDate        string
+	TradeTime        string
+	BankSerial       string
+	TradingDay       string
+	PlateSerial      int
+	LastFragment     byte
+	SessionID        int
+	CustomerName     string
+	IdCardType       byte
+	IdentifiedCardNo string
+	CustType         byte
+	BankAccount      string
+	BankPassWord     string
+	AccountID        string
+	Password         string
+	FutureSerial     int
+	InstallID        int
+	UserID           string
+	VerifyCertNoFlag byte
+	CurrencyID       string
+	Digest           string
+	BankAccType      byte
+	DeviceID         string
+	BankSecuAccType  byte
+	BrokerIDByBank   string
+	BankSecuAcc      string
+	BankPwdFlag      byte
+	SecuPwdFlag      byte
+	OperNo           string
+	RequestID        int
+	TID              int
+	BankUseAmount    float64
+	BankFetchAmount  float64
+	ErrorID          int
+	ErrorMsg         string
+	LongCustomerName string
+	DRIdentityID     int
+	SecFutureSerial  int
+}
+
+func NewCThostFtdcNotifyQueryFutureAccountBySecField(p *C.CThostFtdcNotifyQueryFutureAccountBySecField) *CThostFtdcNotifyQueryFutureAccountBySecField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcNotifyQueryFutureAccountBySecField)
+	ret.TradeCode = c2goStr(&p.TradeCode[0], 7)
+	ret.BankID = c2goStr(&p.BankID[0], 4)
+	ret.BankBranchID = c2goStr(&p.BankBranchID[0], 5)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.BrokerBranchID = c2goStr(&p.BrokerBranchID[0], 31)
+	ret.TradeDate = c2goStr(&p.TradeDate[0], 9)
+	ret.TradeTime = c2goStr(&p.TradeTime[0], 9)
+	ret.BankSerial = c2goStr(&p.BankSerial[0], 13)
+	ret.TradingDay = c2goStr(&p.TradingDay[0], 9)
+	ret.PlateSerial = int(p.PlateSerial)
+	ret.LastFragment = byte(p.LastFragment)
+	ret.SessionID = int(p.SessionID)
+	ret.CustomerName = c2goStr(&p.CustomerName[0], 51)
+	ret.IdCardType = byte(p.IdCardType)
+	ret.IdentifiedCardNo = c2goStr(&p.IdentifiedCardNo[0], 51)
+	ret.CustType = byte(p.CustType)
+	ret.BankAccount = c2goStr(&p.BankAccount[0], 41)
+	ret.BankPassWord = c2goStr(&p.BankPassWord[0], 41)
+	ret.AccountID = c2goStr(&p.AccountID[0], 13)
+	ret.Password = c2goStr(&p.Password[0], 41)
+	ret.FutureSerial = int(p.FutureSerial)
+	ret.InstallID = int(p.InstallID)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	ret.VerifyCertNoFlag = byte(p.VerifyCertNoFlag)
+	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
+	ret.Digest = c2goStr(&p.Digest[0], 36)
+	ret.BankAccType = byte(p.BankAccType)
+	ret.DeviceID = c2goStr(&p.DeviceID[0], 3)
+	ret.BankSecuAccType = byte(p.BankSecuAccType)
+	ret.BrokerIDByBank = c2goStr(&p.BrokerIDByBank[0], 33)
+	ret.BankSecuAcc = c2goStr(&p.BankSecuAcc[0], 41)
+	ret.BankPwdFlag = byte(p.BankPwdFlag)
+	ret.SecuPwdFlag = byte(p.SecuPwdFlag)
+	ret.OperNo = c2goStr(&p.OperNo[0], 17)
+	ret.RequestID = int(p.RequestID)
+	ret.TID = int(p.TID)
+	ret.BankUseAmount = goFloat64(p.BankUseAmount)
+	ret.BankFetchAmount = goFloat64(p.BankFetchAmount)
+	ret.ErrorID = int(p.ErrorID)
+	ret.ErrorMsg = c2goStr(&p.ErrorMsg[0], 81)
+	ret.LongCustomerName = c2goStr(&p.LongCustomerName[0], 161)
+	ret.DRIdentityID = int(p.DRIdentityID)
+	ret.SecFutureSerial = int(p.SecFutureSerial)
+	return ret
+}
+
+func CThostFtdcNotifyQueryFutureAccountBySecFieldCValue(s *CThostFtdcNotifyQueryFutureAccountBySecField) *C.CThostFtdcNotifyQueryFutureAccountBySecField {
+	ptr := (*C.CThostFtdcNotifyQueryFutureAccountBySecField)(C.malloc(C.sizeof_CThostFtdcNotifyQueryFutureAccountBySecField))
+	go2cStr(s.TradeCode, &ptr.TradeCode[0], 7)
+	go2cStr(s.BankID, &ptr.BankID[0], 4)
+	go2cStr(s.BankBranchID, &ptr.BankBranchID[0], 5)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.BrokerBranchID, &ptr.BrokerBranchID[0], 31)
+	go2cStr(s.TradeDate, &ptr.TradeDate[0], 9)
+	go2cStr(s.TradeTime, &ptr.TradeTime[0], 9)
+	go2cStr(s.BankSerial, &ptr.BankSerial[0], 13)
+	go2cStr(s.TradingDay, &ptr.TradingDay[0], 9)
+	ptr.PlateSerial = C.int(s.PlateSerial)
+	ptr.LastFragment = C.char(s.LastFragment)
+	ptr.SessionID = C.int(s.SessionID)
+	go2cStr(s.CustomerName, &ptr.CustomerName[0], 51)
+	ptr.IdCardType = C.char(s.IdCardType)
+	go2cStr(s.IdentifiedCardNo, &ptr.IdentifiedCardNo[0], 51)
+	ptr.CustType = C.char(s.CustType)
+	go2cStr(s.BankAccount, &ptr.BankAccount[0], 41)
+	go2cStr(s.BankPassWord, &ptr.BankPassWord[0], 41)
+	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
+	go2cStr(s.Password, &ptr.Password[0], 41)
+	ptr.FutureSerial = C.int(s.FutureSerial)
+	ptr.InstallID = C.int(s.InstallID)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	ptr.VerifyCertNoFlag = C.char(s.VerifyCertNoFlag)
+	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
+	go2cStr(s.Digest, &ptr.Digest[0], 36)
+	ptr.BankAccType = C.char(s.BankAccType)
+	go2cStr(s.DeviceID, &ptr.DeviceID[0], 3)
+	ptr.BankSecuAccType = C.char(s.BankSecuAccType)
+	go2cStr(s.BrokerIDByBank, &ptr.BrokerIDByBank[0], 33)
+	go2cStr(s.BankSecuAcc, &ptr.BankSecuAcc[0], 41)
+	ptr.BankPwdFlag = C.char(s.BankPwdFlag)
+	ptr.SecuPwdFlag = C.char(s.SecuPwdFlag)
+	go2cStr(s.OperNo, &ptr.OperNo[0], 17)
+	ptr.RequestID = C.int(s.RequestID)
+	ptr.TID = C.int(s.TID)
+	ptr.BankUseAmount = C.double(s.BankUseAmount)
+	ptr.BankFetchAmount = C.double(s.BankFetchAmount)
+	ptr.ErrorID = C.int(s.ErrorID)
+	go2cStr(s.ErrorMsg, &ptr.ErrorMsg[0], 81)
+	go2cStr(s.LongCustomerName, &ptr.LongCustomerName[0], 161)
+	ptr.DRIdentityID = C.int(s.DRIdentityID)
+	ptr.SecFutureSerial = C.int(s.SecFutureSerial)
+	return ptr
+}
+
+type CThostFtdcExitEmergencyField struct {
+	BrokerID string
+}
+
+func NewCThostFtdcExitEmergencyField(p *C.CThostFtdcExitEmergencyField) *CThostFtdcExitEmergencyField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcExitEmergencyField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	return ret
+}
+
+func CThostFtdcExitEmergencyFieldCValue(s *CThostFtdcExitEmergencyField) *C.CThostFtdcExitEmergencyField {
+	ptr := (*C.CThostFtdcExitEmergencyField)(C.malloc(C.sizeof_CThostFtdcExitEmergencyField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	return ptr
+}
+
+type CThostFtdcInvestorPortfMarginModelField struct {
+	BrokerID      string
+	InvestorID    string
+	MarginModelID string
+}
+
+func NewCThostFtdcInvestorPortfMarginModelField(p *C.CThostFtdcInvestorPortfMarginModelField) *CThostFtdcInvestorPortfMarginModelField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcInvestorPortfMarginModelField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.MarginModelID = c2goStr(&p.MarginModelID[0], 13)
+	return ret
+}
+
+func CThostFtdcInvestorPortfMarginModelFieldCValue(s *CThostFtdcInvestorPortfMarginModelField) *C.CThostFtdcInvestorPortfMarginModelField {
+	ptr := (*C.CThostFtdcInvestorPortfMarginModelField)(C.malloc(C.sizeof_CThostFtdcInvestorPortfMarginModelField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.MarginModelID, &ptr.MarginModelID[0], 13)
+	return ptr
+}
+
+type CThostFtdcInvestorPortfSettingField struct {
+	ExchangeID string
+	BrokerID   string
+	InvestorID string
+	HedgeFlag  byte
+	UsePortf   int
+}
+
+func NewCThostFtdcInvestorPortfSettingField(p *C.CThostFtdcInvestorPortfSettingField) *CThostFtdcInvestorPortfSettingField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcInvestorPortfSettingField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.HedgeFlag = byte(p.HedgeFlag)
+	ret.UsePortf = int(p.UsePortf)
+	return ret
+}
+
+func CThostFtdcInvestorPortfSettingFieldCValue(s *CThostFtdcInvestorPortfSettingField) *C.CThostFtdcInvestorPortfSettingField {
+	ptr := (*C.CThostFtdcInvestorPortfSettingField)(C.malloc(C.sizeof_CThostFtdcInvestorPortfSettingField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	ptr.HedgeFlag = C.char(s.HedgeFlag)
+	ptr.UsePortf = C.int(s.UsePortf)
+	return ptr
+}
+
+type CThostFtdcQryInvestorPortfSettingField struct {
+	ExchangeID string
+	BrokerID   string
+	InvestorID string
+}
+
+func NewCThostFtdcQryInvestorPortfSettingField(p *C.CThostFtdcQryInvestorPortfSettingField) *CThostFtdcQryInvestorPortfSettingField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryInvestorPortfSettingField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	return ret
+}
+
+func CThostFtdcQryInvestorPortfSettingFieldCValue(s *CThostFtdcQryInvestorPortfSettingField) *C.CThostFtdcQryInvestorPortfSettingField {
+	ptr := (*C.CThostFtdcQryInvestorPortfSettingField)(C.malloc(C.sizeof_CThostFtdcQryInvestorPortfSettingField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	return ptr
+}
+
+type CThostFtdcUserPasswordUpdateFromSecField struct {
+	BrokerID    string
+	UserID      string
+	OldPassword string
+	NewPassword string
+	FromSec     int
+}
+
+func NewCThostFtdcUserPasswordUpdateFromSecField(p *C.CThostFtdcUserPasswordUpdateFromSecField) *CThostFtdcUserPasswordUpdateFromSecField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcUserPasswordUpdateFromSecField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	ret.OldPassword = c2goStr(&p.OldPassword[0], 41)
+	ret.NewPassword = c2goStr(&p.NewPassword[0], 41)
+	ret.FromSec = int(p.FromSec)
+	return ret
+}
+
+func CThostFtdcUserPasswordUpdateFromSecFieldCValue(s *CThostFtdcUserPasswordUpdateFromSecField) *C.CThostFtdcUserPasswordUpdateFromSecField {
+	ptr := (*C.CThostFtdcUserPasswordUpdateFromSecField)(C.malloc(C.sizeof_CThostFtdcUserPasswordUpdateFromSecField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	go2cStr(s.OldPassword, &ptr.OldPassword[0], 41)
+	go2cStr(s.NewPassword, &ptr.NewPassword[0], 41)
+	ptr.FromSec = C.int(s.FromSec)
+	return ptr
+}
+
+type CThostFtdcSettlementInfoConfirmFromSecField struct {
+	BrokerID    string
+	InvestorID  string
+	ConfirmDate string
+	ConfirmTime string
+	FromSec     int
+}
+
+func NewCThostFtdcSettlementInfoConfirmFromSecField(p *C.CThostFtdcSettlementInfoConfirmFromSecField) *CThostFtdcSettlementInfoConfirmFromSecField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcSettlementInfoConfirmFromSecField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.ConfirmDate = c2goStr(&p.ConfirmDate[0], 9)
+	ret.ConfirmTime = c2goStr(&p.ConfirmTime[0], 9)
+	ret.FromSec = int(p.FromSec)
+	return ret
+}
+
+func CThostFtdcSettlementInfoConfirmFromSecFieldCValue(s *CThostFtdcSettlementInfoConfirmFromSecField) *C.CThostFtdcSettlementInfoConfirmFromSecField {
+	ptr := (*C.CThostFtdcSettlementInfoConfirmFromSecField)(C.malloc(C.sizeof_CThostFtdcSettlementInfoConfirmFromSecField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.ConfirmDate, &ptr.ConfirmDate[0], 9)
+	go2cStr(s.ConfirmTime, &ptr.ConfirmTime[0], 9)
+	ptr.FromSec = C.int(s.FromSec)
+	return ptr
+}
+
+type CThostFtdcTradingAccountPasswordUpdateFromSecField struct {
+	BrokerID    string
+	AccountID   string
+	OldPassword string
+	NewPassword string
+	CurrencyID  string
+	FromSec     int
+}
+
+func NewCThostFtdcTradingAccountPasswordUpdateFromSecField(p *C.CThostFtdcTradingAccountPasswordUpdateFromSecField) *CThostFtdcTradingAccountPasswordUpdateFromSecField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcTradingAccountPasswordUpdateFromSecField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.AccountID = c2goStr(&p.AccountID[0], 13)
+	ret.OldPassword = c2goStr(&p.OldPassword[0], 41)
+	ret.NewPassword = c2goStr(&p.NewPassword[0], 41)
+	ret.CurrencyID = c2goStr(&p.CurrencyID[0], 4)
+	ret.FromSec = int(p.FromSec)
+	return ret
+}
+
+func CThostFtdcTradingAccountPasswordUpdateFromSecFieldCValue(s *CThostFtdcTradingAccountPasswordUpdateFromSecField) *C.CThostFtdcTradingAccountPasswordUpdateFromSecField {
+	ptr := (*C.CThostFtdcTradingAccountPasswordUpdateFromSecField)(C.malloc(C.sizeof_CThostFtdcTradingAccountPasswordUpdateFromSecField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.AccountID, &ptr.AccountID[0], 13)
+	go2cStr(s.OldPassword, &ptr.OldPassword[0], 41)
+	go2cStr(s.NewPassword, &ptr.NewPassword[0], 41)
+	go2cStr(s.CurrencyID, &ptr.CurrencyID[0], 4)
+	ptr.FromSec = C.int(s.FromSec)
+	return ptr
+}
+
+type CThostFtdcRiskForbiddenRightField struct {
+	BrokerID     string
+	InvestorID   string
+	InstrumentID string
+	UserID       string
+}
+
+func NewCThostFtdcRiskForbiddenRightField(p *C.CThostFtdcRiskForbiddenRightField) *CThostFtdcRiskForbiddenRightField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcRiskForbiddenRightField)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.UserID = c2goStr(&p.UserID[0], 16)
+	return ret
+}
+
+func CThostFtdcRiskForbiddenRightFieldCValue(s *CThostFtdcRiskForbiddenRightField) *C.CThostFtdcRiskForbiddenRightField {
+	ptr := (*C.CThostFtdcRiskForbiddenRightField)(C.malloc(C.sizeof_CThostFtdcRiskForbiddenRightField))
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.UserID, &ptr.UserID[0], 16)
+	return ptr
+}
+
+type CThostFtdcInvestorInfoCommRecField struct {
+	ExchangeID       string
+	BrokerID         string
+	InvestorID       string
+	InstrumentID     string
+	OrderCount       int
+	OrderActionCount int
+	ForQuoteCnt      int
+	InfoComm         float64
+	IsOptSeries      int
+	ProductID        string
+	InfoCnt          int
+}
+
+func NewCThostFtdcInvestorInfoCommRecField(p *C.CThostFtdcInvestorInfoCommRecField) *CThostFtdcInvestorInfoCommRecField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcInvestorInfoCommRecField)
+	ret.ExchangeID = c2goStr(&p.ExchangeID[0], 9)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.OrderCount = int(p.OrderCount)
+	ret.OrderActionCount = int(p.OrderActionCount)
+	ret.ForQuoteCnt = int(p.ForQuoteCnt)
+	ret.InfoComm = goFloat64(p.InfoComm)
+	ret.IsOptSeries = int(p.IsOptSeries)
+	ret.ProductID = c2goStr(&p.ProductID[0], 41)
+	ret.InfoCnt = int(p.InfoCnt)
+	return ret
+}
+
+func CThostFtdcInvestorInfoCommRecFieldCValue(s *CThostFtdcInvestorInfoCommRecField) *C.CThostFtdcInvestorInfoCommRecField {
+	ptr := (*C.CThostFtdcInvestorInfoCommRecField)(C.malloc(C.sizeof_CThostFtdcInvestorInfoCommRecField))
+	go2cStr(s.ExchangeID, &ptr.ExchangeID[0], 9)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	ptr.OrderCount = C.int(s.OrderCount)
+	ptr.OrderActionCount = C.int(s.OrderActionCount)
+	ptr.ForQuoteCnt = C.int(s.ForQuoteCnt)
+	ptr.InfoComm = C.double(s.InfoComm)
+	ptr.IsOptSeries = C.int(s.IsOptSeries)
+	go2cStr(s.ProductID, &ptr.ProductID[0], 41)
+	ptr.InfoCnt = C.int(s.InfoCnt)
+	return ptr
+}
+
+type CThostFtdcQryInvestorInfoCommRecField struct {
+	InvestorID   string
+	InstrumentID string
+	BrokerID     string
+}
+
+func NewCThostFtdcQryInvestorInfoCommRecField(p *C.CThostFtdcQryInvestorInfoCommRecField) *CThostFtdcQryInvestorInfoCommRecField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryInvestorInfoCommRecField)
+	ret.InvestorID = c2goStr(&p.InvestorID[0], 13)
+	ret.InstrumentID = c2goStr(&p.InstrumentID[0], 81)
+	ret.BrokerID = c2goStr(&p.BrokerID[0], 11)
+	return ret
+}
+
+func CThostFtdcQryInvestorInfoCommRecFieldCValue(s *CThostFtdcQryInvestorInfoCommRecField) *C.CThostFtdcQryInvestorInfoCommRecField {
+	ptr := (*C.CThostFtdcQryInvestorInfoCommRecField)(C.malloc(C.sizeof_CThostFtdcQryInvestorInfoCommRecField))
+	go2cStr(s.InvestorID, &ptr.InvestorID[0], 13)
+	go2cStr(s.InstrumentID, &ptr.InstrumentID[0], 81)
+	go2cStr(s.BrokerID, &ptr.BrokerID[0], 11)
+	return ptr
+}
+
+type CThostFtdcCombLegField struct {
+	CombInstrumentID string
+	LegID            int
+	LegInstrumentID  string
+	Direction        byte
+	LegMultiple      int
+	ImplyLevel       int
+}
+
+func NewCThostFtdcCombLegField(p *C.CThostFtdcCombLegField) *CThostFtdcCombLegField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcCombLegField)
+	ret.CombInstrumentID = c2goStr(&p.CombInstrumentID[0], 81)
+	ret.LegID = int(p.LegID)
+	ret.LegInstrumentID = c2goStr(&p.LegInstrumentID[0], 81)
+	ret.Direction = byte(p.Direction)
+	ret.LegMultiple = int(p.LegMultiple)
+	ret.ImplyLevel = int(p.ImplyLevel)
+	return ret
+}
+
+func CThostFtdcCombLegFieldCValue(s *CThostFtdcCombLegField) *C.CThostFtdcCombLegField {
+	ptr := (*C.CThostFtdcCombLegField)(C.malloc(C.sizeof_CThostFtdcCombLegField))
+	go2cStr(s.CombInstrumentID, &ptr.CombInstrumentID[0], 81)
+	ptr.LegID = C.int(s.LegID)
+	go2cStr(s.LegInstrumentID, &ptr.LegInstrumentID[0], 81)
+	ptr.Direction = C.char(s.Direction)
+	ptr.LegMultiple = C.int(s.LegMultiple)
+	ptr.ImplyLevel = C.int(s.ImplyLevel)
+	return ptr
+}
+
+type CThostFtdcQryCombLegField struct {
+	LegInstrumentID string
+}
+
+func NewCThostFtdcQryCombLegField(p *C.CThostFtdcQryCombLegField) *CThostFtdcQryCombLegField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcQryCombLegField)
+	ret.LegInstrumentID = c2goStr(&p.LegInstrumentID[0], 81)
+	return ret
+}
+
+func CThostFtdcQryCombLegFieldCValue(s *CThostFtdcQryCombLegField) *C.CThostFtdcQryCombLegField {
+	ptr := (*C.CThostFtdcQryCombLegField)(C.malloc(C.sizeof_CThostFtdcQryCombLegField))
+	go2cStr(s.LegInstrumentID, &ptr.LegInstrumentID[0], 81)
+	return ptr
+}
+
+type CThostFtdcFrontInfoField struct {
+	FrontAddr  string
+	QryFreq    int
+	FTDPkgFreq int
+}
+
+func NewCThostFtdcFrontInfoField(p *C.CThostFtdcFrontInfoField) *CThostFtdcFrontInfoField {
+	if p == nil {
+		return nil
+	}
+	ret := new(CThostFtdcFrontInfoField)
+	ret.FrontAddr = c2goStr(&p.FrontAddr[0], 101)
+	ret.QryFreq = int(p.QryFreq)
+	ret.FTDPkgFreq = int(p.FTDPkgFreq)
+	return ret
+}
+
+func CThostFtdcFrontInfoFieldCValue(s *CThostFtdcFrontInfoField) *C.CThostFtdcFrontInfoField {
+	ptr := (*C.CThostFtdcFrontInfoField)(C.malloc(C.sizeof_CThostFtdcFrontInfoField))
+	go2cStr(s.FrontAddr, &ptr.FrontAddr[0], 101)
+	ptr.QryFreq = C.int(s.QryFreq)
+	ptr.FTDPkgFreq = C.int(s.FTDPkgFreq)
 	return ptr
 }
